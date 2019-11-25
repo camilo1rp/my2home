@@ -1,3 +1,70 @@
+from django.contrib.auth.models import User
 from django.db import models
 
+
 # Create your models here.
+from django.utils.text import slugify
+
+
+class Property(models.Model):
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties')
+
+    type_property = models.CharField(max_length=70)
+    price = models.DecimalField(decimal_places=0, max_digits=12)
+    rooms = models.IntegerField(default=0)
+    baths = models.IntegerField(default=0)
+    parking = models.IntegerField(default=0)
+    area_built = models.DecimalField(default=0, decimal_places=0, max_digits=12)
+    area_total = models.DecimalField(default=0, decimal_places=0, max_digits=12)
+    estrato = models.IntegerField(null=True, blank=True)
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=70)
+    description = models.TextField(max_length=500)
+    type_business = models.CharField(max_length=100)
+
+    # analytic
+    seen = models.IntegerField(default=0)
+    following = models.IntegerField(default=0)
+    follower_ids = models.CharField(max_length=1000, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Property, self).save(*args, **kwargs)
+
+
+class addressCol(models.Model):
+    propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='address_col')
+    Departamento = models.CharField(max_length=30)
+    ciudad = models.CharField(max_length=30)
+    barrio = models.CharField(max_length=30)
+    tipo_via = models.CharField(max_length=30)
+    via = models.CharField(max_length=30)
+    prefijo_via = models.CharField(max_length=10)
+    numero = models.IntegerField()
+    prefijo_numero = models.CharField(max_length=10)
+    placa = models.IntegerField()
+    display = models.BooleanField(default=False)
+
+
+
+
+
+
+
+
+
+
+
+
+    #address = models.ForeignKey(Address, on_delete=models.CASCADE(), related_name='address')
+
