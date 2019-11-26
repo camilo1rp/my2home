@@ -55,6 +55,9 @@ class addressCol(models.Model):
     placa = models.IntegerField()
     display = models.BooleanField(default=False)
 
+    def __str__(self):
+        return "{} {} {} # {}{} - {}".format(self.tipo_via, self.via, self.prefijo_via,
+                                             self.numero, self.prefijo_numero, self.placa)
 
 
 
