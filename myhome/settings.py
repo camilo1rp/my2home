@@ -38,12 +38,13 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'properties.apps.PropertiesConfig',
     'profiles.apps.ProfilesConfig',
-
+    'rosetta',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -101,9 +102,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
+from django.utils.translation import gettext_lazy as _
 
-LANGUAGE_CODE = 'en-us'
-
+LANGUAGE_CODE = 'en'
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+)
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -119,7 +127,6 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'

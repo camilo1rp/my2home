@@ -1,31 +1,38 @@
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
-
-# Create your models here.
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 
 class Property(models.Model):
-    code = models.IntegerField(default=00000000)
+    APARTMENT = 'APT'
+    HOUSE = 'HOU'
+    LAND = 'LAN'
+
+    GENDER = [
+        (APARTMENT, _('apartment')),
+        (HOUSE, _('house')),
+        (LAND, _('land')),
+        ]
+    code = models.IntegerField(_('code'), default=00000000)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties')
-    type_property = models.CharField(max_length=70)
-    price = models.DecimalField(decimal_places=0, max_digits=12)
-    rooms = models.IntegerField(default=0)
-    baths = models.IntegerField(default=0)
-    parking = models.IntegerField(default=0)
-    area_built = models.DecimalField(default=0, decimal_places=0, max_digits=12)
-    area_total = models.DecimalField(default=0, decimal_places=0, max_digits=12)
+    type_property = models.CharField(_('type of property'), max_length=70)
+    price = models.DecimalField(_('price'), decimal_places=0, max_digits=12)
+    rooms = models.IntegerField(_('rooms'), default=0)
+    baths = models.IntegerField(_('bathrooms'), default=0)
+    parking = models.IntegerField(_('parking'), default=0)
+    area_built = models.DecimalField(_('built area'), default=0, decimal_places=0, max_digits=12)
+    area_total = models.DecimalField(_('total area'), default=0, decimal_places=0, max_digits=12)
     estrato = models.IntegerField(null=True, blank=True)
-    title = models.CharField(max_length=50)
+    title = models.CharField(_('title'), max_length=50)
     title_slug = models.SlugField(max_length=70)
-    description = models.TextField(max_length=500)
-    type_business = models.CharField(max_length=100)
+    description = models.TextField(_('description'), max_length=500)
+    type_business = models.CharField(_('type of business'), max_length=100)
 
     # analytic
-    seen = models.IntegerField(default=0)
-    following = models.IntegerField(default=0)
+    seen = models.IntegerField(_('seen'), default=0)
     followers = models.ManyToManyField(User, through='Following')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -77,7 +84,7 @@ class addressCol(models.Model):
     numero = models.IntegerField()
     prefijo_numero = models.CharField(max_length=10)
     placa = models.IntegerField()
-    display = models.BooleanField(default=False)
+    mostrar = models.BooleanField(default=False)
 
     def __str__(self):
         return "{} {} {} # {}{} - {}".format(self.tipo_via, self.via, self.prefijo_via,

@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
+    path('rosetta/', include('rosetta.urls')),
     ]
 # path('property/', include('properties.urls')),
