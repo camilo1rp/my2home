@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 
 class Property(models.Model):
-    code = models.IntegerField()
+    code = models.IntegerField(default=00000000)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties')
     type_property = models.CharField(max_length=70)
