@@ -10,7 +10,7 @@ class Property(models.Model):
     HOUSE = 'HOU'
     LAND = 'LAN'
 
-    GENDER = [
+    TIPO_PRO = [
         (APARTMENT, _('apartment')),
         (HOUSE, _('house')),
         (LAND, _('land')),
@@ -18,7 +18,7 @@ class Property(models.Model):
     code = models.IntegerField(_('code'), default=00000000)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties')
-    type_property = models.CharField(_('type of property'), max_length=70)
+    type_property = models.CharField(_('type of property'), max_length=70, choices=TIPO_PRO, default=APARTMENT)
     price = models.DecimalField(_('price'), decimal_places=0, max_digits=12)
     rooms = models.IntegerField(_('rooms'), default=0)
     baths = models.IntegerField(_('bathrooms'), default=0)
