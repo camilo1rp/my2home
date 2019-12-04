@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-03 16:00-0500\n"
+"POT-Creation-Date: 2019-12-04 15:41-0500\n"
 "PO-Revision-Date: 2019-12-03 20:58+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,3 +78,47 @@ msgstr ""
 #: properties/models.py:35
 msgid "seen"
 msgstr "visits"
+
+#: properties/templates/properties/index.html:37
+msgid "Language"
+msgstr ""
+
+#: properties/templates/properties/index.html:64
+msgid "Inmobiliaria Romero"
+msgstr ""
+
+#: properties/templates/properties/index.html:73
+msgid "Home"
+msgstr ""
+
+#: properties/templates/properties/index.html:75
+msgid "Buy"
+msgstr ""
+
+#: properties/templates/properties/index.html:76
+msgid "Rent"
+msgstr ""
+
+#: properties/templates/properties/index.html:78
+msgid "Properties"
+msgstr ""
+
+#: properties/templates/properties/index.html:80
+msgid "Apartments"
+msgstr ""
+
+#: properties/templates/properties/index.html:81
+msgid "Houses"
+msgstr ""
+
+#: properties/templates/properties/index.html:82
+msgid "Land"
+msgstr ""
+
+#: properties/templates/properties/index.html:94
+msgid "About"
+msgstr ""
+
+#: properties/templates/properties/index.html:95
+msgid "Contact"
+msgstr ""

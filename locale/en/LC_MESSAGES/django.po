@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-03 16:00-0500\n"
+"POT-Creation-Date: 2019-12-04 15:41-0500\n"
 "PO-Revision-Date: 2019-12-03 20:58+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,54 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: account/templates/account/index.html:35
-msgid "Language"
-msgstr ""
-
-#: account/templates/account/index.html:61
-msgid "Inmobiliaria Romero"
-msgstr "Romero Real State "
-
-#: account/templates/account/index.html:70
-msgid "Home"
-msgstr ""
-
-#: account/templates/account/index.html:72
-msgid "Buy"
-msgstr ""
-
-#: account/templates/account/index.html:73
-msgid "Rent"
-msgstr ""
-
-#: account/templates/account/index.html:75
-msgid "Properties"
-msgstr ""
-
-#: account/templates/account/index.html:77
-msgid "Apartments"
-msgstr ""
-
-#: account/templates/account/index.html:78
-msgid "Houses"
-msgstr ""
-
-#: account/templates/account/index.html:79
-msgid "Land"
-msgstr ""
-
-#: account/templates/account/index.html:91
-msgid "About"
-msgstr ""
-
-#: account/templates/account/index.html:92
-msgid "Contact"
-msgstr ""
-
-#: account/urls.py:9
-msgid "index/"
-msgstr ""
-
 #: myhome/settings.py:108
 msgid "English"
 msgstr ""
@@ -74,3 +26,6 @@ msgstr ""
 #: myhome/settings.py:109
 msgid "Spanish"
 msgstr ""
+
+#~ msgid "Inmobiliaria Romero"
+#~ msgstr "Romero Real State "

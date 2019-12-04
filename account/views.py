@@ -7,5 +7,3 @@ def dashboard(request):
     return render(request, 'account/dashboard.html', )
 
 
-def index(request):
-    return render(request, 'account/index.html', )

@@ -19,7 +19,7 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
-    path('account/', include('account.urls')),
+    path('account/', include('account.urls', namespace='account')),
     path('rosetta/', include('rosetta.urls')),
+    path('', include('properties.urls', namespace='property')),
 )
-# path('property/', include('properties.urls')),
