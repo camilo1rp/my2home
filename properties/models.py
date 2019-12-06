@@ -75,9 +75,6 @@ class Property(models.Model):
             code = int(code_str)
         return code
 
-    def get_absolute_url(self):
-        return reverse('profile:update', args=[self.id])
-
 
 class addressCol(models.Model):
     propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='address_col')
