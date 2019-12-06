@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from properties.models import Property, addressCol
+
+admin.site.register(Property)
+admin.site.register(addressCol)

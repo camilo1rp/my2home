@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
+
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -14,12 +16,13 @@ class Property(models.Model):
         (APARTMENT, _('apartment')),
         (HOUSE, _('house')),
         (LAND, _('land')),
-        ]
+    ]
     code = models.IntegerField(_('code'), default=00000000)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties')
     type_property = models.CharField(_('type of property'), max_length=70, choices=TIPO_PRO, default=APARTMENT)
     price = models.DecimalField(_('price'), decimal_places=0, max_digits=12)
+    price_str = models.CharField(max_length=18, default="")
     rooms = models.IntegerField(_('rooms'), default=0)
     baths = models.IntegerField(_('bathrooms'), default=0)
     parking = models.IntegerField(_('parking'), default=0)
@@ -29,7 +32,7 @@ class Property(models.Model):
     title = models.CharField(_('title'), max_length=50)
     title_slug = models.SlugField(max_length=70)
     description = models.TextField(_('description'), max_length=500)
-    type_business = models.CharField(_('type of business'), max_length=100)
+    # type_business = models.CharField(_('type of business'), max_length=100)
 
     # analytic
     seen = models.IntegerField(_('seen'), default=0)
@@ -44,8 +47,8 @@ class Property(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
+        if not self.title_slug:
+            self.title_slug = slugify(self.title)
         if not self.code:
             self.code = self.code_generator()
         super(Property, self).save(*args, **kwargs)
@@ -71,6 +74,9 @@ class Property(models.Model):
             code_str = today_date + code_unique_new
             code = int(code_str)
         return code
+
+    def get_absolute_url(self):
+        return reverse('profile:update', args=[self.id])
 
 
 class addressCol(models.Model):
@@ -101,3 +107,7 @@ class Following(models.Model):
 
     def __str__(self):
         return '{} follows {}'.format(self.user, self.property_followed)
+
+
+class BusinessType(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='businesstype')

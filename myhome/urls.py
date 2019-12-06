@@ -21,5 +21,6 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('account/', include('account.urls', namespace='account')),
     path('rosetta/', include('rosetta.urls')),
+    path('profile/', include('profiles.urls', namespace='profile')),
     path('', include('properties.urls', namespace='property')),
 )
