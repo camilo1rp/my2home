@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-04 15:41-0500\n"
+"POT-Creation-Date: 2019-12-17 10:21-0500\n"
 "PO-Revision-Date: 2019-12-03 20:58+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,65 +19,89 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: properties/models.py:14
+#: properties/models.py:15
 msgid "apartment"
 msgstr ""
 
-#: properties/models.py:15
+#: properties/models.py:16
 msgid "house"
 msgstr ""
 
-#: properties/models.py:16
+#: properties/models.py:17
 msgid "land"
 msgstr ""
 
-#: properties/models.py:18
+#: properties/models.py:19
 msgid "code"
 msgstr ""
 
+#: properties/models.py:20
+msgid "manager"
+msgstr ""
+
 #: properties/models.py:21
-msgid "type of property"
+msgid "owner"
 msgstr ""
 
 #: properties/models.py:22
-msgid "price"
+msgid "type of property"
 msgstr ""
 
 #: properties/models.py:23
-msgid "rooms"
-msgstr ""
-
-#: properties/models.py:24
-msgid "bathrooms"
+msgid "price"
 msgstr ""
 
 #: properties/models.py:25
-msgid "parking"
+msgid "rooms"
 msgstr ""
 
 #: properties/models.py:26
-msgid "built area"
+msgid "bathrooms"
 msgstr ""
 
 #: properties/models.py:27
-msgid "total area"
+msgid "parking"
+msgstr ""
+
+#: properties/models.py:28
+msgid "built area"
 msgstr ""
 
 #: properties/models.py:29
-msgid "title"
+msgid "total area"
 msgstr ""
 
 #: properties/models.py:31
+msgid "title"
+msgstr ""
+
+#: properties/models.py:33
 msgid "description"
 msgstr ""
 
-#: properties/models.py:32
-msgid "type of business"
+#: properties/models.py:34
+msgid "business type"
 msgstr ""
 
-#: properties/models.py:35
+#: properties/models.py:37
 msgid "seen"
 msgstr "visits"
+
+#: properties/models.py:125
+msgid "sale"
+msgstr ""
+
+#: properties/models.py:126
+msgid "rent"
+msgstr ""
+
+#: properties/models.py:127
+msgid "swap"
+msgstr ""
+
+#: properties/models.py:130
+msgid "type of business"
+msgstr ""
 
 #: properties/templates/properties/index.html:37
 msgid "Language"
@@ -121,4 +145,28 @@ msgstr ""
 
 #: properties/templates/properties/index.html:95
 msgid "Contact"
+msgstr ""
+
+#: properties/templates/properties/index.html:227
+msgid "Sale"
+msgstr ""
+
+#: properties/templates/properties/index.html:230
+msgid "Lend"
+msgstr ""
+
+#: properties/templates/properties/index.html:233
+msgid "Swap"
+msgstr ""
+
+#: properties/templates/properties/index.html:250
+msgid "Beds"
+msgstr ""
+
+#: properties/templates/properties/index.html:255
+msgid "Baths"
+msgstr ""
+
+#: properties/templates/properties/index.html:260
+msgid "Sq m"
 msgstr ""

@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
-
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -18,8 +17,8 @@ class Property(models.Model):
         (LAND, _('land')),
     ]
     code = models.IntegerField(_('code'), default=00000000)
-    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties')
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name=_('manager'))
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties', verbose_name=_('owner'))
     type_property = models.CharField(_('type of property'), max_length=70, choices=TIPO_PRO, default=APARTMENT)
     price = models.DecimalField(_('price'), decimal_places=0, max_digits=12)
     price_str = models.CharField(max_length=18, default="")
@@ -32,7 +31,7 @@ class Property(models.Model):
     title = models.CharField(_('title'), max_length=50)
     title_slug = models.SlugField(max_length=70)
     description = models.TextField(_('description'), max_length=500)
-    # type_business = models.CharField(_('type of business'), max_length=100)
+    type_business = models.ManyToManyField('BusinessType', related_name='business', verbose_name=_('business type'))
 
     # analytic
     seen = models.IntegerField(_('seen'), default=0)
@@ -42,6 +41,7 @@ class Property(models.Model):
 
     class Meta:
         ordering = ('-created',)
+        verbose_name_plural = "properties"
 
     def __str__(self):
         return self.title
@@ -54,31 +54,41 @@ class Property(models.Model):
         super(Property, self).save(*args, **kwargs)
 
     def code_generator(self):
-        last_property = self.objects.all().order_by('id').last()
+        last_property = Property.objects.all().order_by('id').last()
         # check if it is the first register
         if not last_property:
             code_str = datetime.now().strftime("%y") + datetime.now().strftime("%m") + '0000'
             code = int(code_str)
+            print(code)
             return code
         # get letest property's code
         property_code = str(last_property.code)
+        print(property_code)
         code_date = property_code[:4]
-        code_unique = int(property_code[-4:])
+        print(code_date)
+        code_unique = (int(property_code[-4:]))
+        print(code_unique)
         today_date = datetime.now().strftime("%y%m")
         # creates new code
         if code_date != today_date:
             code_str = today_date + '0000'
             code = int(code_str)
         else:
-            code_unique_new = str(code_unique + 1)
+            code_unique_new = str(code_unique + 1).zfill(4)
+            print(code_unique_new)
             code_str = today_date + code_unique_new
             code = int(code_str)
         return code
 
+    def get_absolute_url(self):
+        return reverse('property:index')
+        # TODO: create property detail view and uncomment following line
+        # return reverse('property:detail', args=[self.id])
 
-class addressCol(models.Model):
+
+class AddressCol(models.Model):
     propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='address_col')
-    Departamento = models.CharField(max_length=30)
+    departamento = models.CharField(max_length=30)
     ciudad = models.CharField(max_length=30)
     barrio = models.CharField(max_length=30)
     tipo_via = models.CharField(max_length=30)
@@ -90,7 +100,7 @@ class addressCol(models.Model):
     mostrar = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{} {} {} # {}{} - {}".format(self.tipo_via, self.via, self.prefijo_via,
+        return "{} {}{} # {}{} - {}".format(self.tipo_via, self.via, self.prefijo_via,
                                              self.numero, self.prefijo_numero, self.placa)
 
 
@@ -107,4 +117,28 @@ class Following(models.Model):
 
 
 class BusinessType(models.Model):
-    property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='businesstype')
+    SALE = 'SALE / VENTA'
+    RENT = 'RENT / ARRENDAMIENTO'
+    SWAP = 'SWAP / PERMUTA'
+
+    TIPO_BUS = [
+        (SALE, _('sale')),
+        (RENT, _('rent')),
+        (SWAP, _('swap')),
+    ]
+
+    name = models.CharField(_('type of business'), max_length=70, choices=TIPO_BUS, default=SALE)
+
+    def __str__(self):
+        return self.name
+
+
+class Image(models.Model):
+    propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='gallery')
+    image = models.ImageField(upload_to='img/', default='img/img_1.jpg', null=True, blank=True)
+    main = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if not self.propiedad.gallery.all():
+            self.main = True
+        super(Image, self).save(*args, **kwargs)

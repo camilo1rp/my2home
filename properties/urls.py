@@ -5,5 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 app_name = "property"
 urlpatterns = [
-    path('', views.CreateProperty.as_view(), name='index'),
+    path('', views.ListProperty.as_view(), name='index'),
+    path('new_property/', views.CreateProperty.as_view(), name='create'),
+    path('new_address_col/<int:prop_id>/', views.create_address, name='create-address'),
 ]

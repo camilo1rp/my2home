@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        .select2-container {
+  width: 260px ! important;
+}
+</style>
+</head>
+<body>
+<input id="prop" value="{{propiedad}}" hidden disabled>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+</form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<script>
+var propy = $("#prop").val();
+$("#id_propiedad").val(propy).change();
+$('label[for="id_propiedad"]').hide();
+$("#id_propiedad").hide()
+</script>
+</html>

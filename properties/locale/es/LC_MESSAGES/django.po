@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-04 15:41-0500\n"
-"PO-Revision-Date: 2019-12-03 20:58+0000\n"
+"POT-Creation-Date: 2019-12-17 10:21-0500\n"
+"PO-Revision-Date: 2019-12-17 15:21+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,69 +19,93 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: properties/models.py:14
+#: properties/models.py:15
 msgid "apartment"
 msgstr "apartamento"
 
-#: properties/models.py:15
+#: properties/models.py:16
 msgid "house"
 msgstr "casa"
 
-#: properties/models.py:16
+#: properties/models.py:17
 msgid "land"
 msgstr "lote"
 
-#: properties/models.py:18
+#: properties/models.py:19
 msgid "code"
 msgstr "código"
 
+#: properties/models.py:20
+msgid "manager"
+msgstr "vendedor"
+
 #: properties/models.py:21
+msgid "owner"
+msgstr "Propietario"
+
+#: properties/models.py:22
 msgid "type of property"
 msgstr "tipo de propiedad"
 
-#: properties/models.py:22
+#: properties/models.py:23
 msgid "price"
 msgstr "precio"
 
-#: properties/models.py:23
+#: properties/models.py:25
 msgid "rooms"
 msgstr "habitaciones"
 
-#: properties/models.py:24
+#: properties/models.py:26
 msgid "bathrooms"
 msgstr "baños"
 
-#: properties/models.py:25
+#: properties/models.py:27
 msgid "parking"
 msgstr "parqueaderos"
 
-#: properties/models.py:26
+#: properties/models.py:28
 msgid "built area"
 msgstr "área contruida"
 
-#: properties/models.py:27
+#: properties/models.py:29
 msgid "total area"
 msgstr "área total"
 
-#: properties/models.py:29
+#: properties/models.py:31
 msgid "title"
 msgstr "titulo "
 
-#: properties/models.py:31
+#: properties/models.py:33
 msgid "description"
 msgstr "descripción"
 
-#: properties/models.py:32
-msgid "type of business"
+#: properties/models.py:34
+msgid "business type"
 msgstr "tipo de negocio"
 
-#: properties/models.py:35
+#: properties/models.py:37
 msgid "seen"
 msgstr "visitas"
 
+#: properties/models.py:125
+msgid "sale"
+msgstr "venta"
+
+#: properties/models.py:126
+msgid "rent"
+msgstr "arrendamiento"
+
+#: properties/models.py:127
+msgid "swap"
+msgstr "permuta"
+
+#: properties/models.py:130
+msgid "type of business"
+msgstr "tipo de negocio"
+
 #: properties/templates/properties/index.html:37
 msgid "Language"
-msgstr ""
+msgstr "lenguaje"
 
 #: properties/templates/properties/index.html:64
 msgid "Inmobiliaria Romero"
@@ -89,40 +113,69 @@ msgstr ""
 
 #: properties/templates/properties/index.html:73
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
 #: properties/templates/properties/index.html:75
 msgid "Buy"
-msgstr ""
+msgstr "Comprar"
 
 #: properties/templates/properties/index.html:76
 msgid "Rent"
-msgstr ""
+msgstr "Arrendar"
 
 #: properties/templates/properties/index.html:78
 msgid "Properties"
-msgstr ""
+msgstr "Propiedades"
 
 #: properties/templates/properties/index.html:80
-#, fuzzy
-#| msgid "apartment"
 msgid "Apartments"
-msgstr "apartamento"
+msgstr "Apartamentos"
 
 #: properties/templates/properties/index.html:81
-#, fuzzy
-#| msgid "house"
 msgid "Houses"
-msgstr "casa"
+msgstr "Casas"
 
 #: properties/templates/properties/index.html:82
 msgid "Land"
-msgstr ""
+msgstr "Lotes"
 
 #: properties/templates/properties/index.html:94
 msgid "About"
-msgstr ""
+msgstr "Acerca"
 
 #: properties/templates/properties/index.html:95
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
+
+#: properties/templates/properties/index.html:227
+msgid "Sale"
+msgstr "Venta"
+
+#: properties/templates/properties/index.html:230
+msgid "Lend"
+msgstr "Arrendamiento"
+
+#: properties/templates/properties/index.html:233
+msgid "Swap"
+msgstr "Permuta"
+
+#: properties/templates/properties/index.html:250
+msgid "Beds"
+msgstr "Habitaciones"
+
+#: properties/templates/properties/index.html:255
+msgid "Baths"
+msgstr "Baños"
+
+#: properties/templates/properties/index.html:260
+msgid "Sq m"
+msgstr "Metros cuadrados"
+
+#~ msgid "SALE"
+#~ msgstr "VENTA"
+
+#~ msgid "RENT"
+#~ msgstr "ARRENDAMIENTO"
+
+#~ msgid "SWAP"
+#~ msgstr "PERMUTA"

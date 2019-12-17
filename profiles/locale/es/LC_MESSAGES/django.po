@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-04 15:41-0500\n"
+"POT-Creation-Date: 2019-12-17 10:21-0500\n"
 "PO-Revision-Date: 2019-12-03 20:57+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,30 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: profiles/models.py:13
+#: profiles/models.py:14
 msgid "Male"
 msgstr "Masculino"
 
-#: profiles/models.py:14
+#: profiles/models.py:15
 msgid "Femele"
 msgstr "Femenino"
 
-#: profiles/models.py:15
+#: profiles/models.py:16
 msgid "other"
 msgstr "Otro"
 
-#: profiles/models.py:19
+#: profiles/models.py:20
 msgid "Nickname"
 msgstr "Nombre a Mostrar"
 
-#: profiles/models.py:20
+#: profiles/models.py:21
 msgid "gender"
 msgstr "sexo"
 
-#: profiles/models.py:21
+#: profiles/models.py:22
 msgid "city"
 msgstr "ciudad"
 
-#: profiles/models.py:23
+#: profiles/models.py:24
 msgid "company"
 msgstr "empresa"
