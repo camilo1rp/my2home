@@ -40,8 +40,9 @@ def create_address(request, prop_id=None):
     if request.method == 'POST':
         form = AddressColForm(request.POST)
         if form.is_valid():
-            form.save()
-
+            new_address = form.save()
+            property_id = new_address.propiedad.id
+            return render(request, )
     else:
         form = AddressColForm()
     return render(request, 'properties/new_address_col.html', {'form': form, 'propiedad': prop_id})
