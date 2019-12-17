@@ -1,6 +1,8 @@
 {% load staticfiles %}
 {% load static %}
 {% load i18n %}
+{% load thumbnail %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -240,12 +242,14 @@
                   {% with gallery=prop.gallery.all %}
                   {% for img in gallery%}
                     {%if img.main %}
-                      <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+                      {% thumbnail img.image "800x500" padding=True upscale=True as im %}
+                        <img src="{{im.url}}" alt="Image" class="img-fluid">
+                      {% endthumbnail %}
                     {% endif %}
                   {% endfor %}
                   {% endwith %}
 <!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
-                </a>
+                  </a>
                 <div class="p-4 property-body">
                   <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
                   {% with address=prop.address_col.get %}
