@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.ListProperty.as_view(), name='index'),
     path('new_property/', views.CreateProperty.as_view(), name='create'),
     path('new_address_col/<int:prop_id>/', views.create_address, name='create-address'),
+    path('new_image/<int:prop_id>/', views.create_image, name='create-image'),
 ]

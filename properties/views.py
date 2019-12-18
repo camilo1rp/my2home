@@ -1,9 +1,10 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
-
-from .forms import PropertyForm, AddressColForm
-from .models import Property, AddressCol
+from django.utils.translation import gettext_lazy as _
+from .forms import PropertyForm, AddressColForm, ImageForm
+from .models import Property, AddressCol, Image
 
 
 class ListProperty(ListView):
@@ -40,9 +41,27 @@ def create_address(request, prop_id=None):
     if request.method == 'POST':
         form = AddressColForm(request.POST)
         if form.is_valid():
-            new_address = form.save()
+            new_address = form.save(commit=False)
+            if Property.objects.get(id=prop_id).address_col.all():
+                return render(request, 'properties/new_address_col.html',
+                              {'form': form,
+                               'error': _('address already added to property')})
+            new_address.save()
             property_id = new_address.propiedad.id
-            return render(request, )
+            return HttpResponseRedirect(reverse('property:create-image', args=(property_id,)))
     else:
         form = AddressColForm()
     return render(request, 'properties/new_address_col.html', {'form': form, 'propiedad': prop_id})
+
+
+def create_image(request, prop_id=None):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = request.FILES['image']
+            prop = Property.objects.get(id=prop_id)
+            _new_image = Image.objects.get_or_create(propiedad=prop, image=image)
+            return HttpResponseRedirect(reverse('property:index',))
+    else:
+        form = ImageForm()
+    return render(request, 'properties/new_image.html', {'form': form, 'propiedad': prop_id})

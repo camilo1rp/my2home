@@ -100,8 +100,13 @@ class AddressCol(models.Model):
     mostrar = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{} {}{} # {}{} - {}".format(self.tipo_via, self.via, self.prefijo_via,
-                                             self.numero, self.prefijo_numero, self.placa)
+        if self.mostrar:
+            return "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
+                                                        self.prefijo_via, self.numero,
+                                                        self.prefijo_numero, self.placa,
+                                                        self.ciudad, self.departamento)
+        else:
+            return "{}, {} - {}".format(self.barrio, self.ciudad, self.departamento)
 
 
 class Following(models.Model):

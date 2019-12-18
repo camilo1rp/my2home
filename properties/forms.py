@@ -10,9 +10,21 @@ class PropertyForm(forms.ModelForm):
 
 
 class AddressColForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['description'].widget.attrs.update({'size': 4})
 
     class Meta:
         model = AddressCol
         exclude = []
+
+
+class ImageForm(forms.Form):
+    property_id = forms.CharField(max_length=12)
+    image = forms.ImageField()
+
+
+
+
 
 
