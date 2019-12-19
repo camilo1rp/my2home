@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'rosetta',
     'sorl.thumbnail',
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [

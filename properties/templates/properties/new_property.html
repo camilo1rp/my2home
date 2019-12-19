@@ -1,28 +1,235 @@
 {% extends 'properties/base_new.html' %}
 {% load i18n %}
-{% load static %}
+{% load widget_tweaks %}
 {% block title %}title{%endblock%}
 {% block styles %}
     <style>
         .select2-container {
-            width: 260px ! important;
+          width: 260px ! important;
+          max-width: 100%;
         }
+        .span{
+            color: red;
+        }
+        .titleModal{
+            text-align: center;
+        }
+        .divTitleModal{
+            margin: 0 auto;
+        }
+        .divBtn{
+            text-align: center;
+        }
+        .btnSave{
+            margin-left: 6%;
+        }
+        #id_description {
+            max-width: 100%;
+        }
+        #id_type_business {
+            max-width: 100%;
+        }
+
     </style>
 {% endblock %}
 {% block body %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save changes</button>
-    </form>
+<!-- Modal -->
+<div class="modal fade animated fadeInDown" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header divTitleModal">
+        <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
+       </div>
+      <div class="modal-body">
+            <form method="post" action="{% url 'property:create' %}"  id="form">{% csrf_token %}
+                <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.manager}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="fa fa-id-card"></i>
+                                        &nbsp; {{form.type_business.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.type_business}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.owner.label}}<span class="span"> *</span></label>
+                                    <div class="col-md-12">
+                                        {{form.owner}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="fa fa-id-card"></i>
+                                        &nbsp; {{form.type_property.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.type_property}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                         <i class="fas fa-user-tie"></i>
+                                         &nbsp;{{form.price.label}}<span class="span"> *</span>
+                                     </label>
+                                    <div class="col-md-12">
+                                        {{form.price}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                             <i class="fas fa-user-tie"></i>
+                                             &nbsp;{{form.rooms.label}}<span class="span"> *</span>
+                                         </label>
+                                        <div class="col-md-12">
+                                            {{form.rooms}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.baths.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.baths}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.parking.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.parking}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.area_built.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.area_built}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.area_total.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.area_total}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.estrato.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.estrato}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.title.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.title}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="far fa-envelope"></i>
+                                        &nbsp;{{form.description.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        {{form.description}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group divBtn">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-danger pull-right" id="btnLimpiar">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>Limpiar
+                        </button>
+                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
+                            <i class="fa fa-save" aria-hidden="true"></i>Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+  <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!--BOOTSTRAP-->
 <script>
+$(document).ready(function(){
     $("span[class='select2-selection select2-selection--multiple']");
     $("#id_type_business").attr('class','form-control selectDos');
     $('.selectDos').select2({
         //placeholder: 'Seleccione Uno o Mas Puntos de Operación',
     });
+
+    $("input,select").addClass('form-control');
+    $('#exampleModalCenter').modal('show')
+    //$("#id_description").attr('rows','4').attr('cols','70')
+});
 </script>
 {% endblock %}
 {% endblock %}
