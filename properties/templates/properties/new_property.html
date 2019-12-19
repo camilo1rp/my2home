@@ -5,7 +5,7 @@
 {% block styles %}
     <style>
         .select2-container {
-          width: 260px ! important;
+          width: 347px ! important;
           max-width: 100%;
         }
         .span{
@@ -29,6 +29,15 @@
         #id_type_business {
             max-width: 100%;
         }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+        input[type=number] {
+            -moz-appearance:textfield; /* Firefox */
+        }
 
     </style>
 {% endblock %}
@@ -45,29 +54,6 @@
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fas fa-chalkboard-teacher"></i>
-                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.manager}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fa fa-id-card"></i>
-                                        &nbsp; {{form.type_business.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.type_business}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
                             <div class="row">
                                 <div class="col-md-4">
                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
@@ -99,6 +85,7 @@
                                 </div>
                             </div>
                             <br/>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -167,6 +154,31 @@
                                 </div>
                             </div>
                             <br/>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="fas fa-chalkboard-teacher"></i>
+                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.manager}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="col-md-7">
+                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                        <i class="fa fa-id-card"></i>
+                                        &nbsp; {{form.type_business.label}}<span class="span"> *</span>
+                                    </label>
+                                    <div class="col-md-12">
+                                        {{form.type_business}}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
                             <div class="row">
                                 <div class="col-md-5">
                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
@@ -197,10 +209,10 @@
                 <div class="form-group divBtn">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger pull-right" id="btnLimpiar">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>Limpiar
+                            </i>Limpiar
                         </button>
                         <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                            <i class="fa fa-save" aria-hidden="true"></i>Guardar
+                            </i>Guardar
                         </button>
                     </div>
                 </div>

@@ -10,11 +10,13 @@ class Property(models.Model):
     APARTMENT = 'APT'
     HOUSE = 'HOU'
     LAND = 'LAN'
+    COMMERCIAL = 'COM'
 
     TIPO_PRO = [
         (APARTMENT, _('apartment')),
         (HOUSE, _('house')),
         (LAND, _('land')),
+        (COMMERCIAL, _('commercial')),
     ]
     code = models.IntegerField(_('code'), default=00000000)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name=_('manager'))
@@ -63,11 +65,8 @@ class Property(models.Model):
             return code
         # get letest property's code
         property_code = str(last_property.code)
-        print(property_code)
         code_date = property_code[:4]
-        print(code_date)
         code_unique = (int(property_code[-4:]))
-        print(code_unique)
         today_date = datetime.now().strftime("%y%m")
         # creates new code
         if code_date != today_date:
@@ -75,7 +74,6 @@ class Property(models.Model):
             code = int(code_str)
         else:
             code_unique_new = str(code_unique + 1).zfill(4)
-            print(code_unique_new)
             code_str = today_date + code_unique_new
             code = int(code_str)
         return code
@@ -131,7 +129,6 @@ class BusinessType(models.Model):
         (RENT, _('rent')),
         (SWAP, _('swap')),
     ]
-
     name = models.CharField(_('type of business'), max_length=70, choices=TIPO_BUS, default=SALE)
 
     def __str__(self):

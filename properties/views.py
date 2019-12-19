@@ -12,6 +12,30 @@ class ListProperty(ListView):
     template_name = 'properties/index.html'
     paginate_by = 6
 
+    def get(self, request, *args, **kwargs):
+        property_type = request.GET.get('list-types')
+        print(property_type)
+        business_type = request.GET.get('offer-types')
+        print(business_type)
+        city = request.GET.get('select-city')
+        print(city)
+        filters = {}
+        if property_type == business_type and business_type == city:
+            self.object_list = self.model.objects.all()
+        else:
+            if property_type != 'ALL':
+                filters['type_property'] = property_type
+            if business_type != 'ALL':
+                filters['type_business__name'] = business_type
+            query = Property.objects.filter(**filters)
+            if city != 'ALL':
+                prop_with_address = [prop for prop in query if prop.address_col.all()]
+                query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
+            self.object_list = query
+        # allow_empty = self.get_allow_empty()
+        context = self.get_context_data()
+        return self.render_to_response(context)
+
 
 class CreateProperty(CreateView):
     model = Property

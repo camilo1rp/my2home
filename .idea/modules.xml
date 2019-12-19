@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/Downloads/homeland/homeland/.idea/homeland.iml" filepath="$USER_HOME$/Downloads/homeland/homeland/.idea/homeland.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/homeland/.idea/homeland.iml" filepath="$USER_HOME$/Downloads/homeland/.idea/homeland.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/myhome.iml" filepath="$PROJECT_DIR$/.idea/myhome.iml" />
     </modules>
   </component>

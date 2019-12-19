@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load thumbnail %}
-
+{% load easy_maps_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -98,13 +98,10 @@
                 </ul>
               </nav>
             </div>
-           
-
           </div>
         </div>
       </div>
     </div>
-
     <div class="slide-one-item home-slider owl-carousel">
 
       <div class="site-blocks-cover overlay" style="background-image: url({% static 'images/hero_bg_1.jpg' %});" data-aos="fade" data-stellar-background-ratio="0.5">
@@ -139,40 +136,40 @@
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
-          <form class="form-search col-md-12" style="margin-top: -100px;">
+          <form method="get" class="form-search col-md-12" style="margin-top: -100px;">
             <div class="row  align-items-end">
               <div class="col-md-3">
-                <label for="list-types">Listing Types</label>
+                <label for="list-types">{% trans 'Listing Types' %}</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="">Condo</option>
-                    <option value="">Commercial Building</option>
-                    <option value="">Land Property</option>
+                    <option value="ALL">{% trans 'All' %}</option>
+                    <option value="APT">{% trans 'Apartments' %}</option>
+                    <option value="HOU">{% trans 'Houses' %}</option>
+                    <option value="LAN">{% trans 'Land' %}</option>
+                    <option value="COM">{% trans 'Commercial' %}</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
-                <label for="offer-types">Offer Type</label>
+                <label for="offer-types">{% trans 'Offer Type' %}</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                    <option value="">For Sale</option>
-                    <option value="">For Rent</option>
-                    <option value="">For Lease</option>
+                    <option value="ALL">{% trans 'All' %}</option>
+                    <option value="SALE / VENTA">{% trans 'For Sale' %}</option>
+                    <option value="RENT / ARRENDAMIENTO">{% trans 'For Rent' %}</option>
+                    <option value="SWAP / PERMUTA">{% trans 'For Swap' %}</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
-                <label for="select-city">Select City</label>
+                <label for="select-city">{% trans 'Select City' %}</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                    <option value="">New York</option>
-                    <option value="">Brooklyn</option>
-                    <option value="">London</option>
-                    <option value="">Japan</option>
-                    <option value="">Philippines</option>
+                    <option value="ALL">{% trans 'All' %}</option>
+                    <option value="BOGOTA">Bogota</option>
                   </select>
                 </div>
               </div>
@@ -312,7 +309,7 @@
         <div class="row justify-content-center">
           <div class="col-md-7 text-center">
             <div class="site-section-title">
-              <h2>Why Choose Us?</h2>
+              <h2>{% trans 'Why Choose Us?' %}</h2>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis maiores quisquam saepe architecto error corporis aliquam. Cum ipsam a consectetur aut sunt sint animi, pariatur corporis, eaque, deleniti cupiditate officia.</p>
           </div>

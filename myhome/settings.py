@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rosetta',
     'sorl.thumbnail',
     'widget_tweaks',
-
+    'easy_maps',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +144,5 @@ LOGOUT_URL = 'logout'
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('profile:update', args=[u.profile.id])
 }
+
+EASY_MAPS_GOOGLE_KEY = 'AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA'
