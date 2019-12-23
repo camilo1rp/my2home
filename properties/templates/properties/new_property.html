@@ -68,7 +68,7 @@
                                                 headerTag: "h2",
                                                 bodyTag: "section",
                                                 transitionEffect: "slideLeft",
-                                                startIndex: parseInt($("#datoPage").text()),
+                                                startIndex: 1//parseInt($("#datoPage").text()),
                                                 //stepsOrientation: "vertical"
                                             });
                                         });
@@ -248,12 +248,125 @@
 
                                         <h2>Address</h2>
                                         <section>
-                                            <form method="post">
+                                             <form id="formUno" method="post">
                                                 {% csrf_token %}
-                                                {{ form.as_p }}
-                                                {{ error }}
-                                                <button type="submit">Save changes</button>
-                                            </form>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.tipo_via.label}}<span class="span"> *</span></label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.tipo_via}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="fa fa-id-card"></i>
+                                                                        {{form.via.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.via}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3" style="padding-left: 0%;">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                         <i class="fas fa-user-tie"></i>
+                                                                         {{form.prefijo_via.label}}<span class="span"> *</span>
+                                                                     </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.prefijo_via}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                             <i class="fas fa-user-tie"></i>
+                                                                             &nbsp;{{form.numero.label}}<span class="span"> *</span>
+                                                                         </label>
+                                                                        <div class="col-md-12">
+                                                                            {{form.numero.label}}
+                                                                            <span class="help-block"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.prefijo_numero.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.prefijo_numero}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.placa.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.placa}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.ciudad.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.ciudad}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.departamento.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.departamento}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.mostrar.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.mostrar}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="form-group divBtn">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
+                                                            </i>Guardar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>    
+
                                         </section>
 
                                         <h2>Image</h2>
