@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-17 10:21-0500\n"
-"PO-Revision-Date: 2019-12-03 21:01+0000\n"
+"POT-Creation-Date: 2019-12-20 10:32-0500\n"
+"PO-Revision-Date: 2019-12-20 13:00+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,16 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: myhome/settings.py:111
+#: myhome/settings.py:114
 msgid "English"
 msgstr "Inglés"
 
-#: myhome/settings.py:112
+#: myhome/settings.py:115
 msgid "Spanish"
 msgstr "Español"
-
-#~ msgid "Language"
-#~ msgstr "Lenguaje"
 
 #~ msgid "Inmobiliaria Romero"
 #~ msgstr "Inmobiliaria Romero"
@@ -54,11 +51,61 @@ msgstr "Español"
 #~ msgid "Land"
 #~ msgstr "Lotes"
 
+#~ msgid "Commercial"
+#~ msgstr "Comercial"
+
 #~ msgid "About"
 #~ msgstr "Conocenos"
 
 #~ msgid "Contact"
 #~ msgstr "Contactanos"
+
+#~ msgid "Listing Types"
+#~ msgstr "Tipo de Inmueble"
+
+#~ msgid "All"
+#~ msgstr "Todo"
+
+#~ msgid "Offer Type"
+#~ msgstr "Tipo de oferta"
+
+#~ msgid "For Sale"
+#~ msgstr "Venta"
+
+#, fuzzy
+#~| msgid "Rent"
+#~ msgid "For Rent"
+#~ msgstr "Arrendar"
+
+#~ msgid "For Swap"
+#~ msgstr "Permuta"
+
+#~ msgid "Select City"
+#~ msgstr "Selecionar Ciudad"
+
+#~ msgid "Sale"
+#~ msgstr "Venta"
+
+#~ msgid "Lend"
+#~ msgstr "Arriendo"
+
+#~ msgid "Swap"
+#~ msgstr "Permuta"
+
+#~ msgid "Beds"
+#~ msgstr "Habitaciones"
+
+#~ msgid "Baths"
+#~ msgstr "Baños "
+
+#~ msgid "Sq m"
+#~ msgstr "m²"
+
+#~ msgid "Why Choose Us?"
+#~ msgstr "Por que escogernos?"
+
+#~ msgid "Language"
+#~ msgstr "Lenguaje"
 
 #~ msgid "index/"
 #~ msgstr "inicio/"

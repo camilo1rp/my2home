@@ -51,7 +51,7 @@
       <div class="modal-header divTitleModal">
         <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
        </div>
-        <h2 id="datoPage">3</h2><!-- ******** TEXT DE PESTAÑA ******* -->
+        <h2 id="datoPage">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
         <div class="modal-body">
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -68,7 +68,7 @@
                                                 headerTag: "h2",
                                                 bodyTag: "section",
                                                 transitionEffect: "slideLeft",
-                                                startIndex: $("#datoPage").text(), 
+                                                startIndex: parseInt($("#datoPage").text()),
                                                 //stepsOrientation: "vertical"
                                             });
                                         });
@@ -77,7 +77,7 @@
                                     <div id="wizard">
                                         <h2>New Property</h2>
                                         <section style="overflow: auto;"> <!-- PAGE 1-->
-                                            <form id="formUno">
+                                            <form id="formUno" method="post">
                                                 {% csrf_token %}
                                                 <div class="col-md-12">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -306,6 +306,7 @@ $(document).ready(function(){
     //$("#id_description").attr('rows','4').attr('cols','70')
  
     $("[href='#next']").css('display','none');
+    $("[href='#DF GFFG N']").css('display','none');
     $("[href='#previous']").css('display','none');
     
     $("[href='#next']").click(function(){

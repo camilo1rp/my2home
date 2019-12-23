@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-17 10:21-0500\n"
+"POT-Creation-Date: 2019-12-20 10:32-0500\n"
 "PO-Revision-Date: 2019-12-03 20:58+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,154 +19,251 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: properties/models.py:15
-msgid "apartment"
+#: properties/forms.py:11
+msgid "select owner"
+msgstr ""
+
+#: properties/forms.py:12
+msgid "select manager"
 msgstr ""
 
 #: properties/models.py:16
-msgid "house"
+msgid "apartment"
 msgstr ""
 
 #: properties/models.py:17
+msgid "house"
+msgstr ""
+
+#: properties/models.py:18
 msgid "land"
 msgstr ""
 
 #: properties/models.py:19
-msgid "code"
-msgstr ""
-
-#: properties/models.py:20
-msgid "manager"
+msgid "commercial"
 msgstr ""
 
 #: properties/models.py:21
-msgid "owner"
+msgid "code"
 msgstr ""
 
 #: properties/models.py:22
-msgid "type of property"
+msgid "manager"
 msgstr ""
 
 #: properties/models.py:23
-msgid "price"
+msgid "owner"
+msgstr ""
+
+#: properties/models.py:24
+msgid "type of property"
 msgstr ""
 
 #: properties/models.py:25
-msgid "rooms"
-msgstr ""
-
-#: properties/models.py:26
-msgid "bathrooms"
+msgid "price"
 msgstr ""
 
 #: properties/models.py:27
-msgid "parking"
+msgid "rooms"
 msgstr ""
 
 #: properties/models.py:28
-msgid "built area"
+msgid "bathrooms"
 msgstr ""
 
 #: properties/models.py:29
-msgid "total area"
+msgid "parking"
+msgstr ""
+
+#: properties/models.py:30
+msgid "built area"
 msgstr ""
 
 #: properties/models.py:31
-msgid "title"
+msgid "total area"
 msgstr ""
 
 #: properties/models.py:33
+msgid "title"
+msgstr ""
+
+#: properties/models.py:35
 msgid "description"
 msgstr ""
 
-#: properties/models.py:34
+#: properties/models.py:36
 msgid "business type"
 msgstr ""
 
-#: properties/models.py:37
+#: properties/models.py:39
 msgid "seen"
 msgstr "visits"
 
-#: properties/models.py:125
+#: properties/models.py:128
 msgid "sale"
 msgstr ""
 
-#: properties/models.py:126
+#: properties/models.py:129
 msgid "rent"
 msgstr ""
 
-#: properties/models.py:127
+#: properties/models.py:130
 msgid "swap"
 msgstr ""
 
-#: properties/models.py:130
+#: properties/models.py:132
 msgid "type of business"
 msgstr ""
 
-#: properties/templates/properties/index.html:37
-msgid "Language"
+#: properties/templates/properties/index.html:65
+msgid "Inmuebles Fusa"
 msgstr ""
 
-#: properties/templates/properties/index.html:64
-msgid "Inmobiliaria Romero"
-msgstr ""
-
-#: properties/templates/properties/index.html:73
+#: properties/templates/properties/index.html:74
+#: properties/templates/properties/index.html:412
 msgid "Home"
 msgstr ""
 
-#: properties/templates/properties/index.html:75
+#: properties/templates/properties/index.html:76
+#: properties/templates/properties/index.html:413
 msgid "Buy"
 msgstr ""
 
-#: properties/templates/properties/index.html:76
+#: properties/templates/properties/index.html:77
+#: properties/templates/properties/index.html:414
 msgid "Rent"
 msgstr ""
 
-#: properties/templates/properties/index.html:78
+#: properties/templates/properties/index.html:79
 msgid "Properties"
 msgstr ""
 
-#: properties/templates/properties/index.html:80
+#: properties/templates/properties/index.html:81
+#: properties/templates/properties/index.html:147
 msgid "Apartments"
 msgstr ""
 
-#: properties/templates/properties/index.html:81
+#: properties/templates/properties/index.html:82
+#: properties/templates/properties/index.html:148
 msgid "Houses"
 msgstr ""
 
-#: properties/templates/properties/index.html:82
+#: properties/templates/properties/index.html:83
+#: properties/templates/properties/index.html:149
 msgid "Land"
 msgstr ""
 
-#: properties/templates/properties/index.html:94
+#: properties/templates/properties/index.html:84
+#: properties/templates/properties/index.html:150
+msgid "Commercial"
+msgstr ""
+
+#: properties/templates/properties/index.html:96
 msgid "About"
 msgstr ""
 
-#: properties/templates/properties/index.html:95
+#: properties/templates/properties/index.html:97
 msgid "Contact"
 msgstr ""
 
-#: properties/templates/properties/index.html:227
+#: properties/templates/properties/index.html:111
+#: properties/templates/properties/index.html:161
+msgid "For Rent"
+msgstr ""
+
+#: properties/templates/properties/index.html:114
+#: properties/templates/properties/index.html:127
+msgid "See Details"
+msgstr ""
+
+#: properties/templates/properties/index.html:124
+#: properties/templates/properties/index.html:160
+msgid "For Sale"
+msgstr ""
+
+#: properties/templates/properties/index.html:142
+msgid "Listing Types"
+msgstr ""
+
+#: properties/templates/properties/index.html:146
+#: properties/templates/properties/index.html:159
+#: properties/templates/properties/index.html:171
+msgid "All"
+msgstr ""
+
+#: properties/templates/properties/index.html:155
+msgid "Offer Type"
+msgstr ""
+
+#: properties/templates/properties/index.html:162
+msgid "For Swap"
+msgstr ""
+
+#: properties/templates/properties/index.html:167
+msgid "Select City"
+msgstr ""
+
+#: properties/templates/properties/index.html:177
+msgid "Search"
+msgstr ""
+
+#: properties/templates/properties/index.html:226
 msgid "Sale"
 msgstr ""
 
-#: properties/templates/properties/index.html:230
+#: properties/templates/properties/index.html:229
 msgid "Lend"
 msgstr ""
 
-#: properties/templates/properties/index.html:233
+#: properties/templates/properties/index.html:232
+#: properties/templates/properties/index.html:415
 msgid "Swap"
 msgstr ""
 
-#: properties/templates/properties/index.html:250
+#: properties/templates/properties/index.html:262
 msgid "Beds"
 msgstr ""
 
-#: properties/templates/properties/index.html:255
+#: properties/templates/properties/index.html:267
 msgid "Baths"
 msgstr ""
 
-#: properties/templates/properties/index.html:260
+#: properties/templates/properties/index.html:272
 msgid "Sq m"
+msgstr ""
+
+#: properties/templates/properties/index.html:316
+msgid "Why Choose Us?"
+msgstr ""
+
+#: properties/templates/properties/index.html:365
+msgid "Our Team"
+msgstr ""
+
+#: properties/templates/properties/index.html:398
+msgid "About Inmuebles Fusa"
+msgstr ""
+
+#: properties/templates/properties/index.html:420
+msgid "About Us"
+msgstr ""
+
+#: properties/templates/properties/index.html:421
+msgid "Privacy Policy"
+msgstr ""
+
+#: properties/templates/properties/index.html:422
+msgid "Contact Us"
+msgstr ""
+
+#: properties/templates/properties/index.html:423
+msgid "Terms"
+msgstr ""
+
+#: properties/templates/properties/index.html:432
+msgid "Follow Us"
+msgstr ""
+
+#: properties/views.py:72
+msgid "address already added to property"
 msgstr ""

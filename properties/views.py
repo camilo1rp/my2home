@@ -22,6 +22,8 @@ class ListProperty(ListView):
         filters = {}
         if property_type == business_type and business_type == city:
             self.object_list = self.model.objects.all()
+            context = self.get_context_data()
+            context['pro_section'] = False
         else:
             if property_type != 'ALL':
                 filters['type_property'] = property_type
@@ -32,8 +34,8 @@ class ListProperty(ListView):
                 prop_with_address = [prop for prop in query if prop.address_col.all()]
                 query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
             self.object_list = query
-        # allow_empty = self.get_allow_empty()
-        context = self.get_context_data()
+            context = self.get_context_data()
+            context['pro_section'] = True
         return self.render_to_response(context)
 
 
@@ -51,14 +53,16 @@ class CreateProperty(CreateView):
     def get_success_url(self):
         return reverse_lazy('property:create-address',  args=[self.new_property.id])
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = 0
+        return context
+
     # def get(self, request, *args, **kwargs):
     #     self.business = BusinessType.objects.all()
     #     return super().get(request, *args, **kwargs)
     #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['business'] = self.business
-    #     return context
+
 
 
 def create_address(request, prop_id=None):
@@ -75,7 +79,7 @@ def create_address(request, prop_id=None):
             return HttpResponseRedirect(reverse('property:create-image', args=(property_id,)))
     else:
         form = AddressColForm()
-    return render(request, 'properties/new_address_col.html', {'form': form, 'propiedad': prop_id})
+    return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
 
 
 def create_image(request, prop_id=None):
@@ -88,4 +92,4 @@ def create_image(request, prop_id=None):
             return HttpResponseRedirect(reverse('property:index',))
     else:
         form = ImageForm()
-    return render(request, 'properties/new_image.html', {'form': form, 'propiedad': prop_id})
+    return render(request, 'properties/new_image.html', {'form': form, 'propiedad': prop_id, 'page': 2})
