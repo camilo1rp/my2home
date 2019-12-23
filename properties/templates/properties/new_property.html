@@ -1,9 +1,11 @@
 {% extends 'properties/base_new.html' %}
 {% load i18n %}
+{% load static %}
 {% load widget_tweaks %}
 {% block title %}title{%endblock%}
 {% block styles %}
-    <style>
+
+      <style>
         .select2-container {
           width: 347px ! important;
           max-width: 100%;
@@ -49,183 +51,244 @@
       <div class="modal-header divTitleModal">
         <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
        </div>
-      <div class="modal-body">
-            <form method="post" action="{% url 'property:create' %}"  id="form">{% csrf_token %}
+        <h2 id="datoPage">3</h2><!-- ******** TEXT DE PESTAÑA ******* -->
+        <div class="modal-body">
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.owner.label}}<span class="span"> *</span></label>
-                                    <div class="col-md-12">
-                                        {{form.owner}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fa fa-id-card"></i>
-                                        &nbsp; {{form.type_property.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.type_property}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                         <i class="fas fa-user-tie"></i>
-                                         &nbsp;{{form.price.label}}<span class="span"> *</span>
-                                     </label>
-                                    <div class="col-md-12">
-                                        {{form.price}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                             <i class="fas fa-user-tie"></i>
-                                             &nbsp;{{form.rooms.label}}<span class="span"> *</span>
-                                         </label>
-                                        <div class="col-md-12">
-                                            {{form.rooms}}
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.baths.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.baths}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.parking.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.parking}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.area_built.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.area_built}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.area_total.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.area_total}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.estrato.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.estrato}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fas fa-chalkboard-teacher"></i>
-                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.manager}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="col-md-7">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fa fa-id-card"></i>
-                                        &nbsp; {{form.type_business.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.type_business}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.title.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.title}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="far fa-envelope"></i>
-                                        &nbsp;{{form.description.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        {{form.description}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="content">
+                             
+                                <div class="content">
+                                    <script>
+                                        var pedro = 0;
 
+                                        $(function ()
+                                        {
+                                            $("#wizard").steps({
+                                                headerTag: "h2",
+                                                bodyTag: "section",
+                                                transitionEffect: "slideLeft",
+                                                startIndex: $("#datoPage").text(), 
+                                                //stepsOrientation: "vertical"
+                                            });
+                                        });
+                                    </script>
+
+                                    <div id="wizard">
+                                        <h2>New Property</h2>
+                                        <section style="overflow: auto;"> <!-- PAGE 1-->
+                                            <form id="formUno">
+                                                {% csrf_token %}
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.owner.label}}<span class="span"> *</span></label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.owner}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="fa fa-id-card"></i>
+                                                                        {{form.type_property.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.type_property}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3" style="padding-left: 0%;">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                         <i class="fas fa-user-tie"></i>
+                                                                         {{form.price.label}}<span class="span"> *</span>
+                                                                     </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.price}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                             <i class="fas fa-user-tie"></i>
+                                                                             &nbsp;{{form.rooms.label}}<span class="span"> *</span>
+                                                                         </label>
+                                                                        <div class="col-md-12">
+                                                                            {{form.rooms}}
+                                                                            <span class="help-block"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.baths.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.baths}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.parking.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.parking}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.area_built.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.area_built}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.area_total.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.area_total}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.estrato.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.estrato}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-5">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="fas fa-chalkboard-teacher"></i>
+                                                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.manager}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <br/>
+                                                                <div class="col-md-7">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="fa fa-id-card"></i>
+                                                                        &nbsp; {{form.type_business.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.type_business}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-5">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.title.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.title}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="far fa-envelope"></i>
+                                                                        &nbsp;{{form.description.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        {{form.description}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="form-group divBtn">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
+                                                            </i>Guardar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            
+                                        </section>
+
+                                        <h2>Address</h2>
+                                        <section>
+                                            <form method="post">
+                                                {% csrf_token %}
+                                                {{ form.as_p }}
+                                                {{ error }}
+                                                <button type="submit">Save changes</button>
+                                            </form>
+                                        </section>
+
+                                        <h2>Image</h2>
+                                        <section>
+                                            <form method="post" enctype="multipart/form-data" id="form">
+                                                {% csrf_token %}
+                                                {{ form.as_p }}
+                                                <button type="submit">Save changes</button>
+                                            </form>
+                                        </section>
+
+                                        <h2>Forth Step</h2>
+                                        <section>
+                                            <p>Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor. 
+                                                Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae. 
+                                                Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut com*******</p>
+                                        </section>
+                                    </div>
+                                </div>
+                            
+                            </div>
                         </div>
                     </div>
                 </div>
-                <br/>
-                <div class="form-group divBtn">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-danger pull-right" id="btnLimpiar">
-                            </i>Limpiar
-                        </button>
-                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                            </i>Guardar
-                        </button>
-                    </div>
-                </div>
-            </form>
-      </div>
-    </div>
-  </div>
-</div>
-{% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-  <!--BOOTSTRAP-->
+                    {% block script %}
+        </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <!--BOOTSTRAP-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+   <script src="{% static 'js/jquery.steps.min.js' %}"></script>
+   <script src="{% static 'js/jquery.steps.js' %}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -241,7 +304,19 @@ $(document).ready(function(){
     $("input,select").addClass('form-control');
     $('#exampleModalCenter').modal('show')
     //$("#id_description").attr('rows','4').attr('cols','70')
-});
+ 
+    $("[href='#next']").css('display','none');
+    $("[href='#previous']").css('display','none');
+    
+    $("[href='#next']").click(function(){
+        //alert('mario ')
+       
+    });
+
+
+    //$("[href='#next']").trigger('click');
+
+ });
 </script>
 {% endblock %}
 {% endblock %}
