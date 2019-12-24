@@ -40,6 +40,12 @@
         input[type=number] {
             -moz-appearance:textfield; /* Firefox */
         }
+        .form-control {
+            padding:0.2em !important;
+        }
+        .select2-selection__choice{
+            font-size: 0.8em;
+        }
 
     </style>
 {% endblock %}
@@ -60,15 +66,13 @@
                              
                                 <div class="content">
                                     <script>
-                                        var pedro = 0;
-
-                                        $(function ()
+                                    $(function ()
                                         {
                                             $("#wizard").steps({
                                                 headerTag: "h2",
                                                 bodyTag: "section",
                                                 transitionEffect: "slideLeft",
-                                                startIndex: 1//parseInt($("#datoPage").text()),
+                                                startIndex: parseInt($("#datoPage").text()),
                                                 //stepsOrientation: "vertical"
                                             });
                                         });
@@ -83,7 +87,7 @@
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <div class="col-md-12">
                                                             <div class="row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                     <i class="fas fa-id-card-alt"></i>&nbsp;{{form.owner.label}}<span class="span"> *</span></label>
                                                                     <div class="col-md-12">
@@ -91,7 +95,7 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-5">
+                                                                <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         <i class="fa fa-id-card"></i>
                                                                         {{form.type_property.label}}<span class="span"> *</span>
@@ -101,25 +105,46 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3" style="padding-left: 0%;">
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        <i class="fa fa-id-card"></i>
+                                                                        {{form.type_business.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.type_business}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                          <i class="fas fa-user-tie"></i>
-                                                                         {{form.price.label}}<span class="span"> *</span>
+                                                                         {{form.price_str.label}}<span class="span"> *</span>
+                                                                     </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.price_str}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-0"  hidden>
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                         {{form.price.label}
                                                                      </label>
                                                                     <div class="col-md-12">
                                                                         {{form.price}}
-                                                                        <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <br/>
                                                             <hr>
                                                             <div class="row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-4" style="padding-left: 1%;">
                                                                     <div class="form-group">
                                                                         <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                              <i class="fas fa-user-tie"></i>
-                                                                             &nbsp;{{form.rooms.label}}<span class="span"> *</span>
+                                                                             {{form.rooms.label}}<span class="span"> *</span>
                                                                          </label>
                                                                         <div class="col-md-12">
                                                                             {{form.rooms}}
@@ -130,17 +155,17 @@
                                                                 <div class="col-md-4">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.baths.label}}<span class="span"> *</span>
+                                                                        {{form.baths.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12">
                                                                         {{form.baths}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-4" style="padding-right: 1%; padding-left:1%;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.parking.label}}<span class="span"> *</span>
+                                                                       {{form.parking.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12">
                                                                         {{form.parking}}
@@ -150,10 +175,10 @@
                                                             </div>
                                                             <br/>
                                                             <div class="row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-4" style="padding-left: 1%; white-space:nowrap;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.area_built.label}}<span class="span"> *</span>
+                                                                        {{form.area_built.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12">
                                                                         {{form.area_built}}
@@ -170,7 +195,7 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-4" style="padding-right: 1%; padding-left:1%;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         <i class="far fa-envelope"></i>
                                                                         &nbsp;{{form.estrato.label}}<span class="span"> *</span>
@@ -183,30 +208,20 @@
                                                             </div>
                                                             <br/>
                                                             <hr>
-                                                            <div class="row">
-                                                                <div class="col-md-5">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="fas fa-chalkboard-teacher"></i>
-                                                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.manager}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <br/>
-                                                                <div class="col-md-7">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="fa fa-id-card"></i>
-                                                                        &nbsp; {{form.type_business.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.type_business}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br/>
+<!--                                                            <div class="row">-->
+<!--                                                                <div class="col-md-12">-->
+<!--                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">-->
+<!--                                                                        <i class="fas fa-chalkboard-teacher"></i>-->
+<!--                                                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>-->
+<!--                                                                    </label>-->
+<!--                                                                    <div class="col-md-12">-->
+<!--                                                                        {{form.manager}}-->
+<!--                                                                        <span class="help-block"></span>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                                <br/>-->
+<!--                                                            </div>-->
+<!--                                                            <br/>-->
                                                             <div class="row">
                                                                 <div class="col-md-5">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
@@ -243,12 +258,11 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            
                                         </section>
 
                                         <h2>Address</h2>
                                         <section>
-                                             <form id="formUno" method="post">
+                                             <form id="formDos" method="post">
                                                 {% csrf_token %}
                                                 <div class="col-md-12">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -352,7 +366,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                      
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -366,7 +380,8 @@
                                                     </div>
                                                 </div>
                                             </form>    
-
+                                    <h2 id="propy">{{propiedad}}</h2>
+                                            <button id="back">back</button>
                                         </section>
 
                                         <h2>Image</h2>
@@ -406,6 +421,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!--BOOTSTRAP-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
     $("span[class='select2-selection select2-selection--multiple']");
@@ -416,8 +433,6 @@ $(document).ready(function(){
 
     $("input,select").addClass('form-control');
     $('#exampleModalCenter').modal('show')
-    //$("#id_description").attr('rows','4').attr('cols','70')
- 
     $("[href='#next']").css('display','none');
     $("[href='#DF GFFG N']").css('display','none');
     $("[href='#previous']").css('display','none');
@@ -426,11 +441,55 @@ $(document).ready(function(){
         //alert('mario ')
        
     });
+    var prop = $("#propy").text()
+    $("#back").click(function(){
+    window.location.href ='{% url "property:update" 25 %}'
+    });
 
 
     //$("[href='#next']").trigger('click');
 
- });
+
+ // ***funtion currency
+var id_price_strInput = document.getElementById('id_price_str');
+var currency = 'USD'; // https://www.id_price_str-iso.org/dam/downloads/lists/list_one.xml
+
+id_price_strInput.addEventListener('keydown', onKeydown);
+id_price_strInput.addEventListener('keyup', onKeyup);
+
+function localStringToNumber( s ){
+    return Number(String(s).replace(/[^0-9.-]+/g,""));
+}
+
+var val_com = $("#id_price_str").val();
+$("#id_price_str").attr("placeholder",val_com);
+
+function onKeydown(e){
+  var intformat= e.target.value;
+  var value = intformat.replace(/[.]/g,',');
+  e.target.value = value ? localStringToNumber(value) : '';
+  document.getElementById("id_price").value = e.target.value;
+}
+var timeout = null
+function onKeyup(e){
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+          var value = e.target.value;
+          document.getElementById("id_price").value = value;
+          const options = {
+              maximumFractionDigits : 0,
+              minimumFractionDigits : 0,
+              currency              : currency,
+              style                 : "currency",
+              currencyDisplay       : "symbol",
+          }
+          var usformat = value ? localStringToNumber(value).toLocaleString(undefined, options): '';
+          e.target.value = usformat.replace(/[,]/g,'.');
+          document.getElementById("id_price_str").value = e.target.value;
+    }, 400);
+}
+// **** end funtion currency
+});
 </script>
 {% endblock %}
 {% endblock %}

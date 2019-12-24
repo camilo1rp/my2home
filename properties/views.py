@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.translation import gettext_lazy as _
 from .forms import PropertyForm, AddressColForm, ImageForm
 from .models import Property, AddressCol, Image
@@ -46,8 +46,8 @@ class CreateProperty(CreateView):
 
     def form_valid(self, form):
         self.new_property = form.save(commit=False)
+        self.new_property.manager = self.request.user
         self.new_property.save()
-        print(self.new_property.id)
         return super(CreateProperty, self).form_valid(form)
 
     def get_success_url(self):
@@ -63,6 +63,28 @@ class CreateProperty(CreateView):
     #     return super().get(request, *args, **kwargs)
     #
 
+
+class UpdateProperty(UpdateView):
+    model = Property
+    template_name = 'properties/new_property.html'
+    form_class = PropertyForm
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = 0
+        return context
+
+    # def form_valid(self, form):
+    #     self.new_property = form.save(commit=False)
+    #     self.new_property.manager = self.request.user
+    #     self.new_property.save()
+    #     print(self.new_property.id)
+    #     return super(UpdateProperty, self).form_valid(form)
+    #
+    # def get_success_url(self):
+    #     return reverse_lazy('property:create-address',  args=[self.new_property.id])
+
+    # def get_object(self):
+    #     return self.model.objects.get(pk=self.request.GET.get('pk'))
 
 
 def create_address(request, prop_id=None):
@@ -93,3 +115,4 @@ def create_image(request, prop_id=None):
     else:
         form = ImageForm()
     return render(request, 'properties/new_image.html', {'form': form, 'propiedad': prop_id, 'page': 2})
+

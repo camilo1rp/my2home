@@ -10,10 +10,9 @@ class PropertyForm(forms.ModelForm):
         self.fields['description'].widget.attrs.update(rows='2', cols='40')
         self.fields['owner'].empty_label = _('select owner')
 
-
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'price_str', 'followers']
+        exclude = ['title_slug', 'code', 'seen', 'followers', 'manager']
 
 
 class AddressColForm(forms.ModelForm):
@@ -30,7 +29,6 @@ class AddressColForm(forms.ModelForm):
         self.fields['barrio'].widget.attrs.update(placeholder='ej. Cedritos')
         self.fields['prefijo_via'].label = 'prefijo'
         self.fields['prefijo_numero'].label = 'prefijo'
-
 
     class Meta:
         model = AddressCol
