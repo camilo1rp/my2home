@@ -99,7 +99,11 @@ def create_address(request, prop_id=None):
             property_id = new_address.propiedad.id
             return HttpResponseRedirect(reverse('property:create-image', args=(property_id,)))
     else:
-        form = AddressColForm()
+        if Property.objects.get(id=prop_id).address_col.all():
+            instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
+            form = AddressColForm(request.POST or None, instance=instance)
+        else:
+            form = AddressColForm()
     return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
 
 
