@@ -72,16 +72,15 @@ class UpdateProperty(UpdateView):
         context = super().get_context_data(**kwargs)
         context['page'] = 0
         return context
+    def form_valid(self, form):
+        self.new_property = form.save(commit=False)
+        self.new_property.manager = self.request.user
+        self.new_property.save()
+        print(self.new_property.id)
+        return super(UpdateProperty, self).form_valid(form)
 
-    # def form_valid(self, form):
-    #     self.new_property = form.save(commit=False)
-    #     self.new_property.manager = self.request.user
-    #     self.new_property.save()
-    #     print(self.new_property.id)
-    #     return super(UpdateProperty, self).form_valid(form)
-    #
-    # def get_success_url(self):
-    #     return reverse_lazy('property:create-address',  args=[self.new_property.id])
+    def get_success_url(self):
+        return reverse_lazy('property:create-address',  args=[self.new_property.id])
 
     # def get_object(self):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
