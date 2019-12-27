@@ -184,7 +184,7 @@
       </div>
     </div>
 
-    <div class="site-section site-section-sm bg-light">
+    <div id="propys" class="site-section site-section-sm bg-light">
       <div class="container">
         <div class="row mb-5">
           {% for prop in object_list %}
@@ -212,7 +212,7 @@
                   {%if gallery %}
                     {% for img in gallery%}
                       {%if img.main %}
-                        {% thumbnail img.image "800x500" padding=True upscale=True as im %}
+                        {% thumbnail img.image "800x500" crop=ce padding=True upscale=True as im %}
                           <img src="{{im.url}}" alt="Image" class="img-fluid">
                           {% endthumbnail %}
                         {% endif %}
@@ -259,7 +259,7 @@
               {% with pages=page_obj %}
               {% with total_pages=page_obj.paginator.num_pages current_page=page_obj.number %}
               {% if pages.previous_page_number > 1 %}
-                <a href="?page=1">1</a>
+                <a href="?page=1#propys">1</a>
               {% endif %}
               {% if pages.previous_page_number > 2 %}
                 <span>...</span>
@@ -456,5 +456,18 @@
   <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
   <script src="{% static 'js/aos.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
-  </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Handler for .ready() called.
+    if (window.location.href.indexOf("page") > -1){
+
+    $('html, body').animate({
+        scrollTop: $('#propys').offset().top
+    }, 'slow');
+    }
+});
+</script>
+    </body>
 </html>

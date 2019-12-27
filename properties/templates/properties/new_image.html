@@ -9,13 +9,42 @@
 <body>
 <input id="prop" value="{{propiedad}}" hidden disabled>
 <form method="post" enctype="multipart/form-data" id="form">
+    {{ form.management_form }}
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.0.propiedad }}
+    {{ form.0.image }}
+    {{ form.0.main }}
+    {{ form.1.propiedad }}
+    {{ form.1.image }}
+    {{ form.1.main }}
     <button type="submit">Save changes</button>
 </form>
+<img id=img1 src="" height="200" alt="Image preview...">
+<img id=img2 src="" height="200" alt="Image preview...">
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 var propy = $("#prop").val();
 $("#id_property_id").val(propy).change();
+
+$( "#id_form-0-image" ).on( "change", function() {
+  previewFile("#id_form-0-image","#img1");
+});
+$( "#id_form-1-image" ).on( "change", function() {
+  previewFile("#id_form-1-image","#img2");
+});
+
+function previewFile(e,i) {
+  var preview = document.querySelector(i);
+  var file    = document.querySelector(e).files[0];
+  var reader  = new FileReader();
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
 </script>

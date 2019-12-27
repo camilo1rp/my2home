@@ -117,7 +117,9 @@ def create_image(request, prop_id=None):
         if form.is_valid():
             prop = Property.objects.get(id=prop_id)
             for obj in form:
-                _new_image = Image.objects.get_or_create(propiedad=prop, image=obj.cleaned_data['image'], main=obj.cleaned_data['main'])
+                _new_image = Image.objects.get_or_create(propiedad=prop,
+                                                         image=obj.cleaned_data['image'],
+                                                         main=obj.cleaned_data['main'])
             return HttpResponseRedirect(reverse('property:index', ))
     images_formset = images_formset(queryset=Image.objects.none())
     return render(request, 'properties/new_image.html', {'form': images_formset, 'propiedad': prop_id, 'page': 2})
