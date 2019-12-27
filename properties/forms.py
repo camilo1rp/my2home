@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
-from .models import Property, AddressCol
+from .models import Property, AddressCol, Image
 
 
 class PropertyForm(forms.ModelForm):
@@ -34,9 +34,13 @@ class AddressColForm(forms.ModelForm):
         model = AddressCol
         exclude = []
 
-class ImageForm(forms.Form):
-    property_id = forms.CharField(max_length=12)
-    image = forms.ImageField()
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = []
+
+
 
 
 

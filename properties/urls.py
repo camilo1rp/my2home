@@ -10,5 +10,6 @@ urlpatterns = [
     path('new_address_col/<int:prop_id>/', views.create_address, name='create-address'),
     path('new_image/<int:prop_id>/', views.create_image, name='create-image'),
     path('update_property/<int:pk>/', views.UpdateProperty.as_view(), name='update'),
+    path('property_detail/<int:prop_id>/', views.property_detail, name='detail'),
 ]
 

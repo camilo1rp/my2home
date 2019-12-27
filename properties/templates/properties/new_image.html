@@ -5,109 +5,17 @@
     <title>Title</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
-
-     <!--BOOTSTRAP-->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <!--BOOTSTRAP-->
-
-    <style>
-        .span{
-            color: red;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 <input id="prop" value="{{propiedad}}" hidden disabled>
-
-
-<div class="content" style="width: 23%;height: 22%; margin: 0 auto; border: solid #ccc9c9;">
-    <form id="formUno" method="post">
-            {% csrf_token %}
-            <div class="col-md-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-md-12">
-                        <div class="row">
-                            
-                            <div class="col-md-12" style="text-align: center;">
-                                <span><strong>Seleccione Imagen</strong></span>
-                                <hr>
-                            </div>
-                            
-                            <br>
-                            <div class="col-md-12" style="padding-left: 0%;">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fas fa-user-tie"></i>
-                                        {{form.image.label}}<span class="span"> *</span>
-                                    </label>
-                                <div class="col-md-12">
-                                    {{form.image}}
-                                    <span class="help-block"></span>
-                                </div>
-                                <hr>
-                            </div>
-                            
-                            <br>
-                            <div class="col-md-12" style="padding-left: 0%;">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        <i class="fas fa-user-tie"></i>
-                                        {{form.property_id.label}}<span class="span"> *</span>
-                                    </label>
-                                <div class="col-md-12">
-                                    {{form.property_id}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                            
-                            <br>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group divBtn">
-                <div class="col-md-12" style="text-align: center;">
-                    <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                        </i>Guardar
-                    </button>
-                </div>
-            </div>
-    </form> 
-</div>
-
-<br/>
-<div id="imagen2"></div>
-
+<form method="post" enctype="multipart/form-data" id="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+</form>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 var propy = $("#prop").val();
 $("#id_property_id").val(propy).change();
-
-function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
- 
-            reader.onload = function (e) {
-                var filePreview = document.createElement('img');
-                filePreview.width = 200;
-                
-                filePreview.id = 'file-preview';
-                filePreview.src = e.target.result;
-                
-                var a = '<div class="card" style="width: 14%;float:left;margin-right: 12px;"><img style="width: 186px;height: 194px;" class="card-img-top" src="'+e.target.result+'" alt="Card image cap"><div class="container"><h4><b>John Doe</b></h4><p>Architect & Engineer</p></div></div>';
-                var y = document.getElementById('imagen2');    
-                y.innerHTML += a;
-            }
- 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
- 
-    var fileUpload = document.getElementById('id_image');
-    fileUpload.onchange = function (e) {
-        readFile(e.srcElement);
-    }
- 
 </script>
-

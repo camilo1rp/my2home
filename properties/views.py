@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.translation import gettext_lazy as _
 from .forms import PropertyForm, AddressColForm, ImageForm
 from .models import Property, AddressCol, Image
-
+from django.forms import modelformset_factory
 
 class ListProperty(ListView):
     model = Property
@@ -51,7 +51,7 @@ class CreateProperty(CreateView):
         return super(CreateProperty, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('property:create-address',  args=[self.new_property.id])
+        return reverse_lazy('property:create-address', args=[self.new_property.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,10 +68,12 @@ class UpdateProperty(UpdateView):
     model = Property
     template_name = 'properties/new_property.html'
     form_class = PropertyForm
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = 0
         return context
+
     def form_valid(self, form):
         self.new_property = form.save(commit=False)
         self.new_property.manager = self.request.user
@@ -80,7 +82,7 @@ class UpdateProperty(UpdateView):
         return super(UpdateProperty, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('property:create-address',  args=[self.new_property.id])
+        return reverse_lazy('property:create-address', args=[self.new_property.id])
 
     # def get_object(self):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
@@ -108,14 +110,20 @@ def create_address(request, prop_id=None):
 
 
 def create_image(request, prop_id=None):
+    images_formset = modelformset_factory(Image, fields=['propiedad', 'image', 'main'], extra=2)
     if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
+        form = images_formset(request.POST or None, request.FILES or None)
+        print(form)
         if form.is_valid():
-            image = request.FILES['image']
             prop = Property.objects.get(id=prop_id)
-            _new_image = Image.objects.get_or_create(propiedad=prop, image=image)
-            return HttpResponseRedirect(reverse('property:index',))
-    else:
-        form = ImageForm()
-    return render(request, 'properties/new_image.html', {'form': form, 'propiedad': prop_id, 'page': 2})
+            for obj in form:
+                _new_image = Image.objects.get_or_create(propiedad=prop, image=obj.cleaned_data['image'], main=obj.cleaned_data['main'])
+            return HttpResponseRedirect(reverse('property:index', ))
+    images_formset = images_formset(queryset=Image.objects.none())
+    return render(request, 'properties/new_image.html', {'form': images_formset, 'propiedad': prop_id, 'page': 2})
 
+
+def property_detail(request, prop_id):
+    prop = get_object_or_404(Property, id=prop_id)
+    return render(request, 'properties/property-details.html',
+                  {'prop': prop})

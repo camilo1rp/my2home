@@ -1,7 +1,17 @@
 from django.contrib import admin
 from properties.models import Property, AddressCol, BusinessType, Image
 
-admin.site.register(Property)
+# admin.site.register(Property)
 admin.site.register(AddressCol)
 admin.site.register(BusinessType)
-admin.site.register(Image)
+# admin.site.register(Image)
+
+@admin.register(Property)
+class PropertyAdmin(admin.ModelAdmin):
+    list_display = ('title', 'code', 'type_property', 'price_str', 'rooms', 'created')
+    list_filter = ('type_property', 'created')
+    search_fields = ('code', 'type_property')
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('propiedad', 'main', 'image')
