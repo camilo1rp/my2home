@@ -292,7 +292,7 @@
                 <span>...</span>
               {% endif %}
               {% if pages.next_page_number < total_pages%}
-                <a id="last" href="?{% query_transform page={{ total_pages }}">{{ total_pages }}</a>
+                <a id="last" href="?{% query_transform page=total_pages  %}">{{ total_pages }}</a>
               {% endif %}
               {% endif %}
               {% endwith %}

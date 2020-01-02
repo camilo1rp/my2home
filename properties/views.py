@@ -15,8 +15,7 @@ from django.forms import modelformset_factory
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 6
-
+    paginate_by = 9
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
         print(property_type)
