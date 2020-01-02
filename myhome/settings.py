@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'properties.apps.PropertiesConfig',
     'profiles.apps.ProfilesConfig',
+    'visits.apps.VisitsConfig',
     'rosetta',
     'sorl.thumbnail',
     'widget_tweaks',
@@ -146,3 +147,5 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 EASY_MAPS_GOOGLE_KEY = 'AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA'
+
+VISITS_SESSION_ID = 'visits'

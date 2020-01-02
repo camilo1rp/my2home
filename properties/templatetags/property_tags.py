@@ -14,3 +14,12 @@ def show_latest_properties(count=5, city="a", prop_id=0):
     else:
         latest_properties = properties_city[:count]
     return {'properties': latest_properties}
+
+
+@register.simple_tag(takes_context=True)
+def query_transform(context, **kwargs):
+    query = context['request'].GET.copy()
+    for k, v in kwargs.items():
+        query[k] = v
+    return query.urlencode()
+

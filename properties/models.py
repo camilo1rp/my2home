@@ -37,7 +37,7 @@ class Property(models.Model):
 
     # analytic
     seen = models.IntegerField(_('seen'), default=0)
-    followers = models.ManyToManyField(User, through='Following')
+    followers = models.ManyToManyField(User, through='Following', related_name='following',)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -88,12 +88,12 @@ class AddressCol(models.Model):
     propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='address_col')
     departamento = models.CharField(max_length=30)
     ciudad = models.CharField(max_length=30)
-    barrio = models.CharField(max_length=30)
+    barrio = models.CharField(max_length=30, null=True, blank=True)
     tipo_via = models.CharField(max_length=30)
     via = models.CharField(max_length=30)
-    prefijo_via = models.CharField(max_length=10)
+    prefijo_via = models.CharField(max_length=10, null=True, blank=True)
     numero = models.IntegerField()
-    prefijo_numero = models.CharField(max_length=10)
+    prefijo_numero = models.CharField(max_length=10, null=True, blank=True)
     placa = models.IntegerField()
     mostrar = models.BooleanField(default=False)
 
@@ -144,3 +144,12 @@ class Image(models.Model):
         if not self.propiedad.gallery.all():
             self.main = True
         super(Image, self).save(*args, **kwargs)
+
+
+class Contacts(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=100, null=True, blank=True)
+    phone = models.IntegerField()
+
+    def __str__(self):
+        return self.name
