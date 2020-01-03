@@ -48,6 +48,7 @@ class ImageForm(forms.ModelForm):
         model = Image
         exclude = []
 
+
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contacts

@@ -7,15 +7,15 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.translation import gettext_lazy as _
 
 from visits.visits import Visits
-from .forms import PropertyForm, AddressColForm, ImageForm
-from .models import Property, AddressCol, Image
+from .forms import PropertyForm, AddressColForm, ImageForm, ContactForm
+from .models import Property, AddressCol, Image, Contacts
 from django.forms import modelformset_factory
 
 
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 9
+    paginate_by = 12
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
         print(property_type)
@@ -117,7 +117,6 @@ def create_image(request, prop_id=None):
     images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6)
     if request.method == 'POST':
         form = images_formset(request.POST or None, request.FILES or None)
-        print(form)
         if form.is_valid():
             prop = Property.objects.get(id=prop_id)
             for obj in form:
@@ -138,8 +137,23 @@ def property_detail(request, prop_id):
     prop = get_object_or_404(Property, id=prop_id)
     visit = Visits(request)
     visit.add(prop_id)
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name_in = form.cleaned_data['name']
+            phone_in = form.cleaned_data['phone']
+            try:
+                email_in = form.cleaned_data['email']
+            except KeyError:
+                email_in = 'noemail@nomail.com'
+            _new_contact = Contacts.objects.get_or_create(name=name_in, phone=phone_in, email=email_in)
+            # //TODO: send email with client's info
+            return render(request, 'properties/property-details.html',
+                          {'prop': prop, 'message': _('Your information has been sent to our agents! Thank you')})
+
+    form = ContactForm()
     return render(request, 'properties/property-details.html',
-                  {'prop': prop})
+                  {'prop': prop, 'form': form})
 
 
 def whatsapp_contact(request, prop_id, phone=3162128561):

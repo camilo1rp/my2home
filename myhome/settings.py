@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'properties.apps.PropertiesConfig',
     'profiles.apps.ProfilesConfig',
     'visits.apps.VisitsConfig',
+    'citiesapp.apps.CitiesappConfig',
     'rosetta',
     'sorl.thumbnail',
     'widget_tweaks',
@@ -81,12 +82,26 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# ********************  Default Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'my2home',
+#         'USER': 'myhome',
+#         'PASSWORD': 'Tncamilo123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#         }
+# }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
