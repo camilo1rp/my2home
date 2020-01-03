@@ -95,8 +95,8 @@
     display: block;
     width: auto;
     margin: 0 0.5em 0.5em;
-    padding: 1em 1em;
-    text-decoration: none;
+    padding: 0.5em 1em;
+    text-decoration: none;  
 
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -163,9 +163,9 @@
 .wizard > .content > .body
 {
     float: left;
-    position: absolute;
+    /*position: absolute;*/
     width: 95%;
-    height: 95%;
+    height: 100%;
     padding: 2.5%;
 }
 

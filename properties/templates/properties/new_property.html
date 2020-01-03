@@ -46,6 +46,9 @@
         .select2-selection__choice{
             font-size: 0.8em;
         }
+        .modal-lg { 
+    max-width: 78% !important; 
+} 
 
     </style>
 {% endblock %}
@@ -57,14 +60,14 @@
       <div class="modal-header divTitleModal">
         <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
        </div>
-        <h2 id="datoPage">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
+        <h2 id="datoPage" style="display: none;">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
         <div class="modal-body">
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-12">
                             <div id="content">
                              
-                                <div class="content">
+                                <div class="content" style="height: 100%;">
                                     <script>
                                     $(function ()
                                         {
@@ -72,7 +75,7 @@
                                                 headerTag: "h2",
                                                 bodyTag: "section",
                                                 transitionEffect: "slideLeft",
-                                                startIndex: parseInt($("#datoPage").text()),
+                                                startIndex: 3//parseInt($("#datoPage").text()),
                                                 //stepsOrientation: "vertical"
                                             });
                                         });
@@ -260,7 +263,7 @@
                                             </form>
                                         </section>
 
-                                        <h2>Address</h2>
+                                        <h2>Address</h2><!-- PAGE 2-->
                                         <section>
                                              <form id="formDos" method="post">
                                                 {% csrf_token %}
@@ -384,20 +387,25 @@
                                             <button id="back">back</button>
                                         </section>
 
-                                        <h2>Image</h2>
-                                        <section>
-                                            <form method="post" enctype="multipart/form-data" id="form">
-                                                {% csrf_token %}
-                                                {{ form.as_p }}
-                                                <button type="submit">Save changes</button>
-                                            </form>
+                                        <h2>Image</h2><!-- PAGE 3-->
+                                        <section id="section3">
+                                            <div id="section3Div"></div>
                                         </section>
 
-                                        <h2>Forth Step</h2>
+                                        <h2>terms and Conditions</h2>
                                         <section>
-                                            <p>Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor. 
-                                                Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae. 
-                                                Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut com*******</p>
+                                            <div style="background-color: #fafafa; margin: 9rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
+
+                                                <form>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <label>Al llenar este formulario Acepta que las imagenes y los datos de su propiedad Se han publicados en la Web </label>
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">Aceptar terminos y condiciones</label>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            
                                         </section>
                                     </div>
                                 </div>
@@ -489,6 +497,29 @@ function onKeyup(e){
     }, 400);
 }
 // **** end funtion currency
+
+//<!-- Section - PAGE 3-->
+$("#section3Div").load( "http://localhost:8000/es/new_image/2/#");
+
+// SECTION 4
+
+if( $('#customCheck1').prop('indeterminate') == false ){
+    alert("false terminos")
+    /*
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Acepte términos y condiciones',
+        timer: 2100
+    })
+    */
+}
+
+$("#customCheck1").change(function(){
+    alert("Acepto ¨¨¨¨¨¨¨******* terminos")
+});
+    
+
 });
 </script>
 {% endblock %}

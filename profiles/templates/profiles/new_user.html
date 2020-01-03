@@ -3,12 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<style>
+  .spanIcon{
+    font-weight: bold;
+    color: red;
+  }
+  .contact_form input:focus:invalid { /* when a field is considered invalid by the browser */
+    /*background: #fff url(images/invalid.png) no-repeat 98% center; */
+    box-shadow: 0 0 5px #d45252;
+    border-color: #b03535
+ }
+ .contact_form input:required:valid{ /* when a field is considered valid by the browser */
+   /* background: #fff url(images/valid.png) no-repeat 98% center;*/
+    box-shadow: 0 0 5px #5cd053;
+    border-color: #28921f;
+}
+
+</style>
 </head>
 <body>
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save changes</button>
-</form>
+
+---------
+<div class="container">
+  <div class="row">
+      <div class="col-md-4"></div>
+       <div class="col-md-3" style="width: 35%;height: 22%;margin: 0 auto; border: solid #ccc9c9;">
+
+              <form id="formulario" class="form-horizontal contact_form" method="post">
+                
+                    <h5 style="text-align: center;margin-top: 5%;">Crear Usuario</h5>
+                    <hr>
+
+                    <div class="form-group">
+                        <span class="col-md-12">
+                            Ingrese Nombre Usuario 
+                            <span class="spanIcon"> *</span>
+                        </span>
+                          
+                        </span>
+                        <div class="col-md-12">
+                          <i class="fa fa-user"></i>
+                          &nbsp;
+                          {{ form.username }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"><!--BARRA PASSWORD-->
+                      <span class="col-md-12">
+                        Ingrese su contaseña
+                        <span class="spanIcon"> *</span>
+                      </span>
+                        <div class="col-sm-12">
+                          <i class="fa fa-lock"></i> 
+                          &nbsp;
+                          {{ form.password1 }}
+                        </div>
+                    </div>
+                    <div class="form-group"><!--BARRA PASSWORD-->
+                      <span class="col-md-12">
+                        Confirme su contraseña 
+                        <span class="spanIcon"> *</span>
+                      </span>
+                        <div class="col-sm-12">
+                          <i class="fa fa-lock"></i>
+                          &nbsp;
+                          {{ form.password2 }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div style="text-align: center;">
+                          <input type="submit" class="btn btn-md btn-primary" onclick="comprobar()" value="Aceptar">
+                      </div>
+                    </div>
+               </form>
+      </div>
+      <div class="col-md-4"></div>
+  </div>
+</div>
+  
 </body>
+<script>
+$(document).ready(function(){
+  $("#id_username").attr("placeholder", "Type here to search");
+ 
+
+
+  $("#id_password2").blur(function(){
+    var pass = $("#id_password1").val();
+    var pass2 = $("#id_password2").val();
+
+    if( pass == pass2 ){
+      alert("Nice")
+    }else{
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Contraeña no coinciden',
+          timer: 2100
+      });
+    }
+  });
+    
+
+  
+
+  
+});
+</script>
+
 </html>
