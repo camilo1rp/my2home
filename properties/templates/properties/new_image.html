@@ -79,6 +79,10 @@
             text-align:center;
             font-weight: bold;
         }
+        .span{
+            color: red;
+            font-weight: bold;
+        }
         </style>
         </head>
 <body>
@@ -91,234 +95,233 @@
         <!-- Contenido -->
         <section>
             
-            <div class="content" style="width: 23%;height: 22%; margin: 0 auto; border: solid #ccc9c9;">
+            <div class="content" style="width: 35%;height: 22%; margin: 0 auto; border: solid #ccc9c9;">
 
                 <form id="formUno" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="col-md-12">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                            
-                                        {{ form.management_form }}
+             
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
                                     
-                                        <div class="col-md-12" style="text-align: center;margin-top: 3%;">
-                                            <p style="font-size: 20px;"><strong>Seleccione Imagen</strong></p >
-                                            <hr>
-                                        </div>
-                                        
-                                         <!--- Cero -->
-                                        <div id="div0" class="imagenLi">
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.0.image.label}} 0<span class="span"> *</span>
-                                                    </label>
-                                                <div class="col-md-12">
-                                                    {{form.0.image}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <div class="col-md-2"></div>
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.0.propiedad.label}}<span class="span"> *</span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{form.0.main.label}}<span class="span"> *</span>
-                                                        {{form.0.main}}
-                                                    </label>
-                                                <div class="col-md-8">
-                                                    {{form.0.propiedad}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                        </div>
-                        
-                                        <!--- Uno -->
-                                        <div id="div1" class="imagenLi" style="display: none;">
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.1.image.label}} 1<span class="span"> *</span>
-                                                    </label>
-                                                <div class="col-md-12">
-                                                    {{form.1.image}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                         
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <div class="col-md-2"></div>
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.1.propiedad.label}}<span class="span"> *</span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{form.1.main.label}}<span class="span"> *</span>
-                                                        {{form.1.main}}
-                                                    </label>
-                                                <div class="col-md-8">
-                                                    {{form.1.propiedad}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                            
-                                        </div>
-                                                                               
-                                        <!--- Dos -->
-                                        <div id="div2" class="imagenLi" style="display: none;">
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.2.image.label}} 2<span class="span"> *</span>
-                                                    </label>
-                                                <div class="col-md-12">
-                                                    {{form.2.image}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                         
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <div class="col-md-2"></div>
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.2.propiedad.label}}<span class="span"> *</span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{form.2.main.label}}<span class="span"> *</span>
-                                                        {{form.2.main}}
-                                                    </label>
-                                                <div class="col-md-8">
-                                                    {{form.2.propiedad}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                          
-                                        </div>
-                        
-                                        <!--- Tres-->
-                                        <div id="div3"  class="imagenLi" style="display: none;">
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.3.image.label}} 3<span class="span"> *</span>
-                                                    </label>
-                                                <div class="col-md-12">
-                                                    {{form.3.image}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                         
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <div class="col-md-2"></div>
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.3.propiedad.label}}<span class="span"> *</span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{form.3.main.label}}<span class="span"> *</span>
-                                                        {{form.3.main}}
-                                                    </label>
-                                                <div class="col-md-8">
-                                                    {{form.3.propiedad}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                          
-                                        </div>
-
-                                        <!--- Cuatro-->
-                                        <div id="div4"  class="imagenLi" style="display: none;">
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.4.image.label}} 4<span class="span"> *</span>
-                                                    </label>
-                                                <div class="col-md-12">
-                                                    {{form.4.image}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                         
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <div class="col-md-2"></div>
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.4.propiedad.label}}<span class="span"> *</span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{form.4.main.label}}<span class="span"> *</span>
-                                                        {{form.4.main}}
-                                                    </label>
-                                                <div class="col-md-8">
-                                                    {{form.4.propiedad}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                          
-                                        </div>
-                        
-                                        <!--- Cinco -->
-                                        <div id="div5"  class="imagenLi" style="display: none;">
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.5.image.label}} 5<span class="span"> *</span>
-                                                    </label>
-                                                <div class="col-md-12">
-                                                    {{form.5.image}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <hr>
-                                            </div>
-                                         
-                                            <div class="col-md-12" style="padding-left: 0%;">
-                                                <div class="col-md-2"></div>
-                                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                        <i class="fas fa-user-tie"></i>
-                                                        {{form.5.propiedad.label}}<span class="span"> *</span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{form.5.main.label}}<span class="span"> *</span>
-                                                        {{form.5.main}}
-                                                    </label>
-                                                <div class="col-md-8">
-                                                    {{form.5.propiedad}}
-                                                    <span class="help-block"></span>
-                                                </div>
-                                                <div class="col-md-2"></div>
-                                            </div>
-                                          
-                                        </div>
-                                    
-                                        <div class="col-md-12">
-                                            <div class="information animated swing" id="descripcion" style="display: none;text-align:center;">              
-                                                <div class="alert alert-info" style="font-weight: bold;">
-                                                    <label>  
-                                                        <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i> 
-                                                    </label>
-                                                    <br/>
-                                                    Imagenes listas ...
-                                                </div>
-                                            <p class="animated infinite heartBeat">Elige tu foto Principal</p>
-                                            </div>
-                                            
-                                            <br/>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                            </div>
-                                        </div>
-                                       
-                                        <hr>
+                                {{ form.management_form }}
+                            
+                                <div class="col-md-12" style="text-align: center;margin-top: 3%;">
+                                    <p style="font-size: 20px;"><strong>Seleccione Imagen</strong></p >
+                                    <hr>
                                 </div>
-                            </div>
+                                
+                                    <!--- Cero -->
+                                <div id="div0" class="imagenLi">
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.0.image.label}} 0<span class="span"> *</span>
+                                            </label>
+                                        <div class="col-md-12">
+                                            {{form.0.image}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <div class="col-md-2"></div>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.0.propiedad.label}}<span class="span"> *</span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{form.0.main.label}}<span class="span"> *</span>
+                                                {{form.0.main}}
+                                            </label>
+                                        <div class="col-md-8">
+                                            {{form.0.propiedad}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                </div>
+                
+                                <!--- Uno -->
+                                <div id="div1" class="imagenLi" style="display: none;">
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.1.image.label}} 1<span class="span"> *</span>
+                                            </label>
+                                        <div class="col-md-12">
+                                            {{form.1.image}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <div class="col-md-2"></div>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.1.propiedad.label}}<span class="span"> *</span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{form.1.main.label}}<span class="span"> *</span>
+                                                {{form.1.main}}
+                                            </label>
+                                        <div class="col-md-8">
+                                            {{form.1.propiedad}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    
+                                </div>
+                                                                        
+                                <!--- Dos -->
+                                <div id="div2" class="imagenLi" style="display: none;">
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.2.image.label}} 2<span class="span"> *</span>
+                                            </label>
+                                        <div class="col-md-12">
+                                            {{form.2.image}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <div class="col-md-2"></div>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.2.propiedad.label}}<span class="span"> *</span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{form.2.main.label}}<span class="span"> *</span>
+                                                {{form.2.main}}
+                                            </label>
+                                        <div class="col-md-8">
+                                            {{form.2.propiedad}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    
+                                </div>
+                
+                                <!--- Tres-->
+                                <div id="div3"  class="imagenLi" style="display: none;">
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.3.image.label}} 3<span class="span"> *</span>
+                                            </label>
+                                        <div class="col-md-12">
+                                            {{form.3.image}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <div class="col-md-2"></div>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.3.propiedad.label}}<span class="span"> *</span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{form.3.main.label}}<span class="span"> *</span>
+                                                {{form.3.main}}
+                                            </label>
+                                        <div class="col-md-8">
+                                            {{form.3.propiedad}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    
+                                </div>
+
+                                <!--- Cuatro-->
+                                <div id="div4"  class="imagenLi" style="display: none;">
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.4.image.label}} 4<span class="span"> *</span>
+                                            </label>
+                                        <div class="col-md-12">
+                                            {{form.4.image}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <div class="col-md-2"></div>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.4.propiedad.label}}<span class="span"> *</span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{form.4.main.label}}<span class="span"> *</span>
+                                                {{form.4.main}}
+                                            </label>
+                                        <div class="col-md-8">
+                                            {{form.4.propiedad}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    
+                                </div>
+                
+                                <!--- Cinco -->
+                                <div id="div5"  class="imagenLi" style="display: none;">
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.5.image.label}} 5<span class="span"> *</span>
+                                            </label>
+                                        <div class="col-md-12">
+                                            {{form.5.image}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    
+                                    <div class="col-md-12" style="padding-left: 0%;">
+                                        <div class="col-md-2"></div>
+                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                <i class="fas fa-user-tie"></i>
+                                                {{form.5.propiedad.label}}<span class="span"> *</span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                {{form.5.main.label}}<span class="span"> *</span>
+                                                {{form.5.main}}
+                                            </label>
+                                        <div class="col-md-8">
+                                            {{form.5.propiedad}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+                                    
+                                </div>
+                            
+                                <div class="col-md-12">
+                                    <div class="information animated swing" id="descripcion" style="display: none;text-align:center;">              
+                                        <div class="alert alert-info" style="font-weight: bold;">
+                                            <label>  
+                                                <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i> 
+                                            </label>
+                                            <br/>
+                                            Imagenes listas ...
+                                        </div>
+                                    <p class="animated infinite heartBeat">Elige tu foto Principal</p>
+                                    </div>
+                                    
+                                    <br/>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    </div>
+                                </div>
+                                
+                                <hr>
                         </div>
+                    </div>
+                       
                 </form> 
                 <br/>
              
@@ -346,8 +349,6 @@
             </div>
         </footer>
 
-        <div style="height: 200px;"></div>
-        <input type="file" name="myImage" accept="image/*" />
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -417,11 +418,11 @@ $(document).ready(function(){
                 var a = '<li id="idCard_'+contador+'" class="liCard">\
                           <div class="image_title">\
                              <a href="#">'+firstName+'\
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-                                <input type="radio" name="" style="width: 3%;height: 21%;" title="Imagen Principal en la Web" class="form-check-input">\
                                 <br>\
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\
-                               <span style="color: white;font-weight: bold;" title="Eliminar Imagen" id="btnImg_'+contador+'">\
+                                <input type="radio" name="" style="width: 9%;height: 21%;" title="Imagen Principal en la Web" class="form-check-input">\
+                                &nbsp;&nbsp;&nbsp;&nbsp;\
+                                <span style="color: white;font-weight: bold;margin-top: 3px;" title="Eliminar Imagen" id="btnImg_'+contador+'">\
+                                    -\
                                   <i class="fa fa-trash fa-2x" aria-hidden="true" style="margin-top: 2px;font-size: 18px;"></i>\
                                </span>\
                              </a>\
