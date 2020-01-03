@@ -30,6 +30,7 @@ class Property(models.Model):
     area_built = models.DecimalField(_('built area'), default=0, decimal_places=0, max_digits=12)
     area_total = models.DecimalField(_('total area'), default=0, decimal_places=0, max_digits=12)
     estrato = models.IntegerField(null=True, blank=True)
+    year = models.IntegerField(_('year built'), null=True, blank=True)
     title = models.CharField(_('title'), max_length=50)
     title_slug = models.SlugField(max_length=70)
     description = models.TextField(_('description'), max_length=500)
@@ -146,7 +147,8 @@ class Image(models.Model):
         super(Image, self).save(*args, **kwargs)
 
 
-class Contacts(models.Model):
+class Contact(models.Model):
+    propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='contacts')
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, null=True, blank=True)
     phone = models.IntegerField()

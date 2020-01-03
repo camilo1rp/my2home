@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
-from .models import Property, AddressCol, Image, Contacts
+from .models import Property, AddressCol, Image, Contact
 import string
 
 CHOICES = [tuple([x, x]) for x in string.ascii_uppercase[:10]]
@@ -51,8 +51,8 @@ class ImageForm(forms.ModelForm):
 
 class ContactForm(forms.ModelForm):
     class Meta:
-        model = Contacts
-        exclude = []
+        model = Contact
+        exclude = ['propiedad']
 
 
 

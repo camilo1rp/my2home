@@ -1,9 +1,10 @@
 from django.contrib import admin
-from properties.models import Property, AddressCol, BusinessType, Image
+from properties.models import Property, AddressCol, BusinessType, Image, Contact
 
 # admin.site.register(Property)
 admin.site.register(AddressCol)
 admin.site.register(BusinessType)
+admin.site.register(Contact)
 # admin.site.register(Image)
 
 @admin.register(Property)

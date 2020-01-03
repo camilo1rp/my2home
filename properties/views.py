@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from visits.visits import Visits
 from .forms import PropertyForm, AddressColForm, ImageForm, ContactForm
-from .models import Property, AddressCol, Image, Contacts
+from .models import Property, AddressCol, Image, Contact
 from django.forms import modelformset_factory
 
 
@@ -98,9 +98,9 @@ def create_address(request, prop_id=None):
         if form.is_valid():
             new_address = form.save(commit=False)
             if Property.objects.get(id=prop_id).address_col.all():
-                return render(request, 'properties/new_address_col.html',
-                              {'form': form,
-                               'error': _('address already added to property')})
+                instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
+                form = AddressColForm(request.POST or None, instance=instance)
+                return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
             new_address.save()
             property_id = new_address.propiedad.id
             return HttpResponseRedirect(reverse('property:create-image', args=(property_id,)))
@@ -114,7 +114,7 @@ def create_address(request, prop_id=None):
 
 
 def create_image(request, prop_id=None):
-    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6)
+    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=7)
     if request.method == 'POST':
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
@@ -138,18 +138,24 @@ def property_detail(request, prop_id):
     visit = Visits(request)
     visit.add(prop_id)
     if request.method == 'POST':
+        print("request post")
         form = ContactForm(request.POST)
         if form.is_valid():
+            print("valid form")
             name_in = form.cleaned_data['name']
             phone_in = form.cleaned_data['phone']
             try:
                 email_in = form.cleaned_data['email']
             except KeyError:
+                print("no email provided")
                 email_in = 'noemail@nomail.com'
-            _new_contact = Contacts.objects.get_or_create(name=name_in, phone=phone_in, email=email_in)
+            print(prop)
+            _new_contact = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
             # //TODO: send email with client's info
             return render(request, 'properties/property-details.html',
                           {'prop': prop, 'message': _('Your information has been sent to our agents! Thank you')})
+        else:
+            return HttpResponse("error submiting file")
 
     form = ContactForm()
     return render(request, 'properties/property-details.html',
