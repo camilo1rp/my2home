@@ -19,9 +19,7 @@
         .divTitleModal{
             margin: 0 auto;
         }
-        .divBtn{
-            text-align: center;
-        }
+        
         .btnSave{
             margin-left: 6%;
         }
@@ -47,8 +45,17 @@
             font-size: 0.8em;
         }
         .modal-lg { 
-    max-width: 78% !important; 
-} 
+            max-width: 78% !important; 
+        } 
+        .centrar{
+            text-align: center;
+        }
+        .centrar0{
+            margin: 0 auto;
+        }
+        .divBtn{
+            text-align: center;
+        }
 
     </style>
 {% endblock %}
@@ -69,20 +76,19 @@
                              
                                 <div class="content" style="height: 100%;">
                                     <script>
-                                    $(function ()
-                                        {
-                                            $("#wizard").steps({
-                                                headerTag: "h2",
-                                                bodyTag: "section",
-                                                transitionEffect: "slideLeft",
-                                                startIndex: 3//parseInt($("#datoPage").text()),
-                                                //stepsOrientation: "vertical"
-                                            });
+                                    $(function () {
+                                        $("#wizard").steps({
+                                            headerTag: "h2",
+                                            bodyTag: "section",
+                                            transitionEffect: "slideLeft",
+                                            startIndex: 1//parseInt($("#datoPage").text()),
+                                            //stepsOrientation: "vertical"
                                         });
+                                    });
                                     </script>
 
                                     <div id="wizard">
-                                        <h2>New Property</h2>
+                                        <h2>{% trans 'New Property' %}</h2>
                                         <section style="overflow: auto;"> <!-- PAGE 1-->
                                             <form id="formUno" method="post">
                                                 {% csrf_token %}
@@ -92,15 +98,15 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.owner.label}}<span class="span"> *</span></label>
+                                                                        {{form.owner.label}}<span class="span"> *</span>
+                                                                    </label>
                                                                     <div class="col-md-12">
                                                                         {{form.owner}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="fa fa-id-card"></i>
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label" style="text-align: -webkit-right;">
                                                                         {{form.type_property.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12">
@@ -109,12 +115,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <br/>
+                                                            <hr>
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="fa fa-id-card"></i>
-                                                                        {{form.type_business.label}}<span class="span"> *</span>
+                                                                       {{form.type_business.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12">
                                                                         {{form.type_business}}
@@ -122,8 +127,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6" >
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                         <i class="fas fa-user-tie"></i>
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label" style="text-align: -webkit-right;">
                                                                          {{form.price_str.label}}<span class="span"> *</span>
                                                                      </label>
                                                                     <div class="col-md-12">
@@ -140,70 +144,72 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <br/>
                                                             <hr>
                                                             <div class="row">
-                                                                <div class="col-md-4" style="padding-left: 1%;">
+                                                                <div class="col-md-3">
                                                                     <div class="form-group">
                                                                         <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                             <i class="fas fa-user-tie"></i>
-                                                                             {{form.rooms.label}}<span class="span"> *</span>
+                                                                            {{form.rooms.label}}<span class="span"> *</span>
                                                                          </label>
-                                                                        <div class="col-md-12">
+                                                                        <div class="col-md-6">
                                                                             {{form.rooms}}
                                                                             <span class="help-block"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
                                                                         {{form.baths.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-6 centrar0">
                                                                         {{form.baths}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4" style="padding-right: 1%; padding-left:1%;">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
                                                                        {{form.parking.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-6 centrar0">
                                                                         {{form.parking}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <br/>
-                                                            <div class="row">
-                                                                <div class="col-md-4" style="padding-left: 1%; white-space:nowrap;">
+                                                                <div class="col-md-3" style="text-align: -webkit-right;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
                                                                         {{form.area_built.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-6">
                                                                         {{form.area_built}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
                                                                 <div class="col-md-4">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.area_total.label}}<span class="span"> *</span>
+                                                                        {{form.area_total.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-6">
                                                                         {{form.area_total}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4" style="padding-right: 1%; padding-left:1%;">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.estrato.label}}<span class="span"> *</span>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                        {{form.area_total.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-6 centrar0">
+                                                                        {{form.area_total}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4" id="divEstrato" style="text-align: -webkit-right;">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.estrato.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6">
                                                                         {{form.estrato}}
                                                                         <span class="help-block"></span>
                                                                     </div>
@@ -214,8 +220,7 @@
 <!--                                                            <div class="row">-->
 <!--                                                                <div class="col-md-12">-->
 <!--                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">-->
-<!--                                                                        <i class="fas fa-chalkboard-teacher"></i>-->
-<!--                                                                        &nbsp;{{form.manager.label}} <span class="span"> *</span>-->
+<!--                                                                        {{form.manager.label}} <span class="span"> *</span>-->
 <!--                                                                    </label>-->
 <!--                                                                    <div class="col-md-12">-->
 <!--                                                                        {{form.manager}}-->
@@ -226,20 +231,18 @@
 <!--                                                            </div>-->
 <!--                                                            <br/>-->
                                                             <div class="row">
-                                                                <div class="col-md-5">
+                                                                <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.title.label}}<span class="span"> *</span>
+                                                                        {{form.title.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12">
                                                                         {{form.title}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-7">
+                                                                <div class="col-md-6" style="text-align: -webkit-right;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.description.label}}<span class="span"> *</span>
+                                                                        {{form.description.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                                         {{form.description}}
@@ -263,136 +266,16 @@
                                             </form>
                                         </section>
 
-                                        <h2>Address</h2><!-- PAGE 2-->
-                                        <section>
-                                             <form id="formDos" method="post">
-                                                {% csrf_token %}
-                                                <div class="col-md-12">
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                        <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.tipo_via.label}}<span class="span"> *</span></label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.tipo_via}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="fa fa-id-card"></i>
-                                                                        {{form.via.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.via}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3" style="padding-left: 0%;">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                         <i class="fas fa-user-tie"></i>
-                                                                         {{form.prefijo_via.label}}<span class="span"> *</span>
-                                                                     </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.prefijo_via}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br/>
-                                                            <hr>
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                             <i class="fas fa-user-tie"></i>
-                                                                             &nbsp;{{form.numero.label}}<span class="span"> *</span>
-                                                                         </label>
-                                                                        <div class="col-md-12">
-                                                                            {{form.numero.label}}
-                                                                            <span class="help-block"></span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.prefijo_numero.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.prefijo_numero}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.placa.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.placa}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br/>
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.ciudad.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.ciudad}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.departamento.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.departamento}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        <i class="far fa-envelope"></i>
-                                                                        &nbsp;{{form.mostrar.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.mostrar}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br/>
-                                                <br/>
-                                                <div class="form-group divBtn">
-                                                    <div class="col-md-12">
-                                                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                                                            </i>Guardar
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>    
-                                    <h2 id="propy">{{propiedad}}</h2>
-                                            <button id="back">back</button>
+                                        <h2>{% trans 'Address' %}</h2><!-- PAGE 2-->
+                                        <section id="section2">
                                         </section>
 
-                                        <h2>Image</h2><!-- PAGE 3-->
+                                        <h2>{% trans 'Image' %}</h2><!-- PAGE 3-->
                                         <section id="section3">
                                             <div id="section3Div"></div>
                                         </section>
 
-                                        <h2>terms and Conditions</h2>
+                                        <h2>{% trans 'Terms and Conditions' %}</h2>
                                         <section>
                                             <div style="background-color: #fafafa; margin: 9rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
 
@@ -433,6 +316,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
+    $("#id_type_property").change(function(){
+        opcion = $("#id_type_property option:selected").val();
+        if( opcion == "LAN" || opcion == "FARM" ){
+            $("#divEstrato").hide();
+        }else{  
+            $("#divEstrato").show();
+        }
+
+    });
+
+
+    $('.steps > ul > li:first').addClass('newProperty')
+    //New Propery Activo
+    $(".newProperty").click(function(){
+        if(  $(".newProperty").attr('aria-selected') == "true" ){
+            window.location.href="{% url 'property:update' 1 %}";
+        }
+    });
+
     $("span[class='select2-selection select2-selection--multiple']");
     $("#id_type_business").attr('class','form-control selectDos');
     $('.selectDos').select2({
@@ -451,7 +353,7 @@ $(document).ready(function(){
     });
     var prop = $("#propy").text()
     $("#back").click(function(){
-    window.location.href ='{% url "property:update" 25 %}'
+        window.location.href ='{% url "property:update" 25 %}'
     });
 
 
@@ -498,6 +400,9 @@ function onKeyup(e){
 }
 // **** end funtion currency
 
+//<!-- Section - PAGE 2-->
+$("#section2").load( "http://localhost:8000/es/new_address_col/30/");
+
 //<!-- Section - PAGE 3-->
 $("#section3Div").load( "http://localhost:8000/es/new_image/2/#");
 
@@ -518,6 +423,12 @@ if( $('#customCheck1').prop('indeterminate') == false ){
 $("#customCheck1").change(function(){
     alert("Acepto ¨¨¨¨¨¨¨******* terminos")
 });
+
+
+ 
+ 
+
+
     
 
 });

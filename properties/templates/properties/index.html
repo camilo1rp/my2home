@@ -132,7 +132,7 @@
 
     </div>
 
-
+    
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
@@ -140,38 +140,29 @@
             <div class="row  align-items-end">
               <div class="col-md-3">
                 <label for="list-types">{% trans 'Listing Types' %}</label>
-                <div class="select-wrap">
-                  <span class="icon icon-arrow_drop_down"></span>
-                  <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="ALL">{% trans 'All' %}</option>
-                    <option value="APT">{% trans 'Apartments' %}</option>
-                    <option value="HOU">{% trans 'Houses' %}</option>
-                    <option value="LAN">{% trans 'Land' %}</option>
-                    <option value="COM">{% trans 'Commercial' %}</option>
-                  </select>
-                </div>
+                <select name="list-types" id="list-types" class="form-control rounded-0">
+                  <option value="ALL">{% trans 'All' %}</option>
+                  <option value="APT">{% trans 'Apartments' %}</option>
+                  <option value="HOU">{% trans 'Houses' %}</option>
+                  <option value="LAN">{% trans 'Land' %}</option>
+                  <option value="COM">{% trans 'Commercial' %}</option>
+              </select>
               </div>
               <div class="col-md-3">
                 <label for="offer-types">{% trans 'Offer Type' %}</label>
-                <div class="select-wrap">
-                  <span class="icon icon-arrow_drop_down"></span>
-                  <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
+                <select name="offer-types" id="offer-types" class="form-control rounded-0">
                     <option value="ALL">{% trans 'All' %}</option>
                     <option value="SALE / VENTA">{% trans 'For Sale' %}</option>
                     <option value="RENT / ARRENDAMIENTO">{% trans 'For Rent' %}</option>
                     <option value="SWAP / PERMUTA">{% trans 'For Swap' %}</option>
-                  </select>
-                </div>
+                </select>
               </div>
               <div class="col-md-3">
                 <label for="select-city">{% trans 'Select City' %}</label>
-                <div class="select-wrap">
-                  <span class="icon icon-arrow_drop_down"></span>
-                  <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                    <option value="ALL">{% trans 'All' %}</option>
-                    <option value="BOGOTA">Bogota</option>
-                  </select>
-                </div>
+                <select name="select-city" id="select-city" class="form-control rounded-0">
+                  <option value="ALL">{% trans 'All' %}</option>
+                  <option value="BOGOTA">Bogota</option>
+                </select>
               </div>
               <div class="col-md-3">
                 <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="{% trans 'Search' %}">
