@@ -1,7 +1,12 @@
 from django import forms
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
-from .models import Property, AddressCol, Image
+from .models import Property, AddressCol, Image, Contact
+import string
+
+CHOICES = [tuple([x, x]) for x in string.ascii_uppercase[:10]]
+[CHOICES.append(tuple(['{} BIS'.format(x),'{} BIS'.format(x)])) for x in string.ascii_uppercase[:10]]
+CHOICES.insert(0, tuple(['', '']))
 
 
 class PropertyForm(forms.ModelForm):
@@ -16,6 +21,9 @@ class PropertyForm(forms.ModelForm):
 
 
 class AddressColForm(forms.ModelForm):
+    prefijo_via = forms.CharField(label='What is your favorite fruit?', widget=forms.Select(choices=CHOICES))
+    prefijo_numero = forms.CharField(label='What is your favorite fruit?', widget=forms.Select(choices=CHOICES))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['tipo_via'].widget.attrs.update(placeholder='ej. Calle')
@@ -41,9 +49,10 @@ class ImageForm(forms.ModelForm):
         exclude = []
 
 
-
-
-
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        exclude = ['propiedad']
 
 
 

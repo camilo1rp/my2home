@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-20 10:32-0500\n"
+"POT-Creation-Date: 2020-01-02 10:45-0500\n"
 "PO-Revision-Date: 2019-12-20 13:00+0000\n"
 "Last-Translator: b'  <camilo1rp@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: myhome/settings.py:114
+#: myhome/settings.py:115
 msgid "English"
 msgstr "Inglés"
 
-#: myhome/settings.py:115
+#: myhome/settings.py:116
 msgid "Spanish"
 msgstr "Español"
 

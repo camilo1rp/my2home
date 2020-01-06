@@ -153,7 +153,10 @@
                   <li>
                     <span class="property-specs">{% trans 'Sq m' %}</span>
                     <span class="property-specs-number">{{ prop.area_total }}</span>
-                    
+                  </li>
+                  <li>
+                    <span class="property-specs">{% trans 'Visits' %}</span>
+                    <span class="property-specs-number">{{ prop.seen }}</span>
                   </li>
                 </ul>
                 </div>
@@ -214,24 +217,31 @@
              </div>
 
             <div class="bg-white widget border rounded">
+              {% if form %}
               <h3 class="h4 text-black widget-title mb-3">{% trans 'Contact Agent' %}</h3>
-              <form action="" class="form-contact-agent">
+              <form  class="form-contact-agent" method="post">{% csrf_token %}
                 <div class="form-group">
-                  <label for="name">{% trans 'Name' %}</label>
-                  <input type="text" id="name" class="form-control">
+                  <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.name.label}}<span class="span"> *</span></label>
+                  {{form.name}}
                 </div>
                 <div class="form-group">
-                  <label for="email">{% trans 'Email' %}</label>
-                  <input type="email" id="email" class="form-control">
+                  <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.phone.label}}<span class="span">*</span></label>
+                  {{form.phone}}
                 </div>
                 <div class="form-group">
-                  <label for="phone">{% trans 'Phone' %}</label>
-                  <input type="text" id="phone" class="form-control">
+                  <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.email.label}}</label>
+                  {{form.email}}
                 </div>
                 <div class="form-group">
-                  <input type="submit" id="phone" class="btn btn-primary" value="Send Message">
+                  <input type="submit" id="phone" class="btn btn-primary" value="{% trans 'Send Message' %}">
                 </div>
               </form>
+              {% else %}
+              <p>{{message}}</p>
+              {% endif %}
             </div>
             <div class="bg-white widget border rounded">
               <h3 class="h4 text-black widget-title mb-3">{%trans 'location' %}</h3>
@@ -298,7 +308,7 @@
             <h3 class="footer-heading mb-4">{% trans 'Follow Us' %}</h3>
 
                 <div>
-                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="{% url 'property:whatsapp' prop.id %}" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
@@ -319,7 +329,10 @@
       </div>
     </footer>
   </div>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+  <i class="fa fa-whatsapp my-float"></i>
+  </a>
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
   <script src="{% static 'js/jquery-ui.js' %}"></script>

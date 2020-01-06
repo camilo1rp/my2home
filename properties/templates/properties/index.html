@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load static %}
+{% load property_tags %}
 {% load i18n %}
 {% load thumbnail %}
 {% load easy_maps_tags %}
@@ -27,6 +28,9 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <!--fontawesome-->
+    <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
+    <!--fontawesome-->
   </head>
   <body>
   {% get_current_language as LANGUAGE_CODE %}
@@ -129,9 +133,10 @@
           </div>
         </div>
       </div>
-
     </div>
-
+    {% if 'list-types' in request.path %}
+      <h1>hello</h1>
+    {% endif %}
     
     <div class="site-section site-section-sm pb-0">
       <div class="container">
@@ -146,7 +151,7 @@
                   <option value="HOU">{% trans 'Houses' %}</option>
                   <option value="LAN">{% trans 'Land' %}</option>
                   <option value="COM">{% trans 'Commercial' %}</option>
-              </select>
+              </select>  
               </div>
               <div class="col-md-3">
                 <label for="offer-types">{% trans 'Offer Type' %}</label>
@@ -170,8 +175,17 @@
             </div>
           </form>
         </div>
-        {{ pro_section }}
-
+        {% with filters=request.GET %}
+          {% if pro_section %}
+          <span class="badge badge-secondary">Filters</span>
+          {% for key, value in filters.items %}
+           {% if key != "page" and value != 'ALL' %}
+            <span class="badge badge-primary">{{ key }} = {{ value }} </span>
+            {% endif %}
+          {% endfor %}
+           {% endif %}
+        {% endwith %}
+        <span id="filter" hidden>{{ pro_section }}</span>
       </div>
     </div>
 
@@ -203,7 +217,7 @@
                   {%if gallery %}
                     {% for img in gallery%}
                       {%if img.main %}
-                        {% thumbnail img.image "800x500" crop=ce padding=True upscale=True as im %}
+                        {% thumbnail img.image "800x500" crop=center padding=True upscale=True as im %}
                           <img src="{{im.url}}" alt="Image" class="img-fluid">
                           {% endthumbnail %}
                         {% endif %}
@@ -215,7 +229,11 @@
 <!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
                   </a>
                 <div class="p-4 property-body">
-                  <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+                  {%if prop in user.following.all %}
+                  <a href="#" class="property-unfavorite" ><span class="icon-heart-o"></span></a>
+                  {% else %}
+                  <a href="#" class="property-favorite" ><span class="icon-heart-o"></span></a>
+                  {% endif %}
                   {% with address=prop.address_col.get %}
                   <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>
                   <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
@@ -250,22 +268,22 @@
               {% with pages=page_obj %}
               {% with total_pages=page_obj.paginator.num_pages current_page=page_obj.number %}
               {% if pages.previous_page_number > 1 %}
-                <a href="?page=1#propys">1</a>
+                <a href="?page=1">1</a>
               {% endif %}
               {% if pages.previous_page_number > 2 %}
                 <span>...</span>
               {% endif %}
               {% if pages.has_previous %}
-                <a href="?page={{ pages.previous_page_number }}">{{ current_page|add:"-1"}}</a>
+                <a id="previous" href="?{% query_transform page=pages.previous_page_number %}">{{ current_page|add:"-1"}}</a>
               {% endif %}
-                <a href="#" class="active">{{ current_page }}</a>
+                <a id="active" href="#" class="active">{{ current_page }}</a>
               {% if pages.has_next %}
-                <a href="?page={{ pages.next_page_number }}">{{ current_page|add:"1"}}</a>
+                <a id="next" href="?{% query_transform page=pages.next_page_number %}">{{ current_page|add:"1"}}</a>
               {% if pages.next_page_number < total_pages|add:"-1 "%}
                 <span>...</span>
               {% endif %}
               {% if pages.next_page_number < total_pages%}
-                <a href="?page={{ total_pages }}">{{ total_pages }}</a>
+                <a id="last" href="?{% query_transform page=total_pages  %}">{{ total_pages }}</a>
               {% endif %}
               {% endif %}
               {% endwith %}
@@ -434,6 +452,10 @@
       </div>
     </footer>
   </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <a href="https://api.whatsapp.com/send?phone=573108181802&text=Quisiera%20mas%20informacion%20sobre%20los%20inmuebles%20y%20servicios%20que%20ofrecen" class="float" target="_blank">
+  <i class="fa fa-whatsapp my-float"></i>
+  </a>
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
   <script src="{% static 'js/jquery-ui.js' %}"></script>
@@ -449,16 +471,23 @@
   <script src="{% static 'js/main.js' %}"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-<script>
+<script type="text/javascript">
   $(document).ready(function () {
+   var filter = $("#filter").text()
     // Handler for .ready() called.
-    if (window.location.href.indexOf("page") > -1){
-
-    $('html, body').animate({
-        scrollTop: $('#propys').offset().top
-    }, 'slow');
+    if (window.location.href.indexOf("page") > -1 || filter == "True" ){
+      $('html, body').animate({
+          scrollTop: $('#propys').offset().top
+      }, 'slow');
+    }
+    if (filter == True ){
+    alert("got in")
+      $('html, body').animate({
+          scrollTop: $('#propys').offset().top
+      },);
     }
 });
+
 </script>
     </body>
 </html>

@@ -1,17 +1,21 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+import urllib
+
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.translation import gettext_lazy as _
-from .forms import PropertyForm, AddressColForm, ImageForm
-from .models import Property, AddressCol, Image
+
+from visits.visits import Visits
+from .forms import PropertyForm, AddressColForm, ImageForm, ContactForm
+from .models import Property, AddressCol, Image, Contact
 from django.forms import modelformset_factory
+
 
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 6
-
+    paginate_by = 12
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
         print(property_type)
@@ -94,9 +98,9 @@ def create_address(request, prop_id=None):
         if form.is_valid():
             new_address = form.save(commit=False)
             if Property.objects.get(id=prop_id).address_col.all():
-                return render(request, 'properties/new_address_col.html',
-                              {'form': form,
-                               'error': _('address already added to property')})
+                instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
+                form = AddressColForm(request.POST or None, instance=instance)
+                return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
             new_address.save()
             property_id = new_address.propiedad.id
             return HttpResponseRedirect(reverse('property:create-image', args=(property_id,)))
@@ -110,16 +114,20 @@ def create_address(request, prop_id=None):
 
 
 def create_image(request, prop_id=None):
-    images_formset = modelformset_factory(Image, fields=['propiedad', 'image', 'main'], extra=2)
+    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=7)
     if request.method == 'POST':
         form = images_formset(request.POST or None, request.FILES or None)
-        print(form)
         if form.is_valid():
             prop = Property.objects.get(id=prop_id)
             for obj in form:
-                _new_image = Image.objects.get_or_create(propiedad=prop,
-                                                         image=obj.cleaned_data['image'],
-                                                         main=obj.cleaned_data['main'])
+                try:
+                    img_in = obj.cleaned_data['image']
+                    main_in = obj.cleaned_data['main']
+                    _new_image = Image.objects.get_or_create(propiedad=prop,
+                                                             image=img_in,
+                                                             main=main_in)
+                except KeyError:
+                    continue
             return HttpResponseRedirect(reverse('property:index', ))
     images_formset = images_formset(queryset=Image.objects.none())
     return render(request, 'properties/new_image.html', {'form': images_formset, 'propiedad': prop_id, 'page': 2})
@@ -127,5 +135,44 @@ def create_image(request, prop_id=None):
 
 def property_detail(request, prop_id):
     prop = get_object_or_404(Property, id=prop_id)
+    visit = Visits(request)
+    visit.add(prop_id)
+    if request.method == 'POST':
+        print("request post")
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            print("valid form")
+            name_in = form.cleaned_data['name']
+            phone_in = form.cleaned_data['phone']
+            try:
+                email_in = form.cleaned_data['email']
+            except KeyError:
+                print("no email provided")
+                email_in = 'noemail@nomail.com'
+            print(prop)
+            _new_contact = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
+            # //TODO: send email with client's info
+            return render(request, 'properties/property-details.html',
+                          {'prop': prop, 'message': _('Your information has been sent to our agents! Thank you')})
+        else:
+            return HttpResponse("error submiting file")
+
+    form = ContactForm()
     return render(request, 'properties/property-details.html',
-                  {'prop': prop})
+                  {'prop': prop, 'form': form})
+
+
+def whatsapp_contact(request, prop_id, phone=3162128561):
+    prop = get_object_or_404(Property, id=prop_id)
+    message = _("I am interested in the property: {}, Address: {}, code: {}. Is it still Available")\
+        .format(prop.title, prop.address_col.get(), prop.code)
+    print('message: {}'.format(message))
+    phone_str = str(phone)
+    message_parsed = urllib.parse.quote(message)
+    print('message parsed: {}'.format(message_parsed))
+    whatsapp_url = "https://wa.me/57{}?text={}".format(phone_str, message_parsed)
+    print('url:{}'.format(whatsapp_url))
+    return redirect(whatsapp_url)
+
+class SendMessage(CreateView):
+    pass
