@@ -68,6 +68,7 @@
         <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
        </div>
         <h2 id="datoPage" style="display: none;">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
+        <span id="propiedad">{{propiedad}}</span>
         <div class="modal-body">
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -81,7 +82,7 @@
                                             headerTag: "h2",
                                             bodyTag: "section",
                                             transitionEffect: "slideLeft",
-                                            startIndex: 2//parseInt($("#datoPage").text()),
+                                            startIndex: parseInt($("#datoPage").text()),
                                             //stepsOrientation: "vertical"
                                         });
                                     });
@@ -268,27 +269,17 @@
 
                                         <h2>{% trans 'Address' %}</h2><!-- PAGE 2-->
                                         <section id="section2">
+                                            {% include "properties/new_address.html" %}
                                         </section>
 
                                         <h2>{% trans 'Image' %}</h2><!-- PAGE 3-->
                                         <section id="section3">
-                                            <div id="section3Div"></div>
+                                            {% include "properties/new_image.html" %}
                                         </section>
 
                                         <h2>{% trans 'Terms and Conditions' %}</h2>
                                         <section>
-                                            <div style="background-color: #fafafa; margin: 9rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
-
-                                                <form>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <label>Al llenar este formulario Acepta que las imagenes y los datos de su propiedad Se han publicados en la Web </label>
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                        <label class="custom-control-label" for="customCheck1">Aceptar terminos y condiciones</label>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                            
+                                            {% include "properties/tyc.html" %}                                            
                                         </section>
                                     </div>
                                 </div>
@@ -316,6 +307,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
+    var prop_id;
+    prop_id = parseInt( $("#propiedad").text() );
+
+
     $("#id_type_property").change(function(){
         opcion = $("#id_type_property option:selected").val();
         if( opcion == "LAN" || opcion == "FARM" ){
@@ -323,15 +318,13 @@ $(document).ready(function(){
         }else{  
             $("#divEstrato").show();
         }
-
     });
 
-
-    $('.steps > ul > li:first').addClass('newProperty')
     //New Propery Activo
+    $('.steps > ul > li:first').addClass('newProperty')
     $(".newProperty").click(function(){
         if(  $(".newProperty").attr('aria-selected') == "true" ){
-            window.location.href="{% url 'property:update' 1 %}";
+            window.location.href="{% url 'property:update' 30 %}";// "+prop_id+"
         }
     });
 
@@ -351,11 +344,6 @@ $(document).ready(function(){
         //alert('mario ')
        
     });
-    var prop = $("#propy").text()
-    $("#back").click(function(){
-        window.location.href ='{% url "property:update" 25 %}'
-    });
-
 
     //$("[href='#next']").trigger('click');
 
@@ -399,12 +387,6 @@ function onKeyup(e){
     }, 400);
 }
 // **** end funtion currency
-
-//<!-- Section - PAGE 2-->
-$("#section2").load( "http://localhost:8000/es/new_address_col/30/");
-
-//<!-- Section - PAGE 3-->
-$("#section3Div").load( "http://localhost:8000/es/new_image/30/#");
 
 // SECTION 4
 
