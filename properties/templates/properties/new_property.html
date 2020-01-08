@@ -91,7 +91,7 @@
                                     <div id="wizard">
                                         <h2>{% trans 'New Property' %}</h2>
                                         <section style="overflow: auto;"> <!-- PAGE 1-->
-                                            <form id="formUno" method="post">
+                                            <form id="formSectionUno" method="post">
                                                 {% csrf_token %}
                                                 <div class="col-md-12">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -274,12 +274,12 @@
 
                                         <h2>{% trans 'Image' %}</h2><!-- PAGE 3-->
                                         <section id="section3">
-                                            {% include "properties/new_image.html" %}
+                                            {% include "properties/new_image2.html" %}
                                         </section>
 
                                         <h2>{% trans 'Terms and Conditions' %}</h2>
                                         <section>
-                                            {% include "properties/tyc.html" %}                                            
+                                                                                 
                                         </section>
                                     </div>
                                 </div>
@@ -320,11 +320,19 @@ $(document).ready(function(){
         }
     });
 
-    //New Propery Activo
+    //New Propery Activo SECTION 1
     $('.steps > ul > li:first').addClass('newProperty')
     $(".newProperty").click(function(){
         if(  $(".newProperty").attr('aria-selected') == "true" ){
             window.location.href="{% url 'property:update' 30 %}";// "+prop_id+"
+        }
+    });
+
+    //New Propery Activo SECTION 2
+    $('.steps > ul > li:eq(1)').addClass('newAddress')
+    $(".newAddress").click(function(){
+        if(  $(".newAddress").attr('aria-selected') == "true" ){
+            window.location.href="{% url 'property:create-address' 30 %}";// "+prop_id+"
         }
     });
 
