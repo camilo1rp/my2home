@@ -23,7 +23,7 @@ class Visits(object):
             prop.save()
             print("visit registerd")
         else:
-            print("property page already visit")
+            print("property page already visited")
         self.save()
 
     def save(self):

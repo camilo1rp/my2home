@@ -1,70 +1,70 @@
- {% load i18n %}
+{% load i18n %}
 {% load thumbnail %}
 {% load easy_maps_tags %}
- {% load staticfiles %}
+{% load staticfiles %}
 {% load static %}
-          {% for prop in properties %}
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="property-entry h-100">
-                <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
-                  {% with business=prop.type_business.all %}
-                  <div class="offer-type-wrap">
-                    {% for busi in business %}
-                      {% if busi.name == 'SALE / VENTA' %}
-                        <span class="offer-type bg-danger">{% trans 'Sale'%}</span>
-                      {% endif %}
-                      {% if busi.name == 'RENT / ARRENDAMIENTO' %}
-                        <span class="offer-type bg-success">{% trans 'Lend'%}</span>
-                      {% endif %}
-                      {% if busi.name == 'SWAP / PERMUTA' %}
-                        <span class="offer-type bg-info">{% trans 'Swap'%}</span>
-                      {% endif %}
+{% for prop in properties %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="property-entry h-100">
+      <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
+        {% with business=prop.type_business.all %}
+        <div class="offer-type-wrap">
+          {% for busi in business %}
+            {% if busi.name == 'SALE / VENTA' %}
+              <span class="offer-type bg-danger">{% trans 'Sale'%}</span>
+            {% endif %}
+            {% if busi.name == 'RENT / ARRENDAMIENTO' %}
+              <span class="offer-type bg-success">{% trans 'Lend'%}</span>
+            {% endif %}
+            {% if busi.name == 'SWAP / PERMUTA' %}
+              <span class="offer-type bg-info">{% trans 'Swap'%}</span>
+            {% endif %}
 <!--                      <span class="offer-type {% if busi.name == 'rent' %}bg-danger{% endif %}{% if busi.name == 'Sale' %}bg-success{% endif %}">{{busi.name}}</span>-->
 <!--                    <span class="offer-type bg-success">Rent</span>-->
-                    {% endfor %}
-                  </div>
-                  {% endwith %}
-                  {% with gallery=prop.gallery.all %}
-                  {%if gallery %}
-                    {% for img in gallery%}
-                      {%if img.main %}
-                        {% thumbnail img.image "800x500" padding=True upscale=True as im %}
-                          <img src="{{im.url}}" alt="Image" class="img-fluid">
-                          {% endthumbnail %}
-                        {% endif %}
-                    {% endfor %}
-                  {% else %}
-                    <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">
-                  {% endif %}
-                  {% endwith %}
-<!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
-                  </a>
-                <div class="p-4 property-body">
-                  <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-                  {% with address=prop.address_col.get %}
-                  <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>
-                  <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
-                  <strong class="property-price text-primary mb-3 d-block text-success">{{ prop.price_str }}</strong>
-                  <ul class="property-specs-wrap mb-3 mb-lg-0">
-                    <li>
-                      <span class="property-specs">{% trans 'Beds' %}</span>
-                      <span class="property-specs-number">{{ prop.rooms }}<sup>+</sup></span>
-                    </li>
-                    <li>
-                      <span class="property-specs">{% trans 'Baths' %}</span>
-                      <span class="property-specs-number">{{ prop.baths }}</span>
-
-                    </li>
-                    <li>
-                      <span class="property-specs">{% trans 'Sq m' %}</span>
-                      <span class="property-specs-number">{{ prop.area_total }}</span>
-                    </li>
-                  </ul>
-
-                </div>
-              </div>
-            </div>
-          {% endwith %}
-          {% empty %}
-            <p> no properties</p>
           {% endfor %}
+        </div>
+        {% endwith %}
+        {% with gallery=prop.gallery.all %}
+        {%if gallery %}
+          {% for img in gallery%}
+            {%if img.main %}
+              {% thumbnail img.image "800x500" padding=True upscale=True as im %}
+                <img src="{{im.url}}" alt="Image" class="img-fluid">
+                {% endthumbnail %}
+              {% endif %}
+          {% endfor %}
+        {% else %}
+          <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">
+        {% endif %}
+        {% endwith %}
+<!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
+        </a>
+      <div class="p-4 property-body">
+        <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+        {% with address=prop.address_col.get %}
+        <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>
+        <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
+        <strong class="property-price text-primary mb-3 d-block text-success">{{ prop.price_str }}</strong>
+        <ul class="property-specs-wrap mb-3 mb-lg-0">
+          <li>
+            <span class="property-specs">{% trans 'Beds' %}</span>
+            <span class="property-specs-number">{{ prop.rooms }}<sup>+</sup></span>
+          </li>
+          <li>
+            <span class="property-specs">{% trans 'Baths' %}</span>
+            <span class="property-specs-number">{{ prop.baths }}</span>
+
+          </li>
+          <li>
+            <span class="property-specs">{% trans 'Sq m' %}</span>
+            <span class="property-specs-number">{{ prop.area_total }}</span>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+{% endwith %}
+{% empty %}
+  <p> no properties</p>
+{% endfor %}

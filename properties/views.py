@@ -1,7 +1,10 @@
 import urllib
+from email.mime.image import MIMEImage
 
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.translation import gettext_lazy as _
@@ -92,18 +95,18 @@ class UpdateProperty(UpdateView):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
 
 
-def create_address(request, prop_id=30):# //TODO: ************ CAMBIAR PROPIEDAD***************
+def create_address(request, prop_id=30):# //TODO: ************ CAMBIAR PROPIEDAD a None***************
     if request.method == 'POST':
-        form = AddressColForm(request.POST)
-        print("***** request post")
-        print(form)
-        if form.is_valid():
-            new_address = form.save(commit=False)   
-            new_address.save()
-            property_id = new_address.propiedad.id
-            return HttpResponseRedirect(reverse('property:create-image', args=(property_id,)))
+        if Property.objects.get(id=prop_id).address_col.all(): # check if property has address
+            instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
+            form = AddressColForm(instance=instance, data=request.POST)
         else:
-            print("error")
+            form = AddressColForm(request.POST)
+        if form.is_valid():
+            new_address = form.save(commit=False)
+            new_address.save()
+            return HttpResponseRedirect(reverse('property:create-image', args=(new_address.propiedad.id,)))
+        print("error")
     else:
         if Property.objects.get(id=prop_id).address_col.all():
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
@@ -118,7 +121,7 @@ def create_image(request, prop_id=None):
     if request.method == 'POST':
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
-            prop1 = obj.cleaned_data['img_in = obj.cleaned_data['image']']
+            prop1 = form.cleaned_data['propiedad']
             prop = Property.objects.get(id=prop_id)
             for obj in form:
                 try:
@@ -150,11 +153,31 @@ def property_detail(request, prop_id):
             except KeyError:
                 print("no email provided")
                 email_in = 'noemail@nomail.com'
-            print(prop)
-            _new_contact = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
-            # //TODO: send email with client's info
+            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
+
+            file = "/media/{}".format(prop.gallery.get(main=True).image)
+            data = {'propiedad': contact.propiedad, 'name': contact.name, 'phone': contact.phone,
+                    'email': contact.email, 'image':file}
+            html_content = render_to_string('properties/contact_email.html', {'data': data})
+            subject = '{} esta interesad@ en la propiedad: {} - {}'.format(data['name'].title(),
+                                                                           data['propiedad'].title,
+                                                                           data['propiedad'].code)
+            msg = EmailMultiAlternatives(subject, html_content, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
+            msg.content_subtype = "html"
+            msg.mixed_subtype = "related"
+            print(file[1::])
+            img = open(file[1::], 'rb').read()
+            url = file
+            print(url)
+            image = MIMEImage(img, 'jpg')
+            image.add_header('Content-ID', '<{}>'.format(url))
+            image.add_header("Content-Disposition", "inline", filename=url)
+            msg.attach(image)
+            msg.send()
+            message = _('Your information has been sent to our agents! Thank you')
+            print("email_sent")
             return render(request, 'properties/property-details.html',
-                          {'prop': prop, 'message': _('Your information has been sent to our agents! Thank you')})
+                          {'prop': prop, 'mess': message, })
         else:
             return HttpResponse("error submiting file")
 
@@ -175,5 +198,10 @@ def whatsapp_contact(request, prop_id, phone=3162128561):
     print('url:{}'.format(whatsapp_url))
     return redirect(whatsapp_url)
 
-class SendMessage(CreateView):
+
+# send_email(new_contact)
+# //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
+def send_email(contact):
     pass
+
+

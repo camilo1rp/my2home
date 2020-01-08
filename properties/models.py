@@ -11,11 +11,13 @@ class Property(models.Model):
     HOUSE = 'HOU'
     LAND = 'LAN'
     COMMERCIAL = 'COM'
+    FARM = 'FAR'
 
     TIPO_PRO = [
         (APARTMENT, _('apartment')),
         (HOUSE, _('house')),
         (LAND, _('land')),
+        (FARM, _('farm')),
         (COMMERCIAL, _('commercial')),
     ]
     code = models.IntegerField(_('code'), default=00000000)
