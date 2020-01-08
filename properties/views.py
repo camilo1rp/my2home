@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic.base import TemplateView
 from django.utils.translation import gettext_lazy as _
 
 from visits.visits import Visits
@@ -117,12 +118,13 @@ def create_address(request, prop_id=30):# //TODO: ************ CAMBIAR PROPIEDAD
 
 
 def create_image(request, prop_id=None):
-    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=7)
+    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6)
     if request.method == 'POST':
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
-            prop1 = form.cleaned_data['propiedad']
-            prop = Property.objects.get(id=prop_id)
+            prop1 = request.POST.get('propiedad_id')
+            print(prop1)
+            prop = Property.objects.get(id=int(prop_id))
             for obj in form:
                 try:
                     img_in = obj.cleaned_data['image']
@@ -204,4 +206,9 @@ def whatsapp_contact(request, prop_id, phone=3162128561):
 def send_email(contact):
     pass
 
+def next_page(request):
+    return render(request, 'properties/new_property.html', {'page': 3})
 
+
+class Tyc(TemplateView):
+    template_name = "properties/tyc.html"

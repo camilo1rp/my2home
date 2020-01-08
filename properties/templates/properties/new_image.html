@@ -87,12 +87,7 @@
         border: solid #ccc9c9;
         background-color: white;
     }
-    .omitir{
-        font-weight: bold; 
-        color: #0d498a; 
-        float: right;
-        text-decoration: underline;
-    }
+ 
     </style>
     </head>
     
@@ -113,15 +108,7 @@
                     <div class="row">
                                 
                             {{ form.management_form }}
-                        
-                            <div class="col-md-12" style="text-align: center;margin-top: 3%;">
-                                <p style="font-size: 20px;"><strong>Seleccione Imagen</strong></p>
-                                <div class="omitir" style="display: none;">
-                                    <a href="#" id="idOmitir">Omitir</a>
-                                </div>
-                                <hr>
-                            </div>
-
+                                                 
                             <!--- Cero -->
                             <div id="div0" class="imagenLi" dir="0">
                                 <div class="col-md-12" style="padding-left: 0%;">
@@ -243,8 +230,8 @@
             <br/>
             
             <div class="form-group divBtn">
-                <div class="col-md-12" style="text-align: center;">
-                    <button disabled title="Eliminar Servicio" class="btn btn-primary" id="btnSave">Guardar</button>
+                <div class="col-md-12" style="text-align: center; display: none;" id="DivBtnSave">
+                    <button title="Eliminar Servicio" class="btn btn-primary" id="btnSave">Guardar</button>
                 </div>
             </div>
         </div>
@@ -285,14 +272,42 @@ $(document).ready(function(){
         $("#id_form-"+id+"-main").prop('checked',true);
     }
     
+
+    function eventosImg(){
+        if( document.getElementById('btnImg_0') != null ){
+            document.getElementById('btnImg_0').addEventListener('click',()=> borrarImg(0), false);
+            document.getElementById('radio_0').addEventListener('click',()=> validacion(0), false);
+        }
+        if( document.getElementById('btnImg_1') != null ){
+            document.getElementById('btnImg_1').addEventListener('click',()=> borrarImg(1), false);
+            document.getElementById('radio_1').addEventListener('click',()=> validacion(1), false);
+        }
+        if( document.getElementById('btnImg_2') != null ){
+            document.getElementById('btnImg_2').addEventListener('click',()=> borrarImg(2), false);
+            document.getElementById('radio_2').addEventListener('click',()=> validacion(2), false);
+        }
+        if( document.getElementById('btnImg_3') != null ){
+            document.getElementById('btnImg_3').addEventListener('click',()=> borrarImg(3), false);
+            document.getElementById('radio_3').addEventListener('click',()=> validacion(3), false);
+        }
+        if( document.getElementById('btnImg_4') != null ){
+            document.getElementById('btnImg_4').addEventListener('click',()=> borrarImg(4), false);
+            document.getElementById('radio_4').addEventListener('click',()=> validacion(4), false);
+        }
+        if( document.getElementById('btnImg_5') != null ){
+            document.getElementById('btnImg_5').addEventListener('click',()=> borrarImg(5), false);
+            document.getElementById('radio_5').addEventListener('click',()=> validacion(5), false);
+        }
+    }
+
     $("input").attr('accept','image/*');//camilooooo
     $("select").addClass('form-control');//camilooooo
     
     $("#btnSave").click(function(){
         event.preventDefault();
         Swal.fire({
-            title: 'Enviar Informacion ?',
-            text: "Desea enviar esta informacion",
+            title: 'Guardar ?',
+            text:  quantity < 6 ? 'Aún puede agregar mas imagenes ' : 'Desea enviar esta información',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -313,7 +328,7 @@ $(document).ready(function(){
                         'Datos enviados Satisfactoramente.',
                         'success'
                     )
-                    $("#formUno").submit();
+                   // $("#formUno").submit();
                 }
             }
         })
@@ -322,14 +337,15 @@ $(document).ready(function(){
     
     function archivo(evt) {
         var files = evt.target.files; 
+        console.log(" to archivo "+files)
         var firstName = evt.target.files[0].name
         //Obtenemos la imagen del campo "file". 
         for (var i = 0, f; f = files[i]; i++) {  
             //Solo admitimos imágenes.
-            if ( ! f.type.match('image.*') ) {
+            /*if ( ! f.type.match('image.*') ) {
                 continue;
-            }
-
+            }*/
+            console.log("eneve to archivo 222222")
             var reader = new FileReader();
             reader.onload = (function(theFile) {
             return function(e) {
@@ -353,24 +369,7 @@ $(document).ready(function(){
             var y = document.getElementById('imagen2');    
             y.innerHTML += a;
             
-            document.getElementById('btnImg_0').addEventListener('click',()=> borrarImg(0), false);
-            document.getElementById('radio_0').addEventListener('click',()=> validacion(0), false);
-    
-            document.getElementById('btnImg_1').addEventListener('click',()=> borrarImg(1), false);
-            document.getElementById('radio_1').addEventListener('click',()=> validacion(1), false);
-        
-            document.getElementById('btnImg_2').addEventListener('click',()=> borrarImg(2), false);
-            document.getElementById('radio_2').addEventListener('click',()=> validacion(2), false);
-
-            document.getElementById('btnImg_3').addEventListener('click',()=> borrarImg(3), false);
-            document.getElementById('radio_3').addEventListener('click',()=> validacion(3), false);
-        
-            document.getElementById('btnImg_4').addEventListener('click',()=> borrarImg(4), false);
-            document.getElementById('radio_4').addEventListener('click',()=> validacion(4), false);
-            
-            document.getElementById('btnImg_5').addEventListener('click',()=> borrarImg(5), false);
-            document.getElementById('radio_5').addEventListener('click',()=> validacion(5), false);
-        
+            eventosImg();
             //document.getElementById('btnImg_'+contador).addEventListener('click',()=> pe(contador), false); //Dinamico
             };
             })(f);
@@ -411,24 +410,29 @@ $(document).ready(function(){
                 $("#div0").css('display','block');
             }
         }
-    }
-        
-    $("#idOmitir").click(function(){
-        $("#imagen2").append( '<span class="liCard"></span>' );
-    });
-
-    var quantity        
-    var percent = 100;
-    timerId = setInterval(function() {
+    }//Arcxhicvo
+    
+        var quantity        
+        var percent = 100;
+        var antes = false;
+        timerId = setInterval(function() {
 
         //Asigno Numero Imagen
         cantidad = $(".imagenLi").length;
         for (let index = 0; index <= cantidad; index++) {
             if( $("#div"+index).is(":visible") ){
-                contador = index;
-                //console.log( index+" index ---" )
+                if( antes ){
+                    if( index !== undefined ) {
+                        contador = index;
+                    }
+                    //console.log( index+" index ---" );
+                }
+            }else{
+                antes = true;
+                //console.log( contador+" contador igual a --- "+antes );
             }
-        }        
+        }
+
         quantity = $(".liCard").length;   
         if( quantity == 1  ){
             completo = 17;
@@ -436,25 +440,23 @@ $(document).ready(function(){
             completo = 34;
         }else if(  quantity == 3 ){
             completo = 51;
-            $(".omitir").css('display','none');    
         }else if(  quantity == 4 ){
             completo = 68;
-            $(".omitir").css('display','block');
         }else if(  quantity == 5 ){
             completo = 85;
-            $(".omitir").css('display','block');
         }else if(  quantity == 6 ){
             completo = 102;
             $('#descripcion').css('display','block');
             $(".imagenLi").css('display','none');
-            $("#btnSave").attr('disabled',false);
-            $(".omitir").css('display','none');
+            $("#DivBtnSave").css('display','block');
         }else{
             completo = 0;
         }
 
-        if( quantity <= 5 ){
-            $("#btnSave").attr('disabled',true);
+        if( quantity > 1 ){
+            $("#DivBtnSave").css('display','block');
+        }else{
+            $("#DivBtnSave").css('display','none');
         }
 
         completo == 102 ? $('.progress-bar').text(percent+'%') : $('.progress-bar').text(completo+'%'); 
@@ -464,16 +466,7 @@ $(document).ready(function(){
     
     var info;
     function borrarImg(id) {
-        info = $(".tarjeta").length; //# de Formularios
-        if( info <= 1  ){//4
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Minimo 3 Imagenes seleccionadas',
-                timer: 2100
-            });
-        }else{
-            Swal.fire({
+        Swal.fire({
                 title: 'Confirmar ..?',
                 text: "Desea Eliminar esta Imagen",
                 icon: 'warning',
@@ -483,7 +476,6 @@ $(document).ready(function(){
                 confirmButtonText: 'Eliminar',
             }).then((result) => {
                 if (result.value) {
-                    
                     $("#idCard_"+id).remove();
                     for (let index = 0; index <= 7; index++) {
                         $("#div"+index).css('display','none');
@@ -492,17 +484,9 @@ $(document).ready(function(){
                     $("#div"+id).css('display','block');
                     $('#descripcion').css('display','none');
                     $("#id_form-"+id+"-image").val('');
-            
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Felicidades',
-                        text: 'Imagen eliminada Satisfactoramente',
-                        timer: 1500
-                    });
-    
                 }
             });
-        }
+        eventosImg();
     }
 
     document.getElementById('id_form-0-image').addEventListener('change', archivo, false);
