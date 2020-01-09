@@ -87,7 +87,12 @@
         border: solid #ccc9c9;
         background-color: white;
     }
- 
+    .centrar{
+        margin: 0 auto;
+    }
+    .fuenteOscura{
+        font-weight: bold;
+    }
     </style>
     </head>
     
@@ -98,15 +103,12 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Terminos y condiciones</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title centrar fuenteOscura" id="exampleModalLabel">Terminos y condiciones</h5>
       </div>
       <div class="modal-body">
             
 
-        <div style="background-color: #fafafa; margin: 9rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
+        <div style="background-color: #fafafa; margin: 3rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
            <form>
                 <div class="custom-control custom-checkbox">
                     <label>Al llenar este formulario Acepta que las imagenes y los datos de su propiedad Se han publicados en la Web </label>
@@ -118,8 +120,10 @@
 
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Enviar</button>
+      <div class="modal-footer centrar">
+        <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
+        &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
       </div>
     </div>
   </div>
@@ -134,7 +138,7 @@
         
         <div class="content contenedor">
             <form action="{% url 'property:create-image' 30 %} " class="formSection3" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
+                {% csrf_token %}
             
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
@@ -261,8 +265,6 @@
 
             </form> 
             <br/>
-            
-            
         </div>
 
     </section>
@@ -290,6 +292,19 @@
     var cantidad;
     var contador;
     var completo = 0;
+
+    $("#btnEnviar").click(function(){
+        if( $("#customCheck1").is(':checked') ){
+            $("form").submit();
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Recuerde Aceptar terminos y condiciones',
+                timer: 2000
+            });
+        }
+    });
 
     //ckeck a main
     function validacion(id){
@@ -333,13 +348,14 @@
     $("#btnSave").click(function(){
         event.preventDefault();
         Swal.fire({
-            title: 'Guardar ?',
-            text:  quantity < 6 ? 'Aún puede agregar mas imagenes ' : 'Desea enviar esta información',
+            title: 'Confirmar ?',
+            text:  quantity < 6 ? 'Enviar, Aún puede agregar mas imagenes ...' : 'Desea enviar esta información',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Mas fotos',
+            confirmButtonText: 'Enivar',
         }).then((result) => {
             if (result.value) {
                 if ( !$("input[type='radio']:checked").val() ) {
@@ -348,19 +364,9 @@
                         title: 'Oops...',
                         text: 'Recuerde Elegir Una Imagen Principal',
                         timer: 2100
-                    })
+                    });
                 }else{
-                     $('#exampleModal').modal('show')
-                     
-                     //$("#modalPrueba").load("{% url 'property:tyc' %}");
-                    /*
-                    Swal.fire(
-                        'Felicidades!',
-                        'Datos enviados Satisfactoramente.',
-                        'success'
-                    )
-                    */
-                    console.log("")
+                    $('#exampleModal').modal('show');
                 }
             }
         })
@@ -478,15 +484,15 @@
             completo = 102;
             $('#descripcion').css('display','block');
             $(".imagenLi").css('display','none');
-            $("#DivBtnSave").css('display','block');
+            $("#DivBtnSave").show();
         }else{
             completo = 0;
         }
 
         if( quantity > 1 ){
-            $("#DivBtnSave").css('display','block');
+            $("#DivBtnSave").show();
         }else{
-            $("#DivBtnSave").css('display','none');
+            $("#DivBtnSave").hide();
         }
 
         completo == 102 ? $('.progress-bar').text(percent+'%') : $('.progress-bar').text(completo+'%'); 
