@@ -12,6 +12,6 @@ urlpatterns = [
     path('new_image/<int:prop_id>/', views.create_image, name='create-image'),
     path('update_property/<int:pk>/', views.UpdateProperty.as_view(), name='update'),
     path('property_detail/<int:prop_id>/', views.property_detail, name='detail'),
-    path('property_detail/<int:prop_id>/whatsapp_connect/', views.whatsapp_contact, name='whatsapp'),
+    path('whatsapp_connect/', views.whatsapp_contact, name='whatsapp'),
 ]
 
