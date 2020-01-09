@@ -510,10 +510,11 @@ function goToStep(wizard, options, state, index)
         refreshStepNavigation(wizard, options, state, oldIndex);
         refreshPagination(wizard, options, state);
         loadAsyncContent(wizard, options, state);
-        startTransitionEffect(wizard, options, state, index, oldIndex, function()
-        {
-            wizard.triggerHandler("stepChanged", [index, oldIndex]);
-        });
+//        startTransitionEffect(wizard, options, state, index, oldIndex, function()
+//        {
+//            wizard.triggerHandler("stepChanged", [index, oldIndex]);
+//        });
+
     }
     else
     {

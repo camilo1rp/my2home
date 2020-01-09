@@ -297,7 +297,7 @@
     <!--BOOTSTRAP-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-   <script src="{% static 'js/jquery.steps.min.js' %}"></script>
+
    <script src="{% static 'js/jquery.steps.js' %}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -322,24 +322,22 @@ $(document).ready(function(){
 
     //New Propery Activo SECTION 1
     $('.steps > ul > li:first').addClass('newProperty')
-    $(".newProperty").click(function(){
-        if(  $(".newProperty").attr('aria-selected') == "true" ){
-            window.location.href="{% url 'property:update' "+prop_id+" %}";
-        }
+    $(".newProperty").click(function(e){
+         window.location.href="{% url 'property:update' 123 %}".replace(/123/, prop_id);
     });
 
     //New Propery Activo SECTION 2
     $('.steps > ul > li:eq(1)').addClass('newAddress')
     $(".newAddress").click(function(){
         if(  $(".newAddress").attr('aria-selected') == "true" ){
-            window.location.href="{% url 'property:create-address' "+prop_id+" %}";
+            window.location.href="{% url 'property:create-address' 123 %}".replace(/123/, prop_id);
         }
     });
 
     $("span[class='select2-selection select2-selection--multiple']");
     $("#id_type_business").attr('class','form-control selectDos');
     $('.selectDos').select2({
-        //placeholder: 'Seleccione Uno o Mas Puntos de Operación',
+        //placeholder: '',
     });
 
     $("input,select").addClass('form-control');
@@ -390,7 +388,8 @@ function onKeyup(e){
               currencyDisplay       : "symbol",
           }
           var usformat = value ? localStringToNumber(value).toLocaleString(undefined, options): '';
-          e.target.value = usformat.replace(/[,]/g,'.');
+          val = usformat.replace(/[,]/g,'.');
+          e.target.value = val.replace(/[US]/g,'');
           document.getElementById("id_price_str").value = e.target.value;
     }, 400);
 }
