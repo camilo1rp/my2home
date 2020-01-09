@@ -1,7 +1,8 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
-from .models import Property, AddressCol, Image, Contact
+from .models import Property, AddressCol, Image, Contact, BusinessType
 import string
 
 CHOICES = [tuple([x, x]) for x in string.ascii_uppercase[:10]]
@@ -21,8 +22,8 @@ class PropertyForm(forms.ModelForm):
 
 
 class AddressColForm(forms.ModelForm):
-    prefijo_via = forms.CharField(label='What is your favorite fruit?', widget=forms.Select(choices=CHOICES))
-    prefijo_numero = forms.CharField(label='What is your favorite fruit?', widget=forms.Select(choices=CHOICES))
+    prefijo_via = forms.CharField(widget=forms.Select(choices=CHOICES))
+    prefijo_numero = forms.CharField(widget=forms.Select(choices=CHOICES))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -57,6 +58,12 @@ class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields['image'].widget.attrs.update({'class': 'upload'})
+
+
+class MultiPropForm(forms.Form):
+    csv_file = forms.FileField(label=_('csv file'))
+    owner = forms.ModelChoiceField(queryset=User.objects.all())
+    # type_business = forms.ModelMultipleChoiceField(queryset=BusinessType.objects.all())
 
 
 

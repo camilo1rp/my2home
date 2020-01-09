@@ -1,19 +1,22 @@
+import csv
+import io
+import json
 import urllib
 from email.mime.image import MIMEImage
-
+from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
+from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.base import TemplateView
-from django.utils.translation import gettext_lazy as _
 
 from visits.visits import Visits
-from .forms import PropertyForm, AddressColForm, ImageForm, ContactForm
-from .models import Property, AddressCol, Image, Contact
-from django.forms import modelformset_factory
+from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
+from .models import Property, AddressCol, Image, Contact, BusinessType
 
 
 class ListProperty(ListView):
@@ -22,11 +25,8 @@ class ListProperty(ListView):
     paginate_by = 12
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
-        print(property_type)
         business_type = request.GET.get('offer-types')
-        print(business_type)
         city = request.GET.get('select-city')
-        print(city)
         filters = {}
         if property_type == business_type and business_type == city:
             self.object_list = self.model.objects.all()
@@ -170,7 +170,6 @@ def property_detail(request, prop_id):
             print(file[1::])
             img = open(file[1::], 'rb').read()
             url = file
-            print(url)
             image = MIMEImage(img, 'jpg')
             image.add_header('Content-ID', '<{}>'.format(url))
             image.add_header("Content-Disposition", "inline", filename=url)
@@ -203,12 +202,63 @@ def whatsapp_contact(request, prop_id, phone=3162128561):
 
 # send_email(new_contact)
 # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
-def send_email(contact):
-    pass
-
-def next_page(request):
-    return render(request, 'properties/new_property.html', {'page': 3})
-
 
 class Tyc(TemplateView):
     template_name = "properties/tyc.html"
+
+
+def property_upload(request):
+    template = 'properties/upload.html'
+    if request.method == 'POST':
+        form = MultiPropForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            csv_file = form.cleaned_data['csv_file']
+            owner = form.cleaned_data['owner']
+            # type_business = BusinessType.objects.get(name=form.cleaned_data['type_business'])
+            manager = request.user
+            # type_business = form.cleaned_data['type_business']
+            if not csv_file.name.endswith('.csv'):
+                messages.error(request, 'File must be format:  .CVS')
+                print("file error")
+                return redirect(reverse('gestores:producto-upload'))
+            data_set = csv_file.read().decode('UTF-8')
+            io_string = io.StringIO(data_set)
+            next(io_string)
+            property_data = csv.reader(io_string, delimiter=",", quotechar="|")
+            if not request.is_ajax():
+                for column in property_data:
+                    if not Property.objects.filter(upload_code=column[13]):
+                        print( "**** NEW PROPERTY ****")
+                        prop, _ = Property.objects.get_or_create(manager=manager, owner=owner, type_property=column[0],
+                                                      price=column[1], price_str=column[2], rooms=column[3],
+                                                      baths=column[4], parking=column[5], area_built=column[6],
+                                                      area_total=column[7], estrato=column[8], year=column[9],
+                                                      title=column[10], description=column[11], upload_code=column[13])
+                    else:
+                        print( "**** ALTER PROPERTY ****")
+                        prop = Property.objects.get(upload_code=column[13])
+                        prop.__dict__.update(manager=manager, owner=owner, type_property=column[0],
+                                                      price=column[1], price_str=column[2], rooms=column[3],
+                                                      baths=column[4], parking=column[5], area_built=column[6],
+                                                      area_total=column[7], estrato=column[8], year=column[9],
+                                                      title=column[10], description=column[11],)
+                    prop.save()
+                    types = column[12].split('-')
+                    for typ in types:
+                        t = typ.lower()
+                        if t == 'arriendo' or t == 'arrendamiento' or t == 'arrendar':
+                            value = 'RENT / ARRENDAMIENTO'
+                        elif t == 'permuta' or t == 'permutar' or t == 'permuto':
+                            value = 'SWAP / PERMUTA'
+                        elif t == 'venta' or t == 'vender' or t == 'vendo':
+                            value = 'SALE / VENTA'
+                        else:
+                            value = 'SALE / VENTA'
+                        business = BusinessType.objects.get(name=value)
+                        prop.type_business.add(business)
+                        prop.save()
+                    # prop.type_business.add(type_business)
+                    # prop.save()
+                return HttpResponseRedirect(reverse('property:index'))
+    form = MultiPropForm()
+    return render(request, template, {'form': form})

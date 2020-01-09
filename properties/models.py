@@ -21,6 +21,7 @@ class Property(models.Model):
         (COMMERCIAL, _('commercial')),
     ]
     code = models.IntegerField(_('code'), default=00000000)
+    upload_code = models.IntegerField(_('upload-code'), default=00000000)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name=_('manager'))
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties', verbose_name=_('owner'))
     type_property = models.CharField(_('type of property'), max_length=70, choices=TIPO_PRO, default=APARTMENT)
