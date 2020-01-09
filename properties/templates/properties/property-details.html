@@ -308,7 +308,7 @@
             <h3 class="footer-heading mb-4">{% trans 'Follow Us' %}</h3>
 
                 <div>
-                  <a href="{% url 'property:whatsapp' prop.id %}" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
@@ -330,7 +330,7 @@
     </footer>
   </div>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." class="float" target="_blank">
+  <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." id="Idwhatsapp" class="float" target="_blank">
   <i class="fa fa-whatsapp my-float"></i>
   </a>
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
@@ -347,6 +347,14 @@
   <script src="{% static 'js/aos.js' %}"></script>
   <script src="{% static 'js/circleaudioplayer.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
-    
+  <script type="text/javascript">
+  $.ajax({
+      url: '{% url "property:whatsapp" %}',
+      type: 'get',
+      data: { 'id': {{prop.id}} }
+  }).done(function(data) {
+      $("#Idwhatsapp").attr('href',data);
+  });
+  </script>
   </body>
 </html>

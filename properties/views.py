@@ -1,4 +1,5 @@
 import urllib
+import json
 from email.mime.image import MIMEImage
 
 from django.core.mail import EmailMultiAlternatives
@@ -113,7 +114,7 @@ def create_address(request, prop_id=30):# //TODO: ************ CAMBIAR PROPIEDAD
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(request.POST or None, instance=instance)
         else:
-            form = AddressColForm()
+            form = AddressColForm()#new_property   
     return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
 
 
@@ -188,7 +189,9 @@ def property_detail(request, prop_id):
                   {'prop': prop, 'form': form})
 
 
-def whatsapp_contact(request, prop_id, phone=3162128561):
+def whatsapp_contact(request):
+    prop_id = request.GET.get('id')
+    phone = 3162128561 
     prop = get_object_or_404(Property, id=prop_id)
     message = _("I am interested in the property: {}, Address: {}, code: {}. Is it still Available")\
         .format(prop.title, prop.address_col.get(), prop.code)
@@ -198,7 +201,8 @@ def whatsapp_contact(request, prop_id, phone=3162128561):
     print('message parsed: {}'.format(message_parsed))
     whatsapp_url = "https://wa.me/57{}?text={}".format(phone_str, message_parsed)
     print('url:{}'.format(whatsapp_url))
-    return redirect(whatsapp_url)
+    print('ebntro************* '+prop_id)
+    return HttpResponse(json.dumps(whatsapp_url), content_type='application/json')
 
 
 # send_email(new_contact)
