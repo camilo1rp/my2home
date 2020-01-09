@@ -214,9 +214,7 @@ def property_upload(request):
         if form.is_valid():
             csv_file = form.cleaned_data['csv_file']
             owner = form.cleaned_data['owner']
-            # type_business = BusinessType.objects.get(name=form.cleaned_data['type_business'])
             manager = request.user
-            # type_business = form.cleaned_data['type_business']
             if not csv_file.name.endswith('.csv'):
                 messages.error(request, 'File must be format:  .CVS')
                 print("file error")
@@ -225,40 +223,37 @@ def property_upload(request):
             io_string = io.StringIO(data_set)
             next(io_string)
             property_data = csv.reader(io_string, delimiter=",", quotechar="|")
-            if not request.is_ajax():
-                for column in property_data:
-                    if not Property.objects.filter(upload_code=column[13]):
-                        print( "**** NEW PROPERTY ****")
-                        prop, _ = Property.objects.get_or_create(manager=manager, owner=owner, type_property=column[0],
-                                                      price=column[1], price_str=column[2], rooms=column[3],
-                                                      baths=column[4], parking=column[5], area_built=column[6],
-                                                      area_total=column[7], estrato=column[8], year=column[9],
-                                                      title=column[10], description=column[11], upload_code=column[13])
+            for column in property_data:
+                if not Property.objects.filter(upload_code=column[13]):
+                    print( "**** NEW PROPERTY ****")
+                    prop, _ = Property.objects.get_or_create(manager=manager, owner=owner, type_property=column[0],
+                                                  price=column[1], price_str=column[2], rooms=column[3],
+                                                  baths=column[4], parking=column[5], area_built=column[6],
+                                                  area_total=column[7], estrato=column[8], year=column[9],
+                                                  title=column[10], description=column[11], upload_code=column[13])
+                else:
+                    print( "**** ALTER PROPERTY ****")
+                    prop = Property.objects.get(upload_code=column[13])
+                    prop.__dict__.update(manager=manager, owner=owner, type_property=column[0],
+                                                  price=column[1], price_str=column[2], rooms=column[3],
+                                                  baths=column[4], parking=column[5], area_built=column[6],
+                                                  area_total=column[7], estrato=column[8], year=column[9],
+                                                  title=column[10], description=column[11],)
+                prop.save()
+                types = column[12].split('-')
+                for typ in types:
+                    t = typ.lower()
+                    if t == 'arriendo' or t == 'arrendamiento' or t == 'arrendar':
+                        value = 'RENT / ARRENDAMIENTO'
+                    elif t == 'permuta' or t == 'permutar' or t == 'permuto':
+                        value = 'SWAP / PERMUTA'
+                    elif t == 'venta' or t == 'vender' or t == 'vendo':
+                        value = 'SALE / VENTA'
                     else:
-                        print( "**** ALTER PROPERTY ****")
-                        prop = Property.objects.get(upload_code=column[13])
-                        prop.__dict__.update(manager=manager, owner=owner, type_property=column[0],
-                                                      price=column[1], price_str=column[2], rooms=column[3],
-                                                      baths=column[4], parking=column[5], area_built=column[6],
-                                                      area_total=column[7], estrato=column[8], year=column[9],
-                                                      title=column[10], description=column[11],)
+                        value = 'SALE / VENTA'
+                    business = BusinessType.objects.get(name=value)
+                    prop.type_business.add(business)
                     prop.save()
-                    types = column[12].split('-')
-                    for typ in types:
-                        t = typ.lower()
-                        if t == 'arriendo' or t == 'arrendamiento' or t == 'arrendar':
-                            value = 'RENT / ARRENDAMIENTO'
-                        elif t == 'permuta' or t == 'permutar' or t == 'permuto':
-                            value = 'SWAP / PERMUTA'
-                        elif t == 'venta' or t == 'vender' or t == 'vendo':
-                            value = 'SALE / VENTA'
-                        else:
-                            value = 'SALE / VENTA'
-                        business = BusinessType.objects.get(name=value)
-                        prop.type_business.add(business)
-                        prop.save()
-                    # prop.type_business.add(type_business)
-                    # prop.save()
                 return HttpResponseRedirect(reverse('property:index'))
     form = MultiPropForm()
     return render(request, template, {'form': form})
