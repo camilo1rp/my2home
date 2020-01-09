@@ -56,7 +56,9 @@
         .divBtn{
             text-align: center;
         }
-
+        .color1{
+            background-color: #fff;
+        }
     </style>
 {% endblock %}
 {% block body %}
@@ -323,16 +325,21 @@ $(document).ready(function(){
     //New Propery Activo SECTION 1
     $('.steps > ul > li:first').addClass('newProperty')
     $(".newProperty").click(function(){
+        $("#wizard-p-0").addClass('color1');
+        $("span").remove();
+        $(".divBtn").hide();
+        $("#formUno").hide();
         if(  $(".newProperty").attr('aria-selected') == "true" ){
-            window.location.href="{% url 'property:update' "+prop_id+" %}";
+            window.location.href="{% url 'property:update' 30 %}";
         }
+        //setTimeout( $(".container, contenedor").removeClass('color1'), 300);
     });
 
     //New Propery Activo SECTION 2
     $('.steps > ul > li:eq(1)').addClass('newAddress')
     $(".newAddress").click(function(){
         if(  $(".newAddress").attr('aria-selected') == "true" ){
-            window.location.href="{% url 'property:create-address' "+prop_id+" %}";
+            window.location.href="{% url 'property:create-address' 30 %}";
         }
     });
 
@@ -399,7 +406,7 @@ function onKeyup(e){
 // SECTION 4
 
 if( $('#customCheck1').prop('indeterminate') == false ){
-    alert("false terminos")
+    //alert("false terminos")
     /*
     Swal.fire({
         icon: 'error',
