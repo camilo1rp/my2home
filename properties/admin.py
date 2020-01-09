@@ -9,7 +9,7 @@ admin.site.register(Contact)
 
 @admin.register(Property)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('title', 'code', 'type_property', 'price_str', 'rooms', 'created')
+    list_display = ('id', 'title', 'code', 'type_property', 'price_str', 'rooms', 'baths', 'created')
     list_filter = ('type_property', 'created')
     search_fields = ('code', 'type_property')
 

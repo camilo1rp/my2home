@@ -200,7 +200,6 @@ def whatsapp_contact(request):
     print('message parsed: {}'.format(message_parsed))
     whatsapp_url = "https://wa.me/57{}?text={}".format(phone_str, message_parsed)
     print('url:{}'.format(whatsapp_url))
-    print('ebntro************* '+prop_id)
     return HttpResponse(json.dumps(whatsapp_url), content_type='application/json')
 
 
@@ -229,14 +228,15 @@ def property_upload(request):
             property_data = csv.reader(io_string, delimiter=",", quotechar="|")
             for column in property_data:
                 if not Property.objects.filter(upload_code=column[13]):
-                    print( "**** NEW PROPERTY ****")
                     prop, _ = Property.objects.get_or_create(manager=manager, owner=owner, type_property=column[0],
                                                   price=column[1], price_str=column[2], rooms=column[3],
                                                   baths=column[4], parking=column[5], area_built=column[6],
                                                   area_total=column[7], estrato=column[8], year=column[9],
                                                   title=column[10], description=column[11], upload_code=column[13])
+                    address,_ = AddressCol.objects.get_or_create(propiedad=prop, tipo_via=column[14], via=column[15],
+                                                                 )
+
                 else:
-                    print( "**** ALTER PROPERTY ****")
                     prop = Property.objects.get(upload_code=column[13])
                     prop.__dict__.update(manager=manager, owner=owner, type_property=column[0],
                                                   price=column[1], price_str=column[2], rooms=column[3],
@@ -261,3 +261,4 @@ def property_upload(request):
                 return HttpResponseRedirect(reverse('property:index'))
     form = MultiPropForm()
     return render(request, template, {'form': form})
+

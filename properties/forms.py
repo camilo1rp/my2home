@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import Textarea
 from django.utils.translation import gettext_lazy as _
+from citiesapp.models import State
 from .models import Property, AddressCol, Image, Contact, BusinessType
 import string
 
@@ -18,12 +19,14 @@ class PropertyForm(forms.ModelForm):
 
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'followers', 'manager']
+        exclude = ['title_slug', 'code', 'seen', 'followers', 'manager', 'upload_code']
 
 
 class AddressColForm(forms.ModelForm):
     prefijo_via = forms.CharField(widget=forms.Select(choices=CHOICES))
     prefijo_numero = forms.CharField(widget=forms.Select(choices=CHOICES))
+    ciudad = forms.CharField(widget=forms.Select())
+    departamento = forms.ModelChoiceField(queryset=State.objects.all())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,10 +57,6 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         exclude = ['propiedad']
-
-    def __init__(self, *args, **kwargs):
-        super(ContactForm, self).__init__(*args, **kwargs)
-        self.fields['image'].widget.attrs.update({'class': 'upload'})
 
 
 class MultiPropForm(forms.Form):

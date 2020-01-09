@@ -24,6 +24,7 @@ urlpatterns = i18n_patterns(
     path('account/', include('account.urls', namespace='account')),
     path('rosetta/', include('rosetta.urls')),
     path('profile/', include('profiles.urls', namespace='profile')),
+    path('cities/', include('citiesapp.urls', namespace='city')),
     path('', include('properties.urls', namespace='property')),
 )
 if settings.DEBUG:

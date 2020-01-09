@@ -7,7 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-   
+
     <style>
     .select2-container {
         width: 260px ! important;
@@ -127,17 +127,17 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                              {{form.propiedad}}
-                      
-                        <br/> 
+
+                        <br/>
                         <hr>
                         <div style="font-weight: bold; text-align: center;">
                             <span style="font-size: 18px;text-decoration: underline;">Direccion: </span>
                             <span id="showData"></span>
                         </div>
-                        
-                        <hr> 
+
+                        <hr>
                         <div class="row">
                             <div class="col-md-9" style="text-align: right;">
                                 <span>Mostrar dirección completa en la Web ?</span>
@@ -167,7 +167,7 @@
                               <option value="3">tres</option>
                         </select>
 
-        
+
                         <div style="font-weight: bold; text-align: center;">
                             <span style="font-size: 18px;text-decoration: underline;">Direccion a Mostrar:</span>
                             <span id="showData2"></span>
@@ -183,7 +183,7 @@
                     </button>
                 </div>
             </div>
-        </form> 
+        </form>
     </div>
 </div>
 
@@ -192,34 +192,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 //SECTION 2
-    $("#ciudadSelect").change(function(){
-    var opcion = $("#ciudadSelect option:selected").val();
+    $("#id_departamento").change(function(){
+    var opcion = $("#id_departamento option:selected").val();
     alert("opciont "+opcion)
-   /* 
+
     $.ajax({
-        url: '{ url "clientes:get-identificacion" }',
+        url: '{% url "city:cities" %}',
         type: 'get',
-        data: { 'idOrg': opcion }
+        data: { 'id': opcion }
     }).done(function(data) {
         var valores = '';
         var datos = JSON.parse(data);
-        $("#deparSelect").empty();
+        $("#id_ciudad").empty();
         valores = "<option value='' selected>Seleccione Una Opción</option>"
         $.each(datos, function(item, val) {
-            valores += "<option value='" + val.pk + "'>" + val.fields.nombre + "</option>";
-        }); 
-        $("#deparSelect").append(valores);
-    });
-    */
-    valores = "<option value='' selected>Seleccione Una Opción</option>"
-    for (var i = 0; i < 7; i++) {
-        valores += "<option value='peru'>ecuador</option>";
-    }
-   
-        $("#deparSelect").append(valores);
+            valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
+        });
+        $("#id_ciudad").append(valores);
     });
 
-
+    });
 
     var propy = $("#prop").val();
     $("#id_propiedad").val(propy).change();
@@ -240,7 +232,7 @@
 
     $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
         $("#showData").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-        
+
         $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
         if( $("#id_mostrar").is(':checked') ){
             //Campos vacios
@@ -249,9 +241,9 @@
             }else{
                 $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
             }
-        }   
+        }
 
-        //Campos vacios 
+        //Campos vacios
         if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
             $("#showData").text('');
         }
@@ -259,7 +251,7 @@
 
     $("#id_mostrar").change(function() {
         if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios 
+            //Campos vacios
             if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
                 $("#showData2").text('');
             }else{
