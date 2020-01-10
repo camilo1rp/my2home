@@ -21,6 +21,7 @@ from visits.visits import Visits
 from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
 from .models import Property, AddressCol, Image, Contact, BusinessType
 
+
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
@@ -197,7 +198,7 @@ def whatsapp_contact(request):
     prop_id = request.GET.get('id')
     phone = 3162128561
     prop = get_object_or_404(Property, id=prop_id)
-    message = _("I am interested in the property: {}, Address: {}, code: {}. Is it still Available") \
+    message = "I am interested in the property: {}, Address: {}, code: {}. Is it still Available" \
         .format(prop.title, prop.address_col.get(), prop.code)
     print('message: {}'.format(message))
     phone_str = str(phone)
@@ -217,13 +218,12 @@ def property_upload(request):
     if request.method == 'POST':
         form = MultiPropForm(request.POST or None, request.FILES or None)
         if form.is_valid():
-            images = [settings.MEDIA_ROOT+'im1/'+img for img in os.listdir(settings.MEDIA_ROOT+'im1/')
-                      if img.endswith("jpg") or img.endswith("png")]
-            with open(images[0], 'rb    ') as inf:
-                jpgdata = inf.read()
+            # get form data
             csv_file = form.cleaned_data['csv_file']
             owner = form.cleaned_data['owner']
+            # get user adding properties
             manager = request.user
+            # get csv data
             if not csv_file.name.endswith('.csv'):
                 messages.error(request, 'File must be format:  .CVS')
                 print("file error")
@@ -232,39 +232,46 @@ def property_upload(request):
             io_string = io.StringIO(data_set)
             next(io_string)
             property_data = csv.reader(io_string, delimiter=",", quotechar="|")
+            # create property, address, images
             for column in property_data:
+                # check if address is to be shown
                 mostrar = False
+                if column[23] in {'si', '1', 'mostrar', 1, }:
+                    mostrar = True
+                # check if property already exists
                 if not Property.objects.filter(upload_code=column[13]):
-                    if column[23] in {'si', '1', 'mostrar', 1, }:
-                        mostrar = True
+
+                    # create property
                     prop, _ = Property.objects.get_or_create(manager=manager, owner=owner, type_property=column[0],
                                                              price=column[1], price_str=column[2], rooms=column[3],
                                                              baths=column[4], parking=column[5], area_built=column[6],
                                                              area_total=column[7], estrato=column[8], year=column[9],
-                                                             title=column[10], description=column[11],
-                                                             upload_code=column[13])
-                    address, _ = AddressCol.objects.get_or_create(propiedad=prop, tipo_via=column[14], via=column[15],
+                                                             title=column[10], description=column[11])
+                    # create address
+                    addr, _ = AddressCol.objects.get_or_create(propiedad=prop, tipo_via=column[14], via=column[15],
                                                                   prefijo_via=column[16], numero=column[17],
                                                                   prefijo_numero=column[18], placa=column[19],
                                                                   barrio=column[20], ciudad=column[21],
                                                                   departamento=column[22], mostrar=mostrar)
                 else:
-                    if column[23] in {'si', '1', 'mostrar', 1, }:
-                        mostrar = True
+                    # get property
                     prop = Property.objects.get(upload_code=column[13])
+                    # update property
                     prop.__dict__.update(manager=manager, owner=owner, type_property=column[0],
                                          price=column[1], price_str=column[2], rooms=column[3],
                                          baths=column[4], parking=column[5], area_built=column[6],
                                          area_total=column[7], estrato=column[8], year=column[9],
-                                         title=column[10], description=column[11], )
+                                         title=column[10], description=column[11],)
+                    # get address
                     addr = prop.address_col.get()
+                    # update address
                     addr.__dict__.update(propiedad=prop, tipo_via=column[14], via=column[15],
                                          prefijo_via=column[16], numero=column[17],
                                          prefijo_numero=column[18], placa=column[19],
                                          mostrar=mostrar)
                 prop.save()
-                img = Image(propiedad=prop, image=jpgdata, main=True)
-                img.save()
+                addr.save()
+                # check the types of business and add them to property
                 types = column[12].split('-')
                 for typ in types:
                     t = typ.lower()
@@ -278,13 +285,20 @@ def property_upload(request):
                         value = 'SALE / VENTA'
                     business = BusinessType.objects.get(name=value)
                     prop.type_business.add(business)
-                    prop.save()
+                # get images from folder
+                images = [column[24] + '/' + img for img in os.listdir(settings.MEDIA_ROOT + column[24]+'/')
+                          if img.endswith("jpg") or img.endswith("png")]
+                # save images for propery and make the first image the main one
+                main = True
+                for image in images:
+                    img = Image(propiedad=prop, image=image, main=main)
+                    img.save()
+                    main = False
+
+                prop.save()
             return HttpResponseRedirect(reverse('property:index'))
     form = MultiPropForm()
     return render(request, template, {'form': form})
-
-
-
 
 
 def Template(request):

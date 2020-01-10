@@ -83,23 +83,23 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # ********************  Default Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'my2home',
-#         'USER': 'myhome',
-#         'PASSWORD': 'Tncamilo123',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#         }
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'my2home',
+        'USER': 'myhome',
+        'PASSWORD': 'Tncamilo123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+        }
+}
 
 
 
@@ -153,20 +153,24 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+LOGIN_URL = '/account/login'
+# LOGIN_REDIRECT_URL = 'dashboard'
+# LOGIN_URL = 'account/login/'
+# LOGOUT_URL = 'logout'
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('profile:update', args=[u.profile.id])
 }
 
+# ***** google maps key *****
 EASY_MAPS_GOOGLE_KEY = 'AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA'
 
+# ***** session variable for counting page visits *****
 VISITS_SESSION_ID = 'visits'
 
+# ***** email settings *****
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'camilo1rp@gmail.com'
-EMAIL_HOST_PASSWORD = '*****'
+EMAIL_HOST_PASSWORD = 'Deltaz1234!@#$'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
