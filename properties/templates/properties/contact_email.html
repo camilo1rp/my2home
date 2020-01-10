@@ -7,14 +7,18 @@
     <!-- META SECTION -->
     <title>Codigo_campana</title>
     <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/x-icon" />
-    <link href="{% static 'css/fontawesome-free-5.10.0-11/css/all.css' %}" rel='stylesheet'/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- END META SECTION -->
-    <!-- CSS INCLUDE -->
-    <!--link rel="stylesheet" type="text/css" id="theme" href="{% static 'css/bootstrap/bootstrap.min.css' %}" /-->
-    <!-- EOF CSS INCLUDE -->
+    
+    <link href="{{site}}{% static 'css/all.css' %}" rel='stylesheet'/>
+   
+    <link rel="stylesheet" type="text/css" href="{{site}}{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{{site}}{% static 'css/bootstrap.min.css' %}">
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- END META SECTION 
+    -->
+
     <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
    <style type="text/css">
        .color{
            color: black;
@@ -24,75 +28,27 @@
 
 <body>
 <!--    <div class="container " style="background-image: url(cid:{% static '/img/fondo-cumple.png' %}); background-repeat: no-repeat; background-size: cover;">-->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="title" style="color: #2b6c7a;">
-                    <img src="https://cdnmundo1.img.sputniknews.com/images/106612/99/1066129904.jpg"  width="200" height="100" class="img-responsive" alt="Property">
-                </h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="display-2" style="color: #ff5e5e;text-align: center;">
-                    <strong{{data.name|title}} esta intereado en:</strong>
-                </h1>
-            </div>
-        </div>
-        <div class="row" style="color: #353e43; text-align:center;">
-            <div class="col-md-12">
-                <h4>
-                    <p class="color"><strong>Telefono: </strong>{{data.phone}}</p>
-                    <p class="color"><strong>email: </strong>{{data.email}}</p>
 
-                    <p class="color"><strong>Propiedad: </strong>{{data.propiedad}}</p>
-                    <p class="color"><strong>codigo: </strong>{{data.propiedad.code}}</p>
-
-                </h4>
-            </div>
-        </div>
-        {% with address=data.propiedad.address_col.get %}
-
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="title" style="color: #2b6c7a;text-align: center;">
-                    <br>
-                    <p><strong>direccion</strong>{{address}}</p>
-                    <p><strong>barrio</strong>{{address.barrio}}</p>
-                </h4>
-            </div>
-        </div>
-        {% endwith %}
-        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-            <div class="container">
-                <div class="row">
-                    <div class="Pcol-md-12 ">
-                        <p style="text-align: center; font-size: 10px">Correo electrónico enviado autoamticamente. No responder. Preguntas o requerimientos, por favor contáctenos en xxxx@xxxxxxx.xxx!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+      
+        
 
 
-<div class="information" id="descripcion" style="font-weight: bold;float: left; margin-right: 4%;width: 20%;margin-left: 4%;margin-top:11%">    
+<div class="information" id="descripcion" style="font-weight: bold;float: left; margin-right: 1%;width: 20%;margin-left: 1%;margin-top:11%">    
     <div class="alert alert-info" style="font-weight: bold;">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="text-align: center;">
                 <h4 class="title" style="color: #2b6c7a;text-align: center;text-align: center;">Cliente Interesado</h4>
                     <br>
-                    <p class="color"><strong>Nombre</strong>: andres camilo</p>
-                    <p class="color"class="color"><strong>direccion</strong>: calle 12 c 40 </p>
-                    <p class="color"class="color"><strong>barrio</strong>: chico Norte</p>
-                
-            </div>
+                    <p class="color" style="margin-bottom: 11%;">Nombre <br/><strong style="font-size: 22px;">{{data.name}}</strong></p>
+                    <p class="color" style="margin-bottom: 11%;">Email <br/><strong style="font-size: 22px;">{{data.email}}</strong></p>
+                    <p class="color" style="margin-bottom: 11%;">Telefono <br/><strong style="font-size: 22px;">{{data.phone}}</strong></p>
+           </div>
         </div>
     </div>
     <div style="text-align: center;margin-top: 14%;">
         <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." id="Idwhatsapp" class="float" target="_blank">
             <i class="fa fa-whatsapp" style="color: green; font-size: 100px; padding-left: 9%;"></i>
-            </a>
+        </a>
              <p class="card-text">
                 <small class="text-muted">&nbsp;&nbsp;Comunicame Ahora con Camilo</small>
             </p>
@@ -100,31 +56,62 @@
 
 </div>
 
-
-<div class="card mb-3" style="width: 45%;">
+{% with address=data.propiedad.address_col.get %}
+<div class="card mb-3" style="width: 35%;">
   <img src="https://i.blogs.es/8e8f64/lo-de-que-comprar-una-casa-es-la-mejor-inversion-hay-generaciones-que-ya-no-lo-ven-ni-de-lejos---1/450_1000.jpg" alt="...">
+  
+  <div class="alert alert-info" style="text-align: center;height: 76px;">
+      <h4 class="" style="text-align: center;">{{address}}</h4>
+      <strong> 
+        <p class="color">{{data.propiedad.title}}</p>
+      </strong>
+  </div>
+  
   <div style="width: 100%;">
-      <div style="width: 50%;float: left;padding: 2%;">
-            <h5 class="" style="text-decoration: underline;text-align: center;">Vivienda Melgar Tolima</h5>
-            <p class="card-text" style="margin-top: 5%">- Amoblada para mayor comidad</p>
-            <p class="card-text">- 4 cuartos</p>
-                <p class="card-text">- 2 baños</p>
-                <p class="card-text">- patio 17 mtr2</p>
+      <div style="width: 40%;float: left;padding: 2%;">
+            
+                <p class="color"><strong>Tipo Propiedad: </strong>{{data.propiedad.type_property}}</p>
+                <p class="color"><strong>Precio: </strong>{{data.propiedad.price}}</p>
+                <p class="color"><strong>Habitaciones: </strong>{{data.propiedad.rooms}}</p>
+                <p class="color"><strong>Baños: </strong>{{data.propiedad.baths}}</p>
+                <p class="color"><strong>Estacionamiento: </strong>{{data.propiedad.parking}}</p>
+                <p class="color"><strong>Área construida: </strong>{{data.propiedad.area_built}}</p>
+                <p class="color"><strong>Área Total : </strong>{{data.propiedad.area_total}}</p>
+                <p class="color"><strong>Éstrato: </strong>{{data.propiedad.estrato}}</p>
+                <p class="color"><strong>Año: </strong>{{data.propiedad.year}}</p>
+                <p class="color"><strong>Codigo: </strong>{{data.propiedad.code}}</p>
+       
        </div>
-      <div style="width: 50%;float: right;padding:2%;">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <div style="width: 60%;float: right;padding:2%;">
+            <p class="color"><strong>Descripcion:
+                <br/> 
+                </strong>{{data.propiedad.description0|linebreaks}}
+            </p>
       </div>
   </div>
 </div>
+{% endwith %}
 
+<div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="Pcol-md-12 ">
+                    <p style="text-align: center; font-size: 17px">Correo electrónico enviado autoamticamente. No responder. Preguntas o requerimientos, por favor contáctenos en xxxx@xxxxxxx.xxx!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
 
- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+  <!-- 
+
+  -->
+    
+ 
 </body>
 </html>
