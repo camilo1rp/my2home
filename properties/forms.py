@@ -23,8 +23,8 @@ class PropertyForm(forms.ModelForm):
 
 
 class AddressColForm(forms.ModelForm):
-    prefijo_via = forms.CharField(widget=forms.Select(choices=CHOICES))
-    prefijo_numero = forms.CharField(widget=forms.Select(choices=CHOICES))
+    prefijo_via = forms.CharField(widget=forms.Select(choices=CHOICES), required=False)
+    prefijo_numero = forms.CharField(widget=forms.Select(choices=CHOICES), required=False)
     ciudad = forms.CharField(widget=forms.Select())
     departamento = forms.ModelChoiceField(queryset=State.objects.all())
 
@@ -32,13 +32,13 @@ class AddressColForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['tipo_via'].widget.attrs.update(placeholder='ej. Calle')
         self.fields['via'].widget.attrs.update(placeholder='ej. 10')
-        self.fields['prefijo_via'].widget.attrs.update(placeholder='ej. A')
+        # self.fields['prefijo_via'].widget.attrs.update(empty_label='ej. A',)
         self.fields['numero'].widget.attrs.update(placeholder='ej. 11')
         self.fields['prefijo_numero'].widget.attrs.update(placeholder='ej. BIS')
         self.fields['placa'].widget.attrs.update(placeholder='ej. 12')
         self.fields['ciudad'].widget.attrs.update(placeholder='ej. Bogota')
         self.fields['departamento'].widget.attrs.update(placeholder='ej. Cundinamarca')
-        self.fields['barrio'].widget.attrs.update(placeholder='ej. Cedritos')
+        self.fields['barrio'].widget.attrs.update(placeholder='ej. Cedritos', required=False)
         self.fields['prefijo_via'].label = 'prefijo'
         self.fields['prefijo_numero'].label = 'prefijo'
 

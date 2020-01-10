@@ -83,9 +83,7 @@ class Property(models.Model):
         return code
 
     def get_absolute_url(self):
-        return reverse('property:index')
-        # TODO: create property detail view and uncomment following line
-        # return reverse('property:detail', args=[self.id])
+        return reverse('property:detail', args=[self.id])
 
 
 class AddressCol(models.Model):
@@ -108,7 +106,9 @@ class AddressCol(models.Model):
                                                         self.prefijo_numero, self.placa,
                                                         self.ciudad, self.departamento)
         else:
-            return "{}, {} - {}".format(self.barrio, self.ciudad, self.departamento)
+            if self.barrio:
+                return "{}, {} - {}".format(self.barrio, self.ciudad, self.departamento)
+            return "{}, {}".format(self.ciudad, self.departamento)
 
 
 class Following(models.Model):

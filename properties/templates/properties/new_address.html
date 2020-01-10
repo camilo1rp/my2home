@@ -39,6 +39,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
+                                {{form.errors}}
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                 {{form.tipo_via.label}}<span class="span"> *</span></label>
                                 <div class="col-md-12">
@@ -57,7 +58,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.prefijo_via.label}}<span class="span"> *</span>
+                                    {{form.prefijo_via.label}}
                                 </label>
                                 <div class="col-md-12">
                                     {{form.prefijo_via}}
@@ -80,7 +81,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.prefijo_numero.label}}<span class="span"> *</span>
+                                    {{form.prefijo_numero.label}}
                                 </label>
                                 <div class="col-md-12">
                                     {{form.prefijo_numero}}
@@ -101,10 +102,10 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.barrio.label}}<span class="span"> *</span>
+                                    {{form.departamento.label}}<span class="span"> *</span>
                                 </label>
                                 <div class="col-md-12">
-                                    {{form.barrio}}
+                                    {{form.departamento}}
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -119,10 +120,10 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.departamento.label}}<span class="span"> *</span>
+                                    {{form.barrio.label}}
                                 </label>
                                 <div class="col-md-12">
-                                    {{form.departamento}}
+                                    {{form.barrio}}
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -140,7 +141,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-9" style="text-align: right;">
-                                <span>Mostrar dirección completa en la Web ?</span>
+                                <span>Mostrar dirección completa en la Web?</span>
                             </div>
                             <div class="col-md-3">
                                 <div class="col-md-12">
@@ -150,24 +151,6 @@
                             </div>
                         </div>
                         <br/>
-
-                        <select id="ciudadSelect">
-                              <option value="" selected>Ciudad</option>
-                              <option value="0">cali</option>
-                              <option value="1">Saab</option>
-                              <option value="2">bogota</option>
-                              <option value="3">Audi</option>
-                        </select>
-                        <br/>
-                         <select id="deparSelect">
-                              <option value="volvo" selected>Departamento</option>
-                              <option value="0">cundinamarca</option>
-                              <option value="1">VW</option>
-                              <option value="2">Audi</option>
-                              <option value="3">tres</option>
-                        </select>
-
-
                         <div style="font-weight: bold; text-align: center;">
                             <span style="font-size: 18px;text-decoration: underline;">Direccion a Mostrar:</span>
                             <span id="showData2"></span>
@@ -206,7 +189,7 @@
         $("#id_ciudad").empty();
         valores = "<option value='' selected>Seleccione Una Opción</option>"
         $.each(datos, function(item, val) {
-            valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
+            valores += "<option value='" + val.fields.name + "'>" + val.fields.name + "</option>"; //change value to '" + val.pk + "' when update model field
         });
         $("#id_ciudad").append(valores);
     });

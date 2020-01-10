@@ -1,6 +1,7 @@
 import csv
 import io
 import json
+import os
 import urllib
 import json
 from email.mime.image import MIMEImage
@@ -14,16 +15,17 @@ from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.base import TemplateView
-
+from django.core.files import File
+from myhome import settings
 from visits.visits import Visits
 from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
 from .models import Property, AddressCol, Image, Contact, BusinessType
-
 
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
     paginate_by = 12
+
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
         business_type = request.GET.get('offer-types')
@@ -97,9 +99,9 @@ class UpdateProperty(UpdateView):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
 
 
-def create_address(request, prop_id=30):# //TODO: ************ CAMBIAR PROPIEDAD a None***************
+def create_address(request, prop_id=None):
     if request.method == 'POST':
-        if Property.objects.get(id=prop_id).address_col.all(): # check if property has address
+        if Property.objects.get(id=prop_id).address_col.all():  # check if property has address
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(instance=instance, data=request.POST)
         else:
@@ -114,7 +116,7 @@ def create_address(request, prop_id=30):# //TODO: ************ CAMBIAR PROPIEDAD
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(request.POST or None, instance=instance)
         else:
-            form = AddressColForm()#new_property   
+            form = AddressColForm()
     return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
 
 
@@ -129,7 +131,7 @@ def create_image(request, prop_id=None):
             for obj in form:
                 try:
                     img_in = obj.cleaned_data['image']
-                    main_in = obj.cleaned_data['main']                   
+                    main_in = obj.cleaned_data['main']
                     _new_image = Image.objects.get_or_create(propiedad=prop,
                                                              image=img_in,
                                                              main=main_in)
@@ -158,9 +160,11 @@ def property_detail(request, prop_id):
                 email_in = 'noemail@nomail.com'
             contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
 
+            # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
+            # ******** email sending ********
             file = "/media/{}".format(prop.gallery.get(main=True).image)
             data = {'propiedad': contact.propiedad, 'name': contact.name, 'phone': contact.phone,
-                    'email': contact.email, 'image':file}
+                    'email': contact.email, 'image': file}
             html_content = render_to_string('properties/contact_email.html', {'data': data})
             subject = '{} esta interesad@ en la propiedad: {} - {}'.format(data['name'].title(),
                                                                            data['propiedad'].title,
@@ -178,6 +182,7 @@ def property_detail(request, prop_id):
             msg.send()
             message = _('Your information has been sent to our agents! Thank you')
             print("email_sent")
+            # ****************
             return render(request, 'properties/property-details.html',
                           {'prop': prop, 'mess': message, })
         else:
@@ -190,9 +195,9 @@ def property_detail(request, prop_id):
 
 def whatsapp_contact(request):
     prop_id = request.GET.get('id')
-    phone = 3162128561 
+    phone = 3162128561
     prop = get_object_or_404(Property, id=prop_id)
-    message = _("I am interested in the property: {}, Address: {}, code: {}. Is it still Available")\
+    message = _("I am interested in the property: {}, Address: {}, code: {}. Is it still Available") \
         .format(prop.title, prop.address_col.get(), prop.code)
     print('message: {}'.format(message))
     phone_str = str(phone)
@@ -203,9 +208,6 @@ def whatsapp_contact(request):
     return HttpResponse(json.dumps(whatsapp_url), content_type='application/json')
 
 
-# send_email(new_contact)
-# //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
-
 class Tyc(TemplateView):
     template_name = "properties/tyc.html"
 
@@ -215,6 +217,10 @@ def property_upload(request):
     if request.method == 'POST':
         form = MultiPropForm(request.POST or None, request.FILES or None)
         if form.is_valid():
+            images = [settings.MEDIA_ROOT+'im1/'+img for img in os.listdir(settings.MEDIA_ROOT+'im1/')
+                      if img.endswith("jpg") or img.endswith("png")]
+            with open(images[0], 'rb    ') as inf:
+                jpgdata = inf.read()
             csv_file = form.cleaned_data['csv_file']
             owner = form.cleaned_data['owner']
             manager = request.user
@@ -227,38 +233,64 @@ def property_upload(request):
             next(io_string)
             property_data = csv.reader(io_string, delimiter=",", quotechar="|")
             for column in property_data:
+                mostrar = False
                 if not Property.objects.filter(upload_code=column[13]):
+                    if column[23] in {'si', '1', 'mostrar', 1, }:
+                        mostrar = True
                     prop, _ = Property.objects.get_or_create(manager=manager, owner=owner, type_property=column[0],
-                                                  price=column[1], price_str=column[2], rooms=column[3],
-                                                  baths=column[4], parking=column[5], area_built=column[6],
-                                                  area_total=column[7], estrato=column[8], year=column[9],
-                                                  title=column[10], description=column[11], upload_code=column[13])
-                    address,_ = AddressCol.objects.get_or_create(propiedad=prop, tipo_via=column[14], via=column[15],
-                                                                 )
-
+                                                             price=column[1], price_str=column[2], rooms=column[3],
+                                                             baths=column[4], parking=column[5], area_built=column[6],
+                                                             area_total=column[7], estrato=column[8], year=column[9],
+                                                             title=column[10], description=column[11],
+                                                             upload_code=column[13])
+                    address, _ = AddressCol.objects.get_or_create(propiedad=prop, tipo_via=column[14], via=column[15],
+                                                                  prefijo_via=column[16], numero=column[17],
+                                                                  prefijo_numero=column[18], placa=column[19],
+                                                                  barrio=column[20], ciudad=column[21],
+                                                                  departamento=column[22], mostrar=mostrar)
                 else:
+                    if column[23] in {'si', '1', 'mostrar', 1, }:
+                        mostrar = True
                     prop = Property.objects.get(upload_code=column[13])
                     prop.__dict__.update(manager=manager, owner=owner, type_property=column[0],
-                                                  price=column[1], price_str=column[2], rooms=column[3],
-                                                  baths=column[4], parking=column[5], area_built=column[6],
-                                                  area_total=column[7], estrato=column[8], year=column[9],
-                                                  title=column[10], description=column[11],)
+                                         price=column[1], price_str=column[2], rooms=column[3],
+                                         baths=column[4], parking=column[5], area_built=column[6],
+                                         area_total=column[7], estrato=column[8], year=column[9],
+                                         title=column[10], description=column[11], )
+                    addr = prop.address_col.get()
+                    addr.__dict__.update(propiedad=prop, tipo_via=column[14], via=column[15],
+                                         prefijo_via=column[16], numero=column[17],
+                                         prefijo_numero=column[18], placa=column[19],
+                                         mostrar=mostrar)
                 prop.save()
+                img = Image(propiedad=prop, image=jpgdata, main=True)
+                img.save()
                 types = column[12].split('-')
                 for typ in types:
                     t = typ.lower()
-                    if t == 'arriendo' or t == 'arrendamiento' or t == 'arrendar':
+                    if t in {'arriendo', 'arrendamiento', 'arrendar'}:
                         value = 'RENT / ARRENDAMIENTO'
-                    elif t == 'permuta' or t == 'permutar' or t == 'permuto':
+                    elif t in {'permuta', 'permutar', 'permuto'}:
                         value = 'SWAP / PERMUTA'
-                    elif t == 'venta' or t == 'vender' or t == 'vendo':
+                    elif t in {'venta', 'vender', 'vendo'}:
                         value = 'SALE / VENTA'
                     else:
                         value = 'SALE / VENTA'
                     business = BusinessType.objects.get(name=value)
                     prop.type_business.add(business)
                     prop.save()
-                return HttpResponseRedirect(reverse('property:index'))
+            return HttpResponseRedirect(reverse('property:index'))
     form = MultiPropForm()
     return render(request, template, {'form': form})
+
+
+
+
+
+def Template(request):
+    prop = Property.objects.last()
+    template= 'properties/contact_email.html'
+    data = {'propiedad': prop, 'name': "nombre apellido", 'phone': "1234456809",
+            'email': "email@email.com"}
+    return render(request, template, {'data': data})
 
