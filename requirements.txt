@@ -19,3 +19,4 @@ six==1.13.0
 sorl-thumbnail==12.5.0
 sqlparse==0.3.0
 urllib3==1.25.7
+daphne==2.4.1
