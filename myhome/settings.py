@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'visits.apps.VisitsConfig',
     'citiesapp.apps.CitiesappConfig',
     'rosetta',
-    'sorl.thumbnail',
+    #'sorl.thumbnail',
     'widget_tweaks',
     'easy_maps',
 ]
