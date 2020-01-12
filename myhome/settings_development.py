@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rosetta',
     #'sorl.thumbnail',
     'widget_tweaks',
-    'easy_maps',
+    #'easy_maps',
 ]
 
 MIDDLEWARE = [
