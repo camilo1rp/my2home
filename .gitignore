@@ -131,3 +131,6 @@ dmypy.json
 # Docker
 .Dockerfile.*
 docker/secrets/*
+
+# Collect static
+static/*
