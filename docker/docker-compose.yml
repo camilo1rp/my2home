@@ -56,11 +56,7 @@ secrets:
         file: secrets/db_password.txt
     secret_key:
         file: secrets/secret_key.txt
-    radius_secret:
-        file: secrets/radius_secret.txt
-    radius_ip_client:
-        file: secrets/radius_ip_client.txt
-
+        
 volumes:
     postgres-vol:
     my2home-static-files:
