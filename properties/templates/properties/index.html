@@ -214,9 +214,9 @@
                   {%if gallery %}
                     {% for img in gallery%}
                       {%if img.main %}
-                        <!-- {% thumbnail img.image "800x500" crop=center padding=True upscale=True as im %}
+                        <!-- { thumbnail img.image "800x500" crop=center padding=True upscale=True as im }
                           <img src="{{im.url}}" alt="Image" class="img-fluid">
-                          {% endthumbnail %} 
+                          { endthumbnail } 
                         -->
                         {% endif %}
                     {% endfor %}
