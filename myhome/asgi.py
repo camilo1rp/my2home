@@ -10,4 +10,4 @@ import os
 from django.core.asgi import get_asgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myhome.settings')
 
-application = get_wsgi_application()
+application = get_asgi_application()
