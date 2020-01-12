@@ -91,9 +91,10 @@
       {%if gallery %}
         {% for img in gallery%}
           {%if img.main %}
-            {% thumbnail img.image "1300x600"  crop="center" as im %}
+            <!--{% thumbnail img.image "1300x600"  crop="center" as im %}
               <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('{{im.url}}');" data-aos="fade" data-stellar-background-ratio="0.5">
             {% endthumbnail %}
+            -->
           {% endif %}
         {% endfor %}
       {% else %}
@@ -122,9 +123,10 @@
                 {% with gallery=prop.gallery.all %}
                 {%if gallery %}
                   {% for img in gallery%}
-                      {% thumbnail img.image "800x600" padding=True upscale=True as im %}
+                      <!-- {% thumbnail img.image "800x600" padding=True upscale=True as im %}
                         <div><img src="{{im.url}}" alt="Image" class="img-fluid"></div>
                       {% endthumbnail %}
+                      -->
                   {% endfor %}
                 {% endif %}
               {% endwith %}
@@ -196,11 +198,12 @@
                 </div>
                 {% with gallery=prop.gallery.all %}
                       {% for img in gallery %}
-                          {% thumbnail img.image "800x500" crop="center" upscale=True padding=true padding_color="#cccccc" as im %}
+                          <!--{% thumbnail img.image "800x500" crop="center" upscale=True padding=true padding_color="#cccccc" as im %}
                             <div class="col-sm-6 col-md-4 col-lg-3">
                               <a href="{{im.url}}" class="image-popup gal-item"><img src="{{im.url}}" alt="Image" class="img-fluid"></a>
                             </div>
                           {% endthumbnail %}
+                          -->
                       {% endfor %}
                 {% endwith %}
               </div>
