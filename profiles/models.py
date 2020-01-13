@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from account.validators import validate_phone
 
 
 class Profile(models.Model):
@@ -14,9 +15,9 @@ class Profile(models.Model):
         (MALE, _('Male')),
         (FEMALE, _('Femele')),
         (OTHER, _('other')),
-        ]
+    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.IntegerField(null=True, blank=True)
+    phone = models.IntegerField(null=True, blank=True, validators=[validate_phone])
     nickname = models.CharField(_('Nickname'), max_length=20, default="none")
     gender = models.CharField(_('gender'), max_length=2, choices=GENDER, default=OTHER)
     city = models.CharField(_('city'), max_length=30, null=True, blank=True)
@@ -27,6 +28,7 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile:update', args=[self.id])
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
