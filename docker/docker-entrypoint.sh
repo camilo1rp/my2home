@@ -12,4 +12,4 @@ while ! python3 /opt/my2home/manage.py migrate 2>&1; do
 done
 
 # start daphene
-daphne -b seed7 -p 8003 --root-path /opt/my2home/ myhome.asgi:application
+daphne -b seed7 -p 8080 --root-path /opt/my2home/ myhome.asgi:application
