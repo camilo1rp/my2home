@@ -9,6 +9,13 @@ class UserForm(UserCreationForm):
         model = User
         fields = ('username', 'password1', 'password2')
 
+    def clean_username(self):
+        user = self.cleaned_data['username']
+        usernames = [users.user.username for users in Profile.objects.all()]
+        if user in usernames:
+            self.add_error('username', "Username is already taken")
+        return user
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:

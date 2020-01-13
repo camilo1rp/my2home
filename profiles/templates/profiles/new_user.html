@@ -31,47 +31,45 @@
 </style>
 </head>
 <body>
-<form method="post">
-
----------
 <div class="container">
+    <br>
   <div class="row">
       <div class="col-md-4"></div>
        <div class="col-md-3" style="width: 35%;height: 22%;margin: 0 auto; border: solid #ccc9c9;">
-
               <form id="formulario" class="form-horizontal contact_form" method="post">
-                
+                  {% csrf_token %}
                     <h5 style="text-align: center;margin-top: 5%;">Crear Usuario</h5>
                     <hr>
-
                     <div class="form-group">
                         <span class="col-md-12">
-                            Ingrese Nombre Usuario 
+                            Ingrese Nombre Usuario
                             <span class="spanIcon"> *</span>
                         </span>
-                          
+
                         </span>
                         <div class="col-md-12">
                           <i class="fa fa-user"></i>
                           &nbsp;
                           {{ form.username }}
+                            {{form.username.errors}}
                         </div>
                     </div>
-                    
+
                     <div class="form-group"><!--BARRA PASSWORD-->
                       <span class="col-md-12">
                         Ingrese su contaseña
                         <span class="spanIcon"> *</span>
                       </span>
                         <div class="col-sm-12">
-                          <i class="fa fa-lock"></i> 
+                          <i class="fa fa-lock"></i>
                           &nbsp;
                           {{ form.password1 }}
+                          {{form.password1.errors}}
                         </div>
                     </div>
                     <div class="form-group"><!--BARRA PASSWORD-->
                       <span class="col-md-12">
-                        Confirme su contraseña 
+                        Confirme su contraseña
                         <span class="spanIcon"> *</span>
                       </span>
                         <div class="col-sm-12">
@@ -79,6 +77,7 @@
                           &nbsp;
                           {{ form.password2 }}
                         </div>
+                        {{form.password2.errors}}
                     </div>
 
                     <div class="form-group">
@@ -91,35 +90,8 @@
       <div class="col-md-4"></div>
   </div>
 </div>
-  
 </body>
 <script>
-$(document).ready(function(){
-  $("#id_username").attr("placeholder", "Type here to search");
- 
-
-
-  $("#id_password2").blur(function(){
-    var pass = $("#id_password1").val();
-    var pass2 = $("#id_password2").val();
-
-    if( pass == pass2 ){
-      alert("Nice")
-    }else{
-      Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Contraeña no coinciden',
-          timer: 2100
-      });
-    }
-  });
-    
-
-  
-
-  
-});
 </script>
 
 </html>

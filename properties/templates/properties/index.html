@@ -177,16 +177,16 @@
             </div>
           </form>
         </div>
-        {% with filters=request.GET %}
-          {% if pro_section %}
-          <span class="badge badge-secondary">Filters</span>
-          {% for key, value in filters.items %}
-           {% if key != "page" and value != 'ALL' %}
-            <span class="badge badge-primary">{{ key }} = {{ value }} </span>
-            {% endif %}
-          {% endfor %}
-           {% endif %}
-        {% endwith %}
+<!--        {% with filters=request.GET %}-->
+<!--          {% if pro_section %}-->
+<!--          <span class="badge badge-secondary">Filters</span>-->
+<!--          {% for key, value in filters.items %}-->
+<!--           {% if key != "page" and value != 'ALL' %}-->
+<!--            <span class="badge badge-primary">{{ key }} = {{  value }} </span>-->
+<!--            {% endif %}-->
+<!--          {% endfor %}-->
+<!--           {% endif %}-->
+<!--        {% endwith %}-->
         <span id="filter" hidden>{{ pro_section }}</span>
       </div>
     </div>
