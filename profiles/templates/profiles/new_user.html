@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% trans 'Registration' %}</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -42,7 +42,7 @@
                     <hr>
                     <div class="form-group">
                         <span class="col-md-12">
-                            Ingrese Nombre Usuario
+                            {% trans 'Username' %}
                             <span class="spanIcon"> *</span>
                         </span>
 
@@ -57,7 +57,7 @@
 
                     <div class="form-group"><!--BARRA PASSWORD-->
                       <span class="col-md-12">
-                        Ingrese su contaseña
+                        {% trans 'Password' %}
                         <span class="spanIcon"> *</span>
                       </span>
                         <div class="col-sm-12">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group"><!--BARRA PASSWORD-->
                       <span class="col-md-12">
-                        Confirme su contraseña
+                        {% trans 'Confirm Password' %}
                         <span class="spanIcon"> *</span>
                       </span>
                         <div class="col-sm-12">
@@ -82,7 +82,7 @@
 
                     <div class="form-group">
                       <div style="text-align: center;">
-                          <input type="submit" class="btn btn-md btn-primary" onclick="comprobar()" value="Aceptar">
+                          <input type="submit" class="btn btn-md btn-primary" onclick="comprobar()" value="{% trans 'Register' %}">
                       </div>
                     </div>
                </form>
