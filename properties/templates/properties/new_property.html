@@ -1,258 +1,426 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+{% extends 'properties/base_new.html' %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}title{%endblock%}
+{% block styles %}
 
-    <style>
-    .select2-container {
-        width: 260px ! important;
-    }
-    .span{
-        color: red;
-        font-weight: bold;
-    }
-    .divBtn{
-        text-align: center;
-    }
-    .contenedor{
-        width: 45%;
-        height: 22%;
-        margin: 0 auto;
-        border: solid #ccc9c9;
-        padding-top: 5%;
-    }
-</style>
-</head>
-<body>
-<input id="prop" value="{{propiedad}}" hidden disabled>
+      <style>
+        .select2-container {
+          width: 347px ! important;
+          max-width: 100%;
+        }
+        .span{
+            color: red;
+        }
+        .titleModal{
+            text-align: center;
+        }
+        .divTitleModal{
+            margin: 0 auto;
+        }
+        
+        .btnSave{
+            margin-left: 6%;
+        }
+        #id_description {
+            max-width: 100%;
+        }
+        #id_type_business {
+            max-width: 100%;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+        input[type=number] {
+            -moz-appearance:textfield; /* Firefox */
+        }
+        .form-control {
+            padding:0.2em !important;
+        }
+        .select2-selection__choice{
+            font-size: 0.8em;
+        }
+        .modal-lg { 
+            max-width: 78% !important; 
+        } 
+        .centrar{
+            text-align: center;
+        }
+        .centrar0{
+            margin: 0 auto;
+        }
+        .divBtn{
+            text-align: center;
+        }
 
-<div class="container contenedor">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <form id="formUno" method="post">
-                {% csrf_token %}
+    </style>
+{% endblock %}
+{% block body %}
+<!-- Modal -->
+<div class="modal fade animated fadeInDown" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header divTitleModal">
+        <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
+       </div>
+        <h2 id="datoPage" style="display: none;">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
+        <span id="propiedad">{{propiedad}}</span>
+        <div class="modal-body">
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.tipo_via.label}}<span class="span"> *</span></label>
-                                    <div class="col-md-12">
-                                        {{form.tipo_via}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.via.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.via}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.prefijo_via.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.prefijo_via}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                            {{form.numero.label}}<span class="span"> *</span>
-                                        </label>
-                                        <div class="col-md-12">
-                                            {{form.numero}}
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.prefijo_numero.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.prefijo_numero}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.placa.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.placa}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.barrio.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.barrio}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.ciudad.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.ciudad}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.departamento.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.departamento}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="content">
+                             
+                                <div class="content" style="height: 100%;">
+                                    <script>
+                                    $(function () {
+                                        $("#wizard").steps({
+                                            headerTag: "h2",
+                                            bodyTag: "section",
+                                            transitionEffect: "slideLeft",
+                                            startIndex: parseInt($("#datoPage").text()),
+                                            //stepsOrientation: "vertical"
+                                        });
+                                    });
+                                    </script>
 
-                                 {{form.propiedad}}
+                                    <div id="wizard">
+                                        <h2>{% trans 'New Property' %}</h2>
+                                        <section style="overflow: auto;"> <!-- PAGE 1-->
+                                            <form id="formSectionUno" method="post">
+                                                {% csrf_token %}
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.owner.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.owner}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label" style="text-align: -webkit-right;">
+                                                                        {{form.type_property.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.type_property}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                       {{form.type_business.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.type_business}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6" >
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label" style="text-align: -webkit-right;">
+                                                                         {{form.price_str.label}}<span class="span"> *</span>
+                                                                     </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.price_str}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-0"  hidden>
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                         {{form.price.label}
+                                                                     </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.price}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                            {{form.rooms.label}}<span class="span"> *</span>
+                                                                         </label>
+                                                                        <div class="col-md-6">
+                                                                            {{form.rooms}}
+                                                                            <span class="help-block"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                        {{form.baths.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 centrar0">
+                                                                        {{form.baths}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                       {{form.parking.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 centrar0">
+                                                                        {{form.parking}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3" style="text-align: -webkit-right;">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.area_built.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6">
+                                                                        {{form.area_built}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.area_total.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6">
+                                                                        {{form.area_total}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                        {{form.year.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6 centrar0">
+                                                                        {{form.year}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4" id="divEstrato" style="text-align: -webkit-right;">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.estrato.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6">
+                                                                        {{form.estrato}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <hr>
+<!--                                                            <div class="row">-->
+<!--                                                                <div class="col-md-12">-->
+<!--                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">-->
+<!--                                                                        {{form.manager.label}} <span class="span"> *</span>-->
+<!--                                                                    </label>-->
+<!--                                                                    <div class="col-md-12">-->
+<!--                                                                        {{form.manager}}-->
+<!--                                                                        <span class="help-block"></span>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                                <br/>-->
+<!--                                                            </div>-->
+<!--                                                            <br/>-->
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.title.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12">
+                                                                        {{form.title}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6" style="text-align: -webkit-right;">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.description.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                        {{form.description}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                            <br/>
-                            <hr>
-                            <div style="font-weight: bold; text-align: center;">
-                                <span style="font-size: 18px;text-decoration: underline;">Direccion: </span>
-                                <span id="showData"></span>
-                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <br/>
+                                                <div class="form-group divBtn">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
+                                                            </i>Guardar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </section>
 
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-9" style="text-align: right;">
-                                    <span>Mostrar dirección completa en la Web ?</span>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-md-12">
-                                        {{form.mostrar}}
-                                        <span class="help-block"></span>
+                                        <h2>{% trans 'Address' %}</h2><!-- PAGE 2-->
+                                        <section id="section2">
+                                            {% include "properties/new_address.html" %}
+                                        </section>
+
+                                        <h2>{% trans 'Image' %}</h2><!-- PAGE 3-->
+                                        <section id="section3">
+                                            {% include "properties/new_image2.html" %}
+                                        </section>
+
+                                        <h2>{% trans 'Terms and Conditions' %}</h2>
+                                        <section>
+                                                                                 
+                                        </section>
                                     </div>
                                 </div>
-                            </div>
-                            <br/>
-
-                            <div style="font-weight: bold; text-align: center;">
-                                <span style="font-size: 18px;text-decoration: underline;">Direccion a Mostrar:</span>
-                                <span id="showData2"></span>
+                            
                             </div>
                         </div>
                     </div>
                 </div>
-                <br/>
-                <div class="form-group divBtn">
-                    <div class="col-md-12">
-                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                            </i>Guardar
-                        </button>
-                    </div>
-                </div>
-            </form>
+                    {% block script %}
         </div>
-        <div class="col-md-1"></div>
-        
-    </div>
-</div>
 
 
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+   <script src="{% static 'js/jquery.steps.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!--BOOTSTRAP-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
-//SECTION 2
-    $("#id_departamento").change(function(){
-    var opcion = $("#id_departamento option:selected").val();
-    alert("opciont "+opcion)
-
-    $.ajax({
-        url: '{% url "city:cities" %}',
-        type: 'get',
-        data: { 'id': opcion }
-    }).done(function(data) {
-        var valores = '';
-        var datos = JSON.parse(data);
-        $("#id_ciudad").empty();
-        valores = "<option value='' selected>Seleccione Una Opción</option>"
-        $.each(datos, function(item, val) {
-            valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
-        });
-        $("#id_ciudad").append(valores);
-    });
-
-    });
-
-    var propy = $("#prop").val();
-    $("#id_propiedad").val(propy).change();
-    $('label[for="id_propiedad"]').hide();
-    $("#id_propiedad").hide()
+$(document).ready(function(){
+    var prop_id;
+    prop_id = parseInt( $("#propiedad").text() );
 
 
-    //Css
-    $("input, select").addClass('form-control');
-
-
-    $("#id_mostrar").prop('checked',true);
-    $("#id_mostrar").css('height','1.5em').css('width','100%');
-
-    if(  $("#id_mostrar").is(':checked') ){
-        $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-    }
-
-    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
-        $("#showData").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-
-        $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
-        if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-                $("#showData2").text('');
-            }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-            }
-        }
-
-        //Campos vacios
-        if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-            $("#showData").text('');
-        } 
-    });
-
-    $("#id_mostrar").change(function() {
-        if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-                $("#showData2").text('');
-            }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-            }
-        }else{
-            $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
+    $("#id_type_property").change(function(){
+        opcion = $("#id_type_property option:selected").val();
+        if( opcion == "LAN" || opcion == "FARM" ){
+            $("#divEstrato").hide();
+        }else{  
+            $("#divEstrato").show();
         }
     });
 
+    //New Propery Activo SECTION 1
+    $('.steps > ul > li:first').addClass('newProperty')
+    $(".newProperty").click(function(e){
+         window.location.href="{% url 'property:update' 123 %}".replace(/123/, prop_id);
+    });
+
+    //New Propery Activo SECTION 2
+    $('.steps > ul > li:eq(1)').addClass('newAddress')
+    $(".newAddress").click(function(){
+        if(  $(".newAddress").attr('aria-selected') == "true" ){
+            window.location.href="{% url 'property:create-address' 123 %}".replace(/123/, prop_id);
+        }
+    });
+
+    $("span[class='select2-selection select2-selection--multiple']");
+    $("#id_type_business").attr('class','form-control selectDos');
+    $('.selectDos').select2({
+        //placeholder: '',
+    });
+
+    $("input,select").addClass('form-control');
+    $('#exampleModalCenter').modal('show')
+    $("[href='#next']").css('display','none');
+    $("[href='#DF GFFG N']").css('display','none');
+    $("[href='#previous']").css('display','none');
+    
+    $("[href='#next']").click(function(){
+        //alert('mario ')
+       
+    });
+
+    //$("[href='#next']").trigger('click');
 
 
+ // ***funtion currency
+var id_price_strInput = document.getElementById('id_price_str');
+var currency = 'USD'; // https://www.id_price_str-iso.org/dam/downloads/lists/list_one.xml
 
+id_price_strInput.addEventListener('keydown', onKeydown);
+id_price_strInput.addEventListener('keyup', onKeyup);
+
+function localStringToNumber( s ){
+    return Number(String(s).replace(/[^0-9.-]+/g,""));
+}
+
+var val_com = $("#id_price_str").val();
+$("#id_price_str").attr("placeholder",val_com);
+
+function onKeydown(e){
+  var intformat= e.target.value;
+  var value = intformat.replace(/[.]/g,',');
+  e.target.value = value ? localStringToNumber(value) : '';
+  document.getElementById("id_price").value = e.target.value;
+}
+var timeout = null
+function onKeyup(e){
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+          var value = e.target.value;
+          document.getElementById("id_price").value = value;
+          const options = {
+              maximumFractionDigits : 0,
+              minimumFractionDigits : 0,
+              currency              : currency,
+              style                 : "currency",
+              currencyDisplay       : "symbol",
+          }
+          var usformat = value ? localStringToNumber(value).toLocaleString(undefined, options): '';
+          val = usformat.replace(/[,]/g,'.');
+          e.target.value = val.replace(/[US]/g,'');
+          document.getElementById("id_price_str").value = e.target.value;
+    }, 400);
+}
+// **** end funtion currency
+
+// SECTION 4
+
+if( $('#customCheck1').prop('indeterminate') == false ){
+    //alert("false terminos")
+    /*
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Acepte términos y condiciones',
+        timer: 2100
+    })
+    */
+}
+
+$("#customCheck1").change(function(){
+    alert("Acepto ¨¨¨¨¨¨¨******* terminos")
+});
+
+
+ 
+ 
+
+
+    
+
+});
 </script>
-</html>
+{% endblock %}
+{% endblock %}
