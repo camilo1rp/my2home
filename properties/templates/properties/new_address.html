@@ -25,6 +25,10 @@
         margin: 0 auto;
         border: solid #ccc9c9;
     }
+    .form{
+        margin: 0 auto;
+        padding-top:3%;
+    }
 </style>
 </head>
 <body>
@@ -32,7 +36,7 @@
 
 <div class="container contenedor">
     <div class="row">
-        <form id="formUno" method="post">
+        <form id="formUno" method="post" class="form">
             {% csrf_token %}
             <div class="col-md-12">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -133,12 +137,6 @@
 
                         <br/>
                         <hr>
-                        <div style="font-weight: bold; text-align: center;">
-                            <span style="font-size: 18px;text-decoration: underline;">Direccion: </span>
-                            <span id="showData"></span>
-                        </div>
-
-                        <hr>
                         <div class="row">
                             <div class="col-md-9" style="text-align: right;">
                                 <span>Mostrar dirección completa en la Web?</span>
@@ -210,38 +208,33 @@
     $("#id_mostrar").css('height','1.5em').css('width','100%');
 
     if(  $("#id_mostrar").is(':checked') ){
-        $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
+        $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
     }
 
     $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
-        $("#showData").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
 
-        $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
+        $("#showData2").html( $("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text()+' '+$("#id_barrio").val() );
         if( $("#id_mostrar").is(':checked') ){
             //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
+            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").val() == '' && $("#id_departamento option:selected").text() == '' && $("#id_barrio").val() == '' ){
                 $("#showData2").text('');
             }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
+                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
             }
         }
 
-        //Campos vacios
-        if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-            $("#showData").text('');
-        }
     });
 
     $("#id_mostrar").change(function() {
         if( $("#id_mostrar").is(':checked') ){
             //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
+            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").text() == '' && $("#id_departamento option:selected").text() == '' && $("#id_barrio").val() == '' ){
                 $("#showData2").text('');
             }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
+                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
             }
         }else{
-            $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
+            $("#showData2").html( $("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text()+' '+$("#id_barrio").val() );
         }
     });
 
