@@ -7,26 +7,106 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <style>
+      .spanIcon{
+        font-weight: bold; 
+        color: red;
+      }
+      .contact_form input:focus:invalid { /* when a field is considered invalid by the browser */
+        /*background: #fff url(images/invalid.png) no-repeat 98% center; */
+        box-shadow: 0 0 5px #d45252;
+        border-color: #b03535
+     }
+     .contact_form input:required:valid{ /* when a field is considered valid by the browser */
+       /* background: #fff url(images/valid.png) no-repeat 98% center;*/
+        box-shadow: 0 0 5px #5cd053;
+        border-color: #28921f;
+      }
+    </style>
 </head>
 <body>
-    <h1>Log-in</h1>
-    {% if form.errors %}
-    <p>
-    Your username and password didn't match.
-    Please try again.
-    </p>
-    {% else %}
-    <p>Please, use the following form to log-in:</p>
-    {% endif %}
-    <div class="login-form">
-        <form action="{% url 'account:login' %}" method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ next }}" />
-            <p><input type="submit" value="Log-in"></p>
-        </form>
-    </div>
-    <p>{% trans 'Dont have an account?' %}</p>
-    <a href="{% url 'profile:create' %}">{% trans 'Register here!' %} </a>
+<div class="container">
+<br>
+  <div class="row">
+      <div class="col-md-4"></div>
+       <div class="col-md-3" style="width: 35%;height: 22%;margin: 0 auto; border: solid #ccc9c9;">
+            <form id="formulario" class="form-horizontal contact_form" action="{% url 'account:login' %}" method="post">
+                  {% csrf_token %}
+                    <h5 style="text-align: center;margin-top: 5%;"> {% trans 'Iniciar Sesión' %} </h5>
+                    <hr>
+                    <div class="form-group">
+                        <span class="col-md-12">
+                            {% trans 'Username' %}
+                            <span class="spanIcon"> *</span>
+                        </span>
+
+                        </span>
+                        <div class="col-md-12">
+                          {{ form.username }}
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" name="next" value="{{ next }}" />
+
+                    <div class="form-group">
+                      <span class="col-md-12">
+                        {% trans 'Password' %}
+                        <span class="spanIcon"> *</span>
+                      </span>
+                        <div class="col-sm-12">
+                          {{ form.password }}
+                        </div>
+                    </div>
+              
+                    <div class="form-group">
+                      <div style="text-align: center;">
+                          <input type="submit" class="btn btn-md btn-primary" value="{% trans 'Log-in' %}">
+                      </div>
+                    </div>
+
+                    <div class="information" id="descripcion" style="text-align:center;">              
+                        <div class="alert alert-info" style="font-weight: bold;">
+                            <p>{% trans 'Dont have an account?' %}</p>
+                            <a href="{% url 'profile:create' %}">{% trans 'Register here!' %} </a>
+                        </div>
+                    </div>
+
+                    {%  if form.errors %}
+                      <div class="alert alert-info" style="font-weight: bold;">
+                          {{form.username.errors}}
+                          {{form.errors}}
+                          {{form.password.errors}}
+                      </div>
+                    {%  endif %}
+                 
+           
+            </form>
+      </div>
+      <div class="col-md-4"></div>
+  </div>
+</div>
+<script type="text/javascript">
+    $("#id_username").attr('class','form-control')
+    $("#id_password").attr('class','form-control')
+</script>
 </body>
 </html>
+
+
+
+
+ 
+    
+
+   
+
+
+            
+   
