@@ -6,7 +6,6 @@ import urllib
 import json
 from email.mime.image import MIMEImage
 from django.contrib import messages
-from django.core import serializers
 from django.core.mail import EmailMultiAlternatives
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
@@ -26,38 +25,26 @@ from .models import Property, AddressCol, Image, Contact, BusinessType
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 12
+    paginate_by = 1
 
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
         business_type = request.GET.get('offer-types')
-        print("business")
-        print(type(business_type))
-        print(business_type)
         city = request.GET.get('select-city')
         filters = {}
         if property_type == business_type and business_type == city:
             self.object_list = self.model.objects.all()
             context = self.get_context_data()
             context['pro_section'] = False
-            print('1111111111')
         else:
             if property_type not in ['ALL', None]:
-                print('22222222')
-                print(property_type)
-                print(type(property_type))
                 filters['type_property'] = property_type
             if business_type not in ['ALL', None]:
-                print('333333')
                 filters['type_business__name'] = business_type
             query = self.model.objects.filter(**filters)
-            print(query)
             if city not in ['ALL', None]:
-                print(filters)
-                print('44444')
                 prop_with_address = [prop for prop in query if prop.address_col.all()]
                 query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
-            print(query)
             self.object_list = query
             context = self.get_context_data()
             context['pro_section'] = True
@@ -105,7 +92,6 @@ class UpdateProperty(UpdateView):
         self.new_property = form.save(commit=False)
         self.new_property.manager = self.request.user
         self.new_property.save()
-        print(self.new_property.id)
         return super(UpdateProperty, self).form_valid(form)
 
     def get_success_url(self):
@@ -126,7 +112,6 @@ def create_address(request, prop_id=None):
             new_address = form.save(commit=False)
             new_address.save()
             return HttpResponseRedirect(reverse('property:create-image', args=(new_address.propiedad.id,)))
-        print("error")
     else:
         if Property.objects.get(id=prop_id).address_col.all():
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
@@ -142,7 +127,6 @@ def create_image(request, prop_id=None):
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
             prop1 = request.POST.get('propiedad_id')
-            print(prop1)
             prop = Property.objects.get(id=int(prop_id))
             for obj in form:
                 try:
@@ -164,10 +148,8 @@ def property_detail(request, prop_id):
     visit = Visits(request)
     visit.add(prop_id)
     if request.method == 'POST':
-        print("request post")
         form = ContactForm(request.POST)
         if form.is_valid():
-            print("valid form")
             name_in = form.cleaned_data['name']
             phone_in = form.cleaned_data['phone']
             try:
@@ -189,7 +171,6 @@ def property_detail(request, prop_id):
             msg = EmailMultiAlternatives(subject, html_content, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
             msg.content_subtype = "html"
             msg.mixed_subtype = "related"
-            print(file[1::])
             img = open(file[1::], 'rb').read()
             url = file
             image = MIMEImage(img, 'jpg')
@@ -205,7 +186,6 @@ def property_detail(request, prop_id):
                            'lat': geo_data["lat"], 'lng': geo_data["lng"]})
         else:
             return HttpResponse("error submiting file")
-    print(geo_data)
     form = ContactForm()
     return render(request, 'properties/property-details.html',
                   {'prop': prop, 'form': form, 'lat': geo_data["lat"],
