@@ -10,7 +10,6 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <style>
@@ -27,7 +26,7 @@
    /* background: #fff url(images/valid.png) no-repeat 98% center;*/
     box-shadow: 0 0 5px #5cd053;
     border-color: #28921f;
-}
+  }
 
 </style>
 </head>
@@ -39,7 +38,7 @@
        <div class="col-md-3" style="width: 35%;height: 22%;margin: 0 auto; border: solid #ccc9c9;">
               <form id="formulario" class="form-horizontal contact_form" method="post">
                   {% csrf_token %}
-                    <h5 style="text-align: center;margin-top: 5%;">Crear Usuario</h5>
+                    <h5 style="text-align: center;margin-top: 5%;">{% trans 'Crear Usuario' %}</h5>
                     <hr>
                     <div class="form-group">
                         <span class="col-md-12">
@@ -49,10 +48,8 @@
 
                         </span>
                         <div class="col-md-12">
-                          <i class="fa fa-user"></i>
-                          &nbsp;
                           {{ form.username }}
-                            {{form.username.errors}}
+                          
                         </div>
                     </div>
 
@@ -62,10 +59,8 @@
                         <span class="spanIcon"> *</span>
                       </span>
                         <div class="col-sm-12">
-                          <i class="fa fa-lock"></i>
-                          &nbsp;
                           {{ form.password1 }}
-                          {{form.password1.errors}}
+                          
                         </div>
                     </div>
                     <div class="form-group"><!--BARRA PASSWORD-->
@@ -74,13 +69,19 @@
                         <span class="spanIcon"> *</span>
                       </span>
                         <div class="col-sm-12">
-                          <i class="fa fa-lock"></i>
-                          &nbsp;
                           {{ form.password2 }}
                         </div>
-                        {{form.password2.errors}}
+                        
                     </div>
 
+                    {%  if form.errors %}
+                      <div class="alert alert-info" style="font-weight: bold;">
+                          {{form.username.errors}}
+                          {{form.password1.errors}}
+                          {{form.password2.errors}}
+                      </div>
+                      {%  endif %} 
+                 
                     <div class="form-group">
                       <div style="text-align: center;">
                           <input type="submit" class="btn btn-md btn-primary" onclick="comprobar()" value="{% trans 'Register' %}">
@@ -91,25 +92,33 @@
       <div class="col-md-4"></div>
   </div>
 </div>
-</body>
 <script>
-<!--$(document).ready(function(){-->
-<!--("#id_password2").blur(function(){-->
-<!--    var pass = $("#id_password1").val();-->
-<!--    var pass2 = $("#id_password2").val();-->
+$(document).ready(function(){
+    $("#id_username").attr('class','form-control')
+    $("#id_password1").attr('class','form-control')
+    $("#id_password2").attr('class','form-control')
+      
 
-<!--    if( pass == pass2 ){-->
-<!--      alert("Nice")-->
-<!--    }else{-->
-<!--      Swal.fire({-->
-<!--          icon: 'error',-->
-<!--          title: 'Oops...',-->
-<!--          text: 'Contraseña no coinciden',-->
-<!--          timer: 2100-->
-<!--      });-->
-<!--    }-->
-<!--  });-->
-<!--});-->
+("#id_password2").blur(function(){
+    var pass = $("#id_password1").val();
+    var pass2 = $("#id_password2").val();
+
+    if( pass == pass2 ){
+      alert("Nice")
+    }else{
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Contraseña no coinciden',
+          timer: 2100
+      });
+    }
+  });
+  
+  $("ul > .errorlist").css('margin','0').css('padding','2%')
+
+});
 </script>
 
+</body>
 </html>
