@@ -1,14 +1,113 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+{% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <style>
+      .spanIcon{
+        font-weight: bold;
+        color: red;
+      }
+      .contact_form input:focus:invalid { /* when a field is considered invalid by the browser */
+        /*background: #fff url(images/invalid.png) no-repeat 98% center; */
+        box-shadow: 0 0 5px #d45252;
+        border-color: #b03535
+     }
+     .contact_form input:required:valid{ /* when a field is considered valid by the browser */
+       /* background: #fff url(images/valid.png) no-repeat 98% center;*/
+        box-shadow: 0 0 5px #5cd053;
+        border-color: #28921f;
+      }
+    </style>
 </head>
 <body>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Save changes</button>
-</form>
+<div class="container">
+<br>
+  <div class="row">
+      <div class="col-md-4"></div>
+       <div class="col-md-3" style="width: 35%;height: 22%;margin: 0 auto; border: solid #ccc9c9;">
+            <form id="formulario" class="form-horizontal contact_form" method="post">
+              {% csrf_token %}
+                <h5 style="text-align: center;margin-top: 5%;"> {% trans 'Perfil' %} </h5>
+                <hr>
+                <div class="form-group">
+                    <span class="col-md-12">
+                        {% trans 'Phone' %}
+                        <span class="spanIcon"> *</span>
+                    </span>
+
+                    </span>
+                    <div class="col-md-12">
+                      {{ form.phone }}
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                  <span class="col-md-12">
+                    {% trans 'Gender' %}
+                    <span class="spanIcon"> *</span>
+                  </span>
+                    <div class="col-sm-12">
+                      {{ form.gender }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <span class="col-md-12">
+                    {% trans 'City' %}
+                    <span class="spanIcon"> *</span>
+                  </span>
+                    <div class="col-sm-12">
+                      {{ form.city }}
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                  <span class="col-md-12">
+                    {% trans 'Company' %}
+                    <span class="spanIcon"> *</span>
+                  </span>
+                    <div class="col-sm-12">
+                      {{ form.company }}
+                    </div>
+                </div>
+
+                {%  if form.errors %}
+                  <div class="alert alert-info" style="font-weight: bold;">
+                      {{form.phone.errors}}
+                      {{form.gender.errors}}
+                      {{form.city.errors}}
+                      {{form.company.errors}}
+                  </div>
+                {%  endif %}
+
+                <div class="form-group">
+                  <div style="text-align: center;">
+                      <input type="submit" class="btn btn-md btn-primary" value="{% trans 'Save Changes' %}">
+                  </div>
+                </div>
+       
+            </form>
+      </div>
+      <div class="col-md-4"></div>
+  </div> 
+</div>
+<script type="text/javascript">
+    $("#id_phone").attr('class','form-control')
+    $("#id_gender").attr('class','form-control')
+    $("#id_city").attr('class','form-control')
+    $("#id_company").attr('class','form-control')
+</script>
 </body>
 </html>
