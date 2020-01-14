@@ -3,9 +3,6 @@
 {% load property_tags %}
 {% load i18n %}
 {% load thumbnail %}
-{% load easy_maps_tags %}
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,12 +23,8 @@
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
-    
-  
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
-
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
   </head>
   <body>
   <div class="site-loader"></div>
@@ -210,12 +203,9 @@
             </div>
           </div>
           <div class="col-lg-4">
-            <div class="bg-white widget border rounded" style="padding-left = 0px;">
-              <h3 class="h4 text-black widget-title mb-3">{%trans 'location' %}</h3>
-              {% with address=prop.address_col.get %}
-                {% easy_map address 270 400 16 %}
-             </div>
-
+            <br>
+            {% google_maps lat lng %}
+            {% with address=prop.address_col.get %}
             <div class="bg-white widget border rounded">
               {% if form %}
               <h3 class="h4 text-black widget-title mb-3">{% trans 'Contact Agent' %}</h3>
@@ -244,7 +234,8 @@
               {% endif %}
             </div>
             <div class="bg-white widget border rounded">
-              <h3 class="h4 text-black widget-title mb-3">{%trans 'location' %}</h3>
+              <h3 class="h4 text-black widget-title mb-3">{%trans 'Information' %}</h3>
+
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit qui explicabo, libero nam, saepe eligendi. Molestias maiores illum error rerum. Exercitationem ullam saepe, minus, reiciendis ducimus quis. Illo, quisquam, veritatis.</p>
             </div>
 
@@ -254,7 +245,6 @@
         </div>
       </div>
     </div>
-
     <div class="site-section site-section-sm bg-light">
       <div class="container">
         <div class="row">

@@ -6,16 +6,17 @@ import urllib
 import json
 from email.mime.image import MIMEImage
 from django.contrib import messages
+from django.core import serializers
 from django.core.mail import EmailMultiAlternatives
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _t
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.base import TemplateView
-from django.core.files import File
+from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
 from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
@@ -30,24 +31,38 @@ class ListProperty(ListView):
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
         business_type = request.GET.get('offer-types')
+        print("business")
+        print(type(business_type))
+        print(business_type)
         city = request.GET.get('select-city')
         filters = {}
         if property_type == business_type and business_type == city:
             self.object_list = self.model.objects.all()
             context = self.get_context_data()
             context['pro_section'] = False
+            print('1111111111')
         else:
-            if property_type != 'ALL':
+            if property_type not in ['ALL', None]:
+                print('22222222')
+                print(property_type)
+                print(type(property_type))
                 filters['type_property'] = property_type
-            if business_type != 'ALL':
+            if business_type not in ['ALL', None]:
+                print('333333')
                 filters['type_business__name'] = business_type
-            query = Property.objects.filter(**filters)
-            if city != 'ALL':
+            query = self.model.objects.filter(**filters)
+            print(query)
+            if city not in ['ALL', None]:
+                print(filters)
+                print('44444')
                 prop_with_address = [prop for prop in query if prop.address_col.all()]
                 query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
+            print(query)
             self.object_list = query
             context = self.get_context_data()
             context['pro_section'] = True
+        if request.is_ajax():
+            return render(request, 'properties/property_list.html', context)
         return self.render_to_response(context)
 
 
@@ -145,6 +160,7 @@ def create_image(request, prop_id=None):
 
 def property_detail(request, prop_id):
     prop = get_object_or_404(Property, id=prop_id)
+    geo_data = get_coordinates(str(prop.address_col.get()))
     visit = Visits(request)
     visit.add(prop_id)
     if request.method == 'POST':
@@ -161,8 +177,8 @@ def property_detail(request, prop_id):
                 email_in = 'noemail@nomail.com'
             contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
 
-            # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
             # ******** email sending ********
+            # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
             file = "/media/{}".format(prop.gallery.get(main=True).image)
             data = {'propiedad': contact.propiedad, 'name': contact.name, 'phone': contact.phone,
                     'email': contact.email, 'image': file}
@@ -181,17 +197,19 @@ def property_detail(request, prop_id):
             image.add_header("Content-Disposition", "inline", filename=url)
             msg.attach(image)
             msg.send()
-            message = _('Your information has been sent to our agents! Thank you')
+            message = _t('Your information has been sent to our agents! Thank you')
             print("email_sent")
             # ****************
             return render(request, 'properties/property-details.html',
-                          {'prop': prop, 'mess': message, })
+                          {'prop': prop, 'mess': message,
+                           'lat': geo_data["lat"], 'lng': geo_data["lng"]})
         else:
             return HttpResponse("error submiting file")
-
+    print(geo_data)
     form = ContactForm()
     return render(request, 'properties/property-details.html',
-                  {'prop': prop, 'form': form})
+                  {'prop': prop, 'form': form, 'lat': geo_data["lat"],
+                   'lng': geo_data["lng"]})
 
 
 def whatsapp_contact(request):
@@ -249,10 +267,10 @@ def property_upload(request):
                                                              title=column[10], description=column[11])
                     # create address
                     addr, _ = AddressCol.objects.get_or_create(propiedad=prop, tipo_via=column[14], via=column[15],
-                                                                  prefijo_via=column[16], numero=column[17],
-                                                                  prefijo_numero=column[18], placa=column[19],
-                                                                  barrio=column[20], ciudad=column[21],
-                                                                  departamento=column[22], mostrar=mostrar)
+                                                               prefijo_via=column[16], numero=column[17],
+                                                               prefijo_numero=column[18], placa=column[19],
+                                                               barrio=column[20], ciudad=column[21],
+                                                               departamento=column[22], mostrar=mostrar)
                 else:
                     # get property
                     prop = Property.objects.get(upload_code=column[13])
@@ -261,7 +279,7 @@ def property_upload(request):
                                          price=column[1], price_str=column[2], rooms=column[3],
                                          baths=column[4], parking=column[5], area_built=column[6],
                                          area_total=column[7], estrato=column[8], year=column[9],
-                                         title=column[10], description=column[11],)
+                                         title=column[10], description=column[11], )
                     # get address
                     addr = prop.address_col.get()
                     # update address
@@ -286,7 +304,7 @@ def property_upload(request):
                     business = BusinessType.objects.get(name=value)
                     prop.type_business.add(business)
                 # get images from folder
-                images = [column[24] + '/' + img for img in os.listdir(settings.MEDIA_ROOT + column[24]+'/')
+                images = [column[24] + '/' + img for img in os.listdir(settings.MEDIA_ROOT + column[24] + '/')
                           if img.endswith("jpg") or img.endswith("png")]
                 # save images for propery and make the first image the main one
                 main = True
@@ -303,8 +321,9 @@ def property_upload(request):
 
 def Template(request):
     prop = Property.objects.last()
-    template= 'properties/contact_email.html'
+    a = prop.address_col.get()
+    geo_data = get_coordinates(str(a))
+    template = 'properties/maps.html'
     data = {'propiedad': prop, 'name': "nombre apellido", 'phone': "1234456809",
-            'email': "email@email.com"}
+            'email': "email@email.com", 'geo_data': geo_data}
     return render(request, template, {'data': data})
-

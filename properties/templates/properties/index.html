@@ -3,7 +3,6 @@
 {% load property_tags %}
 {% load i18n %}
 {% load thumbnail %}
-{% load easy_maps_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,7 +13,6 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500">
     <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
-
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
@@ -26,7 +24,6 @@
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
-
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <!--fontawesome-->
@@ -77,8 +74,8 @@
                   <li class="active">
                     <a href="index.html">{% trans 'Home' %}</a>
                   </li>
-                  <li><a href="buy.html" class="idBuy">{% trans 'Buy' %}</a></li>
-                  <li><a href="rent.html" class="idRent">{% trans 'Rent' %}</a></li>
+                  <li><a class="idBuy">{% trans 'Buy' %}</a></li>
+                  <li><a class="idRent">{% trans 'Rent' %}</a></li>
                   <li class="has-children">
                     <a href="properties.html">{% trans 'Properties' %}</a>
                     <ul id="liAparta" class="dropdown arrow-top">
@@ -143,7 +140,7 @@
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
-          <form method="get" class="form-search col-md-12" style="margin-top: -100px;">
+          <form id=idForm method="get" class="form-search col-md-12" style="margin-top: -100px;">
             <div class="row  align-items-end">
               <div class="col-md-3">
                 <label for="list-types">{% trans 'Listing Types' %}</label>
@@ -188,116 +185,13 @@
 <!--          {% endfor %}-->
 <!--           {% endif %}-->
 <!--        {% endwith %}-->
-        <span id="filter" hidden>{{ pro_section }}</span>
+
       </div>
     </div>
 
     <div id="propys" class="site-section site-section-sm bg-light">
-      <div class="container">
-        <div class="row mb-5">
-          {% for prop in object_list %}
-            <div class="col-md-6 col-lg-4 mb-4">
-              <div class="property-entry h-100">
-                <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
-                  {% with business=prop.type_business.all %}
-                  <div class="offer-type-wrap">
-                    {% for busi in business %}
-                      {% if busi.name == 'SALE / VENTA' %}
-                        <span class="offer-type bg-danger">{% trans 'Sale'%}</span>
-                      {% endif %}
-                      {% if busi.name == 'RENT / ARRENDAMIENTO' %}
-                        <span class="offer-type bg-success">{% trans 'Lend'%}</span>
-                      {% endif %}
-                      {% if busi.name == 'SWAP / PERMUTA' %}
-                        <span class="offer-type bg-info">{% trans 'Swap'%}</span>
-                      {% endif %}
-<!--                      <span class="offer-type {% if busi.name == 'rent' %}bg-danger{% endif %}{% if busi.name == 'Sale' %}bg-success{% endif %}">{{busi.name}}</span>-->
-<!--                    <span class="offer-type bg-success">Rent</span>-->
-                    {% endfor %}
-                  </div>
-                  {% endwith %}
-                  {% with gallery=prop.gallery.all %}
-                  {%if gallery %}
-                    {% for img in gallery%}
-                      {%if img.main %}
-                        {% thumbnail img.image "800x500" crop=center padding=True upscale=True as im %}
-                          <img src="{{im.url}}" alt="Image" class="img-fluid">
-                          {% endthumbnail %}
-                        {% endif %}
-                    {% endfor %}
-                  {% else %}
-                    <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">
-                  {% endif %}
-                  {% endwith %}
-<!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
-                  </a>
-                <div class="p-4 property-body">
-                  {%if prop in user.following.all %}
-                  <a href="#" class="property-unfavorite" ><span class="icon-heart-o"></span></a>
-                  {% else %}
-                  <a href="#" class="property-favorite" ><span class="icon-heart-o"></span></a>
-                  {% endif %}
-                  {% with address=prop.address_col.get %}
-                  <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>
-                  <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
-                  <strong class="property-price text-primary mb-3 d-block text-success">{{ prop.price_str }}</strong>
-                  <ul class="property-specs-wrap mb-3 mb-lg-0">
-                    <li>
-                      <span class="property-specs">{% trans 'Beds' %}</span>
-                      <span class="property-specs-number">{{ prop.rooms }}<sup>+</sup></span>
-                    </li>
-                    <li>
-                      <span class="property-specs">{% trans 'Baths' %}</span>
-                      <span class="property-specs-number">{{ prop.baths }}</span>
-
-                    </li>
-                    <li>
-                      <span class="property-specs">{% trans 'Sq m' %}</span>
-                      <span class="property-specs-number">{{ prop.area_total }}</span>
-                    </li>
-                  </ul>
-
-                </div>
-              </div>
-            </div>
-          {% endwith %}
-          {% empty %}
-            <p> no properties</p>
-          {% endfor %}
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <div class="site-pagination">
-              {% with pages=page_obj %}
-              {% with total_pages=page_obj.paginator.num_pages current_page=page_obj.number %}
-              {% if pages.previous_page_number > 1 %}
-                <a href="?page=1">1</a>
-              {% endif %}
-              {% if pages.previous_page_number > 2 %}
-                <span>...</span>
-              {% endif %}
-              {% if pages.has_previous %}
-                <a id="previous" href="?{% query_transform page=pages.previous_page_number %}">{{ current_page|add:"-1"}}</a>
-              {% endif %}
-                <a id="active" href="#" class="active">{{ current_page }}</a>
-              {% if pages.has_next %}
-                <a id="next" href="?{% query_transform page=pages.next_page_number %}">{{ current_page|add:"1"}}</a>
-              {% if pages.next_page_number < total_pages|add:"-1 "%}
-                <span>...</span>
-              {% endif %}
-              {% if pages.next_page_number < total_pages%}
-                <a id="last" href="?{% query_transform page=total_pages  %}">{{ total_pages }}</a>
-              {% endif %}
-              {% endif %}
-              {% endwith %}
-              {% endwith %}
-            </div>
-          </div>
-        </div>
-
-      </div>
+      {% include 'properties/property_list.html' %}
     </div>
-
     <div class="site-section">
       <div class="container">
         <div class="row justify-content-center">
@@ -360,7 +254,6 @@
 <!--      </div>-->
 <!--    </div>-->
 
-
     <div class="site-section">
     <div class="container">
       <div class="row mb-5 justify-content-center">
@@ -402,9 +295,6 @@
               <h3 class="footer-heading mb-4">{% trans 'About Inmuebles Fusa' %}</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
             </div>
-
-
-
           </div>
           <div class="col-lg-4 mb-5 mb-lg-0">
             <div class="row mb-5">
@@ -439,9 +329,7 @@
                   <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                 </div>
-
           </div>
-
         </div>
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
@@ -482,7 +370,11 @@
             type: 'get',
             data: { 'offer-types': 'SALE / VENTA' }
         }).done(function(data) {
-            alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
         });
     });
 
@@ -493,7 +385,11 @@
             type: 'get',
             data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
         }).done(function(data) {
-            alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
         });
     });
 
@@ -502,9 +398,14 @@
         $.ajax({
             url: '{% url "property:index" %}',
             type: 'get',
-            data: { 'list-types': 'APT' }
+            data: { 'list-types': 'APT'
+             }
         }).done(function(data) {
-            alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+            scrollTop: $('#propys').offset().top
+            }, 'slow');
         });
     });
 
@@ -514,7 +415,11 @@
             type: 'get',
             data: { 'list-types': 'HOU' }
         }).done(function(data) {
-            alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
         });
     });
     
@@ -524,7 +429,11 @@
             type: 'get',
             data: { 'list-types': 'LAN' }
         }).done(function(data) {
-            alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
         });
     });
 
@@ -535,7 +444,11 @@
               type: 'get',
               data: { 'list-types': 'COM' }
           }).done(function(data) {
-              alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
           });
       });
     
@@ -545,25 +458,42 @@
             type: 'get',
             data: { 'list-types': 'FAR' }
         }).done(function(data) {
-            alert(data)
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
         });
     });
 
-  //Camilo
-    var filter = $("#filter").text()
-    // Handler for .ready() called.
-    if (window.location.href.indexOf("page") > -1 || filter == "True" ){
-      $('html, body').animate({
-          scrollTop: $('#propys').offset().top
-      }, 'slow');
-    }
-    if (filter == True ){
-    alert("got in")
-      $('html, body').animate({
-          scrollTop: $('#propys').offset().top
-      },);
-    }
+    // this is the id of the form
+    $("#idForm").submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = $(this);
+        var url = form.attr('action');
 
+        $.ajax({
+               type: "get",
+               url: '{% url "property:index" %}',
+               data: form.serialize(), // serializes the form's elements.
+               success: function(data)
+               {
+                   var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+               }
+             });
+
+
+    });
+  //Camilo
+    if (window.location.href.indexOf("page") > -1){
+      $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+               }
 });//Ready
 
 </script>

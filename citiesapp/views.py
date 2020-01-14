@@ -24,7 +24,6 @@ def city(request):
         try:
             value = City.objects.filter(state=id_state).order_by('name')
             valores = serializers.serialize('json', value)
-            print(valores)
         except:
             valores = 0
     return HttpResponse(json.dumps(valores), content_type='application/json')

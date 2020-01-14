@@ -1,269 +1,502 @@
+{% load staticfiles %}
+{% load static %}
+{% load property_tags %}
+{% load i18n %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <head>
+    <title>Inmuebles Fusa</title>
 
-    <style>
-    .select2-container {
-        width: 260px ! important;
-    }
-    .span{
-        color: red;
-        font-weight: bold;
-    }
-    .divBtn{
-        text-align: center;
-    }
-    .contenedor{
-        width: 45%;
-        height: 22%;
-        margin: 0 auto;
-        border: solid #ccc9c9;
-    }
-</style>
-</head>
-<body>
-<input id="prop" value="{{propiedad}}" hidden disabled>
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediaelementplayer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-<div class="container contenedor">
-    <div class="row">
-        <form id="formUno" method="post">
-            {% csrf_token %}
-            <div class="col-md-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                {{form.tipo_via.label}}<span class="span"> *</span></label>
-                                <div class="col-md-12">
-                                    {{form.tipo_via}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.via.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.via}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.prefijo_via.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.prefijo_via}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                        {{form.numero.label}}<span class="span"> *</span>
-                                    </label>
-                                    <div class="col-md-12">
-                                        {{form.numero}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.prefijo_numero.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.prefijo_numero}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.placa.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.placa}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.barrio.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.barrio}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.ciudad.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.ciudad}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                    {{form.departamento.label}}<span class="span"> *</span>
-                                </label>
-                                <div class="col-md-12">
-                                    {{form.departamento}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
+    <!--fontawesome-->
+    <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
+    <!--fontawesome-->
+  </head>
+  <body>
+  {% get_current_language as LANGUAGE_CODE %}
+  {% get_available_languages as LANGUAGES %}
+  {% get_language_info_list for LANGUAGES as languages %}
 
-                             {{form.propiedad}}
+  <div class="site-loader"></div>
+  <div class="site-wrap">
 
-                        <br/>
-                        <hr>
-                        <div style="font-weight: bold; text-align: center;">
-                            <span style="font-size: 18px;text-decoration: underline;">Direccion: </span>
-                            <span id="showData"></span>
-                        </div>
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
 
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-9" style="text-align: right;">
-                                <span>Mostrar dirección completa en la Web ?</span>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="col-md-12">
-                                    {{form.mostrar}}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
+    <div class="site-navbar mt-4">
+        <div class="social">
+            <ul class="languages">
+              {% for language in languages %}
+                <li>
+                    <a href="/{{ language.code }}" class="icon-flag"
+                      {% if language.code == LANGUAGE_CODE %} class="selected" {% endif %}>
+                      {{ language.name_local|title  }}
+                    </a>
+                </li>
+              {% endfor %}
+             </ul>
+        </div>
 
-                        <select id="ciudadSelect">
-                              <option value="" selected>Ciudad</option>
-                              <option value="0">cali</option>
-                              <option value="1">Saab</option>
-                              <option value="2">bogota</option>
-                              <option value="3">Audi</option>
-                        </select>
-                        <br/>
-                         <select id="deparSelect">
-                              <option value="volvo" selected>Departamento</option>
-                              <option value="0">cundinamarca</option>
-                              <option value="1">VW</option>
-                              <option value="2">Audi</option>
-                              <option value="3">tres</option>
-                        </select>
-
-
-                        <div style="font-weight: bold; text-align: center;">
-                            <span style="font-size: 18px;text-decoration: underline;">Direccion a Mostrar:</span>
-                            <span id="showData2"></span>
-                        </div>
-                    </div>
-                </div>
+        <div class="container py-1">
+          <div class="row align-items-center">
+            <div class="col-8 col-md-8 col-lg-4">
+              <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0"><strong>{% trans 'Inmuebles Fusa' %}<span class="text-danger">.</span></strong></a></h1>
             </div>
-            <br/>
-            <div class="form-group divBtn">
-                <div class="col-md-12">
-                    <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                        </i>Guardar
-                    </button>
-                </div>
+            <div class="col-4 col-md-4 col-lg-8">
+              <nav class="site-navigation text-right text-md-right" role="navigation">
+
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+                <ul id="idBuy" class="site-menu js-clone-nav d-none d-lg-block font-weight-bold">
+                  <li class="active">
+                    <a href="index.html">{% trans 'Home' %}</a>
+                  </li>
+                  <li><a class="idBuy">{% trans 'Buy' %}</a></li>
+                  <li><a class="idRent">{% trans 'Rent' %}</a></li>
+                  <li class="has-children">
+                    <a href="properties.html">{% trans 'Properties' %}</a>
+                    <ul id="liAparta" class="dropdown arrow-top">
+                      <li><a href="#" class="liAparta">{% trans 'Apartments' %}</a></li>
+                      <li><a href="#" class="liHouses">{% trans 'Houses' %}</a></li>
+                      <li><a href="#" class="liLand">{% trans 'Land' %} </a></li>
+                      <li><a href="#" class="liCommercial">{% trans 'Commercial' %} </a></li>
+                      <li><a href="#" class="liFarms">{% trans 'Farms' %} </a></li>
+<!--                      <li class="has-children">-->
+<!--                        <a href="#">Sub Menu</a>-->
+<!--                        <ul class="dropdown">-->
+<!--                          <li><a href="#">Menu One</a></li>-->
+<!--                          <li><a href="#">Menu Two</a></li>-->
+<!--                          <li><a href="#">Menu Three</a></li>-->
+<!--                        </ul>-->
+<!--                      </li>-->
+                    </ul>
+                  </li>
+<!--                  <li><a href="blog.html">Blog</a></li>-->
+                  <li><a href="about.html">{% trans 'About' %}</a></li>
+                  <li><a href="contact.html">{% trans 'Contact' %}</a></li>
+                </ul>
+
+              </nav>
             </div>
-        </form>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+    <div class="slide-one-item home-slider owl-carousel">
 
+      <div class="site-blocks-cover overlay" style="background-image: url({% static 'images/hero_bg_1.jpg' %});" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center text-center">
+            <div class="col-md-10">
+              <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type rounded">{% trans 'For Rent' %}</span>
+              <h1 class="mb-2">Projecto Miramontre</h1>
+              <p class="mb-5"><strong class="h2 text-success font-weight-bold">Desde $2,250,500</strong></p>
+              <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">{% trans 'See Details' %}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+      <div class="site-blocks-cover overlay" style="background-image: url({% static 'images/hero_bg_2.jpg' %});" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center text-center">
+            <div class="col-md-10">
+              <span class="d-inline-block bg-danger text-white px-3 mb-3 property-offer-type rounded">{% trans 'For Sale' %}</span>
+              <h1 class="mb-2">Projecto C.C. Jardin</h1>
+              <p class="mb-5"><strong class="h2 text-success font-weight-bold">Desde $1,000,500</strong></p>
+              <p><a href="#" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">{% trans 'See Details' %}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if 'list-types' in request.path %}
+      <h1>hello</h1>
+    {% endif %}
+    
+    <div class="site-section site-section-sm pb-0">
+      <div class="container">
+        <div class="row">
+          <form id=idForm method="get" class="form-search col-md-12" style="margin-top: -100px;">
+            <div class="row  align-items-end">
+              <div class="col-md-3">
+                <label for="list-types">{% trans 'Listing Types' %}</label>
+                <select name="list-types" id="list-types" class="form-control rounded-0">
+                  <option value="ALL">{% trans 'All' %}</option>
+                  <option value="APT">{% trans 'Apartments' %}</option>
+                  <option value="HOU">{% trans 'Houses' %}</option>
+                  <option value="LAN">{% trans 'Lands' %}</option>
+                  <option value="COM">{% trans 'Commercial' %}</option>
+                  <option value="FAR">{% trans 'Farms' %}</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="offer-types">{% trans 'Offer Type' %}</label>
+                <select name="offer-types" id="offer-types" class="form-control rounded-0">
+                    <option value="ALL">{% trans 'All' %}</option>
+                    <option value="SALE / VENTA">{% trans 'For Sale' %}</option>
+                    <option value="RENT / ARRENDAMIENTO">{% trans 'For Rent' %}</option>
+                    <option value="SWAP / PERMUTA">{% trans 'For Swap' %}</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="select-city">{% trans 'Select City' %}</label>
+                <select name="select-city" id="select-city" class="form-control rounded-0">
+                  <option value="ALL">{% trans 'All' %}</option>
+                  <option value="BOGOTA">Bogota</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="{% trans 'Search' %}">
+              </div>
+            </div>
+          </form>
+        </div>
+<!--        {% with filters=request.GET %}-->
+<!--          {% if pro_section %}-->
+<!--          <span class="badge badge-secondary">Filters</span>-->
+<!--          {% for key, value in filters.items %}-->
+<!--           {% if key != "page" and value != 'ALL' %}-->
+<!--            <span class="badge badge-primary">{{ key }} = {{  value }} </span>-->
+<!--            {% endif %}-->
+<!--          {% endfor %}-->
+<!--           {% endif %}-->
+<!--        {% endwith %}-->
+
+      </div>
+    </div>
+
+    <div id="propys" class="site-section site-section-sm bg-light">
+      {% include 'properties/property_list.html' %}
+    </div>
+    <div class="site-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-7 text-center">
+            <div class="site-section-title">
+              <h2>{% trans 'Why Choose Us?' %}</h2>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis maiores quisquam saepe architecto error corporis aliquam. Cum ipsam a consectetur aut sunt sint animi, pariatur corporis, eaque, deleniti cupiditate officia.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <a href="#" class="service text-center">
+              <span class="icon flaticon-house"></span>
+              <h2 class="service-heading">Responsabilidad</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt iure qui natus perspiciatis ex odio molestia.</p>
+              <p><span class="read-more">Read More</span></p>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="#" class="service text-center">
+              <span class="icon flaticon-sold"></span>
+              <h2 class="service-heading">Recientes Ventas</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt iure qui natus perspiciatis ex odio molestia.</p>
+              <p><span class="read-more">Read More</span></p>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a href="#" class="service text-center">
+              <span class="icon flaticon-camera"></span>
+              <h2 class="service-heading">Asesoria legal</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt iure qui natus perspiciatis ex odio molestia.</p>
+              <p><span class="read-more">Read More</span></p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--    <div class="site-section bg-light">-->
+<!--      <div class="container">-->
+<!--        <div class="row justify-content-center mb-5">-->
+<!--          <div class="col-md-7 text-center">-->
+<!--            <div class="site-section-title">-->
+<!--              <h2>Recent Blog</h2>-->
+<!--            </div>-->
+<!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis maiores quisquam saepe architecto error corporis aliquam. Cum ipsam a consectetur aut sunt sint animi, pariatur corporis, eaque, deleniti cupiditate officia.</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">-->
+<!--            <a href="#"><img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid"></a>-->
+<!--            <div class="p-4 bg-white">-->
+<!--              <span class="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>-->
+<!--              <h2 class="h5 text-black mb-3"><a href="#">Art Gossip by Mike Charles</a></h2>-->
+<!--              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt.</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="site-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-7">
+          <div class="site-section-title text-center">
+            <h2>{% trans 'Our Team' %}</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero magnam officiis ipsa eum pariatur labore fugit amet eaque iure vitae, repellendus laborum in modi reiciendis quis! Optio minima quibusdam, laboriosam.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
+            <div class="team-member">
+
+              <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
+
+              <div class="text">
+
+                <h2 class="mb-2 font-weight-light text-black h4">Megan Smith</h2>
+                <span class="d-block mb-3 text-white-opacity-05">Real Estate Agent</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi dolorem totam non quis facere blanditiis praesentium est. Totam atque corporis nisi, veniam non. Tempore cupiditate, vitae minus obcaecati provident beatae!</p>
+                <p>
+                  <a href="#" class="text-black p-2"><span class="icon-facebook"></span></a>
+                  <a href="#" class="text-black p-2"><span class="icon-twitter"></span></a>
+                  <a href="#" class="text-black p-2"><span class="icon-linkedin"></span></a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">{% trans 'About Inmuebles Fusa' %}</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">{% trans 'Navigations' %}</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="#">{% trans 'Home' %}</a></li>
+                  <li><a href="#">{% trans 'Buy' %}</a></li>
+                  <li><a href="#">{% trans 'Rent' %}</a></li>
+                  <li><a href="#">{% trans 'Swap' %}</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="#">{% trans 'About Us' %}</a></li>
+                  <li><a href="#">{% trans 'Privacy Policy' %}</a></li>
+                  <li><a href="#">{% trans 'Contact Us' %}</a></li>
+                  <li><a href="#">{% trans 'Terms' %}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <h3 class="footer-heading mb-4">{% trans 'Follow Us' %}</h3>
+
+                <div>
+                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                </div>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p style="font-size:7px;">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <a href="https://api.whatsapp.com/send?phone=573108181802&text=Quisiera%20mas%20informacion%20sobre%20los%20inmuebles%20y%20servicios%20que%20ofrecen" class="float" target="_blank">
+  <i class="fa fa-whatsapp my-float"></i>
+  </a>
+      
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/mediaelement-and-player.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
-//SECTION 2
-    $("#id_departamento").change(function(){
-    var opcion = $("#id_departamento option:selected").val();
-    alert("opciont "+opcion)
-
-    $.ajax({
-        url: '{% url "city:cities" %}',
-        type: 'get',
-        data: { 'id': opcion }
-    }).done(function(data) {
-        var valores = '';
-        var datos = JSON.parse(data);
-        $("#id_ciudad").empty();
-        valores = "<option value='' selected>Seleccione Una Opción</option>"
-        $.each(datos, function(item, val) {
-            valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
+  $(document).ready(function () {
+    $("#idBuy > li .idBuy").click(function(){
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'offer-types': 'SALE / VENTA' }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
         });
-        $("#id_ciudad").append(valores);
-    });
-
-    });
-
-    var propy = $("#prop").val();
-    $("#id_propiedad").val(propy).change();
-    $('label[for="id_propiedad"]').hide();
-    $("#id_propiedad").hide()
-
-
-    //Css
-    $("input, select").addClass('form-control');
-
-
-    $("#id_mostrar").prop('checked',true);
-    $("#id_mostrar").css('height','1.5em').css('width','100%');
-
-    if(  $("#id_mostrar").is(':checked') ){
-        $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-    }
-
-    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
-        $("#showData").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-
-        $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
-        if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-                $("#showData2").text('');
-            }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-            }
-        }
-
-        //Campos vacios
-        if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-            $("#showData").text('');
-        }
-    });
-
-    $("#id_mostrar").change(function() {
-        if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad").val() == '' && $("#id_departamento").val() == '' && $("#id_barrio").val() == '' ){
-                $("#showData2").text('');
-            }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad").val()+', '+$("#id_departamento").val()+', '+$("#id_barrio").val() );
-            }
-        }else{
-            $("#showData2").html( $("#id_ciudad").val()+' '+$("#id_departamento").val()+' '+$("#id_barrio").val() );
-        }
     });
 
 
+    $("#idBuy > li .idRent").click(function(){
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+        });
+    });
 
+
+    $('#liAparta > li .liAparta').click(function () {
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'list-types': 'APT'
+             }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+            scrollTop: $('#propys').offset().top
+            }, 'slow');
+        });
+    });
+
+    $('#liAparta > li .liHouses').click(function () {
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'list-types': 'HOU' }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+        });
+    });
+    
+    $('#liAparta > li .liLand').click(function () {
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'list-types': 'LAN' }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+        });
+    });
+
+
+    $('#liAparta > li .liCommercial').click(function () {
+          $.ajax({
+              url: '{% url "property:index" %}',
+              type: 'get',
+              data: { 'list-types': 'COM' }
+          }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+          });
+      });
+    
+    $('#liAparta > li .liFarms').click(function () {
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'list-types': 'FAR' }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+        });
+    });
+
+    // this is the id of the form
+    $("#idForm").submit(function(e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+               type: "get",
+               url: '{% url "property:index" %}',
+               data: form.serialize(), // serializes the form's elements.
+               success: function(data)
+               {
+                   var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+               }
+             });
+
+
+    });
+  //Camilo
+    // Handler for .ready() called.
+    if (window.location.href.indexOf("page") > -1){
+      $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+               }
+});//Ready
 
 </script>
+  </body>
 </html>

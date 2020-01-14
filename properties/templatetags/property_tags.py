@@ -5,7 +5,7 @@ register = template.Library()
 
 
 @register.inclusion_tag('properties/property_card.html')
-def show_latest_properties(count=5, city="a", prop_id=0):
+def show_latest_properties(count=6, city="a", prop_id=0):
     print(city)
     address_city = AddressCol.objects.filter(ciudad=city).order_by('-id')
     properties_city = [address.propiedad for address in address_city if address.propiedad.id != prop_id]
@@ -16,6 +16,7 @@ def show_latest_properties(count=5, city="a", prop_id=0):
     return {'properties': latest_properties}
 
 
+# returns the url of the current location with requests
 @register.simple_tag(takes_context=True)
 def query_transform(context, **kwargs):
     query = context['request'].GET.copy()
@@ -23,3 +24,13 @@ def query_transform(context, **kwargs):
         query[k] = v
     return query.urlencode()
 
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
+
+@register.inclusion_tag('properties/maps.html')
+def google_maps(lat, lng):
+    print("inside function")
+    return {'lat': lat, 'lng': lng}

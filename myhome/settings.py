@@ -38,14 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
+    'django_inlinecss',
     'properties.apps.PropertiesConfig',
     'profiles.apps.ProfilesConfig',
     'visits.apps.VisitsConfig',
     'citiesapp.apps.CitiesappConfig',
+    'geoservice.apps.GeoserviceConfig',
     'rosetta',
     'sorl.thumbnail',
     'widget_tweaks',
-    'easy_maps',
 ]
 
 MIDDLEWARE = [
@@ -171,6 +172,6 @@ VISITS_SESSION_ID = 'visits'
 # ***** email settings *****
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'camilo1rp@gmail.com'
-EMAIL_HOST_PASSWORD = '*******'
+EMAIL_HOST_PASSWORD = 'Deltaz1234!@#$'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
