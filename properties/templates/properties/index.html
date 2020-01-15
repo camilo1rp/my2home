@@ -70,14 +70,15 @@
               <nav class="site-navigation text-right text-md-right" role="navigation">
 
                 <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-                <ul id="idBuy" class="site-menu js-clone-nav d-none d-lg-block font-weight-bold">
+                <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold idBuy">
                   <li class="active">
                     <a href="index.html">{% trans 'Home' %}</a>
                   </li>
-                  <li><a class="idBuy">{% trans 'Buy' %}</a></li>
-                  <li><a class="idRent">{% trans 'Rent' %}</a></li>
+                  <li id="tom"><a href="#" class="ClassBuy">{% trans 'Buy' %}</a></li>
+                  <li><a href="#" class="idRent">{% trans 'Rent' %}</a></li>
+                  <li><a href="#" class="idSwap">{% trans 'Swap' %}</a></li>
                   <li class="has-children">
-                    <a href="properties.html">{% trans 'Properties' %}</a>
+                    <a href="#">{% trans 'Properties' %}</a>
                     <ul id="liAparta" class="dropdown arrow-top">
                       <li><a href="#" class="liAparta">{% trans 'Apartments' %}</a></li>
                       <li><a href="#" class="liHouses">{% trans 'Houses' %}</a></li>
@@ -302,11 +303,11 @@
                 <h3 class="footer-heading mb-4">{% trans 'Navigations' %}</h3>
               </div>
               <div class="col-md-6 col-lg-6">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled idBuy">
                   <li><a href="#">{% trans 'Home' %}</a></li>
-                  <li><a href="#">{% trans 'Buy' %}</a></li>
-                  <li><a href="#">{% trans 'Rent' %}</a></li>
-                  <li><a href="#">{% trans 'Swap' %}</a></li>
+                  <li><a href="#" class="ClassBuy">{% trans 'Buy' %}</a></li>
+                  <li><a href="#" class="idRent">{% trans 'Rent' %}</a></li>
+                  <li><a href="#" class="idSwap">{% trans 'Swap' %}</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
@@ -364,7 +365,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
   $(document).ready(function () {
-    $("#idBuy > li .idBuy").click(function(){
+    $(".idBuy > li .ClassBuy").click(function(){
         $.ajax({
             url: '{% url "property:index" %}',
             type: 'get',
@@ -378,8 +379,23 @@
         });
     });
 
+  
+    $(".idBuy > li .idRent").click(function(){
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
+        }).done(function(data) {
+           var y = document.getElementById('propys');
+           y.innerHTML = data;
+           $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+              }, 'slow');
+        });
+    });
 
-    $("#idBuy > li .idRent").click(function(){
+
+    $(".idBuy > li .idSwap").click(function(){
         $.ajax({
             url: '{% url "property:index" %}',
             type: 'get',
