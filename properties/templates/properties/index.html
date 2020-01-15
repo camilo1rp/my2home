@@ -364,8 +364,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
-  $(document).ready(function () {
-    $(".property-favorite").click(function(){
+  //$(document).ready(function () {
+    $(".heart").click(function(){
+      alert($(".this").attr('dir'))
         $.ajax({
             url: '{% url "property:follow" %}',
             type: 'get',
@@ -523,7 +524,7 @@
         scrollTop: $('#propys').offset().top
       }, 'slow');
     }
-});//Ready
+//});//Ready
 
 </script>
   </body>
