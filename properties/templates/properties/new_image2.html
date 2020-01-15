@@ -82,7 +82,7 @@
     }
     .contenedor{
         width: 35%;
-        height: 22%;
+        height: 211px;
         margin: 0 auto;
         border: solid #ccc9c9;
         background-color: white;
@@ -99,13 +99,13 @@
     <body>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" data-keyboard='false' data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" style="margin-top: 17%;" data-keyboard='false' data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title centrar fuenteOscura" id="exampleModalLabel">Terminos y condiciones</h5>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="padding: 7%;">
             
 
         <div style="background-color: #fafafa; margin: 3rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
@@ -370,6 +370,11 @@
                     });
                 }else{
                     $('#exampleModal').modal('show');
+                    //$("#exampleModal").css('background-color','aliceblue');
+                    //$(".accordian").css("overflow", "hidden");
+                    //$("#exampleModal").css("overflow", "hidden");
+
+   // background-color: red;
                 }
             }
         })
