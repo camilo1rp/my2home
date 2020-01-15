@@ -365,50 +365,61 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
   $(document).ready(function () {
-    $(".idBuy > li .ClassBuy").click(function(){
+    $(".property-favorite").click(function(){
         $.ajax({
-            url: '{% url "property:index" %}',
+            url: '{% url "property:follow" %}',
             type: 'get',
-            data: { 'offer-types': 'SALE / VENTA' }
+            data: { 'prop-id': $(".date").attr('dir') }
         }).done(function(data) {
-           var y = document.getElementById('propys');
-           y.innerHTML = data;
-           $('html, body').animate({
+            var y = document.getElementById('propys');
+            y.innerHTML = data;
+            $('html, body').animate({
               scrollTop: $('#propys').offset().top
-              }, 'slow');
+            }, 'slow');
         });
     });
 
+    $(".idBuy > li .ClassBuy").click(function(){
+        $.ajax({
+           url: '{% url "property:index" %}',
+           type: 'get',
+           data: { 'offer-types': 'SALE / VENTA' }
+        }).done(function(data) {
+          var y = document.getElementById('propys');
+          y.innerHTML = data;
+          $('html, body').animate({
+              scrollTop: $('#propys').offset().top
+          }, 'slow');
+        });
+    });
   
     $(".idBuy > li .idRent").click(function(){
         $.ajax({
-            url: '{% url "property:index" %}',
-            type: 'get',
-            data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
+           url: '{% url "property:index" %}',
+           type: 'get',
+           data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
         }).done(function(data) {
-           var y = document.getElementById('propys');
-           y.innerHTML = data;
-           $('html, body').animate({
+          var y = document.getElementById('propys');
+          y.innerHTML = data;
+          $('html, body').animate({
               scrollTop: $('#propys').offset().top
-              }, 'slow');
+          }, 'slow');
         });
     });
-
 
     $(".idBuy > li .idSwap").click(function(){
         $.ajax({
-            url: '{% url "property:index" %}',
-            type: 'get',
-            data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
+          url: '{% url "property:index" %}',
+          type: 'get',
+          data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
         }).done(function(data) {
-           var y = document.getElementById('propys');
-           y.innerHTML = data;
-           $('html, body').animate({
+          var y = document.getElementById('propys');
+          y.innerHTML = data;
+          $('html, body').animate({
               scrollTop: $('#propys').offset().top
-              }, 'slow');
+          }, 'slow');
         });
     });
-
 
     $('#liAparta > li .liAparta').click(function () {
         $.ajax({
@@ -453,20 +464,19 @@
         });
     });
 
-
     $('#liAparta > li .liCommercial').click(function () {
-          $.ajax({
-              url: '{% url "property:index" %}',
-              type: 'get',
-              data: { 'list-types': 'COM' }
-          }).done(function(data) {
-           var y = document.getElementById('propys');
-           y.innerHTML = data;
-           $('html, body').animate({
-              scrollTop: $('#propys').offset().top
-              }, 'slow');
-          });
-      });
+        $.ajax({
+            url: '{% url "property:index" %}',
+            type: 'get',
+            data: { 'list-types': 'COM' }
+        }).done(function(data) {
+          var y = document.getElementById('propys');
+          y.innerHTML = data;
+          $('html, body').animate({
+            scrollTop: $('#propys').offset().top
+          }, 'slow');
+        });
+    });
     
     $('#liAparta > li .liFarms').click(function () {
         $.ajax({
@@ -474,11 +484,11 @@
             type: 'get',
             data: { 'list-types': 'FAR' }
         }).done(function(data) {
-           var y = document.getElementById('propys');
-           y.innerHTML = data;
-           $('html, body').animate({
+            var y = document.getElementById('propys');
+            y.innerHTML = data;
+            $('html, body').animate({
               scrollTop: $('#propys').offset().top
-              }, 'slow');
+            }, 'slow');
         });
     });
 
@@ -489,27 +499,25 @@
         var url = form.attr('action');
 
         $.ajax({
-               type: "get",
-               url: '{% url "property:index" %}',
-               data: form.serialize(), // serializes the form's elements.
-               success: function(data)
-               {
-                   var y = document.getElementById('propys');
-           y.innerHTML = data;
-           $('html, body').animate({
+           type: "get",
+           url: '{% url "property:index" %}',
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+            var y = document.getElementById('propys');
+            y.innerHTML = data;
+            $('html, body').animate({
               scrollTop: $('#propys').offset().top
-              }, 'slow');
-               }
-             });
-
-
+            }, 'slow');
+           }
+        });
     });
   //Camilo
     if (window.location.href.indexOf("page") > -1){
       $('html, body').animate({
-              scrollTop: $('#propys').offset().top
-              }, 'slow');
-               }
+        scrollTop: $('#propys').offset().top
+      }, 'slow');
+    }
 });//Ready
 
 </script>
