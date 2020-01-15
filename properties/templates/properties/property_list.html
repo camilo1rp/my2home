@@ -38,9 +38,9 @@
               {% endif %}
               {% endwith %}
               </a>
-            <div class="p-4 property-body">
+            <div class="p-4 property-body date" dir="{{prop.id}}">
               {%if prop in user.following.all %}
-              <a href="#" class="property-unfavorite" ><span class="icon-heart-o"></span></a>
+              <a href="#" class="property-unfavorite " ><span class="icon-heart-o"></span></a>
               {% else %}
               <a href="#" class="property-favorite" ><span class="icon-heart-o"></span></a>
               {% endif %}
