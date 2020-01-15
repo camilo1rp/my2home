@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-02 10:45-0500\n"
-"PO-Revision-Date: 2019-12-03 20:57+0000\n"
-"Last-Translator: b'  <camilo1rp@gmail.com>'\n"
+"POT-Creation-Date: 2020-01-14 16:48-0500\n"
+"PO-Revision-Date: 2020-01-15 13:43+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,30 +19,78 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: profiles/models.py:14
+#: profiles/models.py:15
 msgid "Male"
 msgstr ""
 
-#: profiles/models.py:15
+#: profiles/models.py:16
 msgid "Femele"
 msgstr ""
 
-#: profiles/models.py:16
+#: profiles/models.py:17
 msgid "other"
 msgstr ""
 
-#: profiles/models.py:20
+#: profiles/models.py:21
 msgid "Nickname"
 msgstr ""
 
-#: profiles/models.py:21
+#: profiles/models.py:22
 msgid "gender"
 msgstr ""
 
-#: profiles/models.py:22
+#: profiles/models.py:23
 msgid "city"
 msgstr ""
 
-#: profiles/models.py:24
+#: profiles/models.py:25
 msgid "company"
+msgstr ""
+
+#: profiles/templates/profiles/new_user.html:6
+msgid "Registration"
+msgstr ""
+
+#: profiles/templates/profiles/new_user.html:41
+msgid "Crear Usuario"
+msgstr "Create User"
+
+#: profiles/templates/profiles/new_user.html:45
+msgid "Username"
+msgstr ""
+
+#: profiles/templates/profiles/new_user.html:58
+msgid "Password"
+msgstr ""
+
+#: profiles/templates/profiles/new_user.html:68
+msgid "Confirm Password"
+msgstr ""
+
+#: profiles/templates/profiles/new_user.html:87
+msgid "Register"
+msgstr ""
+
+#: profiles/templates/profiles/profile.html:42
+msgid "Perfil"
+msgstr "Profile"
+
+#: profiles/templates/profiles/profile.html:46
+msgid "Phone"
+msgstr ""
+
+#: profiles/templates/profiles/profile.html:58
+msgid "Gender"
+msgstr ""
+
+#: profiles/templates/profiles/profile.html:68
+msgid "City"
+msgstr ""
+
+#: profiles/templates/profiles/profile.html:78
+msgid "Company"
+msgstr ""
+
+#: profiles/templates/profiles/profile.html:97
+msgid "Save Changes"
 msgstr ""

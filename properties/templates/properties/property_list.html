@@ -38,11 +38,11 @@
               {% endif %}
               {% endwith %}
               </a>
-            <div class="p-4 property-body date" dir="{{prop.id}}">
+            <div class="p-4 property-body data" dir="{{prop.id}}">
               {%if prop in user.following.all %}
-              <a href="#" class="property-unfavorite " ><span class="icon-heart-o"></span></a>
+              <a class="property-unfavorite " ><span class="icon-heart-o"></span></a>
               {% else %}
-              <a href="#" class="property-favorite" ><span class="icon-heart-o"></span></a>
+              <a class="property-favorite" ><span class="icon-heart-o"></span></a>
               {% endif %}
               {% with address=prop.address_col.get %}
               <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>

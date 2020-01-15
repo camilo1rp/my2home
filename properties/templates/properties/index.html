@@ -369,8 +369,9 @@
         $.ajax({
             url: '{% url "property:follow" %}',
             type: 'get',
-            data: { 'prop-id': $(".date").attr('dir') }
+            data: { 'prop_id': $(".data").attr('dir') }
         }).done(function(data) {
+        alert(data)
             if (data == 0) {
              window.location.href='{% url "account:login" %}'
             }else{

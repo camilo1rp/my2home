@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-02 10:45-0500\n"
-"PO-Revision-Date: 2019-12-03 20:58+0000\n"
-"Last-Translator: b'  <camilo1rp@gmail.com>'\n"
+"POT-Creation-Date: 2020-01-14 16:48-0500\n"
+"PO-Revision-Date: 2020-01-15 13:46+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,11 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: myhome/settings.py:115
+#: account/templates/registration/login.html:42
+msgid "Iniciar Sesión"
+msgstr ""
+
+#: account/templates/registration/login.html:46
+msgid "Username"
+msgstr ""
+
+#: account/templates/registration/login.html:60
+msgid "Password"
+msgstr ""
+
+#: account/templates/registration/login.html:70
+msgid "Log-in"
+msgstr ""
+
+#: account/templates/registration/login.html:76
+msgid "Dont have an account?"
+msgstr ""
+
+#: account/templates/registration/login.html:77
+msgid "Register here!"
+msgstr ""
+
+#: myhome/settings.py:131
 msgid "English"
 msgstr ""
 
-#: myhome/settings.py:116
+#: myhome/settings.py:132
 msgid "Spanish"
 msgstr ""
 

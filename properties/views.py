@@ -19,13 +19,13 @@ from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
 from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
-from .models import Property, AddressCol, Image, Contact, BusinessType
+from .models import Property, AddressCol, Image, Contact, BusinessType, Following
 
 
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 1
+    paginate_by = 3
 
     def get(self, request, *args, **kwargs):
         property_type = request.GET.get('list-types')
@@ -51,6 +51,27 @@ class ListProperty(ListView):
         if request.is_ajax():
             return render(request, 'properties/property_list.html', context)
         return self.render_to_response(context)
+
+
+def property_following(request):
+    if request.method == 'GET':
+        print(request.GET.get('prop_id'))
+        all_properties = Property.objects.all()
+        try:
+            user = request.user
+            prop = Property.objects.get(id=request.GET.get('prop_id'))
+            print(prop)
+        except:
+            return HttpResponse(json.dumps(0), content_type='application/json')
+        if user.following.filter(id=prop.id):
+            user.following.remove(prop)
+            user.save()
+        else:
+            follows = Following(user=user, property_followed=prop)
+            follows.save()
+        return render(request, 'properties/property_list.html', {'object_list': all_properties})
+
+
 
 
 class CreateProperty(CreateView):
@@ -124,10 +145,12 @@ def create_address(request, prop_id=None):
 def create_image(request, prop_id=None):
     images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6)
     if request.method == 'POST':
+        print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
             prop1 = request.POST.get('propiedad_id')
             prop = Property.objects.get(id=int(prop_id))
+            print(prop)
             for obj in form:
                 try:
                     img_in = obj.cleaned_data['image']
