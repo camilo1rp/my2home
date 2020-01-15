@@ -364,27 +364,24 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
-  //$(document).ready(function () {
-    $(".heart").click(function(){
-      alert($(".this").attr('dir'))
+//$(document).ready(function () {
+    function follows(id){
         $.ajax({
-            url: '{% url "property:follow" %}',
-            type: 'get',
-            data: { 'prop_id': $(".data").attr('dir') }
-        }).done(function(data) {
-        alert(data)
-            if (data == 0) {
-             window.location.href='{% url "account:login" %}'
-            }else{
-              var y = document.getElementById('propys');
-              y.innerHTML = data;
-              $('html, body').animate({
-                scrollTop: $('#propys').offset().top
-              }, 'slow');  
-            }
-         });
-    });
-
+        url: '{% url "property:index" %}',
+        type: 'get',
+        data: {'prop_id': id, 'filters':$("#filters").text()}
+         }).done(function(data) {
+        if (data == 0) {
+         window.location.href='{% url "account:login" %}'
+        }else{
+          var y = document.getElementById('propys');
+          y.innerHTML = data;
+          $('html, body').animate({
+            scrollTop: $('#propys').offset().top
+          }, 'slow');
+        }
+     });
+    }
     $(".idBuy > li .ClassBuy").click(function(){
         $.ajax({
            url: '{% url "property:index" %}',

@@ -1,3 +1,4 @@
+import ast
 import csv
 import io
 import json
@@ -28,26 +29,51 @@ class ListProperty(ListView):
     paginate_by = 3
 
     def get(self, request, *args, **kwargs):
+        # get data
         property_type = request.GET.get('list-types')
         business_type = request.GET.get('offer-types')
         city = request.GET.get('select-city')
-        filters = {}
-        if property_type == business_type and business_type == city:
-            self.object_list = self.model.objects.all()
-            context = self.get_context_data()
-            context['pro_section'] = False
-        else:
-            if property_type not in ['ALL', None]:
-                filters['type_property'] = property_type
-            if business_type not in ['ALL', None]:
-                filters['type_business__name'] = business_type
-            query = self.model.objects.filter(**filters)
-            if city not in ['ALL', None]:
-                prop_with_address = [prop for prop in query if prop.address_col.all()]
-                query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
-            self.object_list = query
-            context = self.get_context_data()
-            context['pro_section'] = True
+        filters = request.GET.get('filters')
+        # init variables
+        filters_dict = {}
+        query = self.model.objects.all()
+
+        # check if there are filters
+        if filters not in ['None', None]:
+            filters_dict = ast.literal_eval(filters)
+            query = self.model.objects.filter(**filters_dict)
+        if property_type not in ['ALL', None, 'None']:
+            filters_dict['type_property'] = property_type
+        # else:
+        #     filters_dict.pop('type_property', None)
+        if business_type not in ['ALL', None, 'None']:
+            filters_dict['type_business__name'] = business_type
+        # else:
+        #     filters_dict.pop('type_business__name', None)
+        if filters_dict:
+            query = self.model.objects.filter(**filters_dict)
+        if city not in ['ALL', None]:
+            prop_with_address = [prop for prop in query if prop.address_col.all()]
+            query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
+
+        self.object_list = query
+
+        if request.GET.get('prop_id'):
+            try:
+                user = self.request.user
+                prop = Property.objects.get(id=request.GET.get('prop_id'))
+            except:
+                return HttpResponse(json.dumps(0), content_type='application/json')
+            if user.following.filter(id=prop.id):
+                user.following.remove(prop)
+                user.save()
+            else:
+                follows = Following(user=user, property_followed=prop)
+                follows.save()
+        print(self.object_list)
+        print(filters_dict)
+        context = self.get_context_data()
+        context['filters'] = filters_dict
         if request.is_ajax():
             return render(request, 'properties/property_list.html', context)
         return self.render_to_response(context)
@@ -70,8 +96,6 @@ def property_following(request):
             follows = Following(user=user, property_followed=prop)
             follows.save()
         return render(request, 'properties/property_list.html', {'object_list': all_properties})
-
-
 
 
 class CreateProperty(CreateView):
