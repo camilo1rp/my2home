@@ -5,6 +5,8 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+from citiesapp.models import City, State
+
 
 class Property(models.Model):
     APARTMENT = 'APT'
@@ -88,8 +90,8 @@ class Property(models.Model):
 
 class AddressCol(models.Model):
     propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='address_col')
-    departamento = models.CharField(max_length=30)
-    ciudad = models.CharField(max_length=30)
+    departamento = models.ForeignKey(State, on_delete=models.SET_NULL, null=True, blank=True)
+    ciudad = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
     barrio = models.CharField(max_length=30, null=True, blank=True)
     tipo_via = models.CharField(max_length=30)
     via = models.CharField(max_length=30)
@@ -107,7 +109,7 @@ class AddressCol(models.Model):
                                                         self.ciudad, self.departamento)
         else:
             if self.barrio:
-                return "{}, {} - {}".format(self.barrio, self.ciudad, self.departamento)
+                return "{}, {}, {}".format(self.barrio, self.ciudad, self.departamento)
             return "{}, {}".format(self.ciudad, self.departamento)
 
 

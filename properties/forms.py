@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import Textarea
+from django.forms import Textarea, BaseFormSet
 from django.utils.translation import gettext_lazy as _
 from citiesapp.models import State
 from .models import Property, AddressCol, Image, Contact, BusinessType
@@ -16,6 +16,7 @@ class PropertyForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['description'].widget.attrs.update(rows='2', cols='40')
         self.fields['owner'].empty_label = _('select owner')
+        self.fields['price_str'].label = _('price')
 
     class Meta:
         model = Property
@@ -25,8 +26,6 @@ class PropertyForm(forms.ModelForm):
 class AddressColForm(forms.ModelForm):
     prefijo_via = forms.CharField(widget=forms.Select(choices=CHOICES), required=False)
     prefijo_numero = forms.CharField(widget=forms.Select(choices=CHOICES), required=False)
-    ciudad = forms.CharField(widget=forms.Select())
-    departamento = forms.ModelChoiceField(queryset=State.objects.all())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -62,7 +61,5 @@ class ContactForm(forms.ModelForm):
 class MultiPropForm(forms.Form):
     csv_file = forms.FileField(label=_('csv file'))
     owner = forms.ModelChoiceField(queryset=User.objects.all())
-    # type_business = forms.ModelMultipleChoiceField(queryset=BusinessType.objects.all())
-
 
 
