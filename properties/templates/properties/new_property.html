@@ -2,9 +2,8 @@
 {% load i18n %}
 {% load static %}
 {% load widget_tweaks %}
-{% block title %}title{%endblock%}
+{% block title %}{% trans 'New Property' %}{%endblock%}
 {% block styles %}
-
       <style>
         .select2-container {
           width: 347px ! important;
@@ -60,7 +59,6 @@
     </style>
 {% endblock %}
 {% block body %}
-<!-- Modal -->
 <div class="modal fade animated fadeInDown" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
@@ -260,7 +258,7 @@
                                                 <div class="form-group divBtn">
                                                     <div class="col-md-12">
                                                         <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                                                            </i>Guardar
+                                                            Guardar
                                                         </button>
                                                     </div>
                                                 </div>
@@ -277,9 +275,9 @@
                                             {% include "properties/new_image2.html" %}
                                         </section>
 
-                                        <h2>{% trans 'Terms and Conditions' %}</h2>
+                                        <h2>{% trans 'Done' %}</h2>
                                         <section>
-                                                                                 
+
                                         </section>
                                     </div>
                                 </div>
@@ -291,20 +289,6 @@
                     {% block script %}
         </div>
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-    <!--BOOTSTRAP-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
-   <script src="{% static 'js/jquery.steps.js' %}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!--BOOTSTRAP-->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
     var prop_id;
@@ -413,12 +397,6 @@ $("#customCheck1").change(function(){
     alert("Acepto ¨¨¨¨¨¨¨******* terminos")
 });
 
-
- 
- 
-
-
-    
 
 });
 </script>

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+
 <html lang="en">
     <head>
         
@@ -135,16 +138,16 @@
 
     <!-- Contenido -->
     <section>
-        
+<!--        get current image // mostrar imagen en form-->
+        <img  src="{% get_media_prefix%}{{form.1.image.value}}" width="500 height="500"/>
         <div class="content contenedor">
-            <form action="{% url 'property:create-image' 30 %} " class="formSection3" method="post" enctype="multipart/form-data">
+            <form  class="formSection3" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                                 <div id="modalPrueba"></div>
                             {{ form.management_form }}
-                                                 
+
                             <!--- Cero -->
                             <div id="div0" class="imagenLi" dir="0">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
@@ -154,12 +157,12 @@
                                     </div>
                                     <br/>
                                 </div>
-                                
+
                                 <div class="col-md-12" style="display: none;">
                                         {{form.0.main}}
                                 </div>
                             </div>
-            
+
                             <!--- Uno -->
                             <div id="div1" class="imagenLi" dir="1" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
@@ -169,12 +172,12 @@
                                     </div>
                                     <br/>
                                 </div>
-                                
+
                                 <div class="col-md-12" style="display: none;margin-top: 11%;">
                                         {{form.1.main}}
                                 </div>
                             </div>
-                                                                    
+
                             <!--- Dos -->
                             <div id="div2" class="imagenLi" dir="2" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
@@ -184,12 +187,12 @@
                                     </div>
                                     <br/>
                                 </div>
-                                
+
                                 <div class="col-md-12" style="display: none;">
                                         {{form.2.main}}
                                 </div>
                             </div>
-            
+
                             <!--- Tres-->
                             <div id="div3"  class="imagenLi" dir="3" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
@@ -199,7 +202,7 @@
                                     </div>
                                     <br/>
                                 </div>
-                                
+
                                 <div class="col-md-12" style="display: none;">
                                         {{form.3.main}}
                                 </div>
@@ -214,12 +217,12 @@
                                     </div>
                                     <br/>
                                 </div>
-                                
+
                                 <div class="col-md-12" style="display: none;">
                                         {{form.4.main}}
                                 </div>
                             </div>
-            
+
                             <!--- Cinco -->
                             <div id="div5"  class="imagenLi" dir="5" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
@@ -229,24 +232,24 @@
                                     </div>
                                     <br/>
                                 </div>
-                                
+
                                 <div class="col-md-12" style="display: none;">
                                         {{form.5.main}}
                                 </div>
                             </div>
-                        
+
                             <div class="col-md-12">
-                                <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 5%;">              
+                                <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 5%;">
                                     <div class="alert alert-info" style="font-weight: bold;">
-                                        <label>  
-                                            <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i> 
+                                        <label>
+                                            <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i>
                                         </label>
                                         <br/>
                                         Imagenes listas ...
                                     </div>
                                 <p class="animated infinite heartBeat">Elige tu foto Principal</p>
                                 </div>
-                                
+
                                 <br/>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
@@ -255,7 +258,7 @@
                             <hr>
                     </div>
                 </div>
-                <input type="hidden" value="{{propiedad}}" name="propiedad_id" id="propiedad_id"> 
+                <input type="hidden" value="{{propiedad}}" name="propiedad_id" id="propiedad_id">
                 <br/>
                 <div class="form-group divBtn">
                     <div class="col-md-12" style="text-align: center; display: none;" id="DivBtnSave">
