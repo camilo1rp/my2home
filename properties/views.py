@@ -167,16 +167,18 @@ def create_address(request, prop_id=None):
 
 
 def create_image(request, prop_id=None):
-    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=4)
     prop = Property.objects.get(id=int(prop_id))
     images = prop.gallery.all()
+    print(len(images))
+    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6-len(images))
+
     if request.method == 'POST':
         print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
         print(form.is_valid)
         if form.is_valid():
             print('got valid')
-            prop1 = request.POST.get('propiedad_id')
+            # prop1 = request.POST.get('propiedad_id')
             print(prop)
             for obj in form:
                 try:

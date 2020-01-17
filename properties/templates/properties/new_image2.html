@@ -85,7 +85,7 @@
     }
     .contenedor{
         width: 35%;
-        height: 211px;
+        height: 500px;
         margin: 0 auto;
         border: solid #ccc9c9;
         background-color: white;
@@ -148,96 +148,108 @@
                     <div class="row">
                                 <div id="modalPrueba"></div>
                             {{ form.management_form }}
-
-                            <!--- Cero -->
-                            <div id="div0" class="imagenLi" dir="0">
-                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12 img0">
-                                        {{form.0.image}}
-                                        <span class="help-block"></span>
+                            {%for formu in form%}
+                                <div id="div{{ forloop.counter|add:-1 }}" style="display: none;margin-top: 11%;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
+                                    <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
+                                        <div class="col-md-12 img{{ forloop.counter|add:-1 }}">
+                                            {{formu}}
+                                            <span class="help-block"></span>
+                                        </div>
+                                        <br/>
                                     </div>
-                                    <br/>
-                                </div>
 
-                                <div class="col-md-12" style="display: none;">
-                                        {{form.0.main}}
                                 </div>
-                            </div>
+                            {% endfor %}
 
-                            <!--- Uno -->
-                            <div id="div1" class="imagenLi" dir="1" style="display: none;">
-                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12 img1">
-                                        {{form.1.image}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                    <br/>
-                                </div>
+<!--                            &lt;!&ndash;- Cero &ndash;&gt;-->
+<!--                            <div id="div0" class="imagenLi" dir="0">-->
+<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
+<!--                                    <div class="col-md-12 img0">-->
+<!--                                        {{form.0.image}}-->
+<!--                                        <span class="help-block"></span>-->
+<!--                                    </div>-->
+<!--                                    <br/>-->
+<!--                                </div>-->
 
-                                <div class="col-md-12" style="display: none;margin-top: 11%;">
-                                        {{form.1.main}}
-                                </div>
-                            </div>
+<!--                                <div class="col-md-12" style="display: none;">-->
+<!--                                        {{form.0.main}}-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <!--- Dos -->
-                            <div id="div2" class="imagenLi" dir="2" style="display: none;">
-                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12 img2">
-                                        {{form.2.image}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                    <br/>
-                                </div>
+<!--                            &lt;!&ndash;- Uno &ndash;&gt;-->
+<!--                            <div id="div1" class="imagenLi" dir="1" style="display: none;">-->
+<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
+<!--                                    <div class="col-md-12 img1">-->
+<!--                                        {{form.1.image}}-->
+<!--                                        <span class="help-block"></span>-->
+<!--                                    </div>-->
+<!--                                    <br/>-->
+<!--                                </div>-->
 
-                                <div class="col-md-12" style="display: none;">
-                                        {{form.2.main}}
-                                </div>
-                            </div>
+<!--                                <div class="col-md-12" style="display: none;margin-top: 11%;">-->
+<!--                                        {{form.1.main}}-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <!--- Tres-->
-                            <div id="div3"  class="imagenLi" dir="3" style="display: none;">
-                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12 img3">
-                                        {{form.3.image}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                    <br/>
-                                </div>
+<!--                            &lt;!&ndash;- Dos &ndash;&gt;-->
+<!--                            <div id="div2" class="imagenLi" dir="2" style="display: none;">-->
+<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
+<!--                                    <div class="col-md-12 img2">-->
+<!--                                        {{form.2.image}}-->
+<!--                                        <span class="help-block"></span>-->
+<!--                                    </div>-->
+<!--                                    <br/>-->
+<!--                                </div>-->
 
-                                <div class="col-md-12" style="display: none;">
-                                        {{form.3.main}}
-                                </div>
-                            </div>
+<!--                                <div class="col-md-12" style="display: none;">-->
+<!--                                        {{form.2.main}}-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <!--- Cuatro-->
-                            <div id="div4"  class="imagenLi" dir="4" style="display: none;">
-                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12 img4">
-                                        {{form.4.image}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                    <br/>
-                                </div>
+<!--                            &lt;!&ndash;- Tres&ndash;&gt;-->
+<!--                            <div id="div3"  class="imagenLi" dir="3" style="display: none;">-->
+<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
+<!--                                    <div class="col-md-12 img3">-->
+<!--                                        {{form.3.image}}-->
+<!--                                        <span class="help-block"></span>-->
+<!--                                    </div>-->
+<!--                                    <br/>-->
+<!--                                </div>-->
 
-                                <div class="col-md-12 " style="display: none;">
-                                        {{form.4.main}}
-                                </div>
-                            </div>
+<!--                                <div class="col-md-12" style="display: none;">-->
+<!--                                        {{form.3.main}}-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <!--- Cinco -->
-                            <div id="div5"  class="imagenLi" dir="5" style="display: none;">
-                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12 img5">
-                                        {{form.5.image}}
-                                        <span class="help-block"></span>
-                                    </div>
-                                    <br/>
-                                </div>
+<!--                            &lt;!&ndash;- Cuatro&ndash;&gt;-->
+<!--                            <div id="div4"  class="imagenLi" dir="4" style="display: none;">-->
+<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
+<!--                                    <div class="col-md-12 img4">-->
+<!--                                        {{form.4.image}}-->
+<!--                                        <span class="help-block"></span>-->
+<!--                                    </div>-->
+<!--                                    <br/>-->
+<!--                                </div>-->
 
-                                <div class="col-md-12" style="display: none;">
-                                        {{form.5.main}}
-                                </div>
-                            </div>
+<!--                                <div class="col-md-12 " style="display: none;">-->
+<!--                                        {{form.4.main}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash;- Cinco &ndash;&gt;-->
+<!--                            <div id="div5"  class="imagenLi" dir="5" style="display: none;">-->
+<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
+<!--                                    <div class="col-md-12 img5">-->
+<!--                                        {{form.5.image}}-->
+<!--                                        <span class="help-block"></span>-->
+<!--                                    </div>-->
+<!--                                    <br/>-->
+<!--                                </div>-->
+
+<!--                                <div class="col-md-12" style="display: none;">-->
+<!--                                        {{form.5.main}}-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                             <div class="col-md-12">
                                 <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 5%;">
