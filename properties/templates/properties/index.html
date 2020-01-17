@@ -77,6 +77,16 @@
   color: #fff !important;
   border-color: black;
 }
+.miCuenta:hover {
+  background: #004085;
+  color: white !important;
+}
+.textMiCuenta{
+  margin: 0%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .espacio{
   padding: 2%;
 }
@@ -143,6 +153,15 @@
   font-size: 150%;
   color: red;
 }
+.fadeOutRight{
+  animation-duration: 2s
+}
+.heartBeat{
+  /*animation-duration: 4s*/
+}
+
+
+
 @media screen and (max-width:550px) {
   .btnSelect {
       width: 42.5em;
@@ -183,46 +202,36 @@
 
 <!-- The Modal -->
 <div class="modal fade animated rubberBand" id="myModal" data-keyboard='false' data-backdrop='static'>
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
     
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header" style="font-weight: bold;margin: 0 auto;width: 100%;">
+        <p class="modal-title" style="margin: auto;margin-right: -12%;">Mi Cuenta</p>
+         <button type="button" class="close" id="btnClose">&times;</button>
       </div>
       
       <!-- Modal body -->
-      <div class="modal-body">
-        <div class="alert alert-primary" role="alert">
-          A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click.
+      <div class="modal-body" style="width: 100%;text-align: center;">
+            
+        <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta" id="btnMiCuenta">Mi Perfil</p>
         </div>
-        <div class="alert alert-secondary" role="alert">
-          A simple secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click.
+         <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta">Agregar Propiedad</p>
         </div>
-        <div class="alert alert-success" role="alert">
-          A simple success alert with <a href="#" class="alert-link">an example link</a>. Give it a click.
+         <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta">Ver Arriendos</p>
         </div>
-        <div class="alert alert-danger" role="alert">
-          A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click.
+         <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta">Otro</p>
         </div>
-        <div class="alert alert-warning" role="alert">
-          A simple warning alert with <a href="#" class="alert-link">an example link</a>. Give it a click.
-        </div>
-        <div class="alert alert-info" role="alert">
-          A simple info alert with <a href="#" class="alert-link">an example link</a>. Give it a click.
-        </div>
+         
       </div>
-      
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose">Close</button>
-      </div>
-      
+ 
     </div>
   </div>
 </div>
-
   <!---MODAL-->
 
 
@@ -381,7 +390,7 @@
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="room_min" id="selectMinimo" class="form-control">
-                            <option value="" disabled selected>{% trans 'Minimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -389,7 +398,7 @@
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="room_max" id="selectMaximo" class="form-control">
-                            <option value="" disabled selected>{% trans 'Maximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -413,7 +422,7 @@
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="bath_min" id="selectMinBa" class="form-control">
-                            <option value="" disabled selected>{% trans 'Minimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -421,7 +430,7 @@
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="bath_max" id="selectMaxBa" class="form-control">
-                            <option value="" disabled selected>{% trans 'Maximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -446,7 +455,7 @@
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="area_min" id="selectMinAre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Minimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
                             <option value="100">100</option>
                             <option value="200">200</option>
                             <option value="300">300</option>
@@ -462,7 +471,7 @@
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="area_max" id="selectMaxAre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Maximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
                             <option value="150">150</option>
                             <option value="250">250</option>
                             <option value="350">350</option>
@@ -494,7 +503,7 @@
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="price_min" id="selectMinPre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Minimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
                             <option value="100">100</option>
                             <option value="200">200</option>
                             <option value="300">300</option>
@@ -516,7 +525,7 @@
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="price_max" id="selectMaxPre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Maximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
                             <option value="150">150</option>
                             <option value="250">250</option>
                             <option value="350">350</option>
@@ -585,7 +594,7 @@
     </div>
 
     <div id="propys" class="site-section site-section-sm bg-light">
-    
+     {% include  'properties/property_list.html' %}
     </div>
     <div class="site-section">
       <div class="container">
@@ -797,16 +806,28 @@
 
     //cerrar modal mi cuenta
     $("#btnClose").click(function(){
-       var cont = 0;
-        $(".liBtnCuenta").addClass('animated infinite heartBeat');//flash
+        $(".liBtnCuenta").addClass('animated infinite  heartBeat');//heartBeat
+        $("#myModal").addClass('animation-duration: 2s fadeOutRight');
+        var cont = 0;
         var id = setInterval( function(){ 
           cont++;
           if( cont == 1 ) {
-              $(".liBtnCuenta").removeClass('animated infinite rubberBand');
-              clearInterval( id );
+              $("#myModal").removeClass('animation-duration: 2s fadeOutRight');
+              
+              $("#myModal").modal('hide');
+          }else if( cont == 3 ){
+            $(".liBtnCuenta").removeClass('animated heartBeat');
+            clearInterval( id );
+            console.log(cont)
           }
-        },3000);
+        },1000);
+
     });
+
+    $("#btnMiCuenta").click(function(){
+      window.location.href="{% url 'property:create' %}";
+    });
+
 
     $(".myInput").on("keyup", function() {
       var dato = $(this).val().toLowerCase();
