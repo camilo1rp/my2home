@@ -4,14 +4,14 @@
 
 <html lang="en">
     <head>
-        
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
     * {
-        margin: 0; 
+        margin: 0;
         padding: 0;
     }
     body {
@@ -20,7 +20,7 @@
     .accordian {
         width: 805px; height: 320px;
         overflow: hidden;
-        
+
         /*Time for some styling*/
         margin: 5px auto;
         box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
@@ -42,28 +42,28 @@
         box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
         -webkit-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
         -moz-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
-        
+
         /*Transitions to give animation effect*/
         transition: all 0.5s;
         -webkit-transition: all 0.5s;
         -moz-transition: all 0.5s;
     }
-    
+
     .accordian ul:hover li {width: 40px;}
     .accordian ul li:hover {width: 640px;}
 
     .accordian li img {
         display: block;
     }
-    
+
     /*Image title styles*/
     .image_title {
         background: rgba(0, 0, 0, 0.5);
         position: absolute;
-        left: 0; bottom: 0; 
-        width: 640px;   
+        left: 0; bottom: 0;
+        width: 640px;
         margin-bottom: 26px;
-    
+
     }
     .image_title a {
         display: block;
@@ -98,7 +98,7 @@
     }
     </style>
     </head>
-    
+
     <body>
 
 <!-- Modal -->
@@ -109,7 +109,7 @@
         <h5 class="modal-title centrar fuenteOscura" id="exampleModalLabel">Terminos y condiciones</h5>
       </div>
       <div class="modal-body" style="padding: 7%;">
-            
+
 
         <div style="background-color: #fafafa; margin: 3rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
            <form>
@@ -139,7 +139,8 @@
     <!-- Contenido -->
     <section>
 <!--        get current image // mostrar imagen en form-->
-        <img  src="{% get_media_prefix%}{{form.1.image.value}}" width="500 height="500"/>
+<!--        <img id="pic0" src="{% get_media_prefix%}{{form.0.image.value}}" width="500" />-->
+<!--        <img id="pic1" src="{% get_media_prefix%}{{form.1.image.value}}" width="500" />-->
         <div class="content contenedor">
             <form  class="formSection3" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -151,7 +152,7 @@
                             <!--- Cero -->
                             <div id="div0" class="imagenLi" dir="0">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 img0">
                                         {{form.0.image}}
                                         <span class="help-block"></span>
                                     </div>
@@ -166,7 +167,7 @@
                             <!--- Uno -->
                             <div id="div1" class="imagenLi" dir="1" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 img1">
                                         {{form.1.image}}
                                         <span class="help-block"></span>
                                     </div>
@@ -181,7 +182,7 @@
                             <!--- Dos -->
                             <div id="div2" class="imagenLi" dir="2" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 img2">
                                         {{form.2.image}}
                                         <span class="help-block"></span>
                                     </div>
@@ -196,7 +197,7 @@
                             <!--- Tres-->
                             <div id="div3"  class="imagenLi" dir="3" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 img3">
                                         {{form.3.image}}
                                         <span class="help-block"></span>
                                     </div>
@@ -211,14 +212,14 @@
                             <!--- Cuatro-->
                             <div id="div4"  class="imagenLi" dir="4" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 img4">
                                         {{form.4.image}}
                                         <span class="help-block"></span>
                                     </div>
                                     <br/>
                                 </div>
 
-                                <div class="col-md-12" style="display: none;">
+                                <div class="col-md-12 " style="display: none;">
                                         {{form.4.main}}
                                 </div>
                             </div>
@@ -226,7 +227,7 @@
                             <!--- Cinco -->
                             <div id="div5"  class="imagenLi" dir="5" style="display: none;">
                                 <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 img5">
                                         {{form.5.image}}
                                         <span class="help-block"></span>
                                     </div>
@@ -266,7 +267,7 @@
                     </div>
                 </div>
 
-            </form> 
+            </form>
             <br/>
         </div>
 
@@ -276,12 +277,28 @@
     <aside>
 
     </aside>
-            
+
     <!-- Pie de pagina -->
     <footer>
         <div class="accordian">
             <ul id="imagen2">
-                
+                {% for f in form %}
+                    {% if f.image.value != "img/img_1.jpg" %}
+                    <li id="idCard_{{ forloop.counter|add:-1 }}" class="liCard tarjeta">
+                            <div class="image_title">
+                                <p style="color:white;font-family: serif;">
+                                &nbsp;&nbsp;&nbsp;<span style="color: white;font-weight: bold;margin-top: 3px;" title=" Eliminar Imagen" id="btnImg_{{ forloop.counter|add:-1 }}">
+                                    <i class="fa fa-trash fa-2x" aria-hidden="true" style="cursor: pointer; margin-top: 2px;font-size: 18px;"></i>
+                                </span>
+                                Nombre</p>
+                                <input type="radio" name="radioBtn" id="radio_{{ forloop.counter|add:-1 }}" class="form-check-input radio" value=1 style="width: 9%;height: 21%;margin-left:-4px;" title="Imagen Principal en la Web">
+                                <p style="color: white;margin-left:2%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imagen principal</p>
+                            </div>
+                            <img src="{% get_media_prefix%}{{f.image.value}}" width="684" height="340">
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
     </footer>
@@ -319,7 +336,7 @@
         }
         $("#id_form-"+id+"-main").prop('checked',true);
     }
-    
+
 
     function eventosImg(){
         if( document.getElementById('btnImg_0') != null ){
@@ -350,7 +367,7 @@
 
     $("input").attr('accept','image/*');//camilooooo
     $("select").addClass('form-control');//camilooooo
-    
+
     $("#btnSave").click(function(){
         event.preventDefault();
         Swal.fire({
@@ -382,14 +399,14 @@
             }
         })
     });
+eventosImg();
 
-    
     function archivo(evt) {
-        var files = evt.target.files; 
+        var files = evt.target.files;
         console.log(" to archivo "+files)
         var firstName = evt.target.files[0].name
-        //Obtenemos la imagen del campo "file". 
-        for (var i = 0, f; f = files[i]; i++) {  
+        //Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
             //Solo admitimos imágenes.
             /*if ( ! f.type.match('image.*') ) {
                 continue;
@@ -398,6 +415,7 @@
             reader.onload = (function(theFile) {
             return function(e) {
             // Creamos la imagen.
+            var list =  "idCard_"+contador
             var a = '<li id="idCard_'+contador+'" class="liCard tarjeta">\
                         <div class="image_title">\
                             <p style="color:white;font-family: serif;">\
@@ -412,57 +430,62 @@
                         <img src="'+e.target.result+'" width="684" height="325">\
                         </a>\
                     </li>';
-            
-            var y = document.getElementById('imagen2');    
+            var y = document.getElementById('imagen2');
+            if (document.getElementById(list)){
+                document.getElementById(list).remove();
+            }
             y.innerHTML += a;
-            
+
             eventosImg();
             //document.getElementById('btnImg_'+contador).addEventListener('click',()=> pe(contador), false); //Dinamico
             };
             })(f);
             reader.readAsDataURL(f);
-            
-            if( $("#id_form-0-image").val() != '' ){
-                $("#div0").css('display','none');
-            }
-            if( $("#id_form-1-image").val() != '' ){
-                $("#div1").css('display','none');
-            }
-            if( $("#id_form-2-image").val() != '' ){
-                $("#div2").css('display','none');
-            }
-            if( $("#id_form-3-image").val() != '' ){
-                $("#div3").css('display','none');
-            }
-            if( $("#id_form-4-image").val() != '' ){
-                $("#div4").css('display','none');
-            }
-            if( $("#id_form-5-image").val() != '' ){
-                $("#div5").css('display','none');
-            }
 
-            if(  $("#id_form-1-image").val() == '' ){
-                $("#div1").css('display','block');
-            }else if(  $("#id_form-2-image").val() == '' ){
-                $("#div2").css('display','block');
-            }else if(  $("#id_form-3-image").val() == '' ){
-                $("#div3").css('display','block');
-            }else if(  $("#id_form-4-image").val() == '' ){
-                document.getElementById('id_form-4-image').addEventListener('change', archivo, false);
-                $("#div4").css('display','block');
-            }else if(  $("#id_form-5-image").val() == '' ){
-                document.getElementById('id_form-5-image').addEventListener('change', archivo, false);
-                $("#div5").css('display','block');
-            }else {
-                $("#div0").css('display','block');
-            }
+
         }
     }//Arcxhicvo
-    
-        var quantity        
+
+        var quantity
         var percent = 100;
         var antes = false;
         timerId = setInterval(function() {
+            if( $("#id_form-0-image").val() != '' || $(".img0 > a ").text().length > 0){
+                $("#div0").css('display','none');
+                console.log("form1 hide")
+            }
+            if( $("#id_form-1-image").val() != '' || $(".img1 > a ").text().length > 0 ){
+                $("#div1").css('display','none');
+            }
+            if( $("#id_form-2-image").val() != '' || $(".img2 > a ").text().length > 0){
+                $("#div2").css('display','none');
+            }
+            if( $("#id_form-3-image").val() != '' || $(".img3 > a ").text().length > 0){
+                $("#div3").css('display','none');
+            }
+            if( $("#id_form-4-image").val() != '' || $(".img4 > a ").text().length > 0){
+                $("#div4").css('display','none');
+            }
+            if( $("#id_form-5-image").val() != '' || $(".img5 > a ").text().length > 0){
+                $("#div5").css('display','none');
+            }
+
+            if(  $("#id_form-0-image").val() == '' && $("#idCard_0").length == 0 ){
+                $("#div0").css('display','block');
+            }else
+            if(  $("#id_form-1-image").val() == '' && $("#idCard_1").length == 0 ){
+                $("#div1").css('display','block');
+            }else if(  $("#id_form-2-image").val() == '' && $("#idCard_2").length == 0 ){
+                $("#div2").css('display','block');
+            }else if(  $("#id_form-3-image").val() == '' && $("#idCard_3").length == 0 ){
+                $("#div3").css('display','block');
+            }else if(  $("#id_form-4-image").val() == '' && $("#idCard_4").length == 0){
+                document.getElementById('id_form-4-image').addEventListener('change', archivo, false);
+                $("#div4").css('display','block');
+            }else if(  $("#id_form-5-image").val() == '' && $("#idCard_5").length == 0){
+                document.getElementById('id_form-5-image').addEventListener('change', archivo, false);
+                $("#div5").css('display','block');
+            }
 
         //Asigno Numero Imagen
         cantidad = $(".imagenLi").length;
@@ -480,7 +503,7 @@
             }
         }
 
-        quantity = $(".liCard").length;   
+        quantity = $(".liCard").length;
         if( quantity == 1  ){
             completo = 17;
         }else if( quantity == 2 ){
@@ -506,11 +529,11 @@
             $("#DivBtnSave").hide();
         }
 
-        completo == 102 ? $('.progress-bar').text(percent+'%') : $('.progress-bar').text(completo+'%'); 
+        completo == 102 ? $('.progress-bar').text(percent+'%') : $('.progress-bar').text(completo+'%');
         $('.progress-bar').css('width', completo+'%');
-        
+
     }, 900);
-    
+
     var info;
     function borrarImg(id) {
         Swal.fire({
@@ -527,7 +550,7 @@
                     for (let index = 0; index <= 7; index++) {
                         $("#div"+index).css('display','none');
                     }
-            
+
                     $("#div"+id).css('display','block');
                     $('#descripcion').css('display','none');
                     $("#id_form-"+id+"-image").val('');
