@@ -167,13 +167,15 @@ def create_address(request, prop_id=None):
 
 
 def create_image(request, prop_id=None):
-    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6)
+    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=4)
     prop = Property.objects.get(id=int(prop_id))
     images = prop.gallery.all()
     if request.method == 'POST':
         print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
+        print(form.is_valid)
         if form.is_valid():
+            print('got valid')
             prop1 = request.POST.get('propiedad_id')
             print(prop)
             for obj in form:
@@ -186,7 +188,9 @@ def create_image(request, prop_id=None):
                 except KeyError:
                     continue
             return HttpResponseRedirect(reverse('property:index', ))
-    images_formset = images_formset(queryset=images)
+    if images:
+        images_formset = images_formset(queryset=images)
+
     return render(request, 'properties/new_image2.html', {'form': images_formset, 'propiedad': prop_id, 'page': 2})
 
 
