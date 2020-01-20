@@ -175,16 +175,26 @@ def create_image(request, prop_id=None):
     if request.method == 'POST':
         print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
-        print(form.is_valid)
         if form.is_valid():
             print('got valid')
             # prop1 = request.POST.get('propiedad_id')
             print(prop)
             for obj in form:
+                print(obj.cleaned_data)
                 try:
                     img_in = obj.cleaned_data['image']
                     main_in = obj.cleaned_data['main']
-                    _new_image = Image.objects.get_or_create(propiedad=prop,
+                    id_in = obj.cleaned_data['id']
+                    if id_in is not None:
+                        existing_image = Image.objects.get(id=obj.cleaned_data['id'].id)
+                        if not img_in:
+                            existing_image.delete()
+                        else:
+                            existing_image.image = img_in
+                            existing_image.main = main_in
+                            existing_image.save()
+                    else:
+                        _new_image = Image.objects.get_or_create(propiedad=prop,
                                                              image=img_in,
                                                              main=main_in)
                 except KeyError:
