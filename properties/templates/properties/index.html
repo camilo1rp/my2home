@@ -767,40 +767,66 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
+
+  //keep filters when adding favorites - mantener filtros click en favoritos
+    var filt = $("#filters").text()
+    var page = $("#active").text()
+    function follows(id){
+        $.ajax({
+        url: '{% url "property:index" %}',
+        type: 'get',
+        data: {'prop_id': id, 'current_filters':filt, 'follow':1, 'page':page}
+         }).done(function(data) {
+         var id = "#"+JSON.parse(data.prop_id)
+         var command = JSON.parse(data.command)
+        if (command == 1) {
+            $(id).removeClass("property-favorite");
+            $(id).addClass("property-unfavorite");
+
+        }else if(command == 0){
+            $(id).removeClass("property-unfavorite");
+            $(id).addClass("property-favorite");
+        }
+        else {
+        window.location.href='{% url "account:login" %}'
+        }
+     });
+     }
+
    //Habitaciones
     $("#selectMinimo").click(function(){
-      $("#textHabiMi").text( $("#selectMinimo option:selected").text() ) 
+      $("#textHabiMi").text( $("#selectMinimo option:selected").text() )
       $(".dropdownHab").removeClass('show');
     });
     $("#selectMaximo").change(function(){
-      $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text() ) 
+      $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text() )
       $(".dropdownHab").addClass('show');
     });
     //Baños
     $("#selectMinBa").click(function(){
-      $("#textBanMi").text( $("#selectMinBa option:selected").text() ) 
+      $("#textBanMi").text( $("#selectMinBa option:selected").text() )
       $(".dropdownBan").removeClass('show');
     });
     $("#selectMaxBa").change(function(){
-      $("#textBanMa").text( ' - '+$("#selectMaxBa option:selected").text() ) 
+      $("#textBanMa").text( ' - '+$("#selectMaxBa option:selected").text() )
       $(".dropdownBan").addClass('show');
     });
-    //Area 
+    //Area
     $("#selectMinAre").click(function(){
-      $("#textAreMi").text( $("#selectMinAre option:selected").text() ) 
+      $("#textAreMi").text( $("#selectMinAre option:selected").text() )
       $(".dropdownAre").removeClass('show');
     });
     $("#selectMaxAre").change(function(){
-      $("#textAreMa").text( ' - '+$("#selectMaxAre option:selected").text()+' m2' ) 
+      $("#textAreMa").text( ' - '+$("#selectMaxAre option:selected").text()+' m2' )
       $(".dropdownAre").addClass('show');
     });
     //Precio selectMinPre
     $("#selectMinPre").click(function(){
-      $("#textPreMi").text( '$'+$("#selectMinPre option:selected").text() ) 
+      $("#textPreMi").text( '$'+$("#selectMinPre option:selected").text() )
       $(".dropdownPre").removeClass('show');
     });
     $("#selectMaxPre").change(function(){
-      $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() ) 
+      $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() )
       $(".dropdownPre").addClass('show');
     });
 
@@ -809,11 +835,11 @@
         $(".liBtnCuenta").addClass('animated infinite  heartBeat');//heartBeat
         $("#myModal").addClass('animation-duration: 2s fadeOutRight');
         var cont = 0;
-        var id = setInterval( function(){ 
+        var id = setInterval( function(){
           cont++;
           if( cont == 1 ) {
               $("#myModal").removeClass('animation-duration: 2s fadeOutRight');
-              
+
               $("#myModal").modal('hide');
           }else if( cont == 3 ){
             $(".liBtnCuenta").removeClass('animated heartBeat');
@@ -840,14 +866,14 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(dato1) > -1)
       });
 
-      
+
     });
 
 
     $("#list-types").change(function(){
       var dato = 'Opción : ';
       $("#textSelect").text( dato + $("#list-types option:selected").text() );
-      $("#descripcion").show(); 
+      $("#descripcion").show();
     });
 
 
@@ -862,28 +888,13 @@
               y.innerHTML = data;
               $('html, body').animate({
                 scrollTop: $('#propys').offset().top
-              }, 'slow'); 
+              }, 'slow');
           });
       }
 
 
 /*
-    $(".heart").click(function(){
-      console.log( $(this).attr("dir") );
-     
-      $.ajax({
-          url: '',
-          type: 'get',
-          data: { 'prop_id': $(this).attr("dir") }
-      }).done(function(data) {
-      alert(data)
-          var y = document.getElementById('propys');
-            y.innerHTML = data;
-            $('html, body').animate({
-              scrollTop: $('#propys').offset().top
-            }, 'slow'); 
-       });
-    });
+
 */
     $(".idBuy > li .ClassBuy").click(function(){
         $.ajax({

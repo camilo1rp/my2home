@@ -26,54 +26,64 @@ from .models import Property, AddressCol, Image, Contact, BusinessType, Followin
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 3
+    paginate_by = 2
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):  # TODO: separate ajax get for efficiency
         # get data
-        property_type = request.GET.get('list-types')
-        business_type = request.GET.get('offer-types')
         city = request.GET.get('select-city')
-        filters = request.GET.get('filters')
+        follow = request.GET.get('follow')
+        current_filters = request.GET.get('current_filters')
+        filters_names = ['type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
+                        'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price_lte']
+        filters_values = [request.GET.get('list-types'), request.GET.get('offer-types'), request.GET.get('room_min'),
+                          request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
+                          request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
+                          request.GET.get('price_max')]
+        # filters_labels = {'SALE / VENTA': _t('Sale'), 'RENT / ARRENDAMIENTO': _t('Rent'), 'SWAP / PERMUTA': _t('Swap')}
         # init variables
-        filters_dict = {}
         query = self.model.objects.all()
+        filters_dict = {}
 
-        # check if there are filters
-        if filters not in ['None', None]:
-            filters_dict = ast.literal_eval(filters)
+        # assign data to filters
+        new_filters = dict(zip(filters_names, filters_values))
+        for key, value in new_filters.items():
+            if value not in ['ALL', None, 'None']:
+                filters_dict[key] = value
+
+        # check if following action, otherwise assign filters to query
+        if follow not in ['None', None]:
+            filters_on = ast.literal_eval(current_filters)
+            query = self.model.objects.filter(**filters_on)
+            if request.GET.get('prop_id'):  # if prop_id in request. it means following property action
+                try:
+                    user = self.request.user
+                    prop = Property.objects.get(id=request.GET.get('prop_id'))
+                except:
+                    return HttpResponse(json.dumps({'command': -1, 'prop_id': prop.id}),
+                                        content_type='application/json')
+                if user.following.filter(id=prop.id):
+                    user.following.remove(prop)
+                    user.save()
+                    print("{} stopped following {}".format(user, prop))
+                    return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}), content_type='application/json')
+                else:
+                    follows = Following(user=user, property_followed=prop)
+                    follows.save()
+                    print("{} started following {}".format(user, prop))
+                    return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}), content_type='application/json')
+        elif filters_dict:
             query = self.model.objects.filter(**filters_dict)
-        if property_type not in ['ALL', None, 'None']:
-            filters_dict['type_property'] = property_type
-        # else:
-        #     filters_dict.pop('type_property', None)
-        if business_type not in ['ALL', None, 'None']:
-            filters_dict['type_business__name'] = business_type
-        # else:
-        #     filters_dict.pop('type_business__name', None)
-        if filters_dict:
-            query = self.model.objects.filter(**filters_dict)
+
+        # check location filter
         if city not in ['ALL', None]:
             prop_with_address = [prop for prop in query if prop.address_col.all()]
             query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
 
+        # assign query and filters to context
         self.object_list = query
-
-        if request.GET.get('prop_id'):
-            try:
-                user = self.request.user
-                prop = Property.objects.get(id=request.GET.get('prop_id'))
-            except:
-                return HttpResponse(json.dumps(0), content_type='application/json')
-            if user.following.filter(id=prop.id):
-                user.following.remove(prop)
-                user.save()
-            else:
-                follows = Following(user=user, property_followed=prop)
-                follows.save()
-        print(self.object_list)
-        print(filters_dict)
         context = self.get_context_data()
         context['filters'] = filters_dict
+        # context['filters_readable'] = []
         if request.is_ajax():
             return render(request, 'properties/property_list.html', context)
         return self.render_to_response(context)
@@ -170,7 +180,7 @@ def create_image(request, prop_id=None):
     prop = Property.objects.get(id=int(prop_id))
     images = prop.gallery.all()
     print(len(images))
-    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6-len(images))
+    images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6 - len(images))
 
     if request.method == 'POST':
         print('got posted')
@@ -195,8 +205,8 @@ def create_image(request, prop_id=None):
                             existing_image.save()
                     else:
                         _new_image = Image.objects.get_or_create(propiedad=prop,
-                                                             image=img_in,
-                                                             main=main_in)
+                                                                 image=img_in,
+                                                                 main=main_in)
                 except KeyError:
                     continue
             return HttpResponseRedirect(reverse('property:index', ))
