@@ -207,7 +207,7 @@
     
       <!-- Modal Header -->
       <div class="modal-header" style="font-weight: bold;margin: 0 auto;width: 100%;">
-        <p class="modal-title" style="margin: auto;margin-right: -12%;">Mi Cuenta</p>
+        <p class="modal-title" style="margin: auto;margin-right: -12%;">{% trans 'My Account' %}</p>
          <button type="button" class="close" id="btnClose">&times;</button>
       </div>
       
@@ -215,13 +215,13 @@
       <div class="modal-body" style="width: 100%;text-align: center;">
             
         <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta" id="btnMiCuenta">Mi Perfil</p>
+          <p class="textMiCuenta" >Mi Perfil</p>
         </div>
          <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta">Agregar Propiedad</p>
+          <p class="textMiCuenta" id="btnMiCuenta">Agregar Propiedad</p>
         </div>
          <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta">Ver Arriendos</p>
+          <p class="textMiCuenta">Ver </p>
         </div>
          <div class="alert alert-primary miCuenta" role="alert">
           <p class="textMiCuenta">Otro</p>
@@ -295,7 +295,7 @@
 <!--                  <li><a href="blog.html">Blog</a></li>-->
                   <li><a href="about.html">{% trans 'About' %}</a></li>
                   <li><a href="contact.html">{% trans 'Contact' %}</a></li>
-                  <li class="liBtnCuenta"><button id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">Mi Cuenta</button>
+                  <li class="liBtnCuenta"><button id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">{% trans 'My Account' %}</button>
                   </li>  
                 </ul>
 
@@ -333,10 +333,6 @@
         </div>
       </div>
     </div>
-    {% if 'list-types' in request.path %}
-      <h1>hello</h1>
-    {% endif %}
-    
     <div class="site-section site-section-sm pb-0">
       <div class="container">
         <div class="row">
@@ -378,19 +374,19 @@
                <div class="col-md-2 search">
                   <div class="dropdownHab">
                     <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown">
-                      <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Habitacion' %}  
+                      <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Rooms' %}
                       <span id="textHabiMi"></span>
                       <span id="textHabiMa"></span>
                       <span class="caret"></span>
                     </button>
                                      
                     <ul class="dropdown-menu filtro ul">
-                      <span class="textDropDawn">{% trans 'Numero Habitaciones' %} 
+                      <span class="textDropDawn">{% trans 'Number of' %} {% trans 'rooms' %}
                       </span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="room_min" id="selectMinimo" class="form-control">
-                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Minimum' %}</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -398,7 +394,8 @@
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="room_max" id="selectMaximo" class="form-control">
-                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Maximum' %}</option>
+                            <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -412,25 +409,30 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownBan">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Numero Baños' %}
+                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Bathrooms' %}
                     <span id="textBanMi"></span>
                     <span id="textBanMa"></span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul">
-                      <span  class="textDropDawn">&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Numero Baños' %}
+                      <span  class="textDropDawn">&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Number of' %} {% trans 'bathrooms' %}
                       </span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="bath_min" id="selectMinBa" class="form-control">
-                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Minimum' %}</option>
+                            <option value="ALL">min</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
+                            <option value="4">4</option>
                           </select>
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="bath_max" id="selectMaxBa" class="form-control">
-                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Maximum' %}</option>
+                            <option value="ALL">max</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -444,44 +446,50 @@
                 <div class="col-md-2 search">
                   <div class="dropdownAre">
                     <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown">
-                      <i class="fas fa-chart-area icon"></i><span  class="size">&nbsp;{% trans 'Área' %}</span>
+                      <i class="fas fa-chart-area icon"></i><span  class="size">&nbsp;{% trans 'Area' %}</span>
                     <span id="textAreMi" class="size"></span>
-                    <span id="textAreMa" class="size">m2</span>
+                    <span id="textAreMa" class="size">m²</span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul">
                       <span class="textDropDawn">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Área (m2)' %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Area m²' %}
                       </span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="area_min" id="selectMinAre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
+                            <option value="" disabled selected>{% trans 'Minimum' %}</option>
+                            <option value="ALL">min</option>
+                            <option value="50">50</option>
                             <option value="100">100</option>
+                            <option value="150">150</option>
                             <option value="200">200</option>
                             <option value="300">300</option>
                             <option value="400">400</option>
                             <option value="500">500</option>
-                            <option value="600">600</option>
-                            <option value="700">700</option>
-                            <option value="800">800</option>
-                            <option value="900">900</option>
                             <option value="1000">1000</option>
-                            <option value="1100">1100</option>
+                            <option value="2000">2000</option>
+                            <option value="3000">3000</option>
+                            <option value="4000">4000</option>
+                            <option value="5000">5000</option>
+                            <option value="10000">10000</option>
                           </select>
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="area_max" id="selectMaxAre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
+                            <option value="" disabled selected>{% trans 'Maximum' %}</option>
+                            <option value="ALL">max</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
                             <option value="150">150</option>
                             <option value="250">250</option>
                             <option value="350">350</option>
                             <option value="450">450</option>
                             <option value="550">550</option>
-                            <option value="650">650</option>
-                            <option value="750">750</option>
-                            <option value="850">850</option>
-                            <option value="950">950</option>
-                            <option value="1050">1050</option>
+                            <option value="1000">1000</option>
+                            <option value="2000">2000</option>
+                            <option value="3000">3000</option>
+                            <option value="4000">4000</option>
+                            <option value="5000">5000</option>
                           </select>
                         </div>
                       </li>
@@ -492,57 +500,57 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownPre">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Precio' %}</span>
+                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Price' %}</span>
                     <span id="textPreMi" class="size"></span>
                     <span id="textPreMa" class="size"></span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul">
                       <span class="textDropDawn">
-                        &nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Precio (Millones)' %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Price' %} ({% trans 'Millions' %})
                       </span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="price_min" id="selectMinPre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Mínimo' %}</option>
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="300">300</option>
-                            <option value="400">400</option>
-                            <option value="500">500</option>
-                            <option value="600">600</option>
-                            <option value="700">700</option>
-                            <option value="800">800</option>
-                            <option value="900">900</option>
-                            <option value="1.000">1.000</option>
-                            <option value="2.000">2.000</option>
-                            <option value="3.000">3.000</option>
-                            <option value="4.000">4.000</option>
-                            <option value="5.000">5.000</option>
-                            <option value="6.000">6.000</option>
-                            <option value="7.000">7.000</option>
-                            <option value="8.000">8.000</option>
+                            <option value="" disabled selected>{% trans 'Minimum' %}</option>
+                            <option value="100000000">100</option>
+                            <option value="200000000">200</option>
+                            <option value="300000000">300</option>
+                            <option value="400000000">400</option>
+                            <option value="500000000">500</option>
+                            <option value="600000000">600</option>
+                            <option value="700000000">700</option>
+                            <option value="800000000">800</option>
+                            <option value="900000000">900</option>
+                            <option value="1000000000">1.000</option>
+                            <option value="2000000000">2.000</option>
+                            <option value="3000000000">3.000</option>
+                            <option value="4000000000">4.000</option>
+                            <option value="5000000000">5.000</option>
+                            <option value="6000000000">6.000</option>
+                            <option value="7000000000">7.000</option>
+                            <option value="8000000000">8.000</option>
                           </select>
                         </div>
                         <div class="divMaximo selecBorde">
                           <select name="price_max" id="selectMaxPre" class="form-control">
-                            <option value="" disabled selected>{% trans 'Máximo' %}</option>
-                            <option value="150">150</option>
-                            <option value="250">250</option>
-                            <option value="350">350</option>
-                            <option value="450">450</option>
-                            <option value="550">550</option>
-                            <option value="650">650</option>
-                            <option value="750">750</option>
-                            <option value="850">850</option>
-                            <option value="950">950</option>
-                            <option value="1.050">1.050</option>
-                            <option value="2.050">2.050</option>
-                            <option value="3.050">3.050</option>
-                            <option value="4.050">4.050</option>
-                            <option value="5.050">5.050</option>
-                            <option value="6.050">6.050</option>
-                            <option value="7.050">7.050</option>
-                            <option value="8.050">8.050</option>
+                            <option value="" disabled selected>{% trans 'Maximum' %}</option>
+                            <option value="150000000">150</option>
+                            <option value="250000000">250</option>
+                            <option value="350000000">350</option>
+                            <option value="450000000">450</option>
+                            <option value="550000000">550</option>
+                            <option value="650000000">650</option>
+                            <option value="750000000">750</option>
+                            <option value="850000000">850</option>
+                            <option value="950000000">950</option>
+                            <option value="1500000000">1.050</option>
+                            <option value="2500000000">2.050</option>
+                            <option value="3500000000">3.050</option>
+                            <option value="4500000000">4.050</option>
+                            <option value="5500000000">5.050</option>
+                            <option value="6500000000">6.050</option>
+                            <option value="7500000000">7.050</option>
+                            <option value="8500000000">8.050</option>
                           </select>
                           </select>
                         </div>
@@ -552,13 +560,13 @@
                 </div>
 
                 
-                <div class="col-md-2 search">
+                <div class="col-md-2 search" hidden>
                   <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown">
-                      <i class="fas fa-filter"></i>&nbsp;&nbsp;{% trans 'Filtros' %}
+                      <i class="fas fa-filter"></i>&nbsp;&nbsp;{% trans 'Filters' %}
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ulFiltros">
-                      <span class="textDropDawn">{% trans 'Mas Filtros' %}
+                      <span class="textDropDawn">{% trans 'More' %} {% trans 'filters' %}
                       </span>
                       
                     </ul>
@@ -571,7 +579,7 @@
              <div class="col-md-12 espacio"> 
               <div class="information opcionElegida" id="descripcion">              
                 <div class="alert alert-info" style="font-weight: bold;text-align: center;">
-                    <label id="textSelect">{% trans 'Opción' %}:</label>
+                    <label id="textSelect">{% trans 'Options' %}:</label>
                 </div>
               </div>
              </div> 
@@ -579,17 +587,6 @@
             </div>
           </form>
         </div>
-<!--        {% with filters=request.GET %}-->
-<!--          {% if pro_section %}-->
-<!--          <span class="badge badge-secondary">Filters</span>-->
-<!--          {% for key, value in filters.items %}-->
-<!--           {% if key != "page" and value != 'ALL' %}-->
-<!--            <span class="badge badge-primary">{{ key }} = {{  value }} </span>-->
-<!--            {% endif %}-->
-<!--          {% endfor %}-->
-<!--           {% endif %}-->
-<!--        {% endwith %}-->
-
       </div>
     </div>
 
@@ -626,7 +623,7 @@
           <div class="col-md-6 col-lg-4">
             <a href="#" class="service text-center">
               <span class="icon flaticon-camera"></span>
-              <h2 class="service-heading">l {% trans 'Asesoria lega' %}</h2>
+              <h2 class="service-heading">l {% trans 'Asesoria legal' %}</h2>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt iure qui natus perspiciatis ex odio molestia.</p>
               <p><span class="read-more">Read More</span></p>
             </a>
@@ -928,7 +925,7 @@
         $.ajax({
           url: '{% url "property:index" %}',
           type: 'get',
-          data: { 'offer-types': 'RENT / ARRENDAMIENTO' }
+          data: { 'offer-types': 'SWAP / PERMUTA' }
         }).done(function(data) {
           var y = document.getElementById('propys');
           y.innerHTML = data;

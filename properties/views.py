@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import gettext_lazy as _t
+from django.utils.translation import gettext
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from geoservice.location import get_coordinates
@@ -29,17 +29,30 @@ class ListProperty(ListView):
     paginate_by = 2
 
     def get(self, request, *args, **kwargs):  # TODO: separate ajax get for efficiency
+        if not request.is_ajax():
+            self.object_list = self.model.objects.all()
+            context = self.get_context_data()
+            return self.render_to_response(context)
         # get data
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
         current_filters = request.GET.get('current_filters')
         filters_names = ['type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
-                        'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price_lte']
+                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte']
         filters_values = [request.GET.get('list-types'), request.GET.get('offer-types'), request.GET.get('room_min'),
                           request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
-                          request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
+                          request.GET.get('area_min'), request.GET.get('area_max'), (request.GET.get('price_min')),
                           request.GET.get('price_max')]
-        # filters_labels = {'SALE / VENTA': _t('Sale'), 'RENT / ARRENDAMIENTO': _t('Rent'), 'SWAP / PERMUTA': _t('Swap')}
+        filters_labels = {'SALE / VENTA': {gettext('Business type'): gettext('Sale')},
+                          'RENT / ARRENDAMIENTO': {gettext('Business type'): gettext('Rent')},
+                          'SWAP / PERMUTA': {gettext('Business type'): gettext('Swap')},
+                          'APT': {gettext('Property type'): gettext('Apartment')}, 'HOU': {gettext('Property type'): gettext('House')},
+                          'LAN': {gettext('Property type'): gettext('Land')}, 'COM': {gettext('Property type'): gettext('Commercial')},
+                          'FAR': {gettext('Property type') : gettext('Farm')}, 'rooms__gte': gettext('Min rooms'),
+                          'rooms__lte': gettext('Max rooms'), 'baths__gte': gettext('Min bathrooms'),
+                          'baths__lte': gettext('Max bathrooms'), 'area_total__gte': gettext('Min area'),
+                          'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'), 'price__lte': gettext('Max price')
+                          }
         # init variables
         query = self.model.objects.all()
         filters_dict = {}
@@ -79,14 +92,24 @@ class ListProperty(ListView):
             prop_with_address = [prop for prop in query if prop.address_col.all()]
             query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
 
+        # assign labels
+        filters_active = filters_dict.copy()
+        print(filters_active)
+        for k, v in filters_dict.items():
+            if v in filters_labels:
+                filters_active.pop(k, None)
+                filters_active[list(filters_labels[v].keys())[0]] = list(filters_labels[v].values())[0]
+            elif k in filters_labels:
+                print(k)
+                filters_active[filters_labels[k]] = v
+                filters_active.pop(k, None)
+
         # assign query and filters to context
         self.object_list = query
         context = self.get_context_data()
         context['filters'] = filters_dict
-        # context['filters_readable'] = []
-        if request.is_ajax():
-            return render(request, 'properties/property_list.html', context)
-        return self.render_to_response(context)
+        context['filters_active'] = filters_active
+        return render(request, 'properties/property_list.html', context)
 
 
 def property_following(request):
@@ -252,7 +275,7 @@ def property_detail(request, prop_id):
             image.add_header("Content-Disposition", "inline", filename=url)
             msg.attach(image)
             msg.send()
-            message = _t('Your information has been sent to our agents! Thank you')
+            message = gettext('Your information has been sent to our agents! Thank you')
             print("email_sent")
             # ****************
             return render(request, 'properties/property-details.html',

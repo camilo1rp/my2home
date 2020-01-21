@@ -51,7 +51,7 @@
               <ul class="property-specs-wrap mb-3 mb-lg-0">
                 <li>
                   <span class="property-specs">{% trans 'Beds' %}</span>
-                  <span class="property-specs-number">{{ prop.rooms }}<sup>+</sup></span>
+                  <span class="property-specs-number">{{ prop.rooms }}</span>
                 </li>
                 <li>
                   <span class="property-specs">{% trans 'Baths' %}</span>
@@ -101,5 +101,8 @@
         </div>
       </div>
     </div>
-     <span id="filters">{{ filters }}</span>
+     <span id="filters" hidden>{{ filters }}</span>
+      {% for label, value in filters_active.items %}
+        <span>{{ label }}: {{ value }}</span> <br>
+      {% endfor %}
 </div>

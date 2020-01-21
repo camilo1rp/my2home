@@ -20,6 +20,8 @@ def show_latest_properties(count=6, city="a", prop_id=0):
 @register.simple_tag(takes_context=True)
 def query_transform(context, **kwargs):
     query = context['request'].GET.copy()
+    query.pop('prop_id', None)
+    query.pop('follow', None)
     for k, v in kwargs.items():
         query[k] = v
     return query.urlencode()
