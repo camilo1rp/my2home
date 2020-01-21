@@ -1,0 +1,177 @@
+{% load i18n %}
+{% load thumbnail %}
+{% load staticfiles %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
+  <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+   <!--fontawesome-->
+  <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
+  <!--fontawesome-->
+
+
+    <!-- style="width:100%;height: 80%;"  -->
+    <style type="text/css">
+      .red{
+        background-color: #dc3545!important;
+        padding: 5px;
+        width: 100%;
+      }
+      .green{
+        background-color: #28a745!important;
+        padding: 5px;
+        width: 100%;
+      }
+      .blue{
+        background-color: #17a2b8!important;
+        padding: 5px;
+        width: 100%;
+      }
+    </style>
+</head>
+<body>
+   
+<div class="row">
+    <div class="col-md-12">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 250px;width: 100%;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators" hidden>
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" >
+ {% for prop in properties %}
+      
+      {% if forloop.counter == 1 %}
+        <div class="item active">
+      {% else %}
+        <div class="item">
+      {% endif %}
+      <div class="property-entry">
+        <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
+          {% with business=prop.type_business.all %}
+          <div class="offer-type-wrap">
+            {% for busi in business %}
+              {% if busi.name == 'SALE / VENTA' %}
+                <span class="offer-type red">{% trans 'Sale'%}</span>
+              {% endif %}
+              {% if busi.name == 'RENT / ARRENDAMIENTO' %}
+                <span class="offer-type green">{% trans 'Lend'%}</span>
+              {% endif %}
+              {% if busi.name == 'SWAP / PERMUTA' %}
+                <span class="offer-type blue">{% trans 'Swap'%}</span>
+              {% endif %}
+  <!--                      <span class="offer-type {% if busi.name == 'rent' %}bg-danger{% endif %}{% if busi.name == 'Sale' %}bg-success{% endif %}">{{busi.name}}</span>-->
+  <!--                    <span class="offer-type bg-success">Rent</span>-->
+
+            {% endfor %}
+          </div>
+          {% endwith %}
+          {% with address=prop.address_col.get %}
+          {% with gallery=prop.gallery.all %}
+          {%if gallery %}
+            {% for img in gallery%}
+              {%if img.main %}
+                {% thumbnail img.image "800x500" padding=True upscale=True as im %}
+                  <img src="{{im.url}}" alt="Image" class="img-fluid">
+                  {% endthumbnail %}
+                {% endif %}
+            {% endfor %}
+          {% else %}
+            <img src="{% static 'images/img_4.jpg' %}" height="240px" width="100%" alt="Image" class="img-fluid">
+            <span class="offer-type blue" style="text-align: center;height:4em;padding-top: 6px; font-weight: bold;">{{ prop.title }} <br>
+               {{ address }}
+            </span>
+          {% endif %}
+          {% endwith %}
+  <!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
+        </a>
+      </div>
+      <div style="width: 100%;text-align: center;">
+          <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+            <ul class="property-specs-wrap" style="margin: 0%;padding: 0%;">
+                <li>
+                  <span class="property-specs">
+                    <i class="fas fa-bed fa-2x"></i>
+                    <span style="font-size: 2em;">
+                      &nbsp;{{ prop.rooms }}
+                    </span>
+                  </span>
+                 </li>
+                <li style="margin-left: 3%;">
+                  <span class="property-specs">
+                    <i class="fas fa-bath fa-2x"></i>
+                    <span style="font-size: 2em;">
+                      &nbsp;{{ prop.baths }}
+                    </span>
+                  </span>
+                 </li>
+                <li style="margin-left: 3%;">
+                  <span class="property-specs">
+                    <i class="fas fa-chart-area icon fa-2x"></i>
+                    <span style="font-size: 2em;">
+                      &nbsp;{{ prop.area_total }}
+                    </span>
+                  </span>
+                </li>
+                <li style="margin-left: 3%;">
+                  <span class="property-specs">
+                    <i class="fas fa-car fa-2x"></i>
+                    <span style="font-size: 2em;">
+                      &nbsp;{{ prop.parking }}
+                    </span>
+                  </span>
+                </li>
+                <li>
+                  <p>
+                    <strong style="font-size: 22px;" class="property-price text-primary d-block text-success">
+                      {{ prop.price_str }}
+                    </strong>
+                  </p>   
+                </li>
+            </ul>
+    
+      </div>
+
+    </div>
+{% endwith %}
+{% empty %}
+  <p> no properties</p>
+{% endfor %}
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+    </div>
+</div>
+    
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+  
+
+
