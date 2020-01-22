@@ -6,18 +6,16 @@
 
 
 <div class="container">
-              {% if filters_active %}
-
-                <div class="col-md-12"> 
-                  <div class="information" id="descripcion">              
-                    <div class="alert alert-info" style="font-weight: bold;text-align: center;">
-                          {% for label, value in filters_active.items %}
-                            <span>{{ label }}: {{ value }}</span> <br>
-                          {% endfor %}
-                    </div>
-                  </div>
-               </div> 
-              {% endif %}
+    {% if filters_active %}
+        <div class="information" id="descripcion">
+          <div class="alert alert-info" style="font-weight: bold;text-align: center;">
+            <span><i class="fas fa-filter"></i>{% trans 'Filters'%} :</span>
+                {% for label, value in filters_active.items %}
+                  <span class="badge badge-info">{{ label }}: {{ value }}  </span>
+                {% endfor %}
+          </div>
+        </div>
+    {% endif %}
     <div class="row mb-5">
       {% for prop in object_list %}
         <div class="col-md-6 col-lg-4 mb-4">
@@ -88,7 +86,7 @@
                 </div>
                 <div class="col-3 col-md-3">
                   <span class="property-specs">{% trans 'Sq m' %}</span>
-                  <span class="property-specs-number">
+                  <span class="property-specs-number d-print-inline">
                   <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
                   &nbsp;{{ prop.area_total }}</span>
                 </div>

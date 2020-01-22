@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<div class="modal fade animated rubberBand" id="myModal" data-keyboard='false' data-backdrop='static'>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="font-weight: bold;margin: 0 auto;width: 100%;">
+        <p class="modal-title" style="margin: auto;margin-right: -12%;">{% trans 'My Account' %}</p>
+         <button type="button" class="close" id="btnClose">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="width: 100%;text-align: center;">
+
+        <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta" >Mi Perfil</p>
+        </div>
+         <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta" id="btnMiCuenta">Agregar Propiedad</p>
+        </div>
+         <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta">Ver </p>
+        </div>
+         <div class="alert alert-primary miCuenta" role="alert">
+          <p class="textMiCuenta">Otro</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

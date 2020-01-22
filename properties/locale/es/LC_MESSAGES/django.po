@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-21 11:59-0500\n"
-"PO-Revision-Date: 2020-01-21 17:07+0000\n"
+"PO-Revision-Date: 2020-01-22 17:21+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -475,7 +475,7 @@ msgstr "Tipo de negocio"
 
 #: properties/views.py:45 properties/views.py:46 properties/views.py:47
 msgid "Property type"
-msgstr "tipo de propiedad"
+msgstr "Tipo de propiedad"
 
 #: properties/views.py:47
 msgid "Farm"

@@ -30,8 +30,39 @@
     <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .boton3 {
+          color: #fff !important;
+          font-size: 20px;
+          font-weight: 500;
+          padding: 0.5em 1.2em;
+          background: rgba(0,0,0,0);
+          border: 2px solid;
+          border-color: #fff;
+          transition: all 1s ease;
+          position: relative;
+        }
+        .boton3:hover {
+          background: black;
+          color: #fff !important;
+          border-color: black;
+        }
+        .miCuenta:hover {
+          background: #004085;
+          color: white !important;
+        }
+        .textMiCuenta{
+          margin: 0%;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        .fadeOutRight{
+          animation-duration: 1s
+        }
+    </style>
   </head>
   <body>
+    {% include 'properties/my_account.html' %}
   <div class="site-loader"></div>
   <div class="site-wrap">
     <div class="site-mobile-menu">
@@ -47,41 +78,43 @@
         <div class="container py-1">
           <div class="row align-items-center">
             <div class="col-8 col-md-8 col-lg-4">
-              <h1 class="mb-0"><a href="{% url 'property:index' %}"    class="text-white h2 mb-0"><strong>{% trans 'Property Details' %}<span class="text-danger">.</span></strong></a></h1>
+              <h1 class="mb-0"><a href="{% url 'property:index' %}" class="text-white h2 mb-0"><strong>{% trans 'Property Details' %}<span class="text-danger">.</span></strong></a></h1>
             </div>
-            <div class="col-4 col-md-4 col-lg-8">
-              <nav class="site-navigation text-right text-md-right" role="navigation">
+                   {% include 'properties/top_nav.html' %}
 
-                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-                <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold">
-                  <li class="active">
-                    <a href="{% url 'property:index' %}">{% trans 'Home' %}</a>
-                  </li>
-                  <li><a href="buy.html">{% trans 'Buy' %}</a></li>
-                  <li><a href="rent.html">{% trans 'Rent' %}</a></li>
-                  <li class="has-children">
-                    <a href="properties.html">{% trans 'Properties' %}</a>
-                    <ul class="dropdown arrow-top">
-                      <li><a href="#">{% trans 'Apartments' %}</a></li>
-                      <li><a href="#">{% trans 'Houses' %}</a></li>
-                      <li><a href="#">{% trans 'Land' %} </a></li>
-                      <li><a href="#">{% trans 'Commercial' %} </a></li>
-<!--                      <li class="has-children">-->
-<!--                        <a href="#">Sub Menu</a>-->
-<!--                        <ul class="dropdown">-->
-<!--                          <li><a href="#">Menu One</a></li>-->
-<!--                          <li><a href="#">Menu Two</a></li>-->
-<!--                          <li><a href="#">Menu Three</a></li>-->
-<!--                        </ul>-->
-<!--                      </li>-->
-                    </ul>
-                  </li>
-<!--                  <li><a href="blog.html">Blog</a></li>-->
-                  <li><a href="about.html">{% trans 'About' %}</a></li>
-                  <li><a href="contact.html">{% trans 'Contact' %}</a></li>
-                </ul>
-              </nav>
-            </div>
+<!--            <div class="col-4 col-md-4 col-lg-8">-->
+<!--              <nav class="site-navigation text-right text-md-right" role="navigation">-->
+
+<!--                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>-->
+<!--                <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold">-->
+<!--                  <li class="active">-->
+<!--                    <a href="{% url 'property:index' %}">{% trans 'Home' %}</a>-->
+<!--                  </li>-->
+<!--                  <li><a href="buy.html">{% trans 'Buy' %}</a></li>-->
+<!--                  <li><a href="rent.html">{% trans 'Rent' %}</a></li>-->
+<!--                  <li class="has-children">-->
+<!--                    <a href="properties.html">{% trans 'Properties' %}</a>-->
+<!--                    <ul class="dropdown arrow-top">-->
+<!--                      <li><a href="#">{% trans 'Apartments' %}</a></li>-->
+<!--                      <li><a href="#">{% trans 'Houses' %}</a></li>-->
+<!--                      <li><a href="#">{% trans 'Land' %} </a></li>-->
+<!--                      <li><a href="#">{% trans 'Commercial' %} </a></li>-->
+<!--&lt;!&ndash;                      <li class="has-children">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a href="#">Sub Menu</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <ul class="dropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <li><a href="#">Menu One</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                          <li><a href="#">Menu Two</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                          <li><a href="#">Menu Three</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </li>&ndash;&gt;-->
+<!--                    </ul>-->
+<!--                  </li>-->
+<!--&lt;!&ndash;                  <li><a href="blog.html">Blog</a></li>&ndash;&gt;-->
+<!--                  <li><a href="about.html">{% trans 'About' %}</a></li>-->
+<!--                  <li><a href="contact.html">{% trans 'Contact' %}</a></li>-->
+<!--                </ul>-->
+<!--              </nav>-->
+<!--            </div>-->
            
 
           </div>
@@ -114,6 +147,7 @@
         </div>
       </div>
     </div>
+</div>
     <div class="site-section site-section-sm">
       <div class="container">
         <div class="row">
@@ -215,8 +249,8 @@
           </div>
           <div class="col-lg-4">
             <br>
-            {% google_maps lat lng %}
             {% with address=prop.address_col.get %}
+            {% google_maps lat lng address.mostrar %}
             <div class="bg-white widget border rounded">
               {% if form %}
               <h3 class="h4 text-black widget-title mb-3">{% trans 'Contact Agent' %}</h3>
@@ -261,7 +295,7 @@
         <div class="row">
           <div class="col-12">
             <div class="site-section-title mb-5">
-              <h2>{% trans 'Recently Added Properties' %} in {{address.ciudad}}</h2>
+              <h2>{% trans 'Recently Added Properties' %}</h2>
 
             </div>
           </div>
@@ -356,6 +390,25 @@
   }).done(function(data) {
       $("#Idwhatsapp").attr('href',data);
   });
+
+  //cerrar modal mi cuenta
+    $("#btnClose").click(function(){
+        $(".liBtnCuenta").addClass('animated infinite  heartBeat');//heartBeat
+        $("#myModal").addClass('animation-duration: 1s fadeOutRight');
+        var cont = 0;
+        var id = setInterval( function(){
+          cont++;
+          if( cont == 1 ) {
+              $("#myModal").removeClass('animation-duration: 1s fadeOutRight');
+
+              $("#myModal").modal('hide');
+          }else if( cont == 3 ){
+            $(".liBtnCuenta").removeClass('animated heartBeat');
+            clearInterval( id );
+            console.log(cont)
+          }
+        },500);
+            });
   </script>
   </body>
 </html>

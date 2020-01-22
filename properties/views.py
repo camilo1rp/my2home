@@ -28,11 +28,7 @@ class ListProperty(ListView):
     template_name = 'properties/index.html'
     paginate_by = 2
 
-    def get(self, request, *args, **kwargs):  # TODO: separate ajax get for efficiency
-        if not request.is_ajax():
-            self.object_list = self.model.objects.all()
-            context = self.get_context_data()
-            return self.render_to_response(context)
+    def get(self, request, *args, **kwargs):
         # get data
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
@@ -65,8 +61,9 @@ class ListProperty(ListView):
 
         # check if following action, otherwise assign filters to query
         if follow not in ['None', None]:
-            filters_on = ast.literal_eval(current_filters)
-            query = self.model.objects.filter(**filters_on)
+            # if current_filters:
+            #     filters_on = ast.literal_eval(current_filters)
+            #     query = self.model.objects.filter(**filters_on)
             if request.GET.get('prop_id'):  # if prop_id in request. it means following property action
                 try:
                     user = self.request.user
@@ -109,6 +106,8 @@ class ListProperty(ListView):
         context = self.get_context_data()
         context['filters'] = filters_dict
         context['filters_active'] = filters_active
+        if not request.is_ajax():
+            return self.render_to_response(context)
         return render(request, 'properties/property_list.html', context)
 
 

@@ -103,10 +103,11 @@ class AddressCol(models.Model):
 
     def __str__(self):
         if self.mostrar:
-            return "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
+            address= "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
                                                         self.prefijo_via, self.numero,
                                                         self.prefijo_numero, self.placa,
                                                         self.ciudad, self.departamento)
+            return address.replace("None", "")
         else:
             if self.barrio:
                 return "{}, {}, {}".format(self.barrio, self.ciudad, self.departamento)

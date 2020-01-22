@@ -19,26 +19,50 @@
 
     <span id="lat" hidden>{{ lat }}</span>
     <span id="lng" hidden>{{ lng }}</span>
+    <span id="show" hidden>{{ show }}</span>
     <div id="map" class="bg-white widget border rounded" style="padding-left = 0px;">
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
       var map;
       var lat_str = $("#lat").text()
-      var lat = parseFloat(lat_str)
+      var show = $("#show").text()
+      var lat = parseFloat(lat_str.replace(',','.'))
       var lng_str = $("#lng").text()
-      var lng = parseFloat(lng_str)
+      var lng = parseFloat(lng_str.replace(',','.'))
+      console.log(show)
+      console.log(lng)
+      console.log(lat)
+      var  zm = 14
+      if (show == "True"){
+        zm = 16
+      }
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: lat, lng: lng},
-          zoom: 16
+          zoom: zm
         });
-      var marker = new google.maps.Marker({
-            position: {lat: lat, lng: lng},
-            map: map,
-            title: 'Here!'
-          });
-      }
+        if (show == 'True'){
+        var marker = new google.maps.Marker({
+              position: {lat: lat, lng: lng},
+              map: map,
+              title: 'Here!'
+            });
+        }
+        else{
+        // Add the circle for this city to the map.
+        var cityCircle = new google.maps.Circle({
+          strokeColor: '#14a5b3',
+          strokeOpacity: 0.8,
+          strokeWeight: 1,
+          fillColor: '#14a5b3',
+          fillOpacity: 0.35,
+          map: map,
+          center: {lat: lat, lng: lng},
+          radius: 800
+        });
+        }
+ }
       document.getElementById('map').innerHTML = '<ol><li>html data</li></ol>';
     </script>
 

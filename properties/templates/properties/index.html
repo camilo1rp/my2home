@@ -91,6 +91,7 @@
 
 .espacio{
   padding: 2%;
+  z-index: 1000;
 }
 .opcionElegida{
   text-align:center;
@@ -124,7 +125,7 @@
     margin-left: -350%;
 }
 .textDropDawn{
-  margin-left: 20%;
+  margin-left: 10%;
   font-weight: bold;
   color: #364e68;
 }
@@ -133,7 +134,7 @@
   float: left;
 }
 .selecBorde{
-  border: solid 2px #364e68;
+  border: solid 1px #364e68;
 }
 .divMaximo{
   float: right;
@@ -156,7 +157,7 @@
   color: red;
 }
 .fadeOutRight{
-  animation-duration: 2s
+  animation-duration: 1s
 }
 .heartBeat{
   /*animation-duration: 4s*/
@@ -203,37 +204,38 @@
 
 
 <!-- The Modal -->
-<div class="modal fade animated rubberBand" id="myModal" data-keyboard='false' data-backdrop='static'>
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-    
-      <!-- Modal Header -->
-      <div class="modal-header" style="font-weight: bold;margin: 0 auto;width: 100%;">
-        <p class="modal-title" style="margin: auto;margin-right: -12%;">{% trans 'My Account' %}</p>
-         <button type="button" class="close" id="btnClose">&times;</button>
-      </div>
-      
-      <!-- Modal body -->
-      <div class="modal-body" style="width: 100%;text-align: center;">
-            
-        <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta" >Mi Perfil</p>
-        </div>
-         <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta" id="btnMiCuenta">Agregar Propiedad</p>
-        </div>
-         <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta">Ver </p>
-        </div>
-         <div class="alert alert-primary miCuenta" role="alert">
-          <p class="textMiCuenta">Otro</p>
-        </div>
-         
-      </div>
- 
-    </div>
-  </div>
-</div>
+  {% include 'properties/my_account.html' %}
+<!--<div class="modal fade animated rubberBand" id="myModal" data-keyboard='false' data-backdrop='static'>-->
+<!--  <div class="modal-dialog modal-sm">-->
+<!--    <div class="modal-content">-->
+<!--    -->
+<!--      &lt;!&ndash; Modal Header &ndash;&gt;-->
+<!--      <div class="modal-header" style="font-weight: bold;margin: 0 auto;width: 100%;">-->
+<!--        <p class="modal-title" style="margin: auto;margin-right: -12%;">{% trans 'My Account' %}</p>-->
+<!--         <button type="button" class="close" id="btnClose">&times;</button>-->
+<!--      </div>-->
+<!--      -->
+<!--      &lt;!&ndash; Modal body &ndash;&gt;-->
+<!--      <div class="modal-body" style="width: 100%;text-align: center;">-->
+<!--            -->
+<!--        <div class="alert alert-primary miCuenta" role="alert">-->
+<!--          <p class="textMiCuenta" >Mi Perfil</p>-->
+<!--        </div>-->
+<!--         <div class="alert alert-primary miCuenta" role="alert">-->
+<!--          <p class="textMiCuenta" id="btnMiCuenta">Agregar Propiedad</p>-->
+<!--        </div>-->
+<!--         <div class="alert alert-primary miCuenta" role="alert">-->
+<!--          <p class="textMiCuenta">Ver </p>-->
+<!--        </div>-->
+<!--         <div class="alert alert-primary miCuenta" role="alert">-->
+<!--          <p class="textMiCuenta">Otro</p>-->
+<!--        </div>-->
+<!--         -->
+<!--      </div>-->
+<!-- -->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
   <!---MODAL-->
 
 
@@ -268,41 +270,43 @@
             <div class="col-8 col-md-8 col-lg-4">
               <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0"><strong>{% trans 'Inmuebles Fusa' %}<span class="text-danger">.</span></strong></a></h1>
             </div>
-            <div class="col-4 col-md-4 col-lg-8">
-              <nav class="site-navigation text-right text-md-right" role="navigation">
+            {% include 'properties/top_nav.html' %}
 
-                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-                <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold idBuy">
-                  <li id="tom"><a href="#" class="ClassBuy">{% trans 'Buy' %}</a></li>
-                  <li><a href="#" class="idRent">{% trans 'Rent' %}</a></li>
-                  <li><a href="#" class="idSwap">{% trans 'Swap' %}</a></li>
-                  <li class="has-children">
-                    <a href="#">{% trans 'Properties' %}</a>
-                    <ul id="liAparta" class="dropdown arrow-top">
-                      <li><a href="#" class="liAparta">{% trans 'Apartments' %}</a></li>
-                      <li><a href="#" class="liHouses">{% trans 'Houses' %}</a></li>
-                      <li><a href="#" class="liLand">{% trans 'Land' %} </a></li>
-                      <li><a href="#" class="liCommercial">{% trans 'Commercial' %} </a></li>
-                      <li><a href="#" class="liFarms">{% trans 'Farms' %} </a></li>
-<!--                      <li class="has-children">-->
-<!--                        <a href="#">Sub Menu</a>-->
-<!--                        <ul class="dropdown">-->
-<!--                          <li><a href="#">Menu One</a></li>-->
-<!--                          <li><a href="#">Menu Two</a></li>-->
-<!--                          <li><a href="#">Menu Three</a></li>-->
-<!--                        </ul>-->
-<!--                      </li>-->
-                    </ul>
-                  </li>
-<!--                  <li><a href="blog.html">Blog</a></li>-->
-                  <li><a href="about.html">{% trans 'About' %}</a></li>
-                  <li><a href="contact.html">{% trans 'Contact' %}</a></li>
-                  <li class="liBtnCuenta"><button id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">{% trans 'My Account' %}</button>
-                  </li>  
-                </ul>
+<!--            <div class="col-4 col-md-4 col-lg-8">-->
+<!--              <nav class="site-navigation text-right text-md-right" role="navigation">-->
+<!--                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>-->
+<!--                <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold idBuy">-->
+<!--                  <li id="tom"><a href="#" class="ClassBuy">{% trans 'Buy' %}</a></li>-->
+<!--                  <li><a href="#" class="idRent">{% trans 'Rent' %}</a></li>-->
+<!--                  <li><a href="#" class="idSwap">{% trans 'Swap' %}</a></li>-->
+<!--                  <li class="has-children">-->
+<!--                    <a href="#">{% trans 'Properties' %}</a>-->
+<!--                    <ul id="liAparta" class="dropdown arrow-top">-->
+<!--                      <li><a href="#" class="liAparta">{% trans 'Apartments' %}</a></li>-->
+<!--                      <li><a href="#" class="liHouses">{% trans 'Houses' %}</a></li>-->
+<!--                      <li><a href="#" class="liLand">{% trans 'Land' %} </a></li>-->
+<!--                      <li><a href="#" class="liCommercial">{% trans 'Commercial' %} </a></li>-->
+<!--                      <li><a href="#" class="liFarms">{% trans 'Farms' %} </a></li>-->
+<!--&lt;!&ndash;                      <li class="has-children">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a href="#">Sub Menu</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <ul class="dropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;                          <li><a href="#">Menu One</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                          <li><a href="#">Menu Two</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                          <li><a href="#">Menu Three</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;                      </li>&ndash;&gt;-->
+<!--                    </ul>-->
+<!--                  </li>-->
+<!--&lt;!&ndash;                  <li><a href="blog.html">Blog</a></li>&ndash;&gt;-->
+<!--                  <li><a href="about.html">{% trans 'About' %}</a></li>-->
+<!--                  <li><a href="contact.html">{% trans 'Contact' %}</a></li>-->
+<!--                  <li class="liBtnCuenta"><button id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">{% trans 'My Account' %}</button>-->
+<!--                  </li>-->
+<!--                </ul>-->
 
-              </nav>
-            </div>
+<!--              </nav>-->
+<!--            </div>-->
+
           </div>
         </div>
       </div>
@@ -389,6 +393,7 @@
                         <div class="divMinimo selecBorde">
                           <select name="room_min" id="selectMinimo" class="form-control">
                             <option value="" disabled selected>{% trans 'Minimum' %}</option>
+                            <option value="ALL">min</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -397,6 +402,7 @@
                         <div class="divMaximo selecBorde">
                           <select name="room_max" id="selectMaximo" class="form-control">
                             <option value="" disabled selected>{% trans 'Maximum' %}</option>
+                            <option value="ALL">max</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
@@ -545,14 +551,14 @@
                             <option value="750000000">750</option>
                             <option value="850000000">850</option>
                             <option value="950000000">950</option>
-                            <option value="1500000000">1.050</option>
-                            <option value="2500000000">2.050</option>
-                            <option value="3500000000">3.050</option>
-                            <option value="4500000000">4.050</option>
-                            <option value="5500000000">5.050</option>
-                            <option value="6500000000">6.050</option>
-                            <option value="7500000000">7.050</option>
-                            <option value="8500000000">8.050</option>
+                            <option value="1500000000">1.500</option>
+                            <option value="2500000000">2.500</option>
+                            <option value="3500000000">3.500</option>
+                            <option value="4500000000">4.500</option>
+                            <option value="5500000000">5.500</option>
+                            <option value="6500000000">6.500</option>
+                            <option value="7500000000">7.500</option>
+                            <option value="8500000000">8.500</option>
                           </select>
                           </select>
                         </div>
@@ -645,10 +651,8 @@
 <!--            </div>-->
 <!--          </div>-->
 <!--          </div>-->
-
 <!--      </div>-->
 <!--    </div>-->
-
     <div class="site-section">
     <div class="container">
       <div class="row mb-5 justify-content-center">
@@ -822,6 +826,7 @@
     $("#selectMaxPre").change(function(){
       $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() )
     });
+
     //Cerrar Selects
      $(document).click(function(){
       $(".dropdownHab").addClass('show');
@@ -833,12 +838,12 @@
     //cerrar modal mi cuenta
     $("#btnClose").click(function(){
         $(".liBtnCuenta").addClass('animated infinite  heartBeat');//heartBeat
-        $("#myModal").addClass('animation-duration: 2s fadeOutRight');
+        $("#myModal").addClass('animation-duration: 1s fadeOutRight');
         var cont = 0;
         var id = setInterval( function(){
           cont++;
           if( cont == 1 ) {
-              $("#myModal").removeClass('animation-duration: 2s fadeOutRight');
+              $("#myModal").removeClass('animation-duration: 1s fadeOutRight');
 
               $("#myModal").modal('hide');
           }else if( cont == 3 ){
@@ -846,7 +851,7 @@
             clearInterval( id );
             console.log(cont)
           }
-        },1000);
+        },500);
 
     });
 
@@ -865,7 +870,6 @@
       $(".filtr|o li").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(dato1) > -1)
       });
-
 
     });
       function yo(ids){
@@ -888,6 +892,7 @@
 
 */
     $(".idBuy > li .ClassBuy").click(function(){
+        $(".idBuy > li .ClassBuy").removeAttr("href");
         $.ajax({
            url: '{% url "property:index" %}',
            type: 'get',
@@ -902,6 +907,7 @@
     });
   
     $(".idBuy > li .idRent").click(function(){
+        $(".idBuy > li .idRent").removeAttr("href");
         $.ajax({
            url: '{% url "property:index" %}',
            type: 'get',
