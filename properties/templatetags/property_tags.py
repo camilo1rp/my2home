@@ -15,13 +15,16 @@ def show_latest_properties(count=6, city="a", prop_id=0):
         latest_properties = properties_city[:count]
     return {'properties': latest_properties}
 
+@register.inclusion_tag('properties/property_card.html')
+def show_properties(count=6):
+    latest_properties = Property.objects.order_by('-created')[:count]
+    return {'properties': latest_properties}
+
 
 # returns the url of the current location with requests
 @register.simple_tag(takes_context=True)
 def query_transform(context, **kwargs):
     query = context['request'].GET.copy()
-    query.pop('prop_id', None)
-    query.pop('follow', None)
     for k, v in kwargs.items():
         query[k] = v
     return query.urlencode()
