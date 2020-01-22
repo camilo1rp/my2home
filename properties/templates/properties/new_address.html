@@ -170,25 +170,43 @@
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>-->
 <script>
 //SECTION 2
-    $("#id_departamento").change(function(){
-    var opcion = $("#id_departamento option:selected").val();
-    alert("opciont "+opcion)
-
-    $.ajax({
-        url: '{% url "city:cities" %}',
-        type: 'get',
-        data: { 'id': opcion }
-    }).done(function(data) {
-        var valores = '';
-        var datos = JSON.parse(data);
-        $("#id_ciudad").empty();
-        valores = "<option value='' selected>Seleccione Una Opción</option>"
-        $.each(datos, function(item, val) {
-            valores += "<option value='" + val.fields.name + "'>" + val.fields.name + "</option>"; //change value to '" + val.pk + "' when update model field
-        });
-        $("#id_ciudad").append(valores);
+    var  depa = '';
+    var  ciud = '';
+    var  pref = ''; 
+    var  prefNum = '';
+    $("#id_prefijo_via").change(function(){
+        pref = $("#id_prefijo_via option:selected").text();
+        datos();
     });
 
+    $("#id_prefijo_numero").change(function(){
+        prefNum = $("#id_prefijo_numero option:selected").text();
+        datos();
+    });
+
+    $("#id_departamento").change(function(){
+        var opcion = $("#id_departamento option:selected").val();
+        depa = $("#id_departamento option:selected").text();
+        $.ajax({
+            url: '{% url "city:cities" %}',
+            type: 'get',
+            data: { 'id': opcion }
+        }).done(function(data) {
+            var valores = '';
+            var datos = JSON.parse(data);
+            $("#id_ciudad").empty();
+            valores = "<option value='' selected>Ciudad</option>"
+            $.each(datos, function(item, val) {
+                valores += "<option value='" + val.fields.name + "'>" + val.fields.name + "</option>"; //change value to '" + val.pk + "' when update model field
+            });
+            $("#id_ciudad").append(valores);
+        });
+        datos();
+    });
+
+    $("#id_ciudad").change(function(){
+        ciud = $("#id_ciudad option:selected").text();
+        datos();
     });
 
     var propy = $("#prop").val();
@@ -196,11 +214,8 @@
     $('label[for="id_propiedad"]').hide();
     $("#id_propiedad").hide()
 
-
     //Css
     $("input, select").addClass('form-control');
-
-
     $("#id_mostrar").prop('checked',true);
     $("#id_mostrar").css('height','1.5em').css('width','100%');
 
@@ -208,30 +223,35 @@
         $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
     }
 
-    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
-
-        $("#showData2").html( $("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text()+' '+$("#id_barrio").val() );
+    function datos(){
         if( $("#id_mostrar").is(':checked') ){
             //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").val() == '' && $("#id_departamento option:selected").text() == '' && $("#id_barrio").val() == '' ){
+            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").val() == '' && $("#id_departamento option:selected").val() == '' && $("#id_barrio").val() == '' ){
                 $("#showData2").text('');
             }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
+                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+pref+' # '+$("#id_numero").val()+' '+prefNum+' - '+$("#id_placa").val()+'. '+$("#id_barrio").val()+', '+ciud+', '+depa );
             }
         }
+    }
+
+    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
+
+        $("#showData2").html( $("#id_barrio").val()+' '+$("#id_departamento option:selected").text()+' '+$("#id_ciudad option:selected").text() );
+        datos();
 
     });
+
+
+    if( $("#id_mostrar").is(':checked') ){
+        datos();
+    }
 
     $("#id_mostrar").change(function() {
         if( $("#id_mostrar").is(':checked') ){
             //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").text() == '' && $("#id_departamento option:selected").text() == '' && $("#id_barrio").val() == '' ){
-                $("#showData2").text('');
-            }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val()+' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
-            }
+            datos();
         }else{
-            $("#showData2").html( $("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text()+' '+$("#id_barrio").val() );
+            $("#showData2").html( $("#id_barrio").val()+' '+$("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text() );
         }
     });
 

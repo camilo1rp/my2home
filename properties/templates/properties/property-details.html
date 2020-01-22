@@ -3,6 +3,9 @@
 {% load property_tags %}
 {% load i18n %}
 {% load thumbnail %}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +15,9 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
     <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
-
+    <!--fontawesome-->
+    <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
+    <!--fontawesome-->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
     <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
@@ -131,28 +136,34 @@
                 <div class="col-md-6">
                   <strong class="text-success h1 mb-3">{{ prop.price_str }}</strong>
                 </div>
-                <div class="col-md-6">
-                  <ul class="property-specs-wrap mb-3 mb-lg-0  float-lg-right">
-                  <li>
+                 <div class="row">
+                <div class="col-3 col-md-3">
                     <span class="property-specs">{% trans 'Beds' %}</span>
-                    <span class="property-specs-number">{{ prop.rooms }}<sup>+</sup></span>
-                    
-                  </li>
-                  <li>
-                    <span class="property-specs">{% trans 'Baths' %}</span>
-                    <span class="property-specs-number">{{ prop.baths }}</span>
-                    
-                  </li>
-                  <li>
-                    <span class="property-specs">{% trans 'Sq m' %}</span>
-                    <span class="property-specs-number">{{ prop.area_total }}</span>
-                  </li>
-                  <li>
-                    <span class="property-specs">{% trans 'Visits' %}</span>
-                    <span class="property-specs-number">{{ prop.seen }}</span>
-                  </li>
-                </ul>
+                    <span class="property-specs-number"> 
+                    <i class="fas fa-bed" style="color: #7f7f7f;"></i>
+                    &nbsp;{{ prop.rooms }}</span>
                 </div>
+                <div class="col-3 col-md-3">
+                   <span class="property-specs">{% trans 'Baths' %}</span>
+                   <span class="property-specs-number">
+                   <i class="fas fa-bath" style="color: #7f7f7f;"></i>
+                   &nbsp;{{ prop.baths }}</span>
+                </div>
+                <div class="col-3 col-md-3">
+                  <span class="property-specs">{% trans 'Parking' %}</span>
+                  <span class="property-specs-number">
+                  <i class="fas fa-car" style="color: #7f7f7f;"></i>
+                  &nbsp;{{ prop.parking }}
+                  </span>
+                </div>
+                <div class="col-3 col-md-3">
+                  <span class="property-specs">{% trans 'Sq m' %}</span>
+                  <span class="property-specs-number">
+                  <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
+                  &nbsp;{{ prop.area_total }}</span>
+                </div>
+               
+              </div>
               </div>
               <div class="row mb-5">
                 <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
@@ -319,7 +330,7 @@
       </div>
     </footer>
   </div>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
   <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202." id="Idwhatsapp" class="float" target="_blank">
   <i class="fa fa-whatsapp my-float"></i>
   </a>

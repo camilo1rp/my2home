@@ -3,7 +3,21 @@
 {% load property_tags %}
 {% load i18n %}
 {% load thumbnail %}
+
+
 <div class="container">
+              {% if filters_active %}
+
+                <div class="col-md-12"> 
+                  <div class="information" id="descripcion">              
+                    <div class="alert alert-info" style="font-weight: bold;text-align: center;">
+                          {% for label, value in filters_active.items %}
+                            <span>{{ label }}: {{ value }}</span> <br>
+                          {% endfor %}
+                    </div>
+                  </div>
+               </div> 
+              {% endif %}
     <div class="row mb-5">
       {% for prop in object_list %}
         <div class="col-md-6 col-lg-4 mb-4">
@@ -45,24 +59,41 @@
               <a class="property-favorite heart" id="{{prop.id}}" onclick="follows( '{{prop.id}}' )"><span class="icon-heart-o"></span></a>
               {% endif %}
               {% with address=prop.address_col.get %}
-              <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>
+              <strong class="property-price text-primary text-success" style="float: right;"> {{ prop.price_str }}</strong>
+              <h2 class="property-title">
+                <a href="property-details.html">{{ prop.title }}</a>
+              </h2>
+              <hr>
               <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
-              <strong class="property-price text-primary mb-3 d-block text-success">{{ prop.price_str }}</strong>
-              <ul class="property-specs-wrap mb-3 mb-lg-0">
-                <li>
-                  <span class="property-specs">{% trans 'Beds' %}</span>
-                  <span class="property-specs-number">{{ prop.rooms }}</span>
-                </li>
-                <li>
-                  <span class="property-specs">{% trans 'Baths' %}</span>
-                  <span class="property-specs-number">{{ prop.baths }}</span>
-
-                </li>
-                <li>
+              
+              <div class="row">
+                <div class="col-3 col-md-3">
+                    <span class="property-specs">{% trans 'Beds' %}</span>
+                    <span class="property-specs-number"> 
+                    <i class="fas fa-bed" style="color: #7f7f7f;"></i>
+                    &nbsp;{{ prop.rooms }}</span>
+                </div>
+                <div class="col-3 col-md-3">
+                   <span class="property-specs">{% trans 'Baths' %}</span>
+                   <span class="property-specs-number">
+                   <i class="fas fa-bath" style="color: #7f7f7f;"></i>
+                   &nbsp;{{ prop.baths }}</span>
+                </div>
+                <div class="col-3 col-md-3">
+                  <span class="property-specs">{% trans 'Parking' %}</span>
+                  <span class="property-specs-number">
+                  <i class="fas fa-car" style="color: #7f7f7f;"></i>
+                  &nbsp;{{ prop.parking }}
+                  </span>
+                </div>
+                <div class="col-3 col-md-3">
                   <span class="property-specs">{% trans 'Sq m' %}</span>
-                  <span class="property-specs-number">{{ prop.area_total }}</span>
-                </li>
-              </ul>
+                  <span class="property-specs-number">
+                  <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
+                  &nbsp;{{ prop.area_total }}</span>
+                </div>
+               
+              </div>
 
             </div>
           </div>
@@ -102,7 +133,4 @@
       </div>
     </div>
      <span id="filters" hidden>{{ filters }}</span>
-      {% for label, value in filters_active.items %}
-        <span>{{ label }}: {{ value }}</span> <br>
-      {% endfor %}
 </div>

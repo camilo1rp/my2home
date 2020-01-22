@@ -29,8 +29,10 @@
     <!--fontawesome-->
     <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
     <!--fontawesome-->
-    <style type="text/css">
-      
+<style type="text/css">
+.iconos{
+  .color: #7f7f7f;
+}
 #myInput {
   padding: 20px;
   margin-top: -6px;
@@ -576,14 +578,6 @@
              </div>
           </form>
 
-             <div class="col-md-12 espacio"> 
-              <div class="information opcionElegida" id="descripcion">              
-                <div class="alert alert-info" style="font-weight: bold;text-align: center;">
-                    <label id="textSelect">{% trans 'Options' %}:</label>
-                </div>
-              </div>
-             </div> 
-
             </div>
           </form>
         </div>
@@ -791,39 +785,48 @@
      }
 
    //Habitaciones
-    $("#selectMinimo").click(function(){
+    $("#selectMinimo").change(function(){
       $("#textHabiMi").text( $("#selectMinimo option:selected").text() )
       $(".dropdownHab").removeClass('show');
     });
+
     $("#selectMaximo").change(function(){
-      $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text() )
-      $(".dropdownHab").addClass('show');
+       $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text() )
     });
+   
     //Baños
-    $("#selectMinBa").click(function(){
+    $("#selectMinBa").change(function(){
       $("#textBanMi").text( $("#selectMinBa option:selected").text() )
       $(".dropdownBan").removeClass('show');
     });
+
     $("#selectMaxBa").change(function(){
       $("#textBanMa").text( ' - '+$("#selectMaxBa option:selected").text() )
-      $(".dropdownBan").addClass('show');
     });
+
     //Area
-    $("#selectMinAre").click(function(){
+    $("#selectMinAre").change(function(){
       $("#textAreMi").text( $("#selectMinAre option:selected").text() )
       $(".dropdownAre").removeClass('show');
     });
+
     $("#selectMaxAre").change(function(){
       $("#textAreMa").text( ' - '+$("#selectMaxAre option:selected").text()+' m2' )
-      $(".dropdownAre").addClass('show');
     });
     //Precio selectMinPre
-    $("#selectMinPre").click(function(){
+    $("#selectMinPre").change(function(){
       $("#textPreMi").text( '$'+$("#selectMinPre option:selected").text() )
       $(".dropdownPre").removeClass('show');
     });
+
     $("#selectMaxPre").change(function(){
       $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() )
+    });
+    //Cerrar Selects
+     $(document).click(function(){
+      $(".dropdownHab").addClass('show');
+      $(".dropdownBan").addClass('show');
+      $(".dropdownAre").addClass('show');
       $(".dropdownPre").addClass('show');
     });
 
@@ -865,15 +868,6 @@
 
 
     });
-
-
-    $("#list-types").change(function(){
-      var dato = 'Opción : ';
-      $("#textSelect").text( dato + $("#list-types option:selected").text() );
-      $("#descripcion").show();
-    });
-
-
       function yo(ids){
          alert(  ids );
            $.ajax({

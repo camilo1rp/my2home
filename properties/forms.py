@@ -37,6 +37,8 @@ class AddressColForm(forms.ModelForm):
         self.fields['placa'].widget.attrs.update(placeholder='ej. 12')
         self.fields['ciudad'].widget.attrs.update(placeholder='ej. Bogota')
         self.fields['departamento'].widget.attrs.update(placeholder='ej. Cundinamarca')
+        self.fields['departamento'].empty_label = "Departamento"  
+        self.fields['ciudad'].empty_label = "Ciudad"  
         self.fields['barrio'].widget.attrs.update(placeholder='ej. Cedritos', required=False)
         self.fields['prefijo_via'].label = 'prefijo'
         self.fields['prefijo_numero'].label = 'prefijo'
