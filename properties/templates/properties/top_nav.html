@@ -3,17 +3,17 @@
   <nav class="site-navigation text-right text-md-right" role="navigation">
     <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
     <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold idBuy">
-      <li><a href="{%url 'property:index' %}?list-types=HOU" class="ClassBuy">{% trans 'Buy' %}</a></li>
-      <li><a href="#" class="idRent">{% trans 'Rent' %}</a></li>
-      <li><a href="#" class="idSwap">{% trans 'Swap' %}</a></li>
+      <li><a href="{%url 'property:index' %}?offer-types=SALE / VENTA" class="ClassBuy">{% trans 'Buy' %}</a></li>
+      <li><a href="{%url 'property:index' %}?offer-types=RENT / ARRENDAMIENTO" class="idRent">{% trans 'Rent' %}</a></li>
+      <li><a href="{%url 'property:index' %}?offer-types=SWAP / PERMUTA" class="idSwap">{% trans 'Swap' %}</a></li>
       <li class="has-children">
         <a href="#">{% trans 'Properties' %}</a>
         <ul id="liAparta" class="dropdown arrow-top">
-          <li><a href="#" class="liAparta">{% trans 'Apartments' %}</a></li>
-          <li><a href="#" class="liHouses">{% trans 'Houses' %}</a></li>
-          <li><a href="#" class="liLand">{% trans 'Land' %} </a></li>
-          <li><a href="#" class="liCommercial">{% trans 'Commercial' %} </a></li>
-          <li><a href="#" class="liFarms">{% trans 'Farms' %} </a></li>
+          <li><a href="{%url 'property:index' %}?list-types=APT" class="liAparta">{% trans 'Apartments' %}</a></li>
+          <li><a href="{%url 'property:index' %}?list-types=HOU" class="liHouses">{% trans 'Houses' %}</a></li>
+          <li><a href="{%url 'property:index' %}?list-types=LAN" class="liLand">{% trans 'Land' %} </a></li>
+          <li><a href="{%url 'property:index' %}?list-types=COM" class="liCommercial">{% trans 'Commercial' %} </a></li>
+          <li><a href="{%url 'property:index' %}?list-types=FAR" class="liFarms">{% trans 'Farms' %} </a></li>
 <!--                      <li class="has-children">-->
 <!--                        <a href="#">Sub Menu</a>-->
 <!--                        <ul class="dropdown">-->

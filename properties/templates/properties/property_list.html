@@ -4,8 +4,7 @@
 {% load i18n %}
 {% load thumbnail %}
 
-
-<div class="container">
+<div  class="container">
     {% if filters_active %}
         <div class="information" id="descripcion">
           <div class="alert alert-info" style="font-weight: bold;text-align: center;">
@@ -16,11 +15,11 @@
           </div>
         </div>
     {% endif %}
-    <div class="row mb-5">
+    <div  id="here" class="row mb-5">
       {% for prop in object_list %}
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="property-entry h-100">
-            <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
+            <a  href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
               {% with business=prop.type_business.all %}
               <div class="offer-type-wrap">
                 {% for busi in business %}
