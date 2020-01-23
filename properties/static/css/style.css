@@ -526,7 +526,11 @@ a {
 .site-blocks-cover {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top; }
+  background-position: 50% 50%; }
+  .site-blocks-cover.overlay:active {
+       background-size: contain;
+       background-color: black;
+    }
   .site-blocks-cover.overlay {
     position: relative; }
     .site-blocks-cover.overlay:before {
@@ -538,7 +542,7 @@ a {
       top: 0;
       background: rgba(0, 0, 0, 0.4); }
   .site-blocks-cover, .site-blocks-cover .row {
-    min-height: 500px;
+    min-height: 600px;
     height: calc(75vh); }
   .site-blocks-cover.inner-page-cover, .site-blocks-cover.inner-page-cover .row {
     min-height: 600px;

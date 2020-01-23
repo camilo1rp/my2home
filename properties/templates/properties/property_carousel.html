@@ -1,0 +1,45 @@
+{% load staticfiles %}
+{% load static %}
+{% load property_tags %}
+{% load i18n %}
+
+<div class="slide-one-item home-slider owl-carousel">
+  {% for prop in properties %}
+    {% with gallery=prop.gallery.all %}
+        {%if gallery %}
+          {% for img in gallery%}
+            {%if img.main %}
+                <div class="site-blocks-cover overlay" style="background-image: url({{img.image.url}});" data-aos="fade" data-stellar-background-ratio="0.5">
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <div class="site-blocks-cover overlay" style="background-image: url({% static 'images/hero_bg_1.jpg' %});" data-aos="fade" data-stellar-background-ratio="0.5">
+        {% endif %}
+        {% endwith %}
+        <div class="container">
+          <div class="row align-items-center justify-content-center text-center">
+            <div class="col-md-10">
+                {% with business=prop.type_business.all %}
+                   {% for busi in business %}
+                        {% if busi.name == 'SALE / VENTA' %}
+                            <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type bg-danger rounded">{% trans 'Sale'%}</span>
+                        {% endif %}
+                        {% if busi.name == 'RENT / ARRENDAMIENTO' %}
+                            <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type bg-success rounded">{% trans 'Lend'%}</span>
+                        {% endif %}
+                        {% if busi.name == 'SWAP / PERMUTA' %}
+                            <span class="d-inline-block bg-success text-white px-3 mb-3 property-offer-type bg-info rounded">{% trans 'swap'%}</span>
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+                {% with address=prop.address_col.get %}
+                <h1 class="mb-2">{{ address }}</h1>
+              <p class="mb-5"><strong class="h2 text-success font-weight-bold">{% trans 'From' %}{{ prop.price_str }}</strong></p>
+              <p><a href="{% url 'property:detail' prop.id %}" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">{% trans 'See Details' %}</a></p>
+                {% endwith %}
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+</div>

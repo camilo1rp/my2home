@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import Textarea, BaseFormSet
 from django.utils.translation import gettext_lazy as _
-from citiesapp.models import State
 from .models import Property, AddressCol, Image, Contact, BusinessType
 import string
 
@@ -57,7 +55,7 @@ class ImageForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        exclude = ['propiedad']
+        fields = ['name', 'phone', 'email']
 
 
 class MultiPropForm(forms.Form):

@@ -2,10 +2,6 @@
 {% load static %}
 {% load property_tags %}
 {% load i18n %}
-{% load thumbnail %}
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,42 +77,6 @@
               <h1 class="mb-0"><a href="{% url 'property:index' %}" class="text-white h2 mb-0"><strong>{% trans 'Property Details' %}<span class="text-danger">.</span></strong></a></h1>
             </div>
                    {% include 'properties/top_nav.html' %}
-
-<!--            <div class="col-4 col-md-4 col-lg-8">-->
-<!--              <nav class="site-navigation text-right text-md-right" role="navigation">-->
-
-<!--                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>-->
-<!--                <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold">-->
-<!--                  <li class="active">-->
-<!--                    <a href="{% url 'property:index' %}">{% trans 'Home' %}</a>-->
-<!--                  </li>-->
-<!--                  <li><a href="buy.html">{% trans 'Buy' %}</a></li>-->
-<!--                  <li><a href="rent.html">{% trans 'Rent' %}</a></li>-->
-<!--                  <li class="has-children">-->
-<!--                    <a href="properties.html">{% trans 'Properties' %}</a>-->
-<!--                    <ul class="dropdown arrow-top">-->
-<!--                      <li><a href="#">{% trans 'Apartments' %}</a></li>-->
-<!--                      <li><a href="#">{% trans 'Houses' %}</a></li>-->
-<!--                      <li><a href="#">{% trans 'Land' %} </a></li>-->
-<!--                      <li><a href="#">{% trans 'Commercial' %} </a></li>-->
-<!--&lt;!&ndash;                      <li class="has-children">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a href="#">Sub Menu</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <ul class="dropdown">&ndash;&gt;-->
-<!--&lt;!&ndash;                          <li><a href="#">Menu One</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;                          <li><a href="#">Menu Two</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;                          <li><a href="#">Menu Three</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </ul>&ndash;&gt;-->
-<!--&lt;!&ndash;                      </li>&ndash;&gt;-->
-<!--                    </ul>-->
-<!--                  </li>-->
-<!--&lt;!&ndash;                  <li><a href="blog.html">Blog</a></li>&ndash;&gt;-->
-<!--                  <li><a href="about.html">{% trans 'About' %}</a></li>-->
-<!--                  <li><a href="contact.html">{% trans 'Contact' %}</a></li>-->
-<!--                </ul>-->
-<!--              </nav>-->
-<!--            </div>-->
-           
-
           </div>
         </div>
       </div>
@@ -125,9 +85,7 @@
       {%if gallery %}
         {% for img in gallery%}
           {%if img.main %}
-            {% thumbnail img.image "1300x600"  crop="center" as im %}
-              <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('{{im.url}}');" data-aos="fade" data-stellar-background-ratio="0.5">
-            {% endthumbnail %}
+              <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url({{img.image.url}});" data-aos="fade" data-stellar-background-ratio="0.5">
           {% endif %}
         {% endfor %}
       {% else %}
@@ -157,9 +115,7 @@
                 {% with gallery=prop.gallery.all %}
                 {%if gallery %}
                   {% for img in gallery%}
-                      {% thumbnail img.image "800x600" padding=True upscale=True as im %}
-                        <div><img src="{{im.url}}" alt="Image" class="img-fluid"></div>
-                      {% endthumbnail %}
+                        <div><img src="{{img.image.url}}" alt="Image" class="img-fluid"></div>
                   {% endfor %}
                 {% endif %}
               {% endwith %}
@@ -237,11 +193,9 @@
                 </div>
                 {% with gallery=prop.gallery.all %}
                       {% for img in gallery %}
-                          {% thumbnail img.image "800x500" crop="center" upscale=True padding=true padding_color="#cccccc" as im %}
                             <div class="col-sm-6 col-md-4 col-lg-3">
-                              <a href="{{im.url}}" class="image-popup gal-item"><img src="{{im.url}}" alt="Image" class="img-fluid"></a>
+                              <a href="{{img.image.url}}" class="image-popup gal-item"><img src="{{img.image.url}}" alt="Image" class="img-fluid"></a>
                             </div>
-                          {% endthumbnail %}
                       {% endfor %}
                 {% endwith %}
               </div>
@@ -250,33 +204,11 @@
           <div class="col-lg-4">
             <br>
             {% with address=prop.address_col.get %}
-            {% google_maps lat lng address.mostrar %}
-            <div class="bg-white widget border rounded">
-              {% if form %}
-              <h3 class="h4 text-black widget-title mb-3">{% trans 'Contact Agent' %}</h3>
-              <form  class="form-contact-agent" method="post">{% csrf_token %}
-                <div class="form-group">
-                  <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.name.label}}<span class="span"> *</span></label>
-                  {{form.name}}
-                </div>
-                <div class="form-group">
-                  <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.phone.label}}<span class="span">*</span></label>
-                  {{form.phone}}
-                </div>
-                <div class="form-group">
-                  <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                    <i class="fas fa-id-card-alt"></i>&nbsp;{{form.email.label}}</label>
-                  {{form.email}}
-                </div>
-                <div class="form-group">
-                  <input type="submit" id="phone" class="btn btn-primary" value="{% trans 'Send Message' %}">
-                </div>
-              </form>
-              {% else %}
-              <p>{{mess}}</p>
-              {% endif %}
+            {% if address %}
+              {% google_maps lat lng address.mostrar %}
+            {% endif %}
+            <div id="contact" class="bg-white widget border rounded">
+              {%include 'properties/contact_form.html' %}
             </div>
             <div class="bg-white widget border rounded">
               <h3 class="h4 text-black widget-title mb-3">{%trans 'Information' %}</h3>
@@ -301,7 +233,9 @@
           </div>
         </div>
         <div class="row mb-5">
+          {% if address %}
           {% show_latest_properties 3 address.ciudad prop.id %}
+          {% endif %}
         </div>
       </div>
       {{address.ciudad}}
@@ -408,7 +342,26 @@
             console.log(cont)
           }
         },500);
-            });
+    });
+    // this is the id of the form
+$("#idForm").on('submit', function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+       type: "post",
+       url: '{% url "property:detail" 24 %}',
+       data: form.serialize(), // serializes the form's elements.
+       success: function(data)
+       {
+        var y = document.getElementById('contact');
+        y.innerHTML = data;
+        $('html, body').animate({
+          scrollTop: $('#contact').offset().top
+        }, 'slow');
+       }
+    });
+});
   </script>
   </body>
 </html>

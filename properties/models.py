@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
+from account.validators import validate_phone
 from citiesapp.models import City, State
 
 
@@ -159,7 +160,7 @@ class Contact(models.Model):
     propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='contacts')
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100, null=True, blank=True)
-    phone = models.IntegerField()
+    phone = models.IntegerField(validators=[validate_phone])
 
     def __str__(self):
         return self.name

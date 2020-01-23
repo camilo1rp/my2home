@@ -7,6 +7,7 @@ import urllib
 import json
 from email.mime.image import MIMEImage
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
@@ -42,12 +43,15 @@ class ListProperty(ListView):
         filters_labels = {'SALE / VENTA': {gettext('Business type'): gettext('Sale')},
                           'RENT / ARRENDAMIENTO': {gettext('Business type'): gettext('Rent')},
                           'SWAP / PERMUTA': {gettext('Business type'): gettext('Swap')},
-                          'APT': {gettext('Property type'): gettext('Apartment')}, 'HOU': {gettext('Property type'): gettext('House')},
-                          'LAN': {gettext('Property type'): gettext('Land')}, 'COM': {gettext('Property type'): gettext('Commercial')},
-                          'FAR': {gettext('Property type') : gettext('Farm')}, 'rooms__gte': gettext('Min rooms'),
+                          'APT': {gettext('Property type'): gettext('Apartment')},
+                          'HOU': {gettext('Property type'): gettext('House')},
+                          'LAN': {gettext('Property type'): gettext('Land')},
+                          'COM': {gettext('Property type'): gettext('Commercial')},
+                          'FAR': {gettext('Property type'): gettext('Farm')}, 'rooms__gte': gettext('Min rooms'),
                           'rooms__lte': gettext('Max rooms'), 'baths__gte': gettext('Min bathrooms'),
                           'baths__lte': gettext('Max bathrooms'), 'area_total__gte': gettext('Min area'),
-                          'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'), 'price__lte': gettext('Max price')
+                          'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'),
+                          'price__lte': gettext('Max price')
                           }
         # init variables
         query = self.model.objects.all()
@@ -240,11 +244,9 @@ def create_image(request, prop_id=None):
 
 def property_detail(request, prop_id):
     prop = get_object_or_404(Property, id=prop_id)
-    geo_data = get_coordinates(str(prop.address_col.get()))
-    visit = Visits(request)
-    visit.add(prop_id)
+    form = ContactForm(request.POST or None)
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        print(form.errors)
         if form.is_valid():
             name_in = form.cleaned_data['name']
             phone_in = form.cleaned_data['phone']
@@ -277,12 +279,19 @@ def property_detail(request, prop_id):
             message = gettext('Your information has been sent to our agents! Thank you')
             print("email_sent")
             # ****************
-            return render(request, 'properties/property-details.html',
-                          {'prop': prop, 'mess': message,
-                           'lat': geo_data["lat"], 'lng': geo_data["lng"]})
-        else:
-            return HttpResponse("error submiting file")
-    form = ContactForm()
+            return render(request, 'properties/contact_form.html', {'form': form})
+
+            # return render(request, 'properties/property-details.html',
+            #               {'prop': prop, 'mess': message,
+            #                'lat': geo_data["lat"], 'lng': geo_data["lng"]})
+        elif request.is_ajax():
+            return render(request, 'properties/contact_form.html', {'form': form})
+    try:
+        geo_data = get_coordinates(str(prop.address_col.get()))
+    except ObjectDoesNotExist:
+        geo_data = {'lat': 70, 'lng': 20}
+    visit = Visits(request)
+    visit.add(prop_id)
     return render(request, 'properties/property-details.html',
                   {'prop': prop, 'form': form, 'lat': geo_data["lat"],
                    'lng': geo_data["lng"]})
@@ -395,7 +404,7 @@ def property_upload(request):
     return render(request, template, {'form': form})
 
 
-def Template(request): # view for debugging
+def Template(request):  # view for debugging
     prop = Property.objects.last()
     a = prop.address_col.get()
     geo_data = get_coordinates(str(a))
