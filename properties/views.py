@@ -395,7 +395,7 @@ def property_upload(request):
     return render(request, template, {'form': form})
 
 
-def Template(request):
+def Template(request): # view for debugging
     prop = Property.objects.last()
     a = prop.address_col.get()
     geo_data = get_coordinates(str(a))

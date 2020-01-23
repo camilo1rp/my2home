@@ -14,13 +14,13 @@ CHOICES.insert(0, tuple(['', '']))
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['description'].widget.attrs.update(rows='2', cols='40')
+        self.fields['description'].widget.attrs.update(rows='4', cols='40')
         self.fields['owner'].empty_label = _('select owner')
         self.fields['price_str'].label = _('price')
 
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'followers', 'manager', 'upload_code']
+        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code']
 
 
 class AddressColForm(forms.ModelForm):
