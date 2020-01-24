@@ -6,6 +6,8 @@ import os
 import urllib
 import json
 from email.mime.image import MIMEImage
+from smtplib import SMTPAuthenticationError
+
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives
@@ -275,11 +277,14 @@ def property_detail(request, prop_id):
             image.add_header('Content-ID', '<{}>'.format(url))
             image.add_header("Content-Disposition", "inline", filename=url)
             msg.attach(image)
-            msg.send()
-            message = gettext('Your information has been sent to our agents! Thank you')
-            print("email_sent")
-            # ****************
-            return render(request, 'properties/contact_form.html', {'form': form})
+            try:
+                msg.send()
+                message = gettext('Your information has been sent to our agents! Thank you')
+                print("email_sent")
+            except SMTPAuthenticationError:
+                message = gettext('Something went wrong, please try again or contact agent by phone or whatsapp')
+             # ****************
+            return render(request, 'properties/contact_form.html', {'form': form, 'mess': message, })
 
             # return render(request, 'properties/property-details.html',
             #               {'prop': prop, 'mess': message,
@@ -301,7 +306,7 @@ def whatsapp_contact(request):
     prop_id = request.GET.get('id')
     phone = 3162128561
     prop = get_object_or_404(Property, id=prop_id)
-    message = "I am interested in the property: {}, Address: {}, code: {}. Is it still Available" \
+    message = gettext("I am interested in the property: {}, Address: {}, code: {}. Is it still Available?") \
         .format(prop.title, prop.address_col.get(), prop.code)
     print('message: {}'.format(message))
     phone_str = str(phone)

@@ -1001,6 +1001,17 @@ a {
     text-transform: uppercase;
     letter-spacing: .1em; }
 
+.widget2 {
+  height: 100px;
+  padding: 40px;
+  margin-bottom: 30px; }
+  .widget .widget-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: .1em; }
+
 .form-contact-agent .form-control {
   height: 37px; }
 

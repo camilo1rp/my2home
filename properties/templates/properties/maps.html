@@ -1,26 +1,12 @@
 {% load property_tags %}
 {% load staticfiles %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 40%;
-      }
-    </style>
-  </head>
-  <body>
 
-    <span id="lat" hidden>{{ lat }}</span>
-    <span id="lng" hidden>{{ lng }}</span>
-    <span id="show" hidden>{{ show }}</span>
+
     <div id="map" class="bg-white widget border rounded" style="padding-left = 0px;">
+        <span id="lat" hidden>{{ lat }}</span>
+        <span id="lng" hidden>{{ lng }}</span>
+        <span id="show" hidden>{{ show }}</span>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
@@ -62,11 +48,8 @@
           radius: 800
         });
         }
- }
+      }
       document.getElementById('map').innerHTML = '<ol><li>html data</li></ol>';
     </script>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&callback=initMap"
     async defer></script>
-  </body>
-</html>

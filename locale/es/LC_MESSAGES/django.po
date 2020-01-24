@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-23 13:25-0500\n"
+"POT-Creation-Date: 2020-01-24 09:53-0500\n"
 "PO-Revision-Date: 2020-01-21 15:54+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,30 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
-#: account/templates/registration/login.html:42
-msgid "Iniciar Sesión"
-msgstr ""
-
-#: account/templates/registration/login.html:46
-msgid "Username"
-msgstr "Nombre de Usuario"
-
-#: account/templates/registration/login.html:60
-msgid "Password"
-msgstr "Contraseña"
-
-#: account/templates/registration/login.html:70
-msgid "Log-in"
-msgstr ""
-
-#: account/templates/registration/login.html:76
-msgid "Dont have an account?"
-msgstr "No tienes una cuenta?"
-
-#: account/templates/registration/login.html:77
-msgid "Register here!"
-msgstr "Registrate aquí!"
-
 #: myhome/settings.py:131
 msgid "English"
 msgstr "Inglés"
@@ -50,6 +26,18 @@ msgstr "Inglés"
 #: myhome/settings.py:132
 msgid "Spanish"
 msgstr "Español"
+
+#~ msgid "Username"
+#~ msgstr "Nombre de Usuario"
+
+#~ msgid "Password"
+#~ msgstr "Contraseña"
+
+#~ msgid "Dont have an account?"
+#~ msgstr "No tienes una cuenta?"
+
+#~ msgid "Register here!"
+#~ msgstr "Registrate aquí!"
 
 #~ msgid "Inmobiliaria Romero"
 #~ msgstr "Inmobiliaria Romero"

@@ -7,7 +7,7 @@ from .models import Profile
 class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2', 'email')
 
     def clean_username(self):
         user = self.cleaned_data['username']
@@ -15,6 +15,13 @@ class UserForm(UserCreationForm):
         if user in usernames:
             self.add_error('username', "Username is already taken")
         return user
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        emails = [users.user.email for users in Profile.objects.all()]
+        if email in emails:
+            self.add_error('email', "email is already registered")
+        return email
 
 
 class ProfileForm(forms.ModelForm):

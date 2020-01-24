@@ -1,32 +1,32 @@
 {% load i18n %}
 <h3 class="h4 text-black widget-title mb-3">{% trans 'Contact Agent' %}</h3>
 <form  id="idForm" class="form-contact-agent" method="post">{% csrf_token %}
-    {% if form%}
-    <div class="form-group">
-      <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-        <i class="fas fa-id-card-alt"></i>&nbsp;{{form.name.label}}<span class="span"> *</span></label>
-      {{form.name}}
-    </div>
-    <div class="form-group">
-      <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-        <i class="fas fa-phone-square-alt"></i>&nbsp;{{form.phone.label}}<span class="span">*</span></label>
-      {{form.phone}}
-    </div>
-    <div class="form-group">
-      <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-        <i class="fas fa-envelope"></i>&nbsp;{{form.email.label}}</label>
-      {{form.email}}
-    </div>
-    <div class="alert alert-info" style="font-weight: bold;">
-      {{form.name.errors}}
-      {{form.phone.errors}}
-      {{form.email.errors}}
-    </div>
-    <div class="form-group">
-      <input type="submit" id="phone" class="btn btn-primary" value="{% trans 'Send Message' %}">
-    </div>
+    {% if form %}
+        <div class="form-group">
+          <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+            <i class="fas fa-id-card-alt"></i>&nbsp;{{form.name.label}}<span class="span"> *</span></label>
+          {{form.name}}
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+            <i class="fas fa-phone-square-alt"></i>&nbsp;{{form.phone.label}}<span class="span">*</span></label>
+          {{form.phone}}
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+            <i class="fas fa-envelope"></i>&nbsp;{{form.email.label}}</label>
+          {{form.email}}
+        </div>
+        {% if form.errors %}
+            <div class="alert alert-info" style="font-weight: bold;">
+              {{form.name.errors}}
+              {{form.phone.errors}}
+              {{form.email.errors}}
+            </div>
+        {% endif %}
+        <div class="form-group">
+          <input type="submit" id="phone" class="btn btn-primary" value="{% trans 'Send Message' %}">
+        </div>
     {% endif %}
     <p>{{mess}}</p>
 </form>
-<script>
-</script>

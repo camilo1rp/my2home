@@ -49,7 +49,17 @@
                         </span>
                         <div class="col-md-12">
                           {{ form.username }}
-                          
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-12">
+                            {% trans 'email' %}
+                            <span class="spanIcon"> *</span>
+                        </span>
+
+                        </span>
+                        <div class="col-md-12">
+                          {{ form.email }}
                         </div>
                     </div>
 
@@ -71,7 +81,6 @@
                         <div class="col-sm-12">
                           {{ form.password2 }}
                         </div>
-                        
                     </div>
 
                     {%  if form.errors %}
