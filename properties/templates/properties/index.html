@@ -129,7 +129,7 @@
   color: #364e68;
 }
 .divMinimo{
-  width: 50%;
+  width: 45%;
   float: left;
 }
 .selecBorde{
@@ -137,7 +137,7 @@
 }
 .divMaximo{
   float: right;
-  width: 47%;
+  width: 44%;
 }
 .margen{
   margin-top: -100px;
@@ -278,14 +278,14 @@
             <div class="row">
                <div class="col-md-2 search">
                   <div class="dropdownHab">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnHab" type="button" data-toggle="dropdown">
                       <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Rooms' %}
                       <span id="textHabiMi"></span>
                       <span id="textHabiMa"></span>
                       <span class="caret"></span>
                     </button>
 
-                    <ul class="dropdown-menu filtro ul">
+                    <ul class="dropdown-menu filtro ul" id="ulDropdownHab">
                       <span class="textDropDawn">{% trans 'Number of' %} {% trans 'rooms' %}
                       </span>
                       <li class="espacio">
@@ -316,7 +316,7 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownBan">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Bathrooms' %}
+                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnBan" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Bathrooms' %}
                     <span id="textBanMi"></span>
                     <span id="textBanMa"></span>
                     <span class="caret"></span></button>
@@ -352,7 +352,7 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownAre">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnAre" type="button" data-toggle="dropdown">
                       <i class="fas fa-chart-area icon"></i><span  class="size">&nbsp;{% trans 'Area' %}</span>
                     <span id="textAreMi" class="size"></span>
                     <span id="textAreMa" class="size">m²</span>
@@ -407,7 +407,7 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownPre">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Price' %}</span>
+                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnPre" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Price' %}</span>
                     <span id="textPreMi" class="size"></span>
                     <span id="textPreMa" class="size"></span>
                     <span class="caret"></span></button>
@@ -483,6 +483,7 @@
 
             </div>
           </form>
+          <br/>
         </div>
       </div>
     </div>
@@ -683,7 +684,11 @@
      });
      }
 
-   //Habitaciones
+    //Habitaciones
+    $("#selectMinimo").click(function(){
+      $("#btnHab").removeAttr('data-toggle')
+    });
+
     $("#selectMinimo").change(function(){
       $("#textHabiMi").text( $("#selectMinimo option:selected").text() )
       $(".dropdownHab").removeClass('show');
@@ -691,9 +696,14 @@
 
     $("#selectMaximo").change(function(){
        $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text() )
+       $("#btnHab").attr('data-toggle','dropdown')
     });
    
     //Baños
+    $("#selectMinBa").click(function(){
+      $("#btnBan").removeAttr('data-toggle')
+    });
+
     $("#selectMinBa").change(function(){
       $("#textBanMi").text( $("#selectMinBa option:selected").text() )
       $(".dropdownBan").removeClass('show');
@@ -701,9 +711,14 @@
 
     $("#selectMaxBa").change(function(){
       $("#textBanMa").text( ' - '+$("#selectMaxBa option:selected").text() )
+      $("#btnBan").attr('data-toggle','dropdown')
     });
 
     //Area
+    $("#selectMinAre").click(function(){
+      $("#btnAre").removeAttr('data-toggle')
+    });
+
     $("#selectMinAre").change(function(){
       $("#textAreMi").text( $("#selectMinAre option:selected").text() )
       $(".dropdownAre").removeClass('show');
@@ -711,15 +726,21 @@
 
     $("#selectMaxAre").change(function(){
       $("#textAreMa").text( ' - '+$("#selectMaxAre option:selected").text()+' m2' )
+      $("#btnAre").attr('data-toggle','dropdown');
     });
     //Precio selectMinPre
+    $("#selectMinPre").click(function(){
+      $("#btnPre").removeAttr('data-toggle')
+    });
+
     $("#selectMinPre").change(function(){
       $("#textPreMi").text( '$'+$("#selectMinPre option:selected").text() )
       $(".dropdownPre").removeClass('show');
     });
 
     $("#selectMaxPre").change(function(){
-      $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() )
+      $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() );
+      $("#btnPre").attr('data-toggle','dropdown');
     });
 
     //Cerrar Selects
