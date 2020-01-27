@@ -1,39 +1,12 @@
+<!DOCTYPE html>
+{% load inlinecss %}
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
+{% inlinecss "/home/usuario/PycharmProjects/myhome/static/css/bootstrap.min.css" %}
 <html lang="en" class="body-full-height">
-
-<head>
-    <!-- META SECTION -->
-    <title>Codigo_campana</title>
-    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/x-icon" />
-    
-    <link href="{{site}}{% static 'css/all.css' %}" rel='stylesheet'/>
-   
-    <link rel="stylesheet" type="text/css" href="{{site}}{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{{site}}{% static 'css/bootstrap.min.css' %}">
-
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- END META SECTION 
-    -->
-
-    <!-- Latest compiled and minified CSS -->
-
-   <style type="text/css">
-       .color{
-           color: black;
-        }
-   </style>
-</head>
-
 <body>
 <!--    <div class="container " style="background-image: url(cid:{% static '/img/fondo-cumple.png' %}); background-repeat: no-repeat; background-size: cover;">-->
-
-      
-        
-
-
-<div class="information" id="descripcion" style="font-weight: bold;float: left; margin-right: 1%;width: 20%;margin-left: 1%;margin-top:11%">    
+<div class="information" id="descripcion" style="font-weight: bold;float: left; margin-right: 1%;width: 20%;margin-left: 1%;margin-top:11%">
     <div class="alert alert-info" style="font-weight: bold;">
         <div class="row">
             <div class="col-md-12" style="text-align: center;">
@@ -104,14 +77,8 @@
         </div>
     </nav>
 </div>
-
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    
-  <!-- 
-
-  -->
-    
- 
+<!--    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>-->
+<!--    <script src="{% static 'js/bootstrap.min.js' %}"></script>-->
 </body>
 </html>
+{% endinlinecss %}
