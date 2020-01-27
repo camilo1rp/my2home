@@ -17,8 +17,6 @@
             {% if busi.name == 'SWAP / PERMUTA' %}
               <span class="offer-type bg-info">{% trans 'swap'%}</span>
             {% endif %}
-<!--                      <span class="offer-type {% if busi.name == 'rent' %}bg-danger{% endif %}{% if busi.name == 'Sale' %}bg-success{% endif %}">{{busi.name}}</span>-->
-<!--                    <span class="offer-type bg-success">Rent</span>-->
           {% endfor %}
         </div>
         {% endwith %}
@@ -26,8 +24,8 @@
         {%if gallery %}
           {% for img in gallery%}
             {%if img.main %}
-                <img src="{{img.image.url}}" alt="Image" class="img-fluid">
-              {% endif %}
+              <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+            {% endif %}
           {% endfor %}
         {% else %}
           <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">
@@ -36,7 +34,7 @@
 <!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
         </a>
       <div class="p-4 property-body">
-        <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+<!--  <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>  -->
         {% with address=prop.address_col.get %}
         <h2 class="property-title"><a href="property-details.html">{{ prop.title }}</a></h2>
         <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>{{ address }}</span>

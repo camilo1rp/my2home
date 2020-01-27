@@ -2,7 +2,6 @@
 {% load static %}
 {% load property_tags %}
 {% load i18n %}
-{% load thumbnail %}
 
 <div  class="container">
     {% if filters_active %}
@@ -39,10 +38,8 @@
               {%if gallery %}
                 {% for img in gallery%}
                   {%if img.main %}
-                    {% thumbnail img.image "800x500" crop=center padding=True upscale=True as im %}
-                      <img src="{{im.url}}" alt="Image" class="img-fluid">
-                      {% endthumbnail %}
-                    {% endif %}
+                      <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+                  {% endif %}
                 {% endfor %}
               {% else %}
                 <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">

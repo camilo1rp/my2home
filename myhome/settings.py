@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'citiesapp.apps.CitiesappConfig',
     'geoservice.apps.GeoserviceConfig',
     'rosetta',
-    'sorl.thumbnail',
     'widget_tweaks',
 ]
 
@@ -149,6 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -171,6 +171,6 @@ VISITS_SESSION_ID = 'visits'
 # ***** email settings *****
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'camilo1rp@gmail.com'
-EMAIL_HOST_PASSWORD = 'Deltaz1234!@#$'
+EMAIL_HOST_PASSWORD = 'Deltaz4321$#@!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

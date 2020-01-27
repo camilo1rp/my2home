@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load thumbnail %}
 {% load staticfiles %}
 {% load static %}
 <!DOCTYPE html>
@@ -81,10 +80,8 @@
           {%if gallery %}
             {% for img in gallery%}
               {%if img.main %}
-                {% thumbnail img.image "800x500" padding=True upscale=True as im %}
-                  <img src="{{im.url}}" alt="Image" class="img-fluid">
-                  {% endthumbnail %}
-                {% endif %}
+                  <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+              {% endif %}
             {% endfor %}
           {% else %}
             <img src="{% static 'images/img_4.jpg' %}" height="240px" width="100%" alt="Image" class="img-fluid">
