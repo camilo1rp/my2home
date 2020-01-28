@@ -45,10 +45,6 @@ INSTALLED_APPS = [
     'citiesapp.apps.CitiesappConfig',
     'geoservice.apps.GeoserviceConfig',
     'rosetta',
-<<<<<<< HEAD
-=======
-    #'sorl.thumbnail',
->>>>>>> 28ab67be9774549bd630ac1d8e344fc1b209bc8e
     'widget_tweaks',
 ]
 

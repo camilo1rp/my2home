@@ -15,10 +15,6 @@ polib==1.1.0
 pytz==2019.3
 requests==2.22.0
 six==1.13.0
-<<<<<<< HEAD
-=======
-#sorl-thumbnail==12.6.0
->>>>>>> 28ab67be9774549bd630ac1d8e344fc1b209bc8e
 sqlparse==0.3.0
 urllib3==1.25.7
 daphne==2.4.1
