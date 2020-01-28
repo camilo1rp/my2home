@@ -7,4 +7,5 @@ app_name = "city"
 urlpatterns = [
     path('cities/', views.city, name='cities'),
     path('states/', views.state, name='states'),
+    path('all_cities/', views.all_cities, name='all-cities'),
 ]

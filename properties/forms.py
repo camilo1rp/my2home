@@ -49,13 +49,18 @@ class AddressColForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = []
+        exclude = ['propiedad']
+
 
 
 class ContactForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['message'].widget.attrs.update(rows='4', cols='20')
+
     class Meta:
         model = Contact
-        fields = ['name', 'phone', 'email']
+        fields = ['name', 'phone', 'email', 'message']
 
 
 class MultiPropForm(forms.Form):

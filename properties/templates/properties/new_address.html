@@ -197,7 +197,7 @@
             $("#id_ciudad").empty();
             valores = "<option value='' selected>Ciudad</option>"
             $.each(datos, function(item, val) {
-                valores += "<option value='" + val.fields.name + "'>" + val.fields.name + "</option>"; //change value to '" + val.pk + "' when update model field
+                valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
             });
             $("#id_ciudad").append(valores);
         });
