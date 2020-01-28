@@ -62,7 +62,7 @@
   transition: all 1s ease;
   position: relative;
 }
-.boton3 {
+.buttonMenu {
   color: #fff !important;
   font-size: 20px;
   font-weight: 500;
@@ -73,7 +73,7 @@
   transition: all 1s ease;
   position: relative;
 }
-.boton3:hover {
+.buttonMenu:hover {
   background: black;
   color: #fff !important;
   border-color: black;
@@ -158,11 +158,6 @@
 .fadeOutRight{
   animation-duration: 1s
 }
-.heartBeat{
-  /*animation-duration: 4s*/
-}
-
-
 
 @media screen and (max-width:550px) {
   .btnSelect {
@@ -234,7 +229,6 @@
             {% include 'properties/top_nav.html' %}
           </div>
         </div>
-
       </div>
     </div>
   {% show_promoted_props 3%}
@@ -266,9 +260,9 @@
                 <div class="col-md-3">
                   <label for="select-city">{% trans 'Select City' %}</label>
                   <select name="select-city" id="select-city" class="form-control rounded-0">
-                    <option value="ALL">{% trans 'All' %}</option>
-                    <option value="BOGOTA">Bogota</option>
+                    <option  value="ALL">{% trans 'All' %}</option>
                   </select>
+                  <p id=all hidden>{% trans 'All' %}</p>
                 </div>
                 <div class="col-md-3">
                   <input type="submit" class="btn btn-success text-white btn-block rounded-0" value="{% trans 'Search' %}">
@@ -278,7 +272,7 @@
             <div class="row">
                <div class="col-md-2 search">
                   <div class="dropdownHab">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnHab" type="button" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnHab" type="button" data-toggle="dropdown">
                       <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Rooms' %}
                       <span id="textHabiMi"></span>
                       <span id="textHabiMa"></span>
@@ -316,7 +310,7 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownBan">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnBan" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Bathrooms' %}
+                    <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnBan" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Bathrooms' %}
                     <span id="textBanMi"></span>
                     <span id="textBanMa"></span>
                     <span class="caret"></span></button>
@@ -352,7 +346,7 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownAre">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnAre" type="button" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnAre" type="button" data-toggle="dropdown">
                       <i class="fas fa-chart-area icon"></i><span  class="size">&nbsp;{% trans 'Area' %}</span>
                     <span id="textAreMi" class="size"></span>
                     <span id="textAreMa" class="size">m²</span>
@@ -407,7 +401,7 @@
 
                 <div class="col-md-2 search">
                   <div class="dropdownPre">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" id="btnPre" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Price' %}</span>
+                    <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnPre" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Price' %}</span>
                     <span id="textPreMi" class="size"></span>
                     <span id="textPreMa" class="size"></span>
                     <span class="caret"></span></button>
@@ -469,7 +463,7 @@
 
                 <div class="col-md-2 search" hidden>
                   <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle boton3 btnSelect" type="button" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" type="button" data-toggle="dropdown">
                       <i class="fas fa-filter"></i>&nbsp;&nbsp;{% trans 'Filters' %}
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ulFiltros">
@@ -528,28 +522,6 @@
         </div>
       </div>
     </div>
-<!--    <div class="site-section bg-light">-->
-<!--      <div class="container">-->
-<!--        <div class="row justify-content-center mb-5">-->
-<!--          <div class="col-md-7 text-center">-->
-<!--            <div class="site-section-title">-->
-<!--              <h2>Recent Blog</h2>-->
-<!--            </div>-->
-<!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis maiores quisquam saepe architecto error corporis aliquam. Cum ipsam a consectetur aut sunt sint animi, pariatur corporis, eaque, deleniti cupiditate officia.</p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">-->
-<!--            <a href="#"><img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid"></a>-->
-<!--            <div class="p-4 bg-white">-->
-<!--              <span class="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>-->
-<!--              <h2 class="h5 text-black mb-3"><a href="#">Art Gossip by Mike Charles</a></h2>-->
-<!--              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt.</p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <div  class="site-section">
     <div class="container">
       <div class="row mb-5 justify-content-center">
@@ -564,7 +536,7 @@
           <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
             <div class="team-member">
 
-              <img src="{% static 'images/person_1.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
+              <img src="{% static 'images/person_4.jpg' %}" alt="Image" class="img-fluid rounded mb-4">
 
               <div class="text">
 
@@ -660,13 +632,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script>
   //keep filters when adding favorites - mantener filtros click en favoritos
-    var filt = $("#filters").text()
     var page = $("#active").text()
     function follows(id){
         $.ajax({
         url: '{% url "property:index" %}',
         type: 'get',
-        data: {'prop_id': id, 'current_filters':filt, 'follow':1, 'page':page}
+        data: {'prop_id': id, 'follow':1,}
          }).done(function(data) {
          var id = "#"+JSON.parse(data.prop_id)
          var command = JSON.parse(data.command)
@@ -768,13 +739,7 @@
             console.log(cont)
           }
         },500);
-
     });
-
-    $("#btnMiCuenta").click(function(){
-      window.location.href="{% url 'property:create' %}";
-    });
-
 
     $(".myInput").on("keyup", function() {
       var dato = $(this).val().toLowerCase();
@@ -788,6 +753,7 @@
       });
 
     });
+    /*
       function yo(ids){
          alert(  ids );
            $.ajax({
@@ -802,10 +768,6 @@
               }, 'slow');
           });
       }
-
-
-/*
-
 */
     $(".idBuy > li .ClassBuy").click(function(){
         $(".idBuy > li .ClassBuy").removeAttr("href");
@@ -959,6 +921,26 @@
         scrollTop: $('#propys').offset().top
       }, 'slow');
     }
+    var flag = 1;
+    var all = $("#all").text();
+     $("#select-city").click(function(){
+     if ( flag == 1 ) {
+        $.ajax({
+            url: '{% url "city:all-cities" %}',
+            type: 'get',
+            data: {}
+        }).done(function(data) {
+            var valores = '';
+            $("#select-city").empty();
+            valores = "<option value='ALL' selected>" + all + "</option>"
+            $.each(data, function(val) {
+                valores += "<option value='" + val + "'>" + val + "</option>";
+            });
+            $("#select-city").append(valores);
+        });
+        flag = 0;
+     }
+    });
 
 </script>
   </body>

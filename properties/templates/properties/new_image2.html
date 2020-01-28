@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 {% load static %}
-
+{% load i18n %}
 <html lang="en">
     <head>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
     <style>
     * {
@@ -143,7 +143,6 @@
                 {% csrf_token %}
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
-                                <div id="modalPrueba"></div>
                             {{ form.management_form }}
                             {%for formu in form%}
                                 <div id="div{{ forloop.counter|add:-1 }}" style="display: none; margin-top: 11%;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
@@ -154,20 +153,18 @@
                                         </div>
                                         <br/>
                                     </div>
-
                                 </div>
                             {% endfor %}
-
                             <div class="col-md-12">
-                                <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 5%;">
+                                <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 1%;">
                                     <div class="alert alert-info" style="font-weight: bold;">
                                         <label>
                                             <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i>
                                         </label>
                                         <br/>
-                                        Imagenes listas ...
+                                        {% trans 'all done!' %}
                                     </div>
-                                <p class="animated infinite heartBeat">Elige tu foto Principal</p>
+                                <p class="animated infinite heartBeat">{% trans 'Choose a main image' %}</p>
                                 </div>
 
                                 <br/>
@@ -211,7 +208,7 @@
                                 </span>
                                 Nombre</p>
                                 <input type="radio" name="radioBtn" id="radio_{{ forloop.counter|add:-1 }}" class="form-check-input radio" value=1 style="width: 9%;height: 21%;margin-left:-4px;" title="Imagen Principal en la Web">
-                                <p style="color: white;margin-left:2%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imagen principal</p>
+                                <p style="color: white;margin-left:2%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Main Image' %}</p>
                             </div>
                             <img src="{% get_media_prefix%}{{f.image.value}}" width="684" height="340">
                             </a>
@@ -222,12 +219,25 @@
         </div>
     </footer>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
 
-<script>    
+<script>
+        for (let index = 0; index <= 7; index++) {
+            var id = "#id_form-"+index+"-main"
+            var radio_id = "#radio_"+index
+            var clear_id ="#form-"+index+"-image-clear_id"
+            var clear_id2 ="form-"+index+"-image-clear_id"
+            $(id).hide();
+            $('label[for=id]').hide();
+            $(radio_id).prop('checked',$(id).prop('checked'));
+            $(clear_id).hide();
+            $('label[for=clear_id2]').hide();
+
+        }
+
     var cantidad;
     var contador = 0;
     var completo = 0;
@@ -296,14 +306,14 @@
             });
         }else{
             Swal.fire({
-                title: 'Confirmar ?',
-                text:  quantity < 6 ? 'Enviar, Aún puede agregar mas imagenes ...' : 'Desea enviar esta información',
+                title: 'Confirmar?',
+                text:  quantity < 6 ? 'Enviar, Aún puede agregar mas imagenes ...' : 'Desea guardar estas imagenes',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                cancelButtonText: 'Mas fotos',
-                confirmButtonText: 'Enivar',
+                cancelButtonText: 'Agregar mas fotos',
+                confirmButtonText: 'Guardar',
             }).then((result) => {
                 if (result.value) {
                     $('#exampleModal').modal('show');
@@ -362,7 +372,6 @@ eventosImg();
         timerId = setInterval(function() {
             if( $("#id_form-0-image").val() != '' || $(".img0 > a ").text().length > 0){
                 $("#div0").hide();
-                console.log("form1 hide")
             }
             if( $("#id_form-1-image").val() != '' || $(".img1 > a ").text().length > 0 ){
                 $("#div1").hide();
@@ -390,10 +399,8 @@ eventosImg();
             }else if(  $("#id_form-3-image").val() == '' && $("#idCard_3").length == 0 ){
                 $("#div3").show();
             }else if(  $("#id_form-4-image").val() == '' && $("#idCard_4").length == 0){
-                document.getElementById('id_form-4-image').addEventListener('change', archivo, false);
                 $("#div4").show();
             }else if(  $("#id_form-5-image").val() == '' && $("#idCard_5").length == 0){
-                document.getElementById('id_form-5-image').addEventListener('change', archivo, false);
                 $("#div5").show();
             }
 
@@ -455,8 +462,8 @@ eventosImg();
             }).then((result) => {
                 if (result.value) {
                     $("#idCard_"+id).remove();
-                    //$("#form-"+id+"-image-clear_id").prop('checked',true);
-                    
+                    $("#form-"+id+"-image-clear_id").prop('checked',true);
+
                     for (let index = 0; index <= 7; index++) {
                         $("#div"+index).hide();
                     }
@@ -470,17 +477,19 @@ eventosImg();
     }
 
     function quitarClear(){
-       $("#form-"+deleteClear+"-image-clear_id").prop('checked',false);     
+       $("#form-"+deleteClear+"-image-clear_id").prop('checked',false);
     }
 
     document.getElementById('id_form-0-image').addEventListener('change', archivo, false);
     document.getElementById('id_form-1-image').addEventListener('change', archivo, false);
     document.getElementById('id_form-2-image').addEventListener('change', archivo, false);
     document.getElementById('id_form-3-image').addEventListener('change', archivo, false);
+    document.getElementById('id_form-4-image').addEventListener('change', archivo, false);
+    document.getElementById('id_form-5-image').addEventListener('change', archivo, false);
 
 </script>
 
     </body>
     </html>
 
-  
+

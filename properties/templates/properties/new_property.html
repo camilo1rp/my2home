@@ -63,10 +63,10 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header divTitleModal">
-        <h5 class="modal-title titleModal" id="exampleModalLongTitle">Ingresa los datos de tu propiedad</h5>
+        <h5 class="modal-title titleModal" id="exampleModalLongTitle">{% trans "Your Property's Details" %}</h5>
        </div>
         <h2 id="datoPage" style="display: none;">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
-        <span id="propiedad">{{propiedad}}</span>
+        <span id="propiedad" hidden>{{propiedad}}</span>
         <div class="modal-body">
                 <div class="col-md-12">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -145,7 +145,7 @@
                                                             </div>
                                                             <hr>
                                                             <div class="row">
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                             {{form.rooms.label}}<span class="span"> *</span>
@@ -156,7 +156,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
                                                                         {{form.baths.label}}<span class="span"> *</span>
                                                                     </label>
@@ -165,12 +165,24 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
                                                                        {{form.parking.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-6 centrar0">
                                                                         {{form.parking}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.area_total.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-6">
+                                                                        {{form.area_total}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
@@ -183,19 +195,7 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        {{form.area_total.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-6">
-                                                                        {{form.area_total}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
                                                                         {{form.year.label}}<span class="span"> *</span>
                                                                     </label>
@@ -204,7 +204,7 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4" id="divEstrato" style="text-align: -webkit-right;">
+                                                                <div class="col-md-3" id="divEstrato" style="text-align: -webkit-right;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.estrato.label}}<span class="span"> *</span>
                                                                     </label>

@@ -10,7 +10,7 @@ from smtplib import SMTPAuthenticationError
 
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -29,13 +29,13 @@ from .models import Property, AddressCol, Image, Contact, BusinessType, Followin
 class ListProperty(ListView):
     model = Property
     template_name = 'properties/index.html'
-    paginate_by = 2
+    paginate_by = 6
 
     def get(self, request, *args, **kwargs):
         # get data
         city = request.GET.get('select-city')
+        print(city)
         follow = request.GET.get('follow')
-        current_filters = request.GET.get('current_filters')
         filters_names = ['type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
                          'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte']
         filters_values = [request.GET.get('list-types'), request.GET.get('offer-types'), request.GET.get('room_min'),
@@ -92,8 +92,10 @@ class ListProperty(ListView):
 
         # check location filter
         if city not in ['ALL', None]:
+            print("got in")
+            print(query)
             prop_with_address = [prop for prop in query if prop.address_col.all()]
-            query = [q for q in prop_with_address if q.address_col.get().ciudad == city]
+            query = [q for q in prop_with_address if q.address_col.get().ciudad.name == city]
 
         # assign labels
         filters_active = filters_dict.copy()
@@ -207,15 +209,12 @@ def create_address(request, prop_id=None):
 def create_image(request, prop_id=None):
     prop = Property.objects.get(id=int(prop_id))
     images = prop.gallery.all()
-    print(len(images))
     images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6 - len(images))
-
     if request.method == 'POST':
         print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
             print('got valid')
-            # prop1 = request.POST.get('propiedad_id')
             print(prop)
             for obj in form:
                 print(obj.cleaned_data)
@@ -238,17 +237,16 @@ def create_image(request, prop_id=None):
                 except KeyError:
                     continue
             return HttpResponseRedirect(reverse('property:index', ))
-    if images:
-        images_formset = images_formset(queryset=images)
 
-    return render(request, 'properties/new_image2.html', {'form': images_formset, 'propiedad': prop_id, 'page': 2})
+    images_formset = images_formset(queryset=images)
+
+    return render(request, 'properties/new_property.html', {'form': images_formset, 'propiedad': prop_id, 'page': 2})
 
 
 def property_detail(request, prop_id):
     prop = get_object_or_404(Property, id=prop_id)
     form = ContactForm(request.POST or None)
     if request.method == 'POST':
-        print(form.errors)
         if form.is_valid():
             name_in = form.cleaned_data['name']
             phone_in = form.cleaned_data['phone']
@@ -257,7 +255,8 @@ def property_detail(request, prop_id):
             except KeyError:
                 print("no email provided")
                 email_in = 'noemail@nomail.com'
-            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in)
+            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in,
+                                                       message=form.cleaned_data['message'])
 
             # ******** email sending ********
             # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
@@ -277,18 +276,15 @@ def property_detail(request, prop_id):
             image.add_header('Content-ID', '<{}>'.format(url))
             image.add_header("Content-Disposition", "inline", filename=url)
             msg.attach(image)
+
             try:
                 msg.send()
                 message = gettext('Your information has been sent to our agents! Thank you')
                 print("email_sent")
             except SMTPAuthenticationError:
                 message = gettext('Something went wrong, please try again or contact agent by phone or whatsapp')
-             # ****************
+            # ****************
             return render(request, 'properties/contact_form.html', {'form': form, 'mess': message, })
-
-            # return render(request, 'properties/property-details.html',
-            #               {'prop': prop, 'mess': message,
-            #                'lat': geo_data["lat"], 'lng': geo_data["lng"]})
         elif request.is_ajax():
             return render(request, 'properties/contact_form.html', {'form': form})
     try:
@@ -417,3 +413,26 @@ def Template(request):  # view for debugging
     data = {'propiedad': prop, 'name': "nombre apellido", 'phone': "1234456809",
             'email': "email@email.com", 'geo_data': geo_data}
     return render(request, template, {'data': data})
+
+
+def contact_us(request):
+    form = ContactForm(request.POST or None,)
+    if request.method == 'POST':
+        if form.is_valid():
+            name_in = form.cleaned_data['name']
+            phone_in = form.cleaned_data['phone']
+            mess_in = form.cleaned_data['message']
+            try:
+                email_in = form.cleaned_data['email']
+            except KeyError:
+                print("no email provided")
+                email_in = 'noemail@nomail.com'
+            # ******** email sending ********
+            # //TODO: move email from contact_us to a funtion in tasks.py after setting up Celery
+            # html_content = render_to_string('properties/contact_email.html', {'data': data})
+            subject = 'MENSAJE DE {}'.format(name_in.title())
+            message = "Nombre: {}, Email: {}, Phone: {}, Message: {}".format(name_in, email_in, phone_in, mess_in)
+            send_mail(subject, message, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
+            # ****************
+    return render(request, 'properties/contact.html', {'form': form})
+

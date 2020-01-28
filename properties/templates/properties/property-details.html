@@ -79,7 +79,7 @@
         <div class="container py-1">
           <div class="row align-items-center">
             <div class="col-8 col-md-8 col-lg-4">
-              <h1 class="mb-0"><a href="{% url 'property:index' %}" class="text-white h2 mb-0"><strong>{% trans 'Property Details' %}<span class="text-danger">.</span></strong></a></h1>
+              <h1 class="mb-0"><a href="{% url 'property:index' %}" class="text-white h2 mb-0"><strong>Inmuebles Fusa<span class="text-danger">.</span></strong></a></h1>
             </div>
                    {% include 'properties/top_nav.html' %}
           </div>
@@ -186,9 +186,14 @@
               </div>
               <h2 class="h4 text-black">{% trans 'More Info' %}</h2>
               {{ prop.description|linebreaks }}
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda aperiam perferendis deleniti vitae asperiores accusamus tempora facilis sapiente, quas! Quos asperiores alias fugiat sunt tempora molestias quo deserunt similique sequi.</p>
-              <p>Nisi voluptatum error ipsum repudiandae, autem deleniti, velit dolorem enim quaerat rerum incidunt sed, qui ducimus! Tempora architecto non, eligendi vitae dolorem laudantium dolore blanditiis assumenda in eos hic unde.</p>
-              <p>Voluptatum debitis cupiditate vero tempora error fugit aspernatur sint veniam laboriosam eaque eum, et hic odio quibusdam molestias corporis dicta! Beatae id magni, laudantium nulla iure ea sunt aliquam. A.</p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                Aenean commodo ligula eget dolor. Aenean massa.
+                Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+                Nulla consequat massa quis enim. Donec pede justo,
+                fringilla vel, aliquet nec, vulputate eget, arcu.
+                In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu
               <div class="row no-gutters mt-5">
                 <div class="col-12">
                   <h2 class="h4 text-black mb-3">{% trans 'Gallery' %}</h2>
@@ -230,7 +235,7 @@
           {% endif %}
         </div>
       </div>
-        {{address.ciudad}}
+<!--        {{address.ciudad}}-->
         {% endwith %}
       <footer class="site-footer">
         <div class="container">
@@ -353,7 +358,9 @@
            }
         });
     });
-
+    $("#btnMiCuenta").click(function(){
+      window.location.href="{% url 'property:create' %}";
+    });
   </script>
   </body>
 </html>
