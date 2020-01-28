@@ -1,0 +1,62 @@
+version: '3.1'
+
+services:
+    postgres:
+        image: postgres:9.6
+        container_name: postgres-my2home
+        environment:
+            POSTGRES_USER: my2home
+            POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+            POSTGRES_DB: my2home
+        volumes:
+            - postgres-vol:/var/lib/postgresql/data
+        secrets:
+            - db_password
+
+    seed7:
+        build: .
+        image: dev/my2home 
+        container_name: my2home
+        environment:
+            SUPERUSER_NAME: my2homeadmin
+            SUPERUSER_EMAIL: /run/secrets/superuser_email
+            SUPERUSER_PASSWORD: /run/secrets/superuser_password
+            ALLOWED_HOSTS: localhost
+            DB_NAME: my2home
+            DB_USER: my2home
+            DB_PASSWORD: /run/secrets/db_password
+            DB_HOST: postgres
+            SECRET_KEY: /run/secrets/secret_key
+        secrets:
+            - superuser_password
+            - db_password
+            - secret_key
+        ports:
+            - 1912:1812/udp
+        volumes:
+            - my2home-static-files:/etc/my2home-nginx/
+
+    nginx:
+        image: nginx:1.11.1-alpine
+        links:
+            - my2home
+        container_name: nginx-my2home
+        command: nginx -g 'daemon off;' -c /etc/my2home-nginx/nginx.conf
+        depends_on:
+            - my2home
+        ports:
+            - 8080:80
+        volumes:
+            - my2home-static-files:/etc/my2home-nginx/
+
+secrets:
+    superuser_password:
+        file: secrets/superuser_password.txt
+    db_password:
+        file: secrets/db_password.txt
+    secret_key:
+        file: secrets/secret_key.txt
+        
+volumes:
+    postgres-vol:
+    my2home-static-files:

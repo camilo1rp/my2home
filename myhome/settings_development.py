@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&g^b@)2w$&e)9=e51f7x_f&6_ctfcy78r+2ss3mes&wsk(z11_'
+SECRET_KEY = os.environ.get('SECRET_KEY','key_onlY_valid_in_development')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -38,18 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
-    'django_inlinecss',
     'properties.apps.PropertiesConfig',
     'profiles.apps.ProfilesConfig',
     'visits.apps.VisitsConfig',
     'citiesapp.apps.CitiesappConfig',
-    'geoservice.apps.GeoserviceConfig',
     'rosetta',
-<<<<<<< HEAD
-=======
     #'sorl.thumbnail',
->>>>>>> 28ab67be9774549bd630ac1d8e344fc1b209bc8e
     'widget_tweaks',
+    #'easy_maps',
 ]
 
 MIDDLEWARE = [
@@ -87,23 +83,24 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 # ********************  Default Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my2home',
-        'USER': 'myhome',
-        'PASSWORD': 'Tncamilo123',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': os.environ.get('DB_NAME','postgres'),
+         'USER': os.environ.get('DB_USER','gitpod'),
+         'PASSWORD': os.environ.get('DB_PASSWORD','passworddb'),
+
+         'HOST': os.environ.get('DB_HOST','localhost'),
+         'PORT': '5432',
+         }
+ }
 
 
 
@@ -140,6 +137,7 @@ LANGUAGE_CODE = 'en'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -149,34 +147,24 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+#https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-STATIC_ROOT = "/workspace/my2home/static/"
+STATIC_ROOT = '/workspace/my2home/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-LOGIN_URL = '/account/login'
-# LOGIN_REDIRECT_URL = 'dashboard'
-# LOGIN_URL = 'account/login/'
-# LOGOUT_URL = 'logout'
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('profile:update', args=[u.profile.id])
 }
 
-# ***** google maps key *****
-EASY_MAPS_GOOGLE_KEY = 'AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA'
+EASY_MAPS_GOOGLE_KEY = os.environ.get('EASY_MAPS_GOOGLE_KEY','')
 
-# ***** session variable for counting page visits *****
 VISITS_SESSION_ID = 'visits'
-
-# ***** email settings *****
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'camilo1rp@gmail.com'
-EMAIL_HOST_PASSWORD = 'Deltaz4321$#@!'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
