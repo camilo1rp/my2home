@@ -85,7 +85,7 @@
     }
     .contenedor{
         width: 35%;
-        height: 500px;
+        height: 300px;
         margin: 0 auto;
         border: solid #ccc9c9;
         background-color: white;
@@ -102,7 +102,7 @@
     <body>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" style="margin-top: 17%;" data-keyboard='false' data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" style="margin-top: 7%;" data-keyboard='false' data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -138,9 +138,6 @@
 
     <!-- Contenido -->
     <section>
-<!--        get current image // mostrar imagen en form-->
-<!--        <img id="pic0" src="{% get_media_prefix%}{{form.0.image.value}}" width="500" />-->
-<!--        <img id="pic1" src="{% get_media_prefix%}{{form.1.image.value}}" width="500" />-->
         <div class="content contenedor">
             <form  class="formSection3" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -149,7 +146,7 @@
                                 <div id="modalPrueba"></div>
                             {{ form.management_form }}
                             {%for formu in form%}
-                                <div id="div{{ forloop.counter|add:-1 }}" style="display: none;margin-top: 11%;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
+                                <div id="div{{ forloop.counter|add:-1 }}" style="display: none; margin-top: 11%;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
                                     <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
                                         <div class="col-md-12 img{{ forloop.counter|add:-1 }}">
                                             {{formu}}
@@ -160,96 +157,6 @@
 
                                 </div>
                             {% endfor %}
-
-<!--                            &lt;!&ndash;- Cero &ndash;&gt;-->
-<!--                            <div id="div0" class="imagenLi" dir="0">-->
-<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
-<!--                                    <div class="col-md-12 img0">-->
-<!--                                        {{form.0.image}}-->
-<!--                                        <span class="help-block"></span>-->
-<!--                                    </div>-->
-<!--                                    <br/>-->
-<!--                                </div>-->
-
-<!--                                <div class="col-md-12" style="display: none;">-->
-<!--                                        {{form.0.main}}-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;- Uno &ndash;&gt;-->
-<!--                            <div id="div1" class="imagenLi" dir="1" style="display: none;">-->
-<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
-<!--                                    <div class="col-md-12 img1">-->
-<!--                                        {{form.1.image}}-->
-<!--                                        <span class="help-block"></span>-->
-<!--                                    </div>-->
-<!--                                    <br/>-->
-<!--                                </div>-->
-
-<!--                                <div class="col-md-12" style="display: none;margin-top: 11%;">-->
-<!--                                        {{form.1.main}}-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;- Dos &ndash;&gt;-->
-<!--                            <div id="div2" class="imagenLi" dir="2" style="display: none;">-->
-<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
-<!--                                    <div class="col-md-12 img2">-->
-<!--                                        {{form.2.image}}-->
-<!--                                        <span class="help-block"></span>-->
-<!--                                    </div>-->
-<!--                                    <br/>-->
-<!--                                </div>-->
-
-<!--                                <div class="col-md-12" style="display: none;">-->
-<!--                                        {{form.2.main}}-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;- Tres&ndash;&gt;-->
-<!--                            <div id="div3"  class="imagenLi" dir="3" style="display: none;">-->
-<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
-<!--                                    <div class="col-md-12 img3">-->
-<!--                                        {{form.3.image}}-->
-<!--                                        <span class="help-block"></span>-->
-<!--                                    </div>-->
-<!--                                    <br/>-->
-<!--                                </div>-->
-
-<!--                                <div class="col-md-12" style="display: none;">-->
-<!--                                        {{form.3.main}}-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;- Cuatro&ndash;&gt;-->
-<!--                            <div id="div4"  class="imagenLi" dir="4" style="display: none;">-->
-<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
-<!--                                    <div class="col-md-12 img4">-->
-<!--                                        {{form.4.image}}-->
-<!--                                        <span class="help-block"></span>-->
-<!--                                    </div>-->
-<!--                                    <br/>-->
-<!--                                </div>-->
-
-<!--                                <div class="col-md-12 " style="display: none;">-->
-<!--                                        {{form.4.main}}-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            &lt;!&ndash;- Cinco &ndash;&gt;-->
-<!--                            <div id="div5"  class="imagenLi" dir="5" style="display: none;">-->
-<!--                                <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">-->
-<!--                                    <div class="col-md-12 img5">-->
-<!--                                        {{form.5.image}}-->
-<!--                                        <span class="help-block"></span>-->
-<!--                                    </div>-->
-<!--                                    <br/>-->
-<!--                                </div>-->
-
-<!--                                <div class="col-md-12" style="display: none;">-->
-<!--                                        {{form.5.main}}-->
-<!--                                </div>-->
-<!--                            </div>-->
 
                             <div class="col-md-12">
                                 <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 5%;">
@@ -320,11 +227,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<script>
+<script>    
     var cantidad;
-    var contador;
+    var contador = 0;
     var completo = 0;
-
     $("#btnEnviar").click(function(){
         if( $("#customCheck1").is(':checked') ){
             $("form").submit();
@@ -348,7 +254,6 @@
         }
         $("#id_form-"+id+"-main").prop('checked',true);
     }
-
 
     function eventosImg(){
         if( document.getElementById('btnImg_0') != null ){
@@ -382,34 +287,29 @@
 
     $("#btnSave").click(function(){
         event.preventDefault();
-        Swal.fire({
-            title: 'Confirmar ?',
-            text:  quantity < 6 ? 'Enviar, Aún puede agregar mas imagenes ...' : 'Desea enviar esta información',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Mas fotos',
-            confirmButtonText: 'Enivar',
-        }).then((result) => {
-            if (result.value) {
-                if ( !$("input[type='radio']:checked").val() ) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Recuerde Elegir Una Imagen Principal',
-                        timer: 2100
-                    });
-                }else{
+        if ( !$("input[type='radio']:checked").val() ) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Recuerde Elegir Una Imagen Principal',
+                timer: 2100
+            });
+        }else{
+            Swal.fire({
+                title: 'Confirmar ?',
+                text:  quantity < 6 ? 'Enviar, Aún puede agregar mas imagenes ...' : 'Desea enviar esta información',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Mas fotos',
+                confirmButtonText: 'Enivar',
+            }).then((result) => {
+                if (result.value) {
                     $('#exampleModal').modal('show');
-                    //$("#exampleModal").css('background-color','aliceblue');
-                    //$(".accordian").css("overflow", "hidden");
-                    //$("#exampleModal").css("overflow", "hidden");
-
-   // background-color: red;
                 }
-            }
-        })
+            })
+        }
     });
 eventosImg();
 
@@ -419,10 +319,6 @@ eventosImg();
         var firstName = evt.target.files[0].name
         //Obtenemos la imagen del campo "file".
         for (var i = 0, f; f = files[i]; i++) {
-            //Solo admitimos imágenes.
-            /*if ( ! f.type.match('image.*') ) {
-                continue;
-            }*/
             var reader = new FileReader();
             reader.onload = (function(theFile) {
             return function(e) {
@@ -448,6 +344,8 @@ eventosImg();
             }
             y.innerHTML += a;
 
+            //Quita el Clear de la Img
+            quitarClear();
             eventosImg();
             //document.getElementById('btnImg_'+contador).addEventListener('click',()=> pe(contador), false); //Dinamico
             };
@@ -463,40 +361,40 @@ eventosImg();
         var antes = false;
         timerId = setInterval(function() {
             if( $("#id_form-0-image").val() != '' || $(".img0 > a ").text().length > 0){
-                $("#div0").css('display','none');
+                $("#div0").hide();
                 console.log("form1 hide")
             }
             if( $("#id_form-1-image").val() != '' || $(".img1 > a ").text().length > 0 ){
-                $("#div1").css('display','none');
+                $("#div1").hide();
             }
             if( $("#id_form-2-image").val() != '' || $(".img2 > a ").text().length > 0){
-                $("#div2").css('display','none');
+                $("#div2").hide();
             }
             if( $("#id_form-3-image").val() != '' || $(".img3 > a ").text().length > 0){
-                $("#div3").css('display','none');
+                $("#div3").hide();
             }
             if( $("#id_form-4-image").val() != '' || $(".img4 > a ").text().length > 0){
-                $("#div4").css('display','none');
+                $("#div4").hide();
             }
             if( $("#id_form-5-image").val() != '' || $(".img5 > a ").text().length > 0){
-                $("#div5").css('display','none');
+                $("#div5").hide();
             }
 
             if(  $("#id_form-0-image").val() == '' && $("#idCard_0").length == 0 ){
-                $("#div0").css('display','block');
+                $("#div0").show();
             }else
             if(  $("#id_form-1-image").val() == '' && $("#idCard_1").length == 0 ){
-                $("#div1").css('display','block');
+                $("#div1").show();
             }else if(  $("#id_form-2-image").val() == '' && $("#idCard_2").length == 0 ){
-                $("#div2").css('display','block');
+                $("#div2").show();
             }else if(  $("#id_form-3-image").val() == '' && $("#idCard_3").length == 0 ){
-                $("#div3").css('display','block');
+                $("#div3").show();
             }else if(  $("#id_form-4-image").val() == '' && $("#idCard_4").length == 0){
                 document.getElementById('id_form-4-image').addEventListener('change', archivo, false);
-                $("#div4").css('display','block');
+                $("#div4").show();
             }else if(  $("#id_form-5-image").val() == '' && $("#idCard_5").length == 0){
                 document.getElementById('id_form-5-image').addEventListener('change', archivo, false);
-                $("#div5").css('display','block');
+                $("#div5").show();
             }
 
         //Asigno Numero Imagen
@@ -507,11 +405,9 @@ eventosImg();
                     if( index !== undefined ) {
                         contador = index;
                     }
-                    //console.log( index+" index ---" );
                 }
             }else{
                 antes = true;
-                //console.log( contador+" contador igual a --- "+antes );
             }
         }
 
@@ -528,8 +424,8 @@ eventosImg();
             completo = 85;
         }else if(  quantity == 6 ){
             completo = 102;
-            $('#descripcion').css('display','block');
-            $(".imagenLi").css('display','none');
+            $('#descripcion').show();
+            $(".imagenLi").hide();
             $("#DivBtnSave").show();
         }else{
             completo = 0;
@@ -546,7 +442,7 @@ eventosImg();
 
     }, 900);
 
-    var info;
+    var deleteClear;
     function borrarImg(id) {
         Swal.fire({
                 title: 'Confirmar ..?',
@@ -559,16 +455,22 @@ eventosImg();
             }).then((result) => {
                 if (result.value) {
                     $("#idCard_"+id).remove();
+                    //$("#form-"+id+"-image-clear_id").prop('checked',true);
+                    
                     for (let index = 0; index <= 7; index++) {
-                        $("#div"+index).css('display','none');
+                        $("#div"+index).hide();
                     }
-
-                    $("#div"+id).css('display','block');
-                    $('#descripcion').css('display','none');
+                    deleteClear = id;
+                    //$("#div"+id).show();
+                    $('#descripcion').hide();
                     $("#id_form-"+id+"-image").val('');
                 }
             });
         eventosImg();
+    }
+
+    function quitarClear(){
+       $("#form-"+deleteClear+"-image-clear_id").prop('checked',false);     
     }
 
     document.getElementById('id_form-0-image').addEventListener('change', archivo, false);
@@ -581,3 +483,4 @@ eventosImg();
     </body>
     </html>
 
+  
