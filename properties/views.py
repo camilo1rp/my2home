@@ -37,13 +37,13 @@ class ListProperty(ListView):
         filter_index = request.GET.get('remove')
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
-        filters_names = ['type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
-                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte']
-        filters_values = [request.GET.get('list-types'), request.GET.get('offer-types'), request.GET.get('room_min'),
+        filters_names = ['City','type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
+                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte',]
+        filters_values = [request.GET.get('select-city'), request.GET.get('list-types'), request.GET.get('offer-types'), request.GET.get('room_min'),
                           request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
-                          request.GET.get('area_min'), request.GET.get('area_max'), (request.GET.get('price_min')),
-                          request.GET.get('price_max')]
-        filters_labels = {'SALE / VENTA': {gettext('Business type'): gettext('Sale')},
+                          request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
+                          request.GET.get('price_max'),]
+        filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Business type'): gettext('Sale')},
                           'RENT / ARRENDAMIENTO': {gettext('Business type'): gettext('Rent')},
                           'SWAP / PERMUTA': {gettext('Business type'): gettext('Swap')},
                           'APT': {gettext('Property type'): gettext('Apartment')},
@@ -54,15 +54,22 @@ class ListProperty(ListView):
                           'rooms__lte': gettext('Max rooms'), 'baths__gte': gettext('Min bathrooms'),
                           'baths__lte': gettext('Max bathrooms'), 'area_total__gte': gettext('Min area'),
                           'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'),
-                          'price__lte': gettext('Max price')
+                          'price__lte': gettext('Max price'),
                           }
         # init variables
         query = self.model.objects.all()
         filters_dict = {}
+
         if current_filters:
+            print('current_filters')
+            print(current_filters)
             filters_dict = ast.literal_eval(current_filters)
+            print('filters_dict:')
             print(filters_dict)
             filters_dict.pop(list(filters_dict.items())[int(filter_index)][0])
+            if 'City' in filters_dict:
+                print("got_in")
+                city = filters_dict['City']
 
         # assign data to filters
         new_filters = dict(zip(filters_names, filters_values))
@@ -90,10 +97,14 @@ class ListProperty(ListView):
                     print("{} started following {}".format(user, prop))
                     return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}), content_type='application/json')
         elif filters_dict:
-            query = self.model.objects.filter(**filters_dict)
+            filters_query = filters_dict.copy()
+            filters_query.pop('City', None)
+            query = self.model.objects.filter(**filters_query)
 
         # check location filter
+        print(city)
         if city not in ['ALL', None]:
+            print("iinnn")
             prop_with_address = [prop for prop in query if prop.address_col.all()]
             query = [q for q in prop_with_address if q.address_col.get().ciudad.name == city]
 
@@ -106,7 +117,10 @@ class ListProperty(ListView):
             elif k in filters_labels:
                 filters_active[filters_labels[k]] = v
                 filters_active.pop(k, None)
-
+        print('filters_dict:')
+        print(filters_dict)
+        print('query:')
+        print(query)
         # assign query and filters to context
         self.object_list = query
         context = self.get_context_data()
