@@ -1,15 +1,16 @@
 {% load static %}
 {% load property_tags %}
 {% load i18n %}
-
 <div  class="container">
+
     {% if filters_active %}
         <div class="information" id="descripcion">
           <div class="alert alert-info" style="font-weight: bold;text-align: center; font-size:1.5em;">
             <span><i class="fas fa-filter"></i>{% trans 'Filters'%} :</span>
-                {% for label, value in filters_active.items %}
-                  <span class="badge badge-info">{{ label }}: {{ value }}  </span>
-                {% endfor %}
+              {% for label, value in filters_active.items %}
+                <span class="badge badge-info">{{ label }}: {{ value }}
+                  <a onclick="filter_remove({{ forloop.counter|add:-1 }})"><i class="fas fa-times-circle"></i></a></span>
+              {% endfor %}
           </div>
         </div>
     {% endif %}
