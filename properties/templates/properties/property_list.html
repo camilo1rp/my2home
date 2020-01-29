@@ -5,7 +5,7 @@
 <div  class="container">
     {% if filters_active %}
         <div class="information" id="descripcion">
-          <div class="alert alert-info" style="font-weight: bold;text-align: center;">
+          <div class="alert alert-info" style="font-weight: bold;text-align: center; font-size:1.5em;">
             <span><i class="fas fa-filter"></i>{% trans 'Filters'%} :</span>
                 {% for label, value in filters_active.items %}
                   <span class="badge badge-info">{{ label }}: {{ value }}  </span>
