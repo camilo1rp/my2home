@@ -33,8 +33,9 @@ class ListProperty(ListView):
 
     def get(self, request, *args, **kwargs):
         # get data
+        current_filters = request.GET.get('current_filters')
+        filter_index = request.GET.get('remove')
         city = request.GET.get('select-city')
-        print(city)
         follow = request.GET.get('follow')
         filters_names = ['type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
                          'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte']
@@ -58,6 +59,10 @@ class ListProperty(ListView):
         # init variables
         query = self.model.objects.all()
         filters_dict = {}
+        if current_filters:
+            filters_dict = ast.literal_eval(current_filters)
+            print(filters_dict)
+            filters_dict.pop(list(filters_dict.items())[int(filter_index)][0])
 
         # assign data to filters
         new_filters = dict(zip(filters_names, filters_values))
@@ -67,9 +72,6 @@ class ListProperty(ListView):
 
         # check if following action, otherwise assign filters to query
         if follow not in ['None', None]:
-            # if current_filters:
-            #     filters_on = ast.literal_eval(current_filters)
-            #     query = self.model.objects.filter(**filters_on)
             if request.GET.get('prop_id'):  # if prop_id in request. it means following property action
                 try:
                     user = self.request.user
@@ -92,20 +94,16 @@ class ListProperty(ListView):
 
         # check location filter
         if city not in ['ALL', None]:
-            print("got in")
-            print(query)
             prop_with_address = [prop for prop in query if prop.address_col.all()]
             query = [q for q in prop_with_address if q.address_col.get().ciudad.name == city]
 
         # assign labels
         filters_active = filters_dict.copy()
-        print(filters_active)
         for k, v in filters_dict.items():
             if v in filters_labels:
                 filters_active.pop(k, None)
                 filters_active[list(filters_labels[v].keys())[0]] = list(filters_labels[v].values())[0]
             elif k in filters_labels:
-                print(k)
                 filters_active[filters_labels[k]] = v
                 filters_active.pop(k, None)
 

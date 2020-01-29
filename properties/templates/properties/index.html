@@ -651,6 +651,19 @@
         }
      });
      }
+     function filter_remove(index){
+     $.ajax({
+        url: '{% url "property:index" %}',
+        type: 'get',
+        data: {'remove':index, 'current_filters':$("#filters").text()}
+         }).done(function(data) {
+            var y = document.getElementById('propys');
+              y.innerHTML = data;
+              $('html, body').animate({
+                scrollTop: $('#propys').offset().top
+              }, 'slow');
+          });
+     }
 
     //Habitaciones
     $("#selectMinimo").click(function(e){
@@ -934,13 +947,10 @@
          var $box3 = $('#id_dropdownAre');
          var $box4 = $('#id_dropdownPre');
          let myArray = [$box, $box2, $box3, $box4];
-
           for(let i = 0; i < myArray.length; i++){
               if(e.target.id !== myArray[i].attr('id') && !$.contains( myArray[i][0], e.target)){
-              console.log("click outside");
               myArray[i].removeClass('show');
               }
-             console.log(myArray[i]);
           }
           });
 </script>
