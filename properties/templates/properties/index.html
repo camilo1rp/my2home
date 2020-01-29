@@ -270,15 +270,14 @@
             </div>
             <div class="row">
                <div class="col-md-2 search">
-                  <div class="dropdownHab">
+                  <div>
                     <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnHab" type="button" data-toggle="dropdown">
                       <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Rooms' %}
                       <span id="textHabiMi"></span>
                       <span id="textHabiMa"></span>
                       <span class="caret"></span>
                     </button>
-
-                    <ul class="dropdown-menu filtro ul" id="ulDropdownHab">
+                    <ul class="dropdown-menu filtro ul" id="id_dropdownHab">
                       <span class="textDropDawn">{% trans 'Number of' %} {% trans 'rooms' %}
                       </span>
                       <li class="espacio">
@@ -303,20 +302,19 @@
                         </div>
                       </li>
                     </ul>
-
                   </div>
                 </div>
 
                 <div class="col-md-2 search">
-                  <div class="dropdownBan">
+                  <div>
                     <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnBan" type="button" data-toggle="dropdown"><i class="fas fa-bath"></i>&nbsp;&nbsp;{% trans 'Bathrooms' %}
                     <span id="textBanMi"></span>
                     <span id="textBanMa"></span>
                     <span class="caret"></span></button>
-                    <ul class="dropdown-menu filtro ul">
+                    <ul class="dropdown-menu filtro ul" id="id_dropdownBan">
                       <span  class="textDropDawn">&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Number of' %} {% trans 'bathrooms' %}
                       </span>
-                      <li class="espacio">
+                      <li class="espacio" >
                         <div class="divMinimo selecBorde">
                           <select name="bath_min" id="selectMinBa" class="form-control">
                             <option value="" disabled selected>{% trans 'Minimum' %}</option>
@@ -350,7 +348,7 @@
                     <span id="textAreMi" class="size"></span>
                     <span id="textAreMa" class="size">m²</span>
                     <span class="caret"></span></button>
-                    <ul class="dropdown-menu filtro ul">
+                    <ul class="dropdown-menu filtro ul" id="id_dropdownAre">
                       <span class="textDropDawn">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Area m²' %}
                       </span>
@@ -399,12 +397,12 @@
                 </div>
 
                 <div class="col-md-2 search">
-                  <div class="dropdownPre">
+                  <div>
                     <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnPre" type="button" data-toggle="dropdown"><i class="fas fa-money-bill-alt icon"></i><span  class="size">&nbsp;{% trans 'Price' %}</span>
                     <span id="textPreMi" class="size"></span>
                     <span id="textPreMa" class="size"></span>
                     <span class="caret"></span></button>
-                    <ul class="dropdown-menu filtro ul">
+                    <ul class="dropdown-menu filtro ul" id="id_dropdownPre">
                       <span class="textDropDawn">
                         &nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Price' %} ({% trans 'Millions' %})
                       </span>
@@ -461,7 +459,7 @@
 
 
                 <div class="col-md-2 search" hidden>
-                  <div class="dropdown">
+                  <div>
                     <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" type="button" data-toggle="dropdown">
                       <i class="fas fa-filter"></i>&nbsp;&nbsp;{% trans 'Filters' %}
                     <span class="caret"></span></button>
@@ -655,71 +653,61 @@
      }
 
     //Habitaciones
-    $("#selectMinimo").click(function(){
-      $("#btnHab").removeAttr('data-toggle')
+    $("#selectMinimo").click(function(e){
+      e.stopPropagation()
     });
-
     $("#selectMinimo").change(function(){
       $("#textHabiMi").text( $("#selectMinimo option:selected").text() )
-      $(".dropdownHab").removeClass('show');
     });
-
+    $("#selectMaximo").click(function(e){
+      e.stopPropagation()
+    });
     $("#selectMaximo").change(function(){
-       $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text() )
-       $("#btnHab").attr('data-toggle','dropdown')
-    });
-   
-    //Baños
-    $("#selectMinBa").click(function(){
-      $("#btnBan").removeAttr('data-toggle')
+       $("#textHabiMa").text( ' - '+$("#selectMaximo option:selected").text())
     });
 
+    //Baños
+    $("#selectMinBa").click(function(e){
+      e.stopPropagation()
+    });
     $("#selectMinBa").change(function(){
       $("#textBanMi").text( $("#selectMinBa option:selected").text() )
-      $(".dropdownBan").removeClass('show');
     });
-
+    $("#selectMaxBa").click(function(e){
+      e.stopPropagation()
+    });
     $("#selectMaxBa").change(function(){
       $("#textBanMa").text( ' - '+$("#selectMaxBa option:selected").text() )
-      $("#btnBan").attr('data-toggle','dropdown')
     });
 
     //Area
-    $("#selectMinAre").click(function(){
-      $("#btnAre").removeAttr('data-toggle')
+    $("#selectMinAre").click(function(e){
+      e.stopPropagation()
     });
-
     $("#selectMinAre").change(function(){
       $("#textAreMi").text( $("#selectMinAre option:selected").text() )
-      $(".dropdownAre").removeClass('show');
     });
-
+    $("#selectMaxAre").click(function(e){
+      e.stopPropagation()
+    });
     $("#selectMaxAre").change(function(){
       $("#textAreMa").text( ' - '+$("#selectMaxAre option:selected").text()+' m2' )
-      $("#btnAre").attr('data-toggle','dropdown');
-    });
-    //Precio selectMinPre
-    $("#selectMinPre").click(function(){
-      $("#btnPre").removeAttr('data-toggle')
     });
 
+    //Precio selectMinPre
+    $("#selectMinPre").click(function(e){
+      e.stopPropagation()
+    });
     $("#selectMinPre").change(function(){
       $("#textPreMi").text( '$'+$("#selectMinPre option:selected").text() )
-      $(".dropdownPre").removeClass('show');
     });
-
+    $("#selectMaxPre").click(function(e){
+      e.stopPropagation()
+    });
     $("#selectMaxPre").change(function(){
       $("#textPreMa").text( '- '+$("#selectMaxPre option:selected").text() );
-      $("#btnPre").attr('data-toggle','dropdown');
     });
 
-    //Cerrar Selects
-     $(document).click(function(){
-      $(".dropdownHab").addClass('show');
-      $(".dropdownBan").addClass('show');
-      $(".dropdownAre").addClass('show');
-      $(".dropdownPre").addClass('show');
-    });
 
     //cerrar modal mi cuenta
     $("#btnClose").click(function(){
@@ -940,7 +928,21 @@
         flag = 0;
      }
     });
+    $(document.body).click(function(e){
+         var $box = $('#id_dropdownHab');
+         var $box2 = $('#id_dropdownBan');
+         var $box3 = $('#id_dropdownAre');
+         var $box4 = $('#id_dropdownPre');
+         let myArray = [$box, $box2, $box3, $box4];
 
+          for(let i = 0; i < myArray.length; i++){
+              if(e.target.id !== myArray[i].attr('id') && !$.contains( myArray[i][0], e.target)){
+              console.log("click outside");
+              myArray[i].removeClass('show');
+              }
+             console.log(myArray[i]);
+          }
+          });
 </script>
   </body>
 </html>

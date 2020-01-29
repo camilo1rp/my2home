@@ -2,8 +2,8 @@
 <style type="text/css">
  .boton3 {
   color: #fff !important;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 1em;
+  font-weight: 700;
   padding: 0.5em 1.2em;
   background: rgba(0,0,0,0);
   border: 2px solid;
@@ -12,9 +12,9 @@
   position: relative;
 }
 .boton3:hover {
-  background: black;
+  background: #17a2b8;
   color: #fff !important;
-  b
+  }
 </style>
 
 <div class="col-4 col-md-4 col-lg-8">
@@ -36,7 +36,7 @@
       </li>
       <li><a href="about.html">{% trans 'About' %}</a></li>
       <li><a href="{% url 'property:contact'%}">{% trans 'Contact' %}</a></li>
-      <li class="liBtnCuenta"><button id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">{% trans 'My Account' %}</button>
+      <li class="liBtnCuenta"><button  id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">{% trans 'My Account' %}</button>
       </li>
     </ul>
   </nav>
