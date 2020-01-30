@@ -112,7 +112,7 @@ class ListProperty(ListView):
             elif k in filters_labels:
                 filters_active[filters_labels[k]] = v
                 filters_active.pop(k, None)
-                
+
         # format price
         try:
             filters_active['Min price'] = "${:0,.0f}".format(int(filters_active['Min price'])).replace(',', '.')
