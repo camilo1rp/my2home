@@ -9,6 +9,7 @@ from email.mime.image import MIMEImage
 from smtplib import SMTPAuthenticationError
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.forms import modelformset_factory
@@ -37,12 +38,13 @@ class ListProperty(ListView):
         filter_index = request.GET.get('remove')
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
-        filters_names = ['City','type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
-                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte',]
-        filters_values = [request.GET.get('select-city'), request.GET.get('list-types'), request.GET.get('offer-types'), request.GET.get('room_min'),
+        filters_names = ['City', 'type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
+                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', ]
+        filters_values = [request.GET.get('select-city'), request.GET.get('list-types'), request.GET.get('offer-types'),
+                          request.GET.get('room_min'),
                           request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
                           request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
-                          request.GET.get('price_max'),]
+                          request.GET.get('price_max')]
         filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Business type'): gettext('Sale')},
                           'RENT / ARRENDAMIENTO': {gettext('Business type'): gettext('Rent')},
                           'SWAP / PERMUTA': {gettext('Business type'): gettext('Swap')},
@@ -61,14 +63,9 @@ class ListProperty(ListView):
         filters_dict = {}
 
         if current_filters:
-            print('current_filters')
-            print(current_filters)
             filters_dict = ast.literal_eval(current_filters)
-            print('filters_dict:')
-            print(filters_dict)
             filters_dict.pop(list(filters_dict.items())[int(filter_index)][0])
             if 'City' in filters_dict:
-                print("got_in")
                 city = filters_dict['City']
 
         # assign data to filters
@@ -102,9 +99,7 @@ class ListProperty(ListView):
             query = self.model.objects.filter(**filters_query)
 
         # check location filter
-        print(city)
         if city not in ['ALL', None]:
-            print("iinnn")
             prop_with_address = [prop for prop in query if prop.address_col.all()]
             query = [q for q in prop_with_address if q.address_col.get().ciudad.name == city]
 
@@ -117,15 +112,45 @@ class ListProperty(ListView):
             elif k in filters_labels:
                 filters_active[filters_labels[k]] = v
                 filters_active.pop(k, None)
-        print('filters_dict:')
-        print(filters_dict)
-        print('query:')
-        print(query)
+
+        # format price
+        try:
+            filters_active['Min price'] = "${:0,.0f}".format(int(filters_active['Min price'])).replace(',', '.')
+        except KeyError:
+            try:
+                filters_active['Min precio'] = "${:0,.0f}".format(int(filters_active['Min precio'])).replace(',', '.')
+            except KeyError:
+                pass
+        try:
+            filters_active['Max price'] = "${:0,.0f}".format(int(filters_active['Max price'])).replace(',', '.')
+        except KeyError:
+            try:
+                filters_active['Max precio'] = "${:0,.0f}".format(int(filters_active['Max precio'])).replace(',', '.')
+            except KeyError:
+                pass
+
+        # format area
+        try:
+            filters_active['Min area'] = "{:0,.0f }m\u00b2".format(int(filters_active['Min area'])).replace(',', '.')
+        except KeyError:
+            try:
+                filters_active['Min área'] = "{:0,.0f}m\u00b2".format(int(filters_active['Min área'])).replace(',', '.')
+            except KeyError:
+                pass
+        try:
+            filters_active['Max area'] = "{:0,.0f }m\u00b2".format(int(filters_active['Max area'])).replace(',', '.')
+        except KeyError:
+            try:
+                filters_active['Max área'] = "{:0,.0f}m\u00b2".format(int(filters_active['Max área'])).replace(',', '.')
+            except KeyError:
+                pass
+
         # assign query and filters to context
         self.object_list = query
         context = self.get_context_data()
         context['filters'] = filters_dict
         context['filters_active'] = filters_active
+
         if not request.is_ajax():
             return self.render_to_response(context)
         return render(request, 'properties/property_list.html', context)
@@ -150,7 +175,7 @@ def property_following(request):
         return render(request, 'properties/property_list.html', {'object_list': all_properties})
 
 
-class CreateProperty(CreateView):
+class CreateProperty(LoginRequiredMixin, CreateView):
     model = Property
     template_name = 'properties/new_property.html'
     form_class = PropertyForm
@@ -175,7 +200,7 @@ class CreateProperty(CreateView):
     #
 
 
-class UpdateProperty(UpdateView):
+class UpdateProperty(LoginRequiredMixin, UpdateView):
     model = Property
     template_name = 'properties/new_property.html'
     form_class = PropertyForm
@@ -428,7 +453,7 @@ def Template(request):  # view for debugging
 
 
 def contact_us(request):
-    form = ContactForm(request.POST or None,)
+    form = ContactForm(request.POST or None, )
     if request.method == 'POST':
         if form.is_valid():
             name_in = form.cleaned_data['name']
@@ -447,4 +472,3 @@ def contact_us(request):
             send_mail(subject, message, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
             # ****************
     return render(request, 'properties/contact.html', {'form': form})
-
