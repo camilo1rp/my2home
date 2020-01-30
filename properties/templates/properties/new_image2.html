@@ -84,7 +84,7 @@
     }
     .contenedor{
         width: 35%;
-        height: 300px;
+        height: auto;
         margin: 0 auto;
         border: solid #ccc9c9;
         background-color: white;
@@ -144,7 +144,7 @@
                     <div class="row">
                             {{ form.management_form }}
                             {%for formu in form%}
-                                <div id="div{{ forloop.counter|add:-1 }}" style="display: none; margin-top: 11%;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
+                                <div id="div{{ forloop.counter|add:-1 }}" style="display: none;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
                                     <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
                                         <div class="col-md-12 img{{ forloop.counter|add:-1 }}">
                                             {{formu}}
@@ -155,7 +155,7 @@
                                 </div>
                             {% endfor %}
                             <div class="col-md-12">
-                                <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 1%;">
+                                <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 4%;">
                                     <div class="alert alert-info" style="font-weight: bold;">
                                         <label>
                                             <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i>
@@ -163,7 +163,7 @@
                                         <br/>
                                         {% trans 'all done!' %}
                                     </div>
-                                <p class="animated infinite heartBeat">{% trans 'Choose a main image' %}</p>
+                                <p class="animated infinite heartBeat" id="msjMain">{% trans 'Choose a main image' %}</p>
                                 </div>
 
                                 <br/>
@@ -224,19 +224,23 @@
 <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
 
 <script>
-        for (let index = 0; index <= 7; index++) {
-            var id = "#id_form-"+index+"-main"
-            var radio_id = "#radio_"+index
-            var clear_id ="#form-"+index+"-image-clear_id"
-            var clear_id2 ="form-"+index+"-image-clear_id"
-            $(id).hide();
-            $('label[for=id]').hide();
-            $(radio_id).prop('checked',$(id).prop('checked'));
-            $(clear_id).hide();
-            $('label[for=clear_id2]').hide();
+        function ocultaText(){
+            for (let index = 0; index <= 7; index++) {
+                var id = "#id_form-"+index+"-main"
+                var radio_id = "#radio_"+index
+                var clear_id ="#form-"+index+"-image-clear_id"
+                $(id).hide();
+                $(radio_id).prop('checked',$(id).prop('checked'));
+                $(clear_id).hide();
+                $('label[for="id_form-'+index+'-main"]').hide();
+                $('label[for="form-'+index+'-image-clear_id"]').hide();
+                $('label[for="id_form-'+index+'-image"]').hide();
+                console.log(' itero '+index)
 
+            }
         }
-
+        
+    ocultaText();    
     var cantidad;
     var contador = 0;
     var completo = 0;
@@ -262,6 +266,7 @@
             $("#id_form-"+index+"-main").prop('checked',false);
         }
         $("#id_form-"+id+"-main").prop('checked',true);
+        $('#msjMain').hide();
     }
 
     function eventosImg(){
@@ -320,7 +325,8 @@
             })
         }
     });
-eventosImg();
+
+    eventosImg();
 
     function archivo(evt) {
         var files = evt.target.files;
@@ -450,6 +456,7 @@ eventosImg();
 
     var deleteClear;
     function borrarImg(id) {
+        //Oculta texT
         Swal.fire({
                 title: 'Confirmar ..?',
                 text: "Desea Eliminar esta Imagen",
@@ -460,6 +467,8 @@ eventosImg();
                 confirmButtonText: 'Eliminar',
             }).then((result) => {
                 if (result.value) {
+                    $('#msjMain').show();
+                    ocultaText();
                     $("#idCard_"+id).remove();
                     $("#form-"+id+"-image-clear_id").prop('checked',true);
 
