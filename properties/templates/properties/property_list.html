@@ -1,14 +1,39 @@
 {% load static %}
 {% load property_tags %}
 {% load i18n %}
+<style>
+  .filter{
+    color: #0c5460;
+    background-color: #ffffff;
+    border-color: #608288;
+    padding: 1vh;
+    font-size: 1rem;
+    border: #608288 1px solid;
+  }
+  .alertas{
+    color: #0c5460;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #364e68;
+    border-radius: .25rem;
+    font-weight: bold;
+
+  }
+
+
+  }
+
+
+</style>
 <div  class="container">
 
     {% if filters_active %}
         <div class="information" id="descripcion">
-          <div class="alert alert-info" style="font-weight: bold;text-align: center; font-size:1.5em;">
+          <div class="alertas">
             <span><i class="fas fa-filter"></i>{% trans 'Filters'%} :</span>
               {% for label, value in filters_active.items %}
-                <span class="badge badge-info">{{ label }}: {{ value }}
+                <span class="badge filter">{{ label }}: {{ value }}
                   <a onclick="filter_remove({{ forloop.counter|add:-1 }})"><i class="fas fa-times-circle"></i></a></span>
               {% endfor %}
           </div>
@@ -60,32 +85,33 @@
               <hr>
               <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
               
-              <div class="row">
+              <div class="row px-0">
                 <div class="col-3 col-md-3">
                     <span class="property-specs">{% trans 'Beds' %}</span>
                     <span class="property-specs-number"> 
                     <i class="fas fa-bed" style="color: #7f7f7f;"></i>
                     &nbsp;{{ prop.rooms }}</span>
                 </div>
-                <div class="col-3 col-md-3">
+                <div class="col-3 col-md-3 px-0">
                    <span class="property-specs">{% trans 'Baths' %}</span>
                    <span class="property-specs-number">
                    <i class="fas fa-bath" style="color: #7f7f7f;"></i>
                    &nbsp;{{ prop.baths }}</span>
                 </div>
-                <div class="col-3 col-md-3">
+                <div class="col-3 col-md-3 px-0">
                   <span class="property-specs">{% trans 'Parking' %}</span>
                   <span class="property-specs-number">
                   <i class="fas fa-car" style="color: #7f7f7f;"></i>
                   &nbsp;{{ prop.parking }}
                   </span>
                 </div>
-                <div class="col-3 col-md-3">
+                <div class="col-3 col-md-3 px-0">
                   <span class="property-specs">{% trans 'Sq m' %}</span>
                   <span class="property-specs-number d-print-inline">
                   <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
                   &nbsp;{{ prop.area_total }}</span>
                 </div>
+
                
               </div>
 
