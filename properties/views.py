@@ -112,7 +112,7 @@ class ListProperty(ListView):
             elif k in filters_labels:
                 filters_active[filters_labels[k]] = v
                 filters_active.pop(k, None)
-
+                
         # format price
         try:
             filters_active['Min price'] = "${:0,.0f}".format(int(filters_active['Min price'])).replace(',', '.')
@@ -131,14 +131,14 @@ class ListProperty(ListView):
 
         # format area
         try:
-            filters_active['Min area'] = "{:0,.0f }m\u00b2".format(int(filters_active['Min area'])).replace(',', '.')
+            filters_active['Min area'] = "{:0,.0f}m\u00b2".format(int(filters_active['Min area'])).replace(',', '.')
         except KeyError:
             try:
                 filters_active['Min área'] = "{:0,.0f}m\u00b2".format(int(filters_active['Min área'])).replace(',', '.')
             except KeyError:
                 pass
         try:
-            filters_active['Max area'] = "{:0,.0f }m\u00b2".format(int(filters_active['Max area'])).replace(',', '.')
+            filters_active['Max area'] = "{:0,.0f}m\u00b2".format(int(filters_active['Max area'])).replace(',', '.')
         except KeyError:
             try:
                 filters_active['Max área'] = "{:0,.0f}m\u00b2".format(int(filters_active['Max área'])).replace(',', '.')
