@@ -33,7 +33,7 @@
                 {% endwith %}
                 {% with address=prop.address_col.get %}
                 <h1 class="mb-2">{{ address }}</h1>
-              <p class="mb-5"><strong class="h2 text-success font-weight-bold">{% trans 'From' %}{{ prop.price_str }}</strong></p>
+              <p class="mb-5"><strong class="h2 text-success font-weight-bold">{% trans 'From' %} {{ prop.price_str }}</strong></p>
               <p><a href="{% url 'property:detail' prop.id %}" class="btn btn-white btn-outline-white py-3 px-5 rounded-0 btn-2">{% trans 'See Details' %}</a></p>
                 {% endwith %}
             </div>
