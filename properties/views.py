@@ -45,9 +45,9 @@ class ListProperty(ListView):
                           request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
                           request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
                           request.GET.get('price_max')]
-        filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Business type'): gettext('Sale')},
-                          'RENT / ARRENDAMIENTO': {gettext('Business type'): gettext('Rent')},
-                          'SWAP / PERMUTA': {gettext('Business type'): gettext('Swap')},
+        filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Offer Type'): gettext('Sale')},
+                          'RENT / ARRENDAMIENTO': {gettext('Offer Type'): gettext('Rent')},
+                          'SWAP / PERMUTA': {gettext('Offer Type'): gettext('Swap')},
                           'APT': {gettext('Property type'): gettext('Apartment')},
                           'HOU': {gettext('Property type'): gettext('House')},
                           'LAN': {gettext('Property type'): gettext('Land')},
@@ -287,19 +287,23 @@ def property_detail(request, prop_id):
         if form.is_valid():
             name_in = form.cleaned_data['name']
             phone_in = form.cleaned_data['phone']
+            message_in = form.cleaned_data['message']
             try:
                 email_in = form.cleaned_data['email']
             except KeyError:
                 print("no email provided")
                 email_in = 'noemail@nomail.com'
             contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in,
-                                                       message=form.cleaned_data['message'])
-
+                                                       message=message_in)
+            address = prop.address_col.get()
+            address_parsed = urllib.parse.quote(str(address))
+            print(address_parsed)
             # ******** email sending ********
             # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
             file = "/media/{}".format(prop.gallery.get(main=True).image)
             data = {'propiedad': contact.propiedad, 'name': contact.name, 'phone': contact.phone,
-                    'email': contact.email, 'image': file}
+                    'email': contact.email, 'message':contact.message,
+                    'image': file, 'addr_parse': address_parsed}
             html_content = render_to_string('properties/contact_email.html', {'data': data})
             subject = '{} esta interesad@ en la propiedad: {} - {}'.format(data['name'].title(),
                                                                            data['propiedad'].title,
@@ -318,10 +322,12 @@ def property_detail(request, prop_id):
                 msg.send()
                 message = gettext('Your information has been sent to our agents! Thank you')
                 print("email_sent")
+                return render(request, 'properties/contact_form.html', {'mess': message, })
             except SMTPAuthenticationError:
                 message = gettext('Something went wrong, please try again or contact agent by phone or whatsapp')
+                return render(request, 'properties/contact_form.html', {'form': form, 'mess': message, })
             # ****************
-            return render(request, 'properties/contact_form.html', {'form': form, 'mess': message, })
+
         elif request.is_ajax():
             return render(request, 'properties/contact_form.html', {'form': form})
     try:

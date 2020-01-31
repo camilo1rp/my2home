@@ -48,6 +48,7 @@
         } 
         .centrar{
             text-align: center;
+            white-space: nowrap;
         }
         .centrar0{
             margin: 0 auto;
@@ -181,26 +182,17 @@
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.area_total.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-8">
                                                                         {{form.area_total}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3" style="text-align: -webkit-right;">
+                                                                <div class="col-md-3" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.area_built.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-8">
                                                                         {{form.area_built}}
-                                                                        <span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
-                                                                        {{form.year.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-6 centrar0">
-                                                                        {{form.year}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
@@ -210,6 +202,15 @@
                                                                     </label>
                                                                     <div class="col-md-6">
                                                                         {{form.estrato}}
+                                                                        <span class="help-block"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                        {{form.year.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-8 centrar0">
+                                                                        {{form.year}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>

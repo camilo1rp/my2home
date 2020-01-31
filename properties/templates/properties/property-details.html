@@ -125,37 +125,47 @@
               </div>
             </div>
             <div class="bg-white property-body border-bottom border-left border-right">
-              <div class="row mb-5">
-                <div class="col-md-6">
-                  <strong class="text-success h1 mb-3">{{ prop.price_str }}</strong>
+              <div class="row mb-3">
+                <div class="col-md-6 ">
+                  <strong class="text-secondary h4 mb-2 ">{{ prop.title }}</strong>
                 </div>
-                <div class="row">
-                  <div class="col-3 col-md-3">
+                <div class="col-md-6 text-right">
+                  <strong class="text-success h1 mb-2">{{ prop.price_str }}</strong>
+                </div>
+
+              </div>
+              <div class="row mb-5 text-center">
+                  <div class="col-4 col-md-2">
                       <span class="property-specs">{% trans 'Beds' %}</span>
                       <span class="property-specs-number">
                       <i class="fas fa-bed" style="color: #7f7f7f;"></i>
                       &nbsp;{{ prop.rooms }}</span>
                   </div>
-                  <div class="col-3 col-md-3">
+                  <div class="col-4 col-md-2">
                      <span class="property-specs">{% trans 'Baths' %}</span>
                      <span class="property-specs-number">
                      <i class="fas fa-bath" style="color: #7f7f7f;"></i>
                      &nbsp;{{ prop.baths }}</span>
                   </div>
-                  <div class="col-3 col-md-3">
+                  <div class="col-4 col-md-2">
                     <span class="property-specs">{% trans 'Parking' %}</span>
                     <span class="property-specs-number">
                     <i class="fas fa-car" style="color: #7f7f7f;"></i>
                     &nbsp;{{ prop.parking }}
                     </span>
                   </div>
-                  <div class="col-3 col-md-3">
-                    <span class="property-specs">{% trans 'Sq m' %}</span>
+                  <div class="col-6 col-md-3">
+                    <span class="property-specs">{% trans 'total area' %}</span>
                     <span class="property-specs-number">
                     <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
-                    &nbsp;{{ prop.area_total }}</span>
+                    &nbsp;{{ prop.area_total }}{% trans 'Sq m' %}</span>
                   </div>
-                </div>
+                  <div class="col-6 col-md-3">
+                    <span class="property-specs">{% trans 'built area' %}</span>
+                    <span class="property-specs-number">
+                    <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
+                    &nbsp;{{ prop.area_built }}{% trans 'Sq m' %}</span>
+                  </div>
               </div>
               <div class="row mb-5">
                 <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
@@ -174,13 +184,27 @@
                     {% endif %}
                   {% endif %}
                 </div>
+                {% with business=prop.type_business.all %}
                 <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
-                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'Year Built' %}</span>
-                  <strong class="d-block">{{prop.year}}</strong>
+                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'Type of offer' %}</span>
+                        <strong  style="display: block ruby">
+                      {% for busi in business %}
+                        {% if busi.name == 'SALE / VENTA' %}
+                          {% trans 'Sale'%}&nbsp;&nbsp;
+                        {% endif %}
+                        {% if busi.name == 'RENT / ARRENDAMIENTO' %}
+                          {% trans 'Lend'%}&nbsp;&nbsp;
+                        {% endif %}
+                        {% if busi.name == 'SWAP / PERMUTA' %}
+                          {% trans 'swap'%}
+                        {% endif %}
+                      {% endfor %}
+                      {% endwith %}
+                        </strong>
                 </div>
                 <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
-                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'Price' %}</span>
-                  <strong class="d-block">{{prop.price_str}}</strong>
+                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'Year' %}</span>
+                  <strong class="d-block">{{prop.year}}</strong>
                 </div>
               </div>
               <h2 class="h4 text-black">{% trans 'More Info' %}</h2>
