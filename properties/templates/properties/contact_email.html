@@ -7,7 +7,7 @@
     <!-- META SECTION -->
     <title>Email Contact</title>
    
-   <style type="text/css">
+   <style>
        .card {
           position: relative;
           margin: .5rem 0 1rem 0;
@@ -22,34 +22,42 @@
 </head>
 
 <body>
-
-
-<div style="padding: 15px;width: 65%;height: 280px;box-shadow: 0px 3px 9px 5px rgba(0,0,0,0.75);" align="center" class="card">
+<div align="center">
+<div style="padding: 15px;width: 90%; height:150px;box-shadow: 0px 3px 9px 5px rgba(0,0,0,0.75);" align="center" class="card">
   <div style="text-align: left;width: 100%;">
     <h2>Cliente Interesado</h2>
   </div>
 
-  <div style="background-color: #eee !important;width: 45%;float: left;margin-left:2%; margin-right: 4%;">
+  <div style="background-color: #eee !important;width: 60%;float: left;margin-left:2%; margin-right: 4%;">
       <div style="text-align: center;">
- 
-        <p class="color" style="margin-bottom: 8%;">Nombre:&nbsp;&nbsp;<strong style="font-size: 22px;">{{data.name}}</strong></p>
-        <p class="color" style="margin-bottom: 7%;">Email:&nbsp;&nbsp;<strong style="font-size: 22px;">{{data.email}}</strong></p>
-        <p class="color">Telefono:&nbsp;&nbsp;<strong style="font-size: 22px;">{{data.phone}}</strong></p>
+         <table style="width:100%">
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Telefono</th>
+          </tr>
+          <tr>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.phone}}</td>
+          </tr>
+        </table>
       </div>
+      <p class="color">Mensaje:&nbsp;&nbsp;<a style="font-size: 11px;">{{data.message}}</a></p>
   </div>
 
-  <div style="width: 45%; float: left;">
-    <a href="https://api.whatsapp.com/send?phone=51955081075&text=Hola%21%20Quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Varela%202.">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF-52JbMRNbBkkd_2z6yjU_0xD-7ygQ9I9Wu7GN9MScDhQD04L&s"  width="200" height="150">
+  <div style="width: 30%; float: left;">
+    <a href="https://api.whatsapp.com/send?phone=+57{{data.phone}}&text=Hola%20{{data.name}}%2C%20quieres%20mas%20informacion%20sobre%20el%20inmueble%20{{data.propiedad.title}}%2C%20ubicado%20en%20%3A%20{{data.addr_parse}}%3F%20Enlace%3A%20Inmueblesfusa.com/property_detail/{{data.propiedad.id}}">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF-52JbMRNbBkkd_2z6yjU_0xD-7ygQ9I9Wu7GN9MScDhQD04L&s"  width="100" height="100">
     </a>
   </div>
 </div>
-
-<div style=" padding: 15px;width: 65%;height: 560px; box-shadow: 0px 3px 9px 5px rgba(0,0,0,0.75)" align="center" class="card">
+<br>
+<div style=" padding: 15px;width: 90%;height: 600px; box-shadow: 0px 3px 9px 5px rgba(0,0,0,0.75)" align="center" class="card">
  {% with address=data.propiedad.address_col.get %}
   <div style="text-align: left;width: 100%;">
-    <h2>{{data.propiedad.title}}</h2>  
-  </div>  
+    <h2>{{data.propiedad.title}}</h2>
+  </div>
 
   <div style="width: 50%;float: left;margin-left:2%;margin-right: 4%;background-color: #eee !important;">
       <div style="text-align: center;">
@@ -61,7 +69,6 @@
        {{data.propiedad.description}}
      </div>
   </div>
-
   <div style="width: 40%; float: left;background-color: #eee !important;">
     <div style="text-align: left;margin-left: 4%;">
       <p class="color"><strong>Tipo Propiedad: </strong>{{data.propiedad.type_property}}</p>
@@ -76,13 +83,12 @@
       <p class="color"><strong>Codigo: </strong>{{data.propiedad.code}}</p>
     </div>
   </div>
-
-  <div>
-      <p style="text-align: center; font-size: 17px;margin-top: 55%;font-weight: bold">Correo electrónico enviado autoamticamente. No responder. Preguntas o requerimientos, por favor contáctenos en xxxx@xxxxxxx.xxx!
-      </p>
-  </div>
-
 </div>
+<div>
+     <p  style="text-align: center; white-space: nowrap; font-size: 17px;font-weight: bold">Correo electrónico enviado autoamticamente. No responder. Preguntas o requerimientos, por favor contáctenos en xxxx@xxxxxxx.xxx!
+      </p>
+    </div>
  {% endwith %}
+</div>
 </body>
 </html>

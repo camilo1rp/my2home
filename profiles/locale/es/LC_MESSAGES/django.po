@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 09:53-0500\n"
+"POT-Creation-Date: 2020-01-31 16:07-0500\n"
 "PO-Revision-Date: 2020-01-15 13:43+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,42 +59,46 @@ msgstr ""
 msgid "Username"
 msgstr "Nombre de Usuario"
 
-#: profiles/templates/profiles/new_user.html:58
+#: profiles/templates/profiles/new_user.html:56
+msgid "email"
+msgstr ""
+
+#: profiles/templates/profiles/new_user.html:68
 msgid "Password"
 msgstr "Contraseña "
 
-#: profiles/templates/profiles/new_user.html:68
+#: profiles/templates/profiles/new_user.html:78
 msgid "Confirm Password"
 msgstr "Confirmar Contraseña"
 
-#: profiles/templates/profiles/new_user.html:87
+#: profiles/templates/profiles/new_user.html:96
 msgid "Register"
 msgstr "Registrarse"
 
-#: profiles/templates/profiles/profile.html:42
+#: profiles/templates/profiles/profile.html:40
 msgid "Perfil"
 msgstr ""
 
-#: profiles/templates/profiles/profile.html:46
+#: profiles/templates/profiles/profile.html:44
 msgid "Phone"
 msgstr "Teléfono"
 
-#: profiles/templates/profiles/profile.html:58
+#: profiles/templates/profiles/profile.html:56
 #, fuzzy
 #| msgid "gender"
 msgid "Gender"
 msgstr "sexo"
 
-#: profiles/templates/profiles/profile.html:68
+#: profiles/templates/profiles/profile.html:66
 msgid "City"
 msgstr "Ciudad"
 
-#: profiles/templates/profiles/profile.html:78
+#: profiles/templates/profiles/profile.html:76
 #, fuzzy
 #| msgid "company"
 msgid "Company"
 msgstr "empresa"
 
-#: profiles/templates/profiles/profile.html:97
+#: profiles/templates/profiles/profile.html:95
 msgid "Save Changes"
 msgstr "Guardar Cambios"

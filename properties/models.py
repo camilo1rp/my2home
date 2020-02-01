@@ -40,7 +40,7 @@ class Property(models.Model):
     title = models.CharField(_('title'), max_length=50)
     title_slug = models.SlugField(max_length=70)
     description = models.TextField(_('description'), max_length=500)
-    type_business = models.ManyToManyField('BusinessType', related_name='business', verbose_name=_('business type'))
+    type_business = models.ManyToManyField('BusinessType', related_name='business', verbose_name=_('offer type'))
 
     # analytic
     seen = models.IntegerField(_('seen'), default=0)
@@ -160,7 +160,7 @@ class Contact(models.Model):
     propiedad = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='contacts')
     name = models.CharField(_('name'), max_length=50)
     email = models.EmailField(_('email'), max_length=100, null=True, blank=True)
-    phone = models.IntegerField(_('phone'), validators=[validate_phone])
+    phone = models.BigIntegerField(_('phone'), validators=[validate_phone])
     message = models.TextField(_('message'), max_length=500, blank=True, null=True)
 
     def __str__(self):

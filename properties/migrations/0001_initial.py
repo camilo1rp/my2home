@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 ('followers', models.ManyToManyField(related_name='following', through='properties.Following', to=settings.AUTH_USER_MODEL)),
                 ('manager', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='properties', to=settings.AUTH_USER_MODEL, verbose_name='manager')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='my_properties', to=settings.AUTH_USER_MODEL, verbose_name='owner')),
-                ('type_business', models.ManyToManyField(related_name='business', to='properties.BusinessType', verbose_name='business type')),
+                ('type_business', models.ManyToManyField(related_name='business', to='properties.BusinessType', verbose_name='offer type')),
             ],
             options={
                 'verbose_name_plural': 'properties',
