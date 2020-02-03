@@ -77,22 +77,25 @@ class ListProperty(ListView):
         # check if following action, otherwise assign filters to query
         if follow not in ['None', None]:
             if request.GET.get('prop_id'):  # if prop_id in request. it means following property action
-                try:
+                prop = Property.objects.get(id=request.GET.get('prop_id'))
+                if request.user.is_authenticated:
                     user = self.request.user
-                    prop = Property.objects.get(id=request.GET.get('prop_id'))
-                except:
-                    return HttpResponse(json.dumps({'command': -1, 'prop_id': prop.id}),
-                                        content_type='application/json')
-                if user.following.filter(id=prop.id):
-                    user.following.remove(prop)
-                    user.save()
-                    print("{} stopped following {}".format(user, prop))
-                    return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}), content_type='application/json')
+                    if user.following.filter(id=prop.id):
+                        user.following.remove(prop)
+                        user.save()
+                        print("{} stopped following {}".format(user, prop))
+                        return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}), content_type='application/json')
+                    elif user != prop.manager:
+                        follows = Following(user=user, property_followed=prop)
+                        follows.save()
+                        print("{} started following {}".format(user, prop))
+                        return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}), content_type='application/json')
+                    else:
+                        print('user owns this property')
+                        return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}), content_type='application/json')
                 else:
-                    follows = Following(user=user, property_followed=prop)
-                    follows.save()
-                    print("{} started following {}".format(user, prop))
-                    return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}), content_type='application/json')
+                    return HttpResponse(json.dumps({'command': -1, 'prop_id': -1}), content_type='application/json')
+
         elif filters_dict:
             filters_query = filters_dict.copy()
             filters_query.pop('City', None)
@@ -194,6 +197,11 @@ class CreateProperty(LoginRequiredMixin, CreateView):
         context['page'] = 0
         return context
 
+    def get_initial(self):
+        owner = self.request.user
+        return {
+            'owner': owner,
+        }
     # def get(self, request, *args, **kwargs):
     #     self.business = BusinessType.objects.all()
     #     return super().get(request, *args, **kwargs)
@@ -273,7 +281,8 @@ def create_image(request, prop_id=None):
                                                                  main=main_in)
                 except KeyError:
                     continue
-            return HttpResponseRedirect(reverse('property:index', ))
+            # return HttpResponseRedirect(reverse('property:index', ))
+            return HttpResponseRedirect(reverse('property:detail', args=(prop.id,)))
 
     images_formset = images_formset(queryset=images)
 
