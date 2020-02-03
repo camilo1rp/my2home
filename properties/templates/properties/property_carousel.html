@@ -2,7 +2,7 @@
 {% load property_tags %}
 {% load i18n %}
 
-<div class="slide-one-item home-slider owl-carousel">
+<div class="slide-one-item home-slider owl-carousel" title="{% trans 'hold left-click to see full image' %}">
   {% for prop in properties %}
     {% with gallery=prop.gallery.all %}
         {%if gallery %}

@@ -27,6 +27,9 @@
     <!--fontawesome-->
     <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
     <!--fontawesome-->
+<!--    swal alerts-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <style type="text/css">
 .iconos{
   .color: #7f7f7f;
@@ -611,7 +614,7 @@
   <a href="https://api.whatsapp.com/send?phone=573108181802&text=Quisiera%20mas%20informacion%20sobre%20los%20inmuebles%20y%20servicios%20que%20ofrecen" class="float" target="_blank">
   <i class="fa fa-whatsapp my-float"></i>
   </a>
-      
+
   <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
   <script src="{% static 'js/jquery-ui.js' %}"></script>
   <script src="{% static 'js/popper.min.js' %}"></script>
@@ -644,10 +647,24 @@
         }else if(command == 0){
             $(id).removeClass("property-unfavorite");
             $(id).addClass("property-favorite");
+        }else if(command == 2){
+          swal.fire("Cannot add it to favourite!", "You pubished this property", "error");
         }
         else {
-        window.location.href='{% url "account:login" %}'
-        }
+         Swal.fire({
+                title: 'Add to favourites',
+                text: "{% trans 'You need to login to add property to favorites' %}",
+                showCancelButton: true,
+                confirmButtonColor: '#364e68',
+                cancelButtonColor: '#bb1f1f',
+                cancelButtonText: 'cancel',
+                confirmButtonText: 'login',
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href='{% url "account:login" %}'
+                }
+             });
+             }
      });
      }
      function filter_remove(index){
@@ -785,7 +802,7 @@
           }, 'slow');
         });
     });
-  
+
     $(".idBuy > li .idRent").click(function(){
         $(".idBuy > li .idRent").removeAttr("href");
         $.ajax({
@@ -846,7 +863,7 @@
               }, 'slow');
         });
     });
-    
+
     $('#liAparta > li .liLand').click(function () {
         $('#liAparta > li .liLand').removeAttr("href");
         $.ajax({
@@ -876,7 +893,7 @@
           }, 'slow');
         });
     });
-    
+
     $('#liAparta > li .liFarms').click(function () {
         $('#liAparta > li .liFarms').removeAttr("href");
         $.ajax({

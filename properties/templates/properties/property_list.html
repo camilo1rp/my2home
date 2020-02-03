@@ -63,20 +63,25 @@
               {%if gallery %}
                 {% for img in gallery%}
                   {%if img.main %}
-                      <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+                      <img src="{{img.image.url}}" height="230" width="350" style="max-width:100%;" alt="Image">
                   {% endif %}
                 {% endfor %}
               {% else %}
-                <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">
+                <img src="{% static 'images/img_4.jpg' %}" height="230" width="350" alt="Image" class="img-fluid">
               {% endif %}
               {% endwith %}
               </a>
             <div class="p-4 property-body data">
               {%if prop in user.following.all %}
-              <a class="property-unfavorite heart" id="{{prop.id}}" onclick="follows( '{{prop.id}}' )"><span class="icon-heart-o"></span></a>
+              <div title="{% trans 'Remove from favourites' %}">
+                <a class="property-unfavorite heart" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
+              </div>
               {% else %}
-              <a class="property-favorite heart" id="{{prop.id}}" onclick="follows( '{{prop.id}}' )"><span class="icon-heart-o"></span></a>
+              <div title="{% trans 'Add to favourites' %}">
+                <a class="property-favorite heart" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
+              </div>
               {% endif %}
+
               {% with address=prop.address_col.get %}
               <strong class="property-price text-primary text-success" style="float: right;"> {{ prop.price_str }}</strong>
               <h2 class="property-title">
@@ -111,10 +116,7 @@
                   <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
                   &nbsp;{{ prop.area_total }}</span>
                 </div>
-
-               
               </div>
-
             </div>
           </div>
         </div>
