@@ -25,21 +25,16 @@
         {%if gallery %}
           {% for img in gallery%}
             {%if img.main %}
-                <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+                <img src="{{img.image.url}}" height="240" width="350" alt="Image" style="max-width:100%;">
               {% endif %}
           {% endfor %}
         {% else %}
-          <img src="{% static 'images/img_4.jpg' %}" alt="Image" class="img-fluid">
+          <img src="{% static 'images/img_4.jpg' %}" height="240" width="350" alt="Image" class="img-fluid">
         {% endif %}
         {% endwith %}
 <!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
         </a>
-           <div class="p-4 property-body data">
-              {%if prop in user.following.all %}
-              <a class="property-unfavorite heart" id="{{prop.id}}" onclick="follows( '{{prop.id}}' )"><span class="icon-heart-o"></span></a>
-              {% else %}
-              <a class="property-favorite heart" id="{{prop.id}}" onclick="follows( '{{prop.id}}' )"><span class="icon-heart-o"></span></a>
-              {% endif %}
+            <div class="p-4 property-body data">
               {% with address=prop.address_col.get %}
               <strong class="property-price text-primary text-success" style="float: right;"> {{ prop.price_str }}</strong>
               <h2 class="property-title">
@@ -47,11 +42,11 @@
               </h2>
               <hr>
               <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{ address }}</span>
-              
+
               <div class="row px-0">
                 <div class="col-3 col-md-3">
                     <span class="property-specs">{% trans 'Beds' %}</span>
-                    <span class="property-specs-number"> 
+                    <span class="property-specs-number">
                     <i class="fas fa-bed" style="color: #7f7f7f;"></i>
                     &nbsp;{{ prop.rooms }}</span>
                 </div>
@@ -74,9 +69,7 @@
                   <i class="fas fa-chart-area" style="color: #7f7f7f;"></i>
                   &nbsp;{{ prop.area_total }}</span>
                 </div>
-              
               </div>
-
             </div>
     </div>
   </div>

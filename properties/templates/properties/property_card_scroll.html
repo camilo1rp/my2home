@@ -32,6 +32,7 @@
         width: 100%;
       }
     </style>
+    <base target="_parent">
 </head>
 <body>
    
@@ -55,7 +56,7 @@
         <div class="item">
       {% endif %}
       <div class="property-entry">
-        <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
+        <a href="{% url 'property:update' prop.id %}" class="property-thumbnail">
           {% with business=prop.type_business.all %}
           <div class="offer-type-wrap">
             {% for busi in business %}
@@ -79,7 +80,10 @@
           {%if gallery %}
             {% for img in gallery%}
               {%if img.main %}
-                  <img src="{{img.image.url}}" alt="Image" class="img-fluid">
+                  <img src="{{img.image.url}}" height="240px" width="100%" alt="Image" class="img-fluid">
+                    <span class="offer-type blue" style="text-align: center;height:4em;padding-top: 6px; font-weight: bold;">{{ prop.title }} <br>
+                       {{ address }}
+                    </span>
               {% endif %}
             {% endfor %}
           {% else %}
@@ -93,8 +97,7 @@
         </a>
       </div>
       <div style="width: 100%;text-align: center;">
-          <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
-            <ul class="property-specs-wrap" style="margin: 0%;padding: 0%;">
+           <ul class="property-specs-wrap" style="margin: 0%;padding: 0%;">
                 <li>
                   <span class="property-specs">
                     <i class="fas fa-bed fa-2x"></i>
