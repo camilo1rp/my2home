@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
-    'django_inlinecss',
     'properties.apps.PropertiesConfig',
     'profiles.apps.ProfilesConfig',
     'visits.apps.VisitsConfig',
