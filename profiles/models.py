@@ -27,7 +27,7 @@ class Profile(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('profile:update', args=[self.id])
+        return reverse('account:login')
 
 
 @receiver(post_save, sender=User)

@@ -156,7 +156,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 LOGIN_URL = '/account/login'
-# LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = '/'
 # LOGIN_URL = 'account/login/'
 # LOGOUT_URL = 'logout'
 
@@ -176,3 +176,5 @@ EMAIL_HOST_USER = 'camilo1rp@gmail.com'
 EMAIL_HOST_PASSWORD = 'Deltaz4321$#@!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'

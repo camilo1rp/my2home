@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext
 from .models import Property, AddressCol, Image, Contact, BusinessType
 import string
 
@@ -13,7 +14,10 @@ class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['description'].widget.attrs.update(rows='4', cols='40')
+        self.fields['description'].widget.attrs['placeholder'] = \
+            gettext("Add extra information that adds value to your property. i.e. common areas, services, security, location, etc.")
         self.fields['owner'].empty_label = _('select owner')
+        self.fields['owner'].widget.attrs['disabled'] = True
         self.fields['price_str'].label = _('price')
 
     class Meta:
