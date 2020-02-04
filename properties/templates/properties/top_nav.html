@@ -1,19 +1,21 @@
 {% load i18n %}
 <style type="text/css">
  .boton3 {
-  color: #fff !important;
-  font-size: 1em;
-  font-weight: 700;
-  padding: 0.5em 1.2em;
-  background: rgba(0,0,0,0);
-  border: 2px solid;
-  border-color: #fff;
-  transition: all 1s ease;
-  position: relative;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 0.3em 0.5em;
+    background: rgba(0,0,0,0);
+    border: 1px solid;
+    letter-spacing: .05em;
+    transition: all 1s ease;
+    position: relative;
 }
 .boton3:hover {
-  background: #17a2b8;
+  background: black;
   color: #fff !important;
+  border: black;
+  padding: 11px
   }
 </style>
 
@@ -36,7 +38,7 @@
       </li>
       <li><a href="about.html">{% trans 'About' %}</a></li>
       <li><a href="{% url 'property:contact'%}">{% trans 'Contact' %}</a></li>
-      <li class="liBtnCuenta"><button  id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal" style="font-size: 10px;">{% trans 'My Account' %}</button>
+      <li class="liBtnCuenta"><button  id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal">{% trans 'My Account' %}</button>
       </li>
     </ul>
   </nav>
