@@ -5,9 +5,15 @@ from .models import Profile
 
 
 class UserForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args,**kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['email'].required = True
+
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'email')
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'email')
 
     def clean_username(self):
         user = self.cleaned_data['username']
@@ -19,7 +25,8 @@ class UserForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         emails = [users.user.email for users in Profile.objects.all()]
-        if email in emails:
+        print(email)
+        if email != "" and email in emails:
             self.add_error('email', "email is already registered")
         return email
 
@@ -27,4 +34,4 @@ class UserForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone', 'gender', 'city', 'company')
+        fields = ('phone', 'gender', 'city', 'company', )

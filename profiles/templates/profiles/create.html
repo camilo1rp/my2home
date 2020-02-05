@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new user</title>
+</head>
+<body>
+     <form id="formulario2" action="{% url 'profile:create' %}" method="post">{% csrf_token %}
+      <label>
+        <span>Name</span>
+        {{ form.username }}
+      </label>
+      <label>
+        <span>First Name</span>
+        {{ form.first_name }}
+      </label>
+      <label>
+        <span>Last Name</span>
+        {{ form.last_name }}
+      </label>
+      <label>
+        <span>email</span>
+        {{ form.email }}
+      </label>
+      <label>
+        <span>Password</span>
+        {{ form.password1 }}
+      </label>
+      <label>
+        <span>Password2</span>
+        {{ form.password2 }}
+      </label>
+      <button type="submit" class="submit">Sign Up</button>
+<!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
+     </form>
+</body>
+</html>
