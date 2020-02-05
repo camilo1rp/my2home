@@ -16,16 +16,38 @@
       <div class="modal-body" style="width: 100%;text-align: center;">
         <a class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="{% url 'account:dashboard' %}" role="button">{% trans 'My Profile' %}</a>
         <a class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="{% url 'property:create' %}" role="button">{% trans 'Publish a Property' %}</a>
-
-<!--         <div class="alert alert-primary miCuenta" role="alert">-->
-<!--          <p class="textMiCuenta">Ver </p>-->
-<!--        </div>-->
-<!--         <div class="alert alert-primary miCuenta" role="alert">-->
-<!--          <p class="textMiCuenta">Otro</p>-->
-<!--        </div>-->
-
+        {% if request.user.is_authenticated %}
+          <a id="logout" class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="#" role="button">{% trans 'Log Out' %}</a>
+        {% else %}
+          <a class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="{% url 'account:login' %}" role="button">{% trans 'Log In' %}</a>
+        {% endif %}
       </div>
 
     </div>
   </div>
 </div>
+<script>
+$("#logout").click(function(){
+  Swal.fire({
+    title: "{% trans 'Are you sure?' %}",
+    text: "{% trans "You will be logged out" %}",
+    showCancelButton: true,
+    confirmButtonColor: '#364e68',
+    cancelButtonColor: '#bb1f1f',
+    confirmButtonText: "{% trans 'Yes!' %}",
+    cancelButtonText: "{% trans 'Cancel' %}"
+  }).then((result) => {
+    if (result.value) {
+      Swal.fire(
+        "{% trans 'You are logged out' %}",
+        "{% trans 'You can go to My account to login again' %}",
+        'success'
+      )
+       setTimeout(logout, 2500)
+    }
+  })
+})
+function logout(){
+  window.location.href='{% url "account:logout" %}'
+}
+</script>

@@ -202,9 +202,13 @@
                       {% endwith %}
                         </strong>
                 </div>
-                <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
-                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'Year' %}</span>
+                <div class="col-md-6 col-lg-2 text-center border-bottom border-top py-3">
+                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'built in' %}</span>
                   <strong class="d-block">{{prop.year}}</strong>
+                </div>
+                <div class="col-md-6 col-lg-2 text-center border-bottom border-top py-3">
+                  <span class="d-inline-block text-black mb-0 caption-text">{% trans 'Visits' %}</span>
+                  <strong class="d-block">{{prop.seen}}</strong>
                 </div>
               </div>
               <h2 class="h4 text-black">{% trans 'More Info' %}</h2>
