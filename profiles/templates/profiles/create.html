@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,30 +9,37 @@
 <body>
      <form id="formulario2" action="{% url 'profile:create' %}" method="post">{% csrf_token %}
       <label>
-        <span>Name</span>
+        <span>{% trans 'Username' %}</span>
         {{ form.username }}
+        {{form.username.errors}}
       </label>
       <label>
-        <span>First Name</span>
+        <span>{% trans 'First Name' %}</span>
         {{ form.first_name }}
+        {{form.first_name.errors}}
       </label>
       <label>
-        <span>Last Name</span>
+        <span>{% trans 'Last Name' %}</span>
         {{ form.last_name }}
+        {{form.last_name.errors}}
       </label>
       <label>
-        <span>email</span>
+        <span>{% trans 'Email' %}</span>
         {{ form.email }}
+        {{form.email.errors}}
       </label>
       <label>
-        <span>Password</span>
+        <span>{% trans 'Password' %}</span>
         {{ form.password1 }}
+        {{form.password1.errors}}
       </label>
       <label>
-        <span>Password2</span>
+        <span>{% trans 'Confirm Password' %}</span>
         {{ form.password2 }}
+        {{form.password2.errors}}
       </label>
-      <button type="submit" class="submit">Sign Up</button>
+      {{ form.non_field_errors }}
+      <button type="button" onclick="sendForm()" class="submit">{% trans 'sign up' %}</button>
 <!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
      </form>
 </body>
