@@ -156,8 +156,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 LOGIN_URL = '/account/login'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 # LOGIN_URL = 'account/login/'
 # LOGOUT_URL = 'logout'
+
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('profile:update', args=[u.profile.id])
