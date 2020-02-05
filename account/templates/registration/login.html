@@ -1,110 +1,107 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<html lang="en">
+<html lang="en" >
 <head>
-    <meta charset="UTF-8">
-    <title>Loggin</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <style>
-      .spanIcon{
-        font-weight: bold; 
-        color: red;
-      }
-      .contact_form input:focus:invalid { /* when a field is considered invalid by the browser */
-        /*background: #fff url(images/invalid.png) no-repeat 98% center; */
-        box-shadow: 0 0 5px #d45252;
-        border-color: #b03535
-     }
-     .contact_form input:required:valid{ /* when a field is considered valid by the browser */
-       /* background: #fff url(images/valid.png) no-repeat 98% center;*/
-        box-shadow: 0 0 5px #5cd053;
-        border-color: #28921f;
-      }
-    </style>
+  <meta charset="UTF-8">
+  <title>CodePen - Login/Registration Form Transition</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+  <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+    <!--ajax.js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--ajax.js-->
 </head>
 <body>
-<div class="container">
-<br>
-  <div class="row">
-      <div class="col-md-4"></div>
-       <div class="col-md-3" style="width: 35%;height: 22%;margin: 0 auto; border: solid #ccc9c9;">
-            <form id="formulario" class="form-horizontal contact_form" action="{% url 'account:login' %}" method="post">
-                  {% csrf_token %}
-                    <h5 style="text-align: center;margin-top: 5%;"> {% trans 'Iniciar Sesión' %} </h5>
-                    <hr>
-                    <div class="form-group">
-                        <span class="col-md-12">
-                            {% trans 'Username' %}
-                            <span class="spanIcon"> *</span>
-                        </span>
+<!-- partial:index.partial.html -->
+<p class="tip"></p>
+<div class="cont">
 
-                        </span>
-                        <div class="col-md-12">
-                          {{ form.username }}
-                        </div>
-                    </div>
-                    
-                    <input type="hidden" name="next" value="{{ next }}" />
+  <div class="form sign-in">
+    <form id="formulario" action="{% url 'account:login' %}" method="post">
+          {% csrf_token %}
+    <h2>Welcome back,</h2>
+    <label>
+      <span>Email</span>
+      {{ form.username }}
+    </label>
+    <label>
+      <span>Password</span>
+      {{ form.password }}
+    </label>
+    <p class="forgot-pass">Forgot password?</p>
+    <button  type="submit" class="submit">Sign In</button>
+<!--    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>-->
+    </form>
+  </div>
 
-                    <div class="form-group">
-                      <span class="col-md-12">
-                        {% trans 'Password' %}
-                        <span class="spanIcon"> *</span>
-                      </span>
-                        <div class="col-sm-12">
-                          {{ form.password }}
-                        </div>
-                    </div>
-              
-                    <div class="form-group">
-                      <div style="text-align: center;">
-                          <input type="submit" class="btn btn-md btn-primary" value="{% trans 'Log-in' %}">
-                      </div>
-                    </div>
-
-                    <div class="information" id="descripcion" style="text-align:center;">              
-                        <div class="alert alert-info" style="font-weight: bold;">
-                            <p>{% trans 'Dont have an account?' %}</p>
-                            <a href="{% url 'profile:create' %}">{% trans 'Register here!' %} </a>
-                        </div>
-                    </div>
-
-                    {%  if form.errors %}
-                      <div class="alert alert-info" style="font-weight: bold;">
-                          {{form.username.errors}}
-                          {{form.errors}}
-                          {{form.password.errors}}
-                      </div>
-                    {%  endif %}
-                 
-           
-            </form>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
       </div>
-      <div class="col-md-4"></div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <div id="newProfile" class="form sign-up">
+     <form id="formulario2" action="{% url 'profile:create' %}" method="post">
+      <label>
+        <span>Name</span>
+        {{ form.username }}
+      </label>
+      <label>
+        <span>First Name</span>
+        {{ form.first_name }}
+      </label>
+      <label>
+        <span>Last Name</span>
+        {{ form.last_name }}
+      </label>
+      <label>
+        <span>email</span>
+        {{ form.email }}
+      </label>
+      <label>
+        <span>Password</span>
+        {{ form.password1 }}
+      </label>
+      <label>
+        <span>Password</span>
+        {{ form.password2 }}
+      </label>
+      <button type="submit" class="submit">Sign Up</button>
+<!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
+     </form>
+    </div>
   </div>
 </div>
-<script type="text/javascript">
-    $("#id_username").attr('class','form-control')
-    $("#id_password").attr('class','form-control')
+
+<a href="https://dribbble.com/shots/3306190-Login-Registration-form" target="_blank" class="icon-link">
+  <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/256/Dribbble-icon.png">
+</a>
+<a href="https://twitter.com/NikolayTalanov" target="_blank" class="icon-link icon-link--twitter">
+  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png">
+</a>
+<!-- partial -->
+<script>
+$.ajax({
+   url: '{% url "profile:create" %}',
+   type: 'get',
+   data: {}
+}).done(function(data) {
+  var y = document.getElementById('newProfile');
+  y.innerHTML = data;
+});
+
+document.querySelector('.img__btn').addEventListener('click', function() {
+  document.querySelector('.cont').classList.toggle('s--signup');
+});
 </script>
 </body>
 </html>
-
-
-
-
- 
-    
-
-   
-
-
-            
-   
