@@ -96,7 +96,7 @@
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <div class="col-md-12">
                                                             <div class="row">
-                                                                <div class="col-md-6" aria-readonly="True">
+                                                                <div class="col-md-6" hidden>
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.owner.label}}<span class="span"> *</span>
                                                                     </label>
@@ -246,7 +246,7 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                                         {{form.description}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -298,9 +298,9 @@ $(document).ready(function(){
 
     $("#id_type_property").change(function(){
         opcion = $("#id_type_property option:selected").val();
-        if( opcion == "LAN" || opcion == "FARM" ){
+        if( opcion == "LAN" || opcion == "FAR" ){
             $("#divEstrato").hide();
-        }else{  
+        }else{
             $("#divEstrato").show();
         }
     });

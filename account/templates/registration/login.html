@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <title>Login and signup</title>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-  <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '/style_login.css' %}">
     <!--ajax.js-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!--ajax.js-->
@@ -17,7 +17,7 @@
 <div>
 <div class="cont">
   <div class="form sign-in">
-    <form id="formulario" action="{% url 'account:login' %}" method="post">
+    <form id="formulario"  method="post">
           {% csrf_token %}
     <h2>{% trans 'Welcome back,' %}</h2>
     <label>
@@ -47,7 +47,7 @@
       </div>
       <div class="img__text m--in">
         <h2>{% trans 'One of us?' %}</h2>
-        <p>{% trans 'If you already has an account, just sign in. We\'ve missed you!' %}</p>
+        <p>{% trans "If you already has an account, just sign in. We've missed you!" %}</p>
       </div>
       <div class="img__btn">
         <span class="m--up">{% trans 'sign up' %}</span>
@@ -90,16 +90,36 @@ function sendForm() {
 function confirmation() {
   if($("#formulario3").length != 0) {
       Swal.fire({
-        position: 'center',
+        position: 'top-center',
         icon: 'success',
         title: '{% trans 'Your account has been created' %}',
-        text: '{% trans 'Fill out these extra information and login' %}',
+        text: '{% trans 'Fill out this extra information and login' %}',
         showConfirmButton: false,
         timer: 2500
       })
       $("#id_phone").prop('required',true);
   }
 }
+function sendForm3() {
+        var form = $("#formulario3").serialize(); // serializes the form's elements.
+        var urls =$("#url").text();
+        console.log(urls);
+        $.ajax({
+           type: "post",
+           url: urls,
+           data: form,
+        }).done(function(data) {
+          console.log(data.length)
+          if( data.length < 2000){
+          var y = document.getElementById('newUser');
+          y.innerHTML = data;
+          }
+          else{
+            location.reload(true);
+          }
+          });
+};
+
 $(document).ajaxComplete(function() {
   $("id_phone").prop('required',true);
 });

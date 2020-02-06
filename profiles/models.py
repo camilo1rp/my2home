@@ -17,7 +17,7 @@ class Profile(models.Model):
         (OTHER, _('other')),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.IntegerField(null=True, blank=True, validators=[validate_phone])
+    phone = models.BigIntegerField(null=True, blank=True, validators=[validate_phone])
     nickname = models.CharField(_('Nickname'), max_length=20, default="none")
     gender = models.CharField(_('gender'), max_length=2, choices=GENDER, default=OTHER)
     city = models.CharField(_('city'), max_length=30, null=True, blank=True)

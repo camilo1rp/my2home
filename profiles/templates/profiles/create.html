@@ -5,40 +5,46 @@
 <head>
     <meta charset="UTF-8">
     <title>new user</title>
+    <style>
+        li {
+            text-align: center;
+            font-size: 0.8rem;
+         }
+    </style>
 </head>
 <body>
      <form id="formulario2" action="{% url 'profile:create' %}" method="post">{% csrf_token %}
       <label>
         <span>{% trans 'Username' %}</span>
         {{ form.username }}
-        {{form.username.errors}}
       </label>
-      <label>
+         {{form.username.errors}}
+         <label>
         <span>{% trans 'First Name' %}</span>
         {{ form.first_name }}
-        {{form.first_name.errors}}
       </label>
-      <label>
+         {{form.first_name.errors}}
+         <label>
         <span>{% trans 'Last Name' %}</span>
         {{ form.last_name }}
-        {{form.last_name.errors}}
       </label>
-      <label>
+         {{form.last_name.errors}}
+         <label>
         <span>{% trans 'Email' %}</span>
         {{ form.email }}
-        {{form.email.errors}}
       </label>
-      <label>
+         {{form.email.errors}}
+         <label>
         <span>{% trans 'Password' %}</span>
         {{ form.password1 }}
-        {{form.password1.errors}}
       </label>
-      <label>
+         {{form.password1.errors}}
+         <label>
         <span>{% trans 'Confirm Password' %}</span>
         {{ form.password2 }}
-        {{form.password2.errors}}
       </label>
-      {{ form.non_field_errors }}
+         {{form.password2.errors}}
+         {{ form.non_field_errors }}
       <button type="button" onclick="sendForm()" class="submit">{% trans 'sign up' %}</button>
 <!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
      </form>

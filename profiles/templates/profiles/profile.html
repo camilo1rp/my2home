@@ -16,9 +16,11 @@
       -moz-appearance:textfield;
     }
     </style>
+
 </head>
 <body>
-    <form id="formulario3" action="{% url 'profile:update' pro_id %}" method="post">
+    <span id="url" hidden>{% url 'profile:update' pro_id %}</span>
+    <form id="formulario3" method="post">
       {% csrf_token %}
         <label>
             <span>{% trans 'Phone' %}</span>
@@ -41,7 +43,7 @@
             {{form.company.errors}}
         </label>
         {{ form.non_field_errors }}
-        <button id="confirm" type="submit" class="submit">{% trans 'sign in now' %}</button>
+        <button  type="button" onclick="sendForm3()" class="submit">{% trans 'sign in now' %}</button>
     </form>
 </body>
 </html>
