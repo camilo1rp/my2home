@@ -5,10 +5,20 @@ from django.utils.translation import gettext
 from .models import Property, AddressCol, Image, Contact, BusinessType
 import string
 
-CHOICES = [tuple([x, x]) for x in string.ascii_uppercase[:10]]
-[CHOICES.append(tuple(['{} BIS'.format(x),'{} BIS'.format(x)])) for x in string.ascii_uppercase[:10]]
-CHOICES.insert(0, tuple(['', '']))
+PREFIJOS = [tuple([x, x]) for x in string.ascii_uppercase[:8]]
+[PREFIJOS.append(tuple(['{} BIS'.format(x), '{} BIS'.format(x)])) for x in string.ascii_uppercase[:8]]
+[PREFIJOS.append(tuple(['{} SUR'.format(x), '{} SUR'.format(x)])) for x in string.ascii_uppercase[:8]]
+PREFIJOS.insert(0, tuple(['', '']))
 
+VIAS = [
+    ('CL', 'Calle'),
+    ('CR', _('Carrera')),
+    ('TV', _('Transversal')),
+    ('DG', _('Diagonal')),
+    ('AV', _('Avenida')),
+    ('AC', _('Avenida calle')),
+    ('AK', _('Avenida carrera')),
+]
 
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -17,17 +27,18 @@ class PropertyForm(forms.ModelForm):
         self.fields['description'].widget.attrs['placeholder'] = \
             gettext("Add extra information that adds value to your property. i.e. common areas, services, security, location, etc.")
         self.fields['owner'].empty_label = _('select owner')
-        self.fields['owner'].widget.attrs['disabled'] = True
+        # self.fields['owner'].widget.attrs['disabled'] = True
         self.fields['price_str'].label = _('price')
 
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code']
+        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted']
 
 
 class AddressColForm(forms.ModelForm):
-    prefijo_via = forms.CharField(widget=forms.Select(choices=CHOICES), required=False)
-    prefijo_numero = forms.CharField(widget=forms.Select(choices=CHOICES), required=False)
+    prefijo_via = forms.CharField(widget=forms.Select(choices=PREFIJOS), required=False)
+    prefijo_numero = forms.CharField(widget=forms.Select(choices=PREFIJOS), required=False)
+    tipo_via = forms.CharField(widget=forms.Select(choices=VIAS), required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

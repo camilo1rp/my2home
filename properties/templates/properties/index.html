@@ -225,9 +225,6 @@
 
         <div class="container py-1">
           <div class="row align-items-center">
-            <div class="col-8 col-md-8 col-lg-4">
-              <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0"><strong>{% trans 'Inmuebles Fusa' %}<span class="text-danger">.</span></strong></a></h1>
-            </div>
             {% include 'properties/top_nav.html' %}
           </div>
         </div>
@@ -414,6 +411,7 @@
                         <div class="divMinimo selecBorde">
                           <select name="price_min" id="selectMinPre" class="form-control">
                             <option value="" disabled selected>{% trans 'Minimum' %}</option>
+                            <option value="ALL">min</option>
                             <option value="100000000">100</option>
                             <option value="200000000">200</option>
                             <option value="300000000">300</option>
@@ -436,6 +434,7 @@
                         <div class="divMaximo selecBorde">
                           <select name="price_max" id="selectMaxPre" class="form-control">
                             <option value="" disabled selected>{% trans 'Maximum' %}</option>
+                            <option value="ALL">max</option>
                             <option value="150000000">150</option>
                             <option value="250000000">250</option>
                             <option value="350000000">350</option>
@@ -649,7 +648,7 @@
             $(id).removeClass("property-unfavorite");
             $(id).addClass("property-favorite");
         }else if(command == 2){
-          swal.fire("Cannot add it to favourite!", "You pubished this property", "error");
+          swal.fire("{%trans 'Cannot add it to favourite!'%}", "{% trans 'You pubished this property' %}", "error");
         }
         else {
          Swal.fire({

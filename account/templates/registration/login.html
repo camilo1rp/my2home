@@ -4,32 +4,37 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Login/Registration Form Transition</title>
+  <title>Login and signup</title>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-  <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '/style_login.css' %}">
     <!--ajax.js-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!--ajax.js-->
+  <!--    swal alerts-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<p class="tip"></p>
+<div>
 <div class="cont">
-
   <div class="form sign-in">
-    <form id="formulario" action="{% url 'account:login' %}" method="post">
+    <form id="formulario"  method="post">
           {% csrf_token %}
-    <h2>Welcome back,</h2>
+    <h2>{% trans 'Welcome back,' %}</h2>
     <label>
-      <span>Email</span>
+      <span>{% trans 'Username' %} {% trans 'or' %} {% trans 'Email' %}</span>
       {{ form.username }}
+      {{form.username.errors}}
     </label>
     <label>
-      <span>Password</span>
+      <span>{% trans 'Password' %}</span>
       {{ form.password }}
+      {{form.password.errors}}
     </label>
-    <p class="forgot-pass">Forgot password?</p>
-    <button  type="submit" class="submit">Sign In</button>
+      {{ form.non_field_errors }}
+
+
+<!--    <p class="forgot-pass"><a href="#">{% trans 'Forgot password?' %}</a></p>-->
+    <button  type="submit" class="submit">{% trans 'sign in' %}</button>
 <!--    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>-->
     </form>
   </div>
@@ -37,57 +42,24 @@
   <div class="sub-cont">
     <div class="img">
       <div class="img__text m--up">
-        <h2>New here?</h2>
-        <p>Sign up and discover great amount of new opportunities!</p>
+        <h2>{% trans 'New here?' %}</h2>
+        <p>{% trans 'Sign up and discover great amount of new opportunities!' %}</p>
       </div>
       <div class="img__text m--in">
-        <h2>One of us?</h2>
-        <p>If you already has an account, just sign in. We've missed you!</p>
+        <h2>{% trans 'One of us?' %}</h2>
+        <p>{% trans "If you already has an account, just sign in. We've missed you!" %}</p>
       </div>
       <div class="img__btn">
-        <span class="m--up">Sign Up</span>
-        <span class="m--in">Sign In</span>
+        <span class="m--up">{% trans 'sign up' %}</span>
+        <span class="m--in">{% trans 'sign in' %}</span>
       </div>
     </div>
-    <div id="newProfile" class="form sign-up">
-     <form id="formulario2" action="{% url 'profile:create' %}" method="post">
-      <label>
-        <span>Name</span>
-        {{ form.username }}
-      </label>
-      <label>
-        <span>First Name</span>
-        {{ form.first_name }}
-      </label>
-      <label>
-        <span>Last Name</span>
-        {{ form.last_name }}
-      </label>
-      <label>
-        <span>email</span>
-        {{ form.email }}
-      </label>
-      <label>
-        <span>Password</span>
-        {{ form.password1 }}
-      </label>
-      <label>
-        <span>Password</span>
-        {{ form.password2 }}
-      </label>
-      <button type="submit" class="submit">Sign Up</button>
-<!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
-     </form>
+    <div id="newUser" class="form sign-up">
+        <p>{% trans 'Error loading form, please refresh the browser (press F5)' %}</p>
     </div>
   </div>
 </div>
-
-<a href="https://dribbble.com/shots/3306190-Login-Registration-form" target="_blank" class="icon-link">
-  <img src="http://icons.iconarchive.com/icons/uiconstock/socialmedia/256/Dribbble-icon.png">
-</a>
-<a href="https://twitter.com/NikolayTalanov" target="_blank" class="icon-link icon-link--twitter">
-  <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png">
-</a>
+</div>
 <!-- partial -->
 <script>
 $.ajax({
@@ -95,11 +67,61 @@ $.ajax({
    type: 'get',
    data: {}
 }).done(function(data) {
-  var y = document.getElementById('newProfile');
+  var y = document.getElementById('newUser');
   y.innerHTML = data;
 });
 document.querySelector('.img__btn').addEventListener('click', function() {
   document.querySelector('.cont').classList.toggle('s--signup');
+});
+
+function sendForm() {
+        var form = $("#formulario2").serialize(); // serializes the form's elements.
+        $.ajax({
+           type: "post",
+           url: '{% url "profile:create" %}',
+           data: form,
+        }).done(function(data) {
+          var y = document.getElementById('newUser');
+          y.innerHTML = data;
+          confirmation()
+          });
+};
+
+function confirmation() {
+  if($("#formulario3").length != 0) {
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: '{% trans 'Your account has been created' %}',
+        text: '{% trans 'Fill out this extra information and login' %}',
+        showConfirmButton: false,
+        timer: 2500
+      })
+      $("#id_phone").prop('required',true);
+  }
+}
+function sendForm3() {
+        var form = $("#formulario3").serialize(); // serializes the form's elements.
+        var urls =$("#url").text();
+        console.log(urls);
+        $.ajax({
+           type: "post",
+           url: urls,
+           data: form,
+        }).done(function(data) {
+          console.log(data.length)
+          if( data.length < 2000){
+          var y = document.getElementById('newUser');
+          y.innerHTML = data;
+          }
+          else{
+            location.reload(true);
+          }
+          });
+};
+
+$(document).ajaxComplete(function() {
+  $("id_phone").prop('required',true);
 });
 </script>
 </body>

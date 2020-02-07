@@ -1,5 +1,21 @@
 {% load i18n %}
 <style>
+  .alertas{
+    color: #0c5460;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #364e68;
+    border-radius: .25rem;
+    font-weight: bold;
+    margin: 0%;
+    cursor: pointer;
+  }
+  .alertas:hover{
+    background-color: black;
+    color: white;
+    border: 2px solid #0c5460;
+  }
 
 </style>
 <div class="modal fade animated rubberBand" id="myModal" data-keyboard='false' data-backdrop='static'>
@@ -14,12 +30,12 @@
 
       <!-- Modal body -->
       <div class="modal-body" style="width: 100%;text-align: center;">
-        <a class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="{% url 'account:dashboard' %}" role="button">{% trans 'My Profile' %}</a>
-        <a class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="{% url 'property:create' %}" role="button">{% trans 'Publish a Property' %}</a>
+        <a class="btn btn-lg btn-block px-0 alertas"  href="{% url 'account:dashboard' %}" role="button">{% trans 'My Profile' %}</a>
+        <a class="btn btn-lg btn-block px-0 alertas"  href="{% url 'property:create' %}" role="button">{% trans 'Publish a Property' %}</a>
         {% if request.user.is_authenticated %}
-          <a id="logout" class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="#" role="button">{% trans 'Log Out' %}</a>
+          <a id="logout" class="btn btn-lg btn-block px-0 alertas"  href="#" role="button">{% trans 'Log Out' %}</a>
         {% else %}
-          <a class="btn btn-info btn-lg btn-block px-0 textMiCuenta"  href="{% url 'account:login' %}" role="button">{% trans 'Log In' %}</a>
+          <a class="btn btn-lg btn-block px-0 alertas"  href="{% url 'account:login' %}" role="button">{% trans 'Log In' %}</a>
         {% endif %}
       </div>
 

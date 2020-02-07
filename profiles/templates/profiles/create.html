@@ -1,36 +1,51 @@
 <!DOCTYPE html>
+{% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>new user</title>
+    <style>
+        li {
+            text-align: center;
+            font-size: 0.8rem;
+         }
+    </style>
 </head>
 <body>
      <form id="formulario2" action="{% url 'profile:create' %}" method="post">{% csrf_token %}
       <label>
-        <span>Name</span>
+        <span>{% trans 'Username' %}</span>
         {{ form.username }}
       </label>
-      <label>
-        <span>First Name</span>
+         {{form.username.errors}}
+         <label>
+        <span>{% trans 'First Name' %}</span>
         {{ form.first_name }}
       </label>
-      <label>
-        <span>Last Name</span>
+         {{form.first_name.errors}}
+         <label>
+        <span>{% trans 'Last Name' %}</span>
         {{ form.last_name }}
       </label>
-      <label>
-        <span>email</span>
+         {{form.last_name.errors}}
+         <label>
+        <span>{% trans 'Email' %}</span>
         {{ form.email }}
       </label>
-      <label>
-        <span>Password</span>
+         {{form.email.errors}}
+         <label>
+        <span>{% trans 'Password' %}</span>
         {{ form.password1 }}
       </label>
-      <label>
-        <span>Password2</span>
+         {{form.password1.errors}}
+         <label>
+        <span>{% trans 'Confirm Password' %}</span>
         {{ form.password2 }}
       </label>
-      <button type="submit" class="submit">Sign Up</button>
+         {{form.password2.errors}}
+         {{ form.non_field_errors }}
+      <button type="button" onclick="sendForm()" class="submit">{% trans 'sign up' %}</button>
 <!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
      </form>
 </body>
