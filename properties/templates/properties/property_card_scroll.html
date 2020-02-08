@@ -38,7 +38,7 @@
    
 <div class="row">
     <div class="col-md-12">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 250px;width: 100%;">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 400px;width: 100%;">
     <!-- Indicators -->
     <ol class="carousel-indicators" hidden>
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -80,14 +80,14 @@
           {%if gallery %}
             {% for img in gallery%}
               {%if img.main %}
-                  <img src="{{img.image.url}}" height="240px" width="100%" alt="Image" class="img-fluid">
+                  <img src="{{img.image.url}}" height="280px" width="100%" alt="Image" class="img-fluid">
                     <span class="offer-type blue" style="text-align: center;height:4em;padding-top: 6px; font-weight: bold;">{{ prop.title }} <br>
                        {{ address }}
                     </span>
               {% endif %}
             {% endfor %}
           {% else %}
-            <img src="{% static 'images/img_4.jpg' %}" height="240px" width="100%" alt="Image" class="img-fluid">
+            <img src="{% static 'images/img_4.jpg' %}" height="280px" width="100%" alt="Image" class="img-fluid">
             <span class="offer-type blue" style="text-align: center;height:4em;padding-top: 6px; font-weight: bold;">{{ prop.title }} <br>
                {{ address }}
             </span>

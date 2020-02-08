@@ -4,60 +4,59 @@
 {% load widget_tweaks %}
 {% block title %}{% trans 'New Property' %}{%endblock%}
 {% block styles %}
-      <style>
-        .select2-container {
-          width: 347px ! important;
-          max-width: 100%;
-        }
-        .span{
-            color: red;
-        }
-        .titleModal{
-            text-align: center;
-        }
-        .divTitleModal{
-            margin: 0 auto;
-        }
-        
-        .btnSave{
-            margin-left: 6%;
-        }
-        #id_description {
-            max-width: 100%;
-        }
-        #id_type_business {
-            max-width: 100%;
-        }
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            /* display: none; <- Crashes Chrome on hover */
-            -webkit-appearance: none;
-            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-        }
-        input[type=number] {
-            -moz-appearance:textfield; /* Firefox */
-        }
-        .form-control {
-            padding:0.2em !important;
-        }
-        .select2-selection__choice{
-            font-size: 0.8em;
-        }
-        .modal-lg { 
-            max-width: 78% !important; 
-        } 
-        .centrar{
-            text-align: center;
-            white-space: nowrap;
-        }
-        .centrar0{
-            margin: 0 auto;
-        }
-        .divBtn{
-            text-align: center;
-        }
+<style>
+    .select2-container {
+      width: 347px ! important;
+      max-width: 100%;
+    }
+    .span{
+        color: red;
+    }
+    .titleModal{
+        text-align: center;
+    }
+    .divTitleModal{
+        margin: 0 auto;
+    }
 
-    </style>
+    .btnSave{
+        margin-left: 6%;
+    }
+    #id_description {
+        max-width: 100%;
+    }
+    #id_type_business {
+        max-width: 100%;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+    input[type=number] {
+        -moz-appearance:textfield; /* Firefox */
+    }
+    .form-control {
+        padding:0.2em !important;
+    }
+    .select2-selection__choice{
+        font-size: 0.8em;
+    }
+    .modal-lg {
+        max-width: 78% !important;
+    }
+    .centrar{
+        text-align: center;
+        white-space: nowrap;
+    }
+    .centrar0{
+        margin: 0 auto;
+    }
+    .divBtn{
+        text-align: center;
+    }
+</style>
 {% endblock %}
 {% block body %}
 <div class="modal fade animated fadeInDown" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
