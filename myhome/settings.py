@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&g^b@)2w$&e)9=e51f7x_f&6_ctfcy78r+2ss3mes&wsk(z11_'
+SECRET_KEY = os.environ.get('SECRET_KEY','')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['my2home','my2home:8080']
 
 # Application definition
 
@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my2home',
-        'USER': 'myhome',
-        'PASSWORD': 'Tncamilo123',
-        'HOST': '127.0.0.1',
+        'NAME': os.environ.get('DB_NAME','my2home')
+        'USER': os.environ.get('DB_USER','my2home'),
+        'PASSWORD': os.environ.get('DB_PASSWORD',''),
+        'HOST': os.environ.get('DB_HOST',''),
         'PORT': '5432',
         }
 }
@@ -135,7 +135,7 @@ LANGUAGE_CODE = 'en'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
-TIME_ZONE = 'UTC'
+TIME_ZONE = os.environ.get('TIME_ZONE','America/Bogota')
 
 USE_I18N = True
 
@@ -146,10 +146,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-STATIC_ROOT = "/workspace/my2home/static/"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -157,8 +155,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_URL = '/account/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-# LOGIN_URL = 'account/login/'
-# LOGOUT_URL = 'logout'
 
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -166,15 +162,15 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 # ***** google maps key *****
-EASY_MAPS_GOOGLE_KEY = 'AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA'
+GOOGLE_MAPS_KEY = os.environ.get('GOOGLE_MAPS_KEY','')
 
 # ***** session variable for counting page visits *****
 VISITS_SESSION_ID = 'visits'
 
 # ***** email settings *****
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'camilo1rp@gmail.com'
-EMAIL_HOST_PASSWORD = 'Deltaz4321$#@!'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER','')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD','')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

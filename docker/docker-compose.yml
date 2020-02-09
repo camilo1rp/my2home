@@ -27,10 +27,14 @@ services:
             DB_PASSWORD: /run/secrets/db_password
             DB_HOST: postgres
             SECRET_KEY: /run/secrets/secret_key
+            EMAIL_HOST_USER: /run/secrets/email_host_user
+            EMAIL_HOST_PASSWORD: /run/secrets/email_host_password
         secrets:
             - superuser_password
             - db_password
             - secret_key
+            - email_host_user
+            - email_host_password
         volumes:
             - my2home-static-files:/etc/my2home-nginx/
 
@@ -43,7 +47,7 @@ services:
         depends_on:
             - my2home
         ports:
-            - 8080:80
+            - 80:80
         volumes:
             - my2home-static-files:/etc/my2home-nginx/
 
@@ -54,6 +58,11 @@ secrets:
         file: secrets/db_password.txt
     secret_key:
         file: secrets/secret_key.txt
+    email_host_user:
+        file: secrets/email_host_user.txt
+    email_host_password:
+        file: secrets/email_host_password.txt
+
         
 volumes:
     postgres-vol:
