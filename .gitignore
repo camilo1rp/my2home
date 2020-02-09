@@ -136,13 +136,13 @@ docker/secrets/*
 static/* 
 
 #pycharm
-_linux/
+_linux/*
 aws.xml
 colors.scheme.xml
 debugger.xml
 nuevo.js
 .idea
-codestyles/
-codeinspection/
+codestyles/*
+codeinspection/*
 vsc.xml
 find.xml
