@@ -144,6 +144,6 @@ nuevo.js
 .idea
 codestyles/*
 inspection/*
-vsc.xml
+vcs.xml
 find.xml
 editor.xml
