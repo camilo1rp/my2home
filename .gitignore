@@ -134,3 +134,13 @@ docker/secrets/*
 
 # Collect static
 static/* 
+
+#pycharm
+_linux/
+aws.xml
+colors.scheme.xml
+debugger.xml
+nuevo.js
+.idea
+codestyles/
+codeinspection/

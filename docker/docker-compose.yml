@@ -13,7 +13,7 @@ services:
         secrets:
             - db_password
 
-    seed7:
+    my2home:
         build: .
         image: dev/my2home 
         container_name: my2home
@@ -31,8 +31,6 @@ services:
             - superuser_password
             - db_password
             - secret_key
-        ports:
-            - 1912:1812/udp
         volumes:
             - my2home-static-files:/etc/my2home-nginx/
 
