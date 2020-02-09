@@ -144,3 +144,5 @@ nuevo.js
 .idea
 codestyles/
 codeinspection/
+vsc.xml
+find.xml
