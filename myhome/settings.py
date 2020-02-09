@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME','my2home')
+        'NAME': os.environ.get('DB_NAME','my2home'),
         'USER': os.environ.get('DB_USER','my2home'),
         'PASSWORD': os.environ.get('DB_PASSWORD',''),
         'HOST': os.environ.get('DB_HOST',''),
