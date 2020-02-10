@@ -26,7 +26,7 @@ RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 WORKDIR /opt
-RUN git clone --depth 1 git@github.com:fernando737/my2home.git
+RUN git clone --depth 1 git@github.com:camilo1rp/my2home.git
 
 FROM repoClone as appBuild
 
