@@ -18,4 +18,4 @@ python3 /opt/my2home/manage.py collectstatic --noinput
 cd /opt/my2home/
 
 # start daphene
-daphne -b my2home -p 8003 seed_7.asgi:application
+daphne -b my2home -p 8003 myhome.asgi:application
