@@ -11,7 +11,7 @@ idna==2.8
 microsofttranslator==0.8
 Pillow==6.2.1
 polib==1.1.0
-pytz==2019.3
+#pytz==2019.3
 requests==2.22.0
 six==1.13.0
 sqlparse==0.3.0
