@@ -1,7 +1,6 @@
-FROM debian:10.2 as build
+FROM ubuntu:18.04 as build
 
-ENV DEBIAN_FRONTEND=noninteractive
-
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && apt-get -qy install lsof \
 ntp \
 git \
