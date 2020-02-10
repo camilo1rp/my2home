@@ -36,7 +36,10 @@ services:
             - email_host_user
             - email_host_password
         volumes:
-            - my2home-static-files:/etc/my2home-nginx/
+            - my2home-media-files:/opt/my2home/media/
+            - my2home-static-files:/opt/my2home/static/
+            - my2home-nginx:/etc/my2home-nginx/
+
 
     nginx:
         image: nginx:1.11.1-alpine
@@ -49,7 +52,9 @@ services:
         ports:
             - 80:80
         volumes:
-            - my2home-static-files:/etc/my2home-nginx/
+            - my2home-media-files:/opt/my2home/media/
+            - my2home-static-files:/opt/my2home/static/
+            - my2home-nginx:/etc/my2home-nginx/
 
 secrets:
     superuser_password:

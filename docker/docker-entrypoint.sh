@@ -11,5 +11,8 @@ while ! python3 /opt/my2home/manage.py migrate 2>&1; do
 	sleep 5
 done
 
+# run python3 manage.py collectstatic
+python3 /opt/my2home/manage.py collectstatic --noinput
+
 # start daphene
 daphne -b seed7 -p 8080 --root-path /opt/my2home/ myhome.asgi:application
