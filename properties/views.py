@@ -340,9 +340,10 @@ def property_detail(request, prop_id):
         elif request.is_ajax():
             return render(request, 'properties/contact_form.html', {'form': form})
     try:
-        geo_data = get_coordinates(str(prop.address_col.get()))
+        address = prop.address_col.get()
+        geo_data = get_coordinates(str(address))
     except ObjectDoesNotExist:
-        geo_data = {'lat': 70, 'lng': 20}
+        geo_data = {'lat':  '4.624335', 'lng': '-74.063644'}
     visit = Visits(request)
     visit.add(prop_id)
     return render(request, 'properties/property-details.html',
