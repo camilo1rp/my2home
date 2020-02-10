@@ -14,5 +14,8 @@ done
 # run python3 manage.py collectstatic
 python3 /opt/my2home/manage.py collectstatic --noinput
 
+#move to seed_7 directory
+cd /opt/my2home/
+
 # start daphene
-daphne -b my2home -p 8080 --root-path /opt/my2home/ myhome.asgi:application
+daphne -b my2home -p 8003 myhome.asgi:application
