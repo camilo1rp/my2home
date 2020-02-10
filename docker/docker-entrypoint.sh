@@ -15,4 +15,4 @@ done
 python3 /opt/my2home/manage.py collectstatic --noinput
 
 # start daphene
-daphne -b seed7 -p 8080 --root-path /opt/my2home/ myhome.asgi:application
+daphne -b my2home -p 8080 --root-path /opt/my2home/ myhome.asgi:application
