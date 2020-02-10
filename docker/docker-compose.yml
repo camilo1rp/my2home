@@ -72,3 +72,5 @@ secrets:
 volumes:
     postgres-vol:
     my2home-static-files:
+    my2home-media-files:
+    my2home-nginx:
