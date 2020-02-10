@@ -31,6 +31,24 @@
         padding: 5px;
         width: 100%;
       }
+      .item .btn {
+            position: absolute;
+            top: 70%;
+            left: 80%;
+            transform: translate(-85%, -85%);
+            -ms-transform: translate(-85%, -85%);
+            background-color:
+            #37474f94;
+            color:
+            white;
+            font-size: 1.5rem;
+            border: 1px solid white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+.item .btn:hover {
+  background-color: #364e68;
+}
     </style>
     <base target="_parent">
 </head>
@@ -49,14 +67,14 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" >
  {% for prop in properties %}
-      
+
       {% if forloop.counter == 1 %}
         <div class="item active">
       {% else %}
         <div class="item">
       {% endif %}
       <div class="property-entry">
-        <a href="{% url 'property:update' prop.id %}" class="property-thumbnail">
+        <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail" >
           {% with business=prop.type_business.all %}
           <div class="offer-type-wrap">
             {% for busi in business %}
@@ -69,32 +87,35 @@
               {% if busi.name == 'SWAP / PERMUTA' %}
                 <span class="offer-type blue">{% trans 'Swap'%}</span>
               {% endif %}
-  <!--                      <span class="offer-type {% if busi.name == 'rent' %}bg-danger{% endif %}{% if busi.name == 'Sale' %}bg-success{% endif %}">{{busi.name}}</span>-->
-  <!--                    <span class="offer-type bg-success">Rent</span>-->
-
             {% endfor %}
           </div>
           {% endwith %}
-          {% with address=prop.address_col.get %}
+
           {% with gallery=prop.gallery.all %}
           {%if gallery %}
             {% for img in gallery%}
-              {%if img.main %}
-                  <img src="{{img.image.url}}" height="280px" width="100%" alt="Image" class="img-fluid">
-                    <span class="offer-type blue" style="text-align: center;height:4em;padding-top: 6px; font-weight: bold;">{{ prop.title }} <br>
-                       {{ address }}
-                    </span>
-              {% endif %}
+                {%if img.main %}
+                    <img src="{{img.image.url}}" height="320px" width="100%" alt="Image" class="img-fluid" title="{% trans "click to go to property's page" %}" ">
+                    <span class="offer-type" style="text-align: center;height:5em;padding-top: 1em; font-weight:bold; background:#37474f;">{{ prop.title }} <br>
+                        {{ prop.address_col.get }}
+                    </span></a>
+                {% endif %}
             {% endfor %}
           {% else %}
-            <img src="{% static 'images/img_4.jpg' %}" height="280px" width="100%" alt="Image" class="img-fluid">
-            <span class="offer-type blue" style="text-align: center;height:4em;padding-top: 6px; font-weight: bold;">{{ prop.title }} <br>
-               {{ address }}
-            </span>
+            <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail">
+                <img src="{% static 'images/img_4.jpg' %}" height="320px" width="100%" alt="Image" class="img-fluid">
+                <span class="offer-type" style="text-align: center;height:5em;padding-top: 1em; font-weight:bold; background:#37474f;">{{ prop.title }} <br>
+                    <p>Address has not been provided</p>
+            </span></a>
           {% endif %}
-          {% endwith %}
-  <!--                  <img src="{% static 'images/img_1.jpg' %}" alt="Image" class="img-fluid">-->
-        </a>
+          {% if editable %}
+            <a href="{% url 'property:update' prop.id %}" class="btn">
+                <i class="fas fa-edit"></i>
+                    <span style="font-size: 1em;">
+                      &nbsp;{% trans 'Edit' %}
+                    </span>
+            </a>
+          {% endif %}
       </div>
       <div style="width: 100%;text-align: center;">
            <ul class="property-specs-wrap" style="margin: 0%;padding: 0%;">

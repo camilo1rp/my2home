@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 14:39-0500\n"
-"PO-Revision-Date: 2020-02-06 19:50+0000\n"
-"Last-Translator: b'  <>'\n"
+"POT-Creation-Date: 2020-02-10 15:12-0500\n"
+"PO-Revision-Date: 2020-02-10 20:14+0000\n"
+"Last-Translator: b'Camilo Romero <camilo1rp2@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
+
+#: account/templates/account/dashboard.html:79
+msgid "Profile"
+msgstr "Perfil"
+
+#: account/templates/account/dashboard.html:91
+msgid "Home"
+msgstr "Inicio"
+
+#: account/templates/account/dashboard.html:92
+msgid "Publish a Property"
+msgstr "Publicar una Propiedad"
+
+#: account/templates/account/dashboard.html:94
+msgid "More"
+msgstr "Mas"
+
+#: account/templates/account/dashboard.html:95
+msgid "Contact Us"
+msgstr "Contactanos"
+
+#: account/templates/account/dashboard.html:105
+msgid "Details"
+msgstr "Detalles"
+
+#: account/templates/account/dashboard.html:118
+#: account/templates/account/dashboard.html:156
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: account/templates/account/dashboard.html:125
+#: account/templates/registration/login.html:24
+msgid "Email"
+msgstr "Email"
+
+#: account/templates/account/dashboard.html:127
+msgid "Phone"
+msgstr "Teléfono"
+
+#: account/templates/account/dashboard.html:129
+msgid "City"
+msgstr "Ciudad"
+
+#: account/templates/account/dashboard.html:131
+msgid "Company"
+msgstr "Empresa"
+
+#: account/templates/account/dashboard.html:145
+msgid "Messages"
+msgstr "Mensajes"
+
+#: account/templates/account/dashboard.html:153
+msgid "Coming soon!"
+msgstr "Próximamente!"
+
+#: account/templates/account/dashboard.html:185
+msgid "Followed properties"
+msgstr "Inmuebles seguidos"
 
 #: account/templates/registration/login.html:22
 msgid "Welcome back,"
@@ -31,10 +89,6 @@ msgstr "Nombre de Usuario"
 #: account/templates/registration/login.html:24
 msgid "or"
 msgstr "o"
-
-#: account/templates/registration/login.html:24
-msgid "Email"
-msgstr ""
 
 #: account/templates/registration/login.html:29
 #: account/templates/registration/login1.html:58
