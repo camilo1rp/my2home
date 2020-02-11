@@ -58,7 +58,7 @@ services:
             - my2home-nginx:/etc/my2home-nginx/
 
 secrets:
-    django_superuser_email:
+    django_superuser_mail:
         file: secrets/django_superuser_mail.txt
     django_superuser_password:
         file: secrets/django_superuser_password.txt
