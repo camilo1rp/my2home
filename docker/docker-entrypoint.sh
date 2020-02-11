@@ -17,25 +17,25 @@ if [ "$DJANGO_SKIP_SUPERUSER" == "true" ]; then
   echo "↩️ Skip creating the superuser"
 else
   if [ -z ${DJANGO_SUPERUSER_NAME+x} ]; then
-    SUPERUSER_NAME='admin'
+    DJANGO_SUPERUSER_NAME='admin'
   fi
-  if [ -z ${DJANGO_SUPERUSER_EMAIL+x} ]; then
-    SUPERUSER_EMAIL='admin@example.com'
+  if [ -z ${DJANGO_SUPERUSER_MAIL+x} ]; then
+    DJANGO_SUPERUSER_MAIL='admin@example.com'
   fi
   if [ -z ${DJANGO_SUPERUSER_PASSWORD+x} ]; then
     if [ -f "/run/secrets/django_superuser_password" ]; then
-      SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
+      DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
     else
-      SUPERUSER_PASSWORD='admin'
+      DJANGO_SUPERUSER_PASSWORD='admin'
     fi
   fi
 
 python3 /opt/my2home/manage.py shell << END
 from django.contrib.auth.models import User
 if not User.objects.filter(username='${DJANGO_SUPERUSER_NAME}'):
-    u=User.objects.create_superuser('${DJANGO_SUPERUSER_NAME}', '${DJANGO_SUPERUSER_EMAIL}', '${DJANGO_SUPERUSER_PASSWORD}')
+    u=User.objects.create_superuser('${DJANGO_SUPERUSER_NAME}', '${DJANGO_SUPERUSER_MAIL}', '${DJANGO_SUPERUSER_PASSWORD}')
 END
-  echo "💡 Superuser Username: ${DJANGO_SUPERUSER_NAME}, E-Mail: ${DJANGO_SUPERUSER_EMAIL}"
+  echo "💡 Superuser Username: ${DJANGO_SUPERUSER_NAME}, E-Mail: ${DJANGO_SUPERUSER_MAIL}"
 fi
 
 
