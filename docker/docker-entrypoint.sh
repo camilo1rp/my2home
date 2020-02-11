@@ -23,7 +23,7 @@ else
     SUPERUSER_EMAIL='admin@example.com'
   fi
   if [ -z ${DJANGO_SUPERUSER_PASSWORD+x} ]; then
-    if [ -f "/run/secrets/superuser_password" ]; then
+    if [ -f "/run/secrets/django_superuser_password" ]; then
       SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
     else
       SUPERUSER_PASSWORD='admin'
