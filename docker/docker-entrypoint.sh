@@ -12,24 +12,31 @@ while ! python3 /opt/my2home/manage.py migrate 2>&1; do
 	sleep 5
 done
 
-# create superuser
-create_superuser="
-import django
-django.setup()
-from django.contrib.auth.models import User
-try:
-    User.objects.create_superuser('$DJANGO_SUPERUSER_NAME', '$DJANGO_SUPERUSER_MAIL', '$DJANGO_SUPERUSER_PASS')
-except Exception:
-    pass
-"
-create_superuser() {
-    if [ -z "$DJANGO_SUPERUSER_NAME" ] || [ -z "$DJANGO_SUPERUSER_MAIL" ] || [ -z "$DJANGO_SUPERUSER_PASS" ]; then
-        echo "Environment variables for database not set, not creating superuser."
+# Create Superuser if required
+if [ "$DJANGO_SKIP_SUPERUSER" == "true" ]; then
+  echo "↩️ Skip creating the superuser"
+else
+  if [ -z ${DJANGO_SUPERUSER_NAME+x} ]; then
+    SUPERUSER_NAME='admin'
+  fi
+  if [ -z ${DJANGO_SUPERUSER_EMAIL+x} ]; then
+    SUPERUSER_EMAIL='admin@example.com'
+  fi
+  if [ -z ${DJANGO_SUPERUSER_PASSWORD+x} ]; then
+    if [ -f "/run/secrets/superuser_password" ]; then
+      SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
     else
-        echo "Creating superuser"
-        python3 -c "$create_superuser"
+      SUPERUSER_PASSWORD='admin'
     fi
-}
+  fi
+
+  ./manage.py shell --interface python3 << END
+from django.contrib.auth.models import User
+if not User.objects.filter(username='${DJANGO_SUPERUSER_NAME}'):
+    u=User.objects.create_superuser('${DJANGO_SUPERUSER_NAME}', '${DJANGO_SUPERUSER_EMAIL}', '${DJANGO_SUPERUSER_PASSWORD}')
+END
+  echo "💡 Superuser Username: ${DJANGO_SUPERUSER_NAME}, E-Mail: ${DJANGO_SUPERUSER_EMAIL}"
+fi
 
 
 # run python3 manage.py collectstatic
