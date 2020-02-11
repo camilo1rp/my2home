@@ -30,7 +30,7 @@ else
     fi
   fi
 
-  ./manage.py shell --interface python3 << END
+python3 /opt/my2home/manage.py shell << END
 from django.contrib.auth.models import User
 if not User.objects.filter(username='${DJANGO_SUPERUSER_NAME}'):
     u=User.objects.create_superuser('${DJANGO_SUPERUSER_NAME}', '${DJANGO_SUPERUSER_EMAIL}', '${DJANGO_SUPERUSER_PASSWORD}')
