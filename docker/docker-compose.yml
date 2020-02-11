@@ -59,7 +59,7 @@ services:
 
 secrets:
     django_superuser_email:
-              secrets/django_superuser_email.txt
+        file: secrets/django_superuser_email.txt
     django_superuser_password:
         file: secrets/django_superuser_password.txt
     db_password:
