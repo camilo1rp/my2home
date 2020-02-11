@@ -19,7 +19,7 @@ services:
         container_name: my2home
         environment:
             DJANGO_SUPERUSER_NAME: my2homeadmin
-            DJANGO_SUPERUSER_MAIL: /run/secrets/django_superuser_email
+            DJANGO_SUPERUSER_MAIL: /run/secrets/django_superuser_mail
             DJANGO_SUPERUSER_PASS: /run/secrets/django_superuser_password
             ALLOWED_HOSTS: localhost
             DB_NAME: my2home
@@ -30,7 +30,7 @@ services:
             EMAIL_HOST_USER: /run/secrets/email_host_user
             EMAIL_HOST_PASSWORD: /run/secrets/email_host_password
         secrets:
-            - django_superuser_email
+            - django_superuser_mail
             - django_superuser_password
             - db_password
             - secret_key
@@ -59,7 +59,7 @@ services:
 
 secrets:
     django_superuser_email:
-        file: secrets/django_superuser_email.txt
+        file: secrets/django_superuser_mail.txt
     django_superuser_password:
         file: secrets/django_superuser_password.txt
     db_password:

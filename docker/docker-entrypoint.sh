@@ -2,7 +2,8 @@
 set -e
 
 # read docker secrets into env variables
-export SUPERUSER_PASSWORD=$(cat /run/secrets/superuser_password)
+export DJANGO_SUPERUSER_PASSWORD=$(cat /run/secrets/django_superuser_password)
+export DJANGO_SUPERUSER_MAIL=$(cat /run/secrets/django_superuser_mail)
 export DB_PASSWORD=$(cat /run/secrets/db_password)
 export SECRET_KEY=$(cat /run/secrets/secret_key)
 
