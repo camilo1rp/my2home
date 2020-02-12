@@ -17,11 +17,11 @@ class Profile(models.Model):
         (OTHER, _('other')),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.BigIntegerField(null=True, blank=True, validators=[validate_phone])
+    phone = models.BigIntegerField(null=True, validators=[validate_phone])
     nickname = models.CharField(_('Nickname'), max_length=20, default="none")
     gender = models.CharField(_('gender'), max_length=2, choices=GENDER, default=OTHER)
     city = models.CharField(_('city'), max_length=30, null=True, blank=True)
-    # photo = models.ImageField(upload_to="media/", default="media/default.png")
+    photo = models.ImageField(upload_to="media/profiles", default="/profiles/profile.jpg")
     company = models.CharField(_('company'), max_length=30, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
