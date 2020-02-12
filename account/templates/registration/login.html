@@ -32,7 +32,6 @@
     </label>
       {{ form.non_field_errors }}
 
-
 <!--    <p class="forgot-pass"><a href="#">{% trans 'Forgot password?' %}</a></p>-->
     <button  type="submit" class="submit">{% trans 'sign in' %}</button>
 <!--    <button type="button" class="fb-btn">Connect with <span>facebook</span></button>-->
@@ -81,9 +80,9 @@ function sendForm() {
            url: '{% url "profile:create" %}',
            data: form,
         }).done(function(data) {
-          var y = document.getElementById('newUser');
-          y.innerHTML = data;
-          confirmation()
+            var y = document.getElementById('newUser');
+            y.innerHTML = data;
+            document.getElementById('id_photo').addEventListener('change', imageChange);
           });
 };
 
@@ -100,19 +99,44 @@ function confirmation() {
       $("#id_phone").prop('required',true);
   }
 }
+function imageChange () {
+    url = $('#url_img').text()
+  $("#id_image").attr("src", url);
+}
+function imageChange(evt){
+    var files = evt.target.files;
+    //Obtenemos la imagen del campo "file".
+    for (var i = 0, f; f = files[i]; i++) {
+       //Solo admitimos imágenes.
+       if (!f.type.match('image.*')) {
+            continue;
+       }
+       var reader = new FileReader();
+       reader.onload = (function(theFile) {
+           return function(e) {
+           // Creamos la imagen.
+           document.getElementById("id_image").innerHTML = ['<img class="responsive-img"  src="', e.target.result,'" title="',escape(theFile.name),'"/>'].join('');
+        };
+       })(f);
+       reader.readAsDataURL(f);
+    }
+}
 function sendForm3() {
-        var form = $("#formulario3").serialize(); // serializes the form's elements.
+        var form = new FormData($('#formulario3').get(0));
         var urls =$("#url").text();
-        console.log(urls);
         $.ajax({
            type: "post",
            url: urls,
            data: form,
+           cache: false,
+           contentType: 'multipart/form-data',
+           processData: false,
+           contentType: false,
         }).done(function(data) {
-          console.log(data.length)
-          if( data.length < 2000){
+          if( data.length < 4000){
           var y = document.getElementById('newUser');
           y.innerHTML = data;
+          document.getElementById('id_photo').addEventListener('change', imageChange);
           }
           else{
             location.reload(true);
