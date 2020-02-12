@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+
+    <form id="formulario" method="POST" action="">
+        <div class="card-content white-text" style="word-wrap: break-word; margin:0;">{% csrf_token %}
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    {{form.phone}}
+                    <label  style="font-size:1.2rem;">{{form.phone.label}}</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">{{form.phone.errors}}</span>
+
+                </div>
+                <div class="input-field col s12 m6">
+                    {{form.city}}
+                    <label style="font-size:1.2rem;">{{form.city.label}}</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">{{form.city.errors}}</span>
+
+                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 m6">
+                  {{form.gender}}
+                <label>{{form.gender.label}}</label>
+                <span class="helper-text" data-error="wrong" data-success="right">{{form.gender.errors}}</span>
+              </div>
+                <div class="input-field col s12 m6">
+                    {{form.company}}
+                    <label  style="font-size:1.2rem;">{{form.company.label}}</label>
+                <span class="helper-text" data-error="wrong" data-success="right">{{form.company.errors}}</span>
+                </div>
+            </div>
+            <button  type="button" onclick="sendForm()">{% trans 'save' %}</button>
+        </div>
+        <br>
+    </form>

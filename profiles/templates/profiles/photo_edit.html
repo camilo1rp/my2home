@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>photo_edit</title>
+    <link rel="stylesheet" type="text/css" href="{% static '/materialize/css/materialize.min.css' %}">
+    <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="left card-title">
+            <b>{% trans 'Change Profile Photo' %}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div   class="row">
+            <form id="formulario2" method="post">{% csrf_token %}
+                <div class="col s12">
+                    <div class="card-panel grey lighten-5 z-depth-1">
+                        <div class="row valign-wrapper">
+                            <div id="id_image" class="col s3">
+                                <img src="{{form.instance.photo.url}}" alt="profile" class="responsive-img"> <!-- notice the "circle" class -->
+                            </div>
+                            <div class="col s9">
+                                {{ form.photo }}
+                                {{form.photo.errors}}
+                            </div>
+                        </div>
+                    </div>`
+                </div>
+                <button  type="button" onclick="sendForm2()" class="submit" >{% trans 'Confirm' %}</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
