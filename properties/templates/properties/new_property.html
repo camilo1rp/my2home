@@ -46,12 +46,9 @@
     .modal-lg {
         max-width: 78% !important;
     }
-    .centrar{
-        text-align: center;
-        white-space: nowrap;
-    }
-    .centrar0{
-        margin: 0 auto;
+    form label {
+      overflow: none;
+      white-space: nowrap;
     }
     .divBtn{
         text-align: center;
@@ -89,7 +86,7 @@
                                     <div id="wizard">
                                         <h2>{% trans 'New Property' %}</h2>
                                         <section style="overflow: auto;"> <!-- PAGE 1-->
-                                            <form id="formSectionUno" method="post">
+                                            <form id="formSectionUno" method="post" >
                                                 {% csrf_token %}
                                                 <div class="col-md-12">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -115,7 +112,7 @@
                                                                 </div>
                                                             </div>
                                                             <hr>
-                                                            <div class="row">
+                                                            <div class="row justify-content-center">
                                                                 <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                        {{form.type_business.label}}<span class="span"> *</span>
@@ -144,71 +141,71 @@
                                                                 </div>
                                                             </div>
                                                             <hr>
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-md-4 justify-content-center">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                             {{form.rooms.label}}<span class="span"> *</span>
                                                                          </label>
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-md-12 col-lg-8">
                                                                             {{form.rooms}}
                                                                             <span class="help-block"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.baths.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-6 centrar0">
+                                                                    <div class="col-md-12 col-lg-8">
                                                                         {{form.baths}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                        {{form.parking.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-6 centrar0">
+                                                                    <div class="col-md-12 col-lg-8">
                                                                         {{form.parking}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
-                                                            <div class="row">
-                                                                <div class="col-md-3">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                            <div class="row justify-content-center">
+                                                                <div class="col-md-6 col-lg-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label ">
                                                                         {{form.area_total.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-8">
+                                                                    <div class="col-md-12 col-lg-8">
                                                                         {{form.area_total}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3" >
+                                                                <div class="col-md-6 col-lg-3" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.area_built.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-8">
+                                                                    <div class="col-md-12 col-lg-8">
                                                                         {{form.area_built}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3" id="divEstrato" style="text-align: -webkit-right;">
+                                                                <div class="col-md-6 col-lg-3" id="divEstrato" style="text-align: -webkit-right;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.estrato.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-12 col-lg-8">
                                                                         {{form.estrato}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-3">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label centrar">
+                                                                <div class="col-md-6 col-lg-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.year.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-8 centrar0">
+                                                                    <div class="col-md-12 col-lg-8">
                                                                         {{form.year}}
                                                                         <span class="help-block"></span>
                                                                     </div>

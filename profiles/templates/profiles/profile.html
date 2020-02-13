@@ -6,22 +6,45 @@
     <meta charset="UTF-8">
     <title>{%trans 'Edit Profile' %}</title>
     <style>
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
+    li {
+            text-align: center;
+            font-size: 0.8rem;
+            color: red;
     }
-    /* Firefox */
-    input[type=number] {
-      -moz-appearance:textfield;
-    }
+
     </style>
+    <!--    materialize-->
+    <link rel="stylesheet" type="text/css" href="{% static '/materialize/css/materialize.min.css' %}">
+    <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+    <!--    materialize-->
+    <link rel="stylesheet" type="text/css" href="{% static '/style_login.css' %}">
+<!--    &lt;!&ndash; Compiled and minified CSS &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+
+<!--    &lt;!&ndash; Compiled and minified JavaScript &ndash;&gt;-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
 
 </head>
 <body>
-    <span id="url" hidden>{% url 'profile:update' pro_id %}</span>
+
     <form id="formulario3" method="post">
-      {% csrf_token %}
+    <span id="url" >{% url 'profile:update' pro_id %}</span>
+        <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel grey lighten-5 z-depth-1">
+                <div class="row valign-wrapper">
+                    <div id="id_image" class="col s3">
+                        <img  src="{{form.instance.photo.url}}"alt="" class="responsive-img"> <!-- notice the "circle" class -->
+                    </div>
+                    <div class="col s9">
+                        {{ form.photo }}
+                        {{form.photo.errors}}
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        {% csrf_token %}
+        <input name="user_id" value="{{ pro_id }}">
         <label>
             <span>{% trans 'Phone' %}</span>
             {{ form.phone }}
@@ -43,7 +66,8 @@
             {{form.company.errors}}
         </label>
         {{ form.non_field_errors }}
-        <button  type="button" onclick="sendForm3()" class="submit">{% trans 'sign in now' %}</button>
+        <button  type="button" onclick="sendForm3()" class="submit" >{% trans 'sign in now' %}</button>
     </form>
 </body>
+
 </html>

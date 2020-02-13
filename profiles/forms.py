@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
-
+from django.utils.translation import gettext as _
 
 class UserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
@@ -34,4 +34,17 @@ class UserForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone', 'gender', 'city', 'company', )
+        fields = ('phone', 'gender', 'city', 'company', 'photo')
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('phone', 'gender', 'city', 'company')
+
+
+class ProfilePhotoForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('photo',)
+
