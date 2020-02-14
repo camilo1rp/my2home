@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext
 
 class UserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
@@ -19,7 +19,7 @@ class UserForm(UserCreationForm):
         user = self.cleaned_data['username']
         usernames = [users.user.username for users in Profile.objects.all()]
         if user in usernames:
-            self.add_error('username', "Username is already taken")
+            self.add_error('username', gettext("Username is already taken"))
         return user
 
     def clean_email(self):
@@ -27,7 +27,7 @@ class UserForm(UserCreationForm):
         emails = [users.user.email for users in Profile.objects.all()]
         print(email)
         if email != "" and email in emails:
-            self.add_error('email', "email is already registered")
+            self.add_error('email', gettext("Email is already registered"))
         return email
 
 

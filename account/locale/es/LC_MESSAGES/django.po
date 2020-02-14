@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 15:12-0500\n"
+"POT-Creation-Date: 2020-02-14 10:24-0500\n"
 "PO-Revision-Date: 2020-02-10 20:14+0000\n"
 "Last-Translator: b'Camilo Romero <camilo1rp2@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,61 +19,64 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
-#: account/templates/account/dashboard.html:79
+#: account/templates/account/dashboard.html:117
 msgid "Profile"
 msgstr "Perfil"
 
-#: account/templates/account/dashboard.html:91
+#: account/templates/account/dashboard.html:129
 msgid "Home"
 msgstr "Inicio"
 
-#: account/templates/account/dashboard.html:92
+#: account/templates/account/dashboard.html:130
 msgid "Publish a Property"
 msgstr "Publicar una Propiedad"
 
-#: account/templates/account/dashboard.html:94
+#: account/templates/account/dashboard.html:132
 msgid "More"
 msgstr "Mas"
 
-#: account/templates/account/dashboard.html:95
+#: account/templates/account/dashboard.html:133
 msgid "Contact Us"
 msgstr "Contactanos"
 
-#: account/templates/account/dashboard.html:105
+#: account/templates/account/dashboard.html:142
 msgid "Details"
 msgstr "Detalles"
 
-#: account/templates/account/dashboard.html:118
-#: account/templates/account/dashboard.html:156
+#: account/templates/account/dashboard.html:149
+msgid "change image"
+msgstr ""
+
+#: account/templates/account/dashboard.html:154
+#: account/templates/account/dashboard.html:203
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: account/templates/account/dashboard.html:125
-#: account/templates/registration/login.html:24
-msgid "Email"
-msgstr "Email"
-
-#: account/templates/account/dashboard.html:127
+#: account/templates/account/dashboard.html:163
 msgid "Phone"
 msgstr "Teléfono"
 
-#: account/templates/account/dashboard.html:129
+#: account/templates/account/dashboard.html:167
+msgid "Gender"
+msgstr ""
+
+#: account/templates/account/dashboard.html:173
 msgid "City"
 msgstr "Ciudad"
 
-#: account/templates/account/dashboard.html:131
+#: account/templates/account/dashboard.html:177
 msgid "Company"
 msgstr "Empresa"
 
-#: account/templates/account/dashboard.html:145
+#: account/templates/account/dashboard.html:192
 msgid "Messages"
 msgstr "Mensajes"
 
-#: account/templates/account/dashboard.html:153
+#: account/templates/account/dashboard.html:200
 msgid "Coming soon!"
 msgstr "Próximamente!"
 
-#: account/templates/account/dashboard.html:185
+#: account/templates/account/dashboard.html:232
 msgid "Followed properties"
 msgstr "Inmuebles seguidos"
 
@@ -90,50 +93,54 @@ msgstr "Nombre de Usuario"
 msgid "or"
 msgstr "o"
 
+#: account/templates/registration/login.html:24
+msgid "Email"
+msgstr "Email"
+
 #: account/templates/registration/login.html:29
 #: account/templates/registration/login1.html:58
 msgid "Password"
 msgstr "Contraseña "
 
-#: account/templates/registration/login.html:36
+#: account/templates/registration/login.html:35
 msgid "Forgot password?"
 msgstr "Olvidaste tu contraseña"
 
-#: account/templates/registration/login.html:37
-#: account/templates/registration/login.html:54
+#: account/templates/registration/login.html:36
+#: account/templates/registration/login.html:53
 msgid "sign in"
 msgstr "ingresar"
 
-#: account/templates/registration/login.html:45
+#: account/templates/registration/login.html:44
 msgid "New here?"
 msgstr "Eres nuevo?"
 
-#: account/templates/registration/login.html:46
+#: account/templates/registration/login.html:45
 msgid "Sign up and discover great amount of new opportunities!"
 msgstr "Registrate y descubre un montón de nuevas oportunidades"
 
-#: account/templates/registration/login.html:49
+#: account/templates/registration/login.html:48
 msgid "One of us?"
 msgstr "Uno de nosotros?"
 
-#: account/templates/registration/login.html:50
+#: account/templates/registration/login.html:49
 msgid "If you already has an account, just sign in. We've missed you!"
 msgstr "Si ya tienes una cuenta, Ingresa!, Te extrañamos"
 
-#: account/templates/registration/login.html:53
+#: account/templates/registration/login.html:52
 msgid "sign up"
 msgstr "registrarse"
 
-#: account/templates/registration/login.html:58
+#: account/templates/registration/login.html:57
 msgid "Error loading form, please refresh the browser (press F5)"
 msgstr ""
 "Error cargando el formulario, por favor refresca la pagina (presiona F5)"
 
-#: account/templates/registration/login.html:95
+#: account/templates/registration/login.html:94
 msgid "Your account has been created"
 msgstr "Tu cuenta ha sido creada"
 
-#: account/templates/registration/login.html:96
+#: account/templates/registration/login.html:95
 msgid "Fill out this extra information and login"
 msgstr "Llena esta información extra e ingresa"
 
