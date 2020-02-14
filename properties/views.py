@@ -155,7 +155,7 @@ class ListProperty(ListView):
                 pass
 
         # assign query and filters to context
-        self.object_list = query
+        self.object_list = query.filter(active=True)
         context = self.get_context_data()
         context['filters'] = filters_dict
         context['filters_active'] = filters_active
@@ -391,7 +391,7 @@ def whatsapp_contact(request):
 class Tyc(TemplateView):
     template_name = "properties/tyc.html"
 
-
+@login_required
 def property_upload(request):
     template = 'properties/upload.html'
     if request.method == 'POST':
