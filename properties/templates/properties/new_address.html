@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load i18n %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
 
     <style>
     .select2-container {
@@ -26,6 +27,21 @@
         margin: 0 auto;
         padding-top:3%;
     }
+
+    input[type=number] {
+        -moz-appearance:textfield; /* Firefox */
+        text-align: center;
+    }
+    input[type=text] {
+        text-align: center;
+    }
+    input[type=checkbox] {
+     -ms-transform: scale(1.5); /* IE */
+     -moz-transform: scale(1.5); /* FF */
+     -webkit-transform: scale(1.5); /* Safari and Chrome */
+     -o-transform: scale(1.5); /* Opera */
+      padding: 10px;
+    }
 </style>
 </head>
 <body>
@@ -43,7 +59,7 @@
                                 {{form.errors}}
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                 {{form.tipo_via.label}}<span class="span"> *</span></label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-8 offset-lg-2">
                                     {{form.tipo_via}}
                                     <span class="help-block"></span>
                                 </div>
@@ -52,7 +68,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.via.label}}<span class="span"> *</span>
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-8 offset-lg-2">
                                     {{form.via}}
                                     <span class="help-block"></span>
                                 </div>
@@ -61,7 +77,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.prefijo_via.label}}
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-6 offset-lg-2">
                                     {{form.prefijo_via}}
                                     <span class="help-block"></span>
                                 </div>
@@ -74,7 +90,7 @@
                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                         {{form.numero.label}}<span class="span"> *</span>
                                     </label>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 col-lg-8 offset-lg-2">
                                         {{form.numero}}
                                         <span class="help-block"></span>
                                     </div>
@@ -84,7 +100,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.prefijo_numero.label}}
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-6 offset-lg-2">
                                     {{form.prefijo_numero}}
                                     <span class="help-block"></span>
                                 </div>
@@ -93,7 +109,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.placa.label}}<span class="span"> *</span>
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-8 offset-lg-2">
                                     {{form.placa}}
                                     <span class="help-block"></span>
                                 </div>
@@ -105,7 +121,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.departamento.label}}<span class="span"> *</span>
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-10 offset-lg-2">
                                     {{form.departamento}}
                                     <span class="help-block"></span>
                                 </div>
@@ -114,7 +130,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.ciudad.label}}<span class="span"> *</span>
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-10 offset-lg-2">
                                     {{form.ciudad}}
                                     <span class="help-block"></span>
                                 </div>
@@ -123,7 +139,7 @@
                                 <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                     {{form.barrio.label}}
                                 </label>
-                                <div class="col-md-12">
+                                <div class="col-md-12 col-lg-8 offset-lg-2">
                                     {{form.barrio}}
                                     <span class="help-block"></span>
                                 </div>
@@ -135,20 +151,18 @@
                         <br/>
                         <hr>
                         <div class="row">
-                            <div class="col-md-9" style="text-align: right;">
-                                <span>Mostrar dirección completa en la Web?</span>
+                            <div class="col-sm-9 col-md-7 col-lg-6">
+                                <label class="control-label">
+                                    <p>{% trans 'Show full address in web:' %}</p>
+                                </label>
                             </div>
-                            <div class="col-md-3">
-                                <div class="col-md-12">
-                                    {{form.mostrar}}
-                                    <span class="help-block"></span>
-                                </div>
+                            <div class="col-sm-3     col-md-3 col-lg-3">
+                                {{form.mostrar}}
                             </div>
                         </div>
-                        <br/>
-                        <div style="font-weight: bold; text-align: center;">
-                            <span style="font-size: 18px;text-decoration: underline;">Direccion a Mostrar:</span>
-                            <span id="showData2"></span>
+                        <div style=" text-align: center;">
+                            <span style="font-size: 18px;">{% trans 'Address to be shown:' %}</span>
+                            <span style="font-weight: bold;" id="showData2"></span>
                         </div>
                     </div>
                 </div>
@@ -156,8 +170,8 @@
             <br/>
             <div class="form-group divBtn">
                 <div class="col-md-12">
-                    <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                        Guardar
+                    <button type="submit" id="btnGuardar" class="btn btn-primary btnSave" style="background-color:#364e68;">
+                        {% trans 'save' %}
                     </button>
                 </div>
             </div>
@@ -172,7 +186,7 @@
 //SECTION 2
     var  depa = '';
     var  ciud = '';
-    var  pref = ''; 
+    var  pref = '';
     var  prefNum = '';
     $("#id_prefijo_via").change(function(){
         pref = $("#id_prefijo_via option:selected").text();
@@ -183,6 +197,8 @@
         prefNum = $("#id_prefijo_numero option:selected").text();
         datos();
     });
+    // show dept and city in mostrar address (trick)
+
 
     $("#id_departamento").change(function(){
         var opcion = $("#id_departamento option:selected").val();
@@ -200,6 +216,9 @@
                 valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
             });
             $("#id_ciudad").append(valores);
+            $("#id_ciudad").val(city_id);
+            $("#id_ciudad").trigger("change");
+
         });
         datos();
     });
@@ -217,7 +236,7 @@
     //Css
     $("input, select").addClass('form-control');
     $("#id_mostrar").prop('checked',true);
-    $("#id_mostrar").css('height','1.5em').css('width','100%');
+    //$("#id_mostrar").css('height','1.5em').css('width','100%');
 
     if(  $("#id_mostrar").is(':checked') ){
         $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
@@ -229,14 +248,14 @@
             if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").val() == '' && $("#id_departamento option:selected").val() == '' && $("#id_barrio").val() == '' ){
                 $("#showData2").text('');
             }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+pref+' # '+$("#id_numero").val()+' '+prefNum+' - '+$("#id_placa").val()+'. '+$("#id_barrio").val()+', '+ciud+', '+depa );
+                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+''+pref+' # '+$("#id_numero").val()+''+prefNum+' - '+$("#id_placa").val()+''+$("#id_barrio").val()+', '+ciud+', '+depa );
             }
         }
     }
 
     $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
 
-        $("#showData2").html( $("#id_barrio").val()+' '+$("#id_departamento option:selected").text()+' '+$("#id_ciudad option:selected").text() );
+        $("#showData2").html( $("#id_barrio").val()+' '+$("#id_departamento option:selected").text()+', '+$("#id_ciudad option:selected").text() );
         datos();
 
     });
@@ -254,8 +273,12 @@
             $("#showData2").html( $("#id_barrio").val()+' '+$("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text() );
         }
     });
-
-
+    var city_id = $("#id_ciudad").val();
+    $( document ).ready(function() {
+        $("#id_departamento").trigger('change');
+        $("#id_prefijo_via").trigger('change');
+        $("#id_prefijo_numero").trigger('change');
+    });
 
 
 </script>
