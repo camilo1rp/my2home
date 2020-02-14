@@ -9,6 +9,7 @@ from email.mime.image import MIMEImage
 from smtplib import SMTPAuthenticationError
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives, send_mail
@@ -86,15 +87,18 @@ class ListProperty(ListView):
                         user.following.remove(prop)
                         user.save()
                         print("{} stopped following {}".format(user, prop))
-                        return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}), content_type='application/json')
+                        return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}),
+                                            content_type='application/json')
                     elif user != prop.manager:
                         follows = Following(user=user, property_followed=prop)
                         follows.save()
                         print("{} started following {}".format(user, prop))
-                        return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}), content_type='application/json')
+                        return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}),
+                                            content_type='application/json')
                     else:
                         print('user owns this property')
-                        return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}), content_type='application/json')
+                        return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}),
+                                            content_type='application/json')
                 else:
                     return HttpResponse(json.dumps({'command': -1, 'prop_id': -1}), content_type='application/json')
 
@@ -204,10 +208,14 @@ class CreateProperty(LoginRequiredMixin, CreateView):
         return {
             'owner': owner,
         }
+
+    def dispatch(self, *args, **kwargs):
+        return super(CreateProperty, self).dispatch(*args, **kwargs)
     # def get(self, request, *args, **kwargs):
     #     self.business = BusinessType.objects.all()
     #     return super().get(request, *args, **kwargs)
     #
+
 
 class UpdateProperty(LoginRequiredMixin, UpdateView):
     model = Property
@@ -230,16 +238,22 @@ class UpdateProperty(LoginRequiredMixin, UpdateView):
 
     @method_decorator(user_is_propertys_manager)
     def dispatch(self, *args, **kwargs):
-        print('dispatching')
         return super(UpdateProperty, self).dispatch(*args, **kwargs)
 
     # def get_object(self):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
 
 
+@login_required
 def create_address(request, prop_id=None):
+    try:
+        prop = Property.objects.get(id=prop_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(gettext("Property does not exist"))
+    if request.user in [prop.manager, prop.owner]:
+        return HttpResponse(gettext("Access denied"))
     if request.method == 'POST':
-        if Property.objects.get(id=prop_id).address_col.all():  # check if property has address
+        if prop.address_col.all():  # check if property has address
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(instance=instance, data=request.POST)
         else:
@@ -249,7 +263,7 @@ def create_address(request, prop_id=None):
             new_address.save()
             return HttpResponseRedirect(reverse('property:create-image', args=(new_address.propiedad.id,)))
     else:
-        if Property.objects.get(id=prop_id).address_col.all():
+        if prop.address_col.all():
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(request.POST or None, instance=instance)
         else:
@@ -257,18 +271,20 @@ def create_address(request, prop_id=None):
     return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
 
 
+@login_required
 def create_image(request, prop_id=None):
-    prop = Property.objects.get(id=int(prop_id))
+    try:
+        prop = Property.objects.get(id=prop_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(gettext("Property does not exist"))
+    if request.user in [prop.manager, prop.owner]:
+        return HttpResponse(gettext("Access denied, you don't own or manage this property"))
     images = prop.gallery.all()
     images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6 - len(images))
     if request.method == 'POST':
-        print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
-            print('got valid')
-            print(prop)
             for obj in form:
-                print(obj.cleaned_data)
                 try:
                     img_in = obj.cleaned_data['image']
                     main_in = obj.cleaned_data['main']
