@@ -91,15 +91,16 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 #}
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my2home',
-        'USER': 'myhome',
-        'PASSWORD': 'Tncamilo123',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': os.environ.get('DB_NAME','postgres'),
+         'USER': os.environ.get('DB_USER','gitpod'),
+         'PASSWORD': os.environ.get('DB_PASSWORD','passworddb'),
+
+         'HOST': os.environ.get('DB_HOST','localhost'),
+         'PORT': '5432',
+         }
+ }
 
 
 # Password validation
