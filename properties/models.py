@@ -37,9 +37,9 @@ class Property(models.Model):
     area_total = models.DecimalField(_('total area'), default=0, decimal_places=0, max_digits=12)
     estrato = models.IntegerField(null=True, blank=True)
     year = models.IntegerField(_('year built'), null=True, blank=True)
-    title = models.CharField(_('title'), max_length=50)
-    title_slug = models.SlugField(max_length=70)
-    description = models.TextField(_('description'), max_length=500)
+    title = models.CharField(_('title'), max_length=30)
+    title_slug = models.SlugField(max_length=50)
+    description = models.TextField(_('description'), max_length=700)
     type_business = models.ManyToManyField('BusinessType', related_name='business', verbose_name=_('offer type'))
 
     # analytic
