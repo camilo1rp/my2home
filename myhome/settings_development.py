@@ -91,17 +91,15 @@ WSGI_APPLICATION = 'myhome.wsgi.application'
 #}
 
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': os.environ.get('DB_NAME','postgres'),
-         'USER': os.environ.get('DB_USER','gitpod'),
-         'PASSWORD': os.environ.get('DB_PASSWORD','passworddb'),
-
-         'HOST': os.environ.get('DB_HOST','localhost'),
-         'PORT': '5432',
-         }
- }
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'my2home',
+        'USER': 'myhome',
+        'PASSWORD': 'Tncamilo123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+        }
+}
 
 
 # Password validation
@@ -156,10 +154,9 @@ STATIC_ROOT = '/workspace/my2home/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+LOGIN_URL = '/account/login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('profile:update', args=[u.profile.id])
@@ -168,3 +165,5 @@ ABSOLUTE_URL_OVERRIDES = {
 EASY_MAPS_GOOGLE_KEY = os.environ.get('EASY_MAPS_GOOGLE_KEY','')
 
 VISITS_SESSION_ID = 'visits'
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
