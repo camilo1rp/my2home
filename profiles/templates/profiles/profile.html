@@ -28,7 +28,7 @@
 <body>
 
     <form id="formulario3" method="post">
-    <span id="url" >{% url 'profile:update' pro_id %}</span>
+    <span hidden id="url" >{% url 'profile:update' pro_id %}</span>
         <div class="col s12 m8 offset-m2 l6 offset-l3">
             <div class="card-panel grey lighten-5 z-depth-1">
                 <div class="row valign-wrapper">
@@ -44,7 +44,7 @@
         </div>
 
         {% csrf_token %}
-        <input name="user_id" value="{{ pro_id }}">
+        <input hidden name="user_id" value="{{ pro_id }}">
         <label>
             <span>{% trans 'Phone' %}</span>
             {{ form.phone }}
