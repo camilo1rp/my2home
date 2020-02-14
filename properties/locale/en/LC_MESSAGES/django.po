@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 15:12-0500\n"
+"POT-Creation-Date: 2020-02-14 10:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -189,7 +189,7 @@ msgstr ""
 
 #: properties/templates/properties/contact.html:69
 #: properties/templates/properties/index.html:583
-#: properties/templates/properties/property-details.html:274
+#: properties/templates/properties/property-details.html:266
 msgid "Contact Us"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgid "Contact Info"
 msgstr ""
 
 #: properties/templates/properties/contact.html:124
-#: properties/templates/properties/new_property.html:268
+#: properties/templates/properties/new_property.html:234
 msgid "Address"
 msgstr ""
 
@@ -358,57 +358,57 @@ msgid "Asesoria legal"
 msgstr ""
 
 #: properties/templates/properties/index.html:562
-#: properties/templates/properties/property-details.html:253
+#: properties/templates/properties/property-details.html:245
 msgid "About Inmuebles Fusa"
 msgstr ""
 
 #: properties/templates/properties/index.html:569
-#: properties/templates/properties/property-details.html:260
+#: properties/templates/properties/property-details.html:252
 msgid "Navigations"
 msgstr ""
 
 #: properties/templates/properties/index.html:573
-#: properties/templates/properties/property-details.html:264
+#: properties/templates/properties/property-details.html:256
 msgid "Home"
 msgstr ""
 
 #: properties/templates/properties/index.html:574
-#: properties/templates/properties/property-details.html:265
+#: properties/templates/properties/property-details.html:257
 #: properties/templates/properties/top_nav.html:31
 msgid "Buy"
 msgstr ""
 
 #: properties/templates/properties/index.html:575
-#: properties/templates/properties/property-details.html:266
+#: properties/templates/properties/property-details.html:258
 #: properties/templates/properties/top_nav.html:32 properties/views.py:49
 msgid "Rent"
 msgstr ""
 
 #: properties/templates/properties/index.html:576
-#: properties/templates/properties/property-details.html:267
-#: properties/templates/properties/property_card_scroll.html:88
+#: properties/templates/properties/property-details.html:259
+#: properties/templates/properties/property_card_scroll.html:87
 #: properties/templates/properties/property_list.html:51
 #: properties/templates/properties/top_nav.html:33 properties/views.py:50
 msgid "Swap"
 msgstr ""
 
 #: properties/templates/properties/index.html:581
-#: properties/templates/properties/property-details.html:272
+#: properties/templates/properties/property-details.html:264
 msgid "About Us"
 msgstr ""
 
 #: properties/templates/properties/index.html:582
-#: properties/templates/properties/property-details.html:273
+#: properties/templates/properties/property-details.html:265
 msgid "Privacy Policy"
 msgstr ""
 
 #: properties/templates/properties/index.html:584
-#: properties/templates/properties/property-details.html:275
+#: properties/templates/properties/property-details.html:267
 msgid "Terms"
 msgstr ""
 
 #: properties/templates/properties/index.html:591
-#: properties/templates/properties/property-details.html:282
+#: properties/templates/properties/property-details.html:274
 msgid "Follow Us"
 msgstr ""
 
@@ -458,6 +458,8 @@ msgid "Yes!"
 msgstr ""
 
 #: properties/templates/properties/my_account.html:54
+#: properties/templates/properties/new_image2.html:127
+#: properties/templates/properties/new_image2.html:315
 msgid "Cancel"
 msgstr ""
 
@@ -469,33 +471,111 @@ msgstr ""
 msgid "You can go to My account to login again"
 msgstr ""
 
-#: properties/templates/properties/new_image2.html:164
+#: properties/templates/properties/new_address.html:156
+msgid "Show full address in web:"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:164
+msgid "Address to be shown:"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:174
+#: properties/templates/properties/new_image2.html:316
+#: properties/templates/properties/new_property.html:227
+msgid "Save"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:108
+msgid "confirmation"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:115
+#: properties/templates/properties/tyc.html:4
+msgid ""
+"I confirm that I have all the rights to share the information given in this "
+"form and I authorise the publication of it, including images and text."
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:117
+#: properties/templates/properties/tyc.html:6
+msgid "Confirm"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:125
+msgid "Publish my Property"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:165
 msgid "all done!"
 msgstr ""
 
-#: properties/templates/properties/new_image2.html:166
+#: properties/templates/properties/new_image2.html:167
 msgid "Choose a main image"
 msgstr ""
 
-#: properties/templates/properties/new_image2.html:210
+#: properties/templates/properties/new_image2.html:180
+msgid "Save images"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:180
+msgid "Finish"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:211
+#: properties/templates/properties/new_image2.html:345
 msgid "Main Image"
 msgstr ""
 
+#: properties/templates/properties/new_image2.html:306
+msgid "Please select a main image"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:311
+msgid "You can add more images. Up to 6!"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:311
+msgid "Would you like to save these images?"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:315
+msgid "Add more images"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:344
+msgid "main image in page"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:454
+msgid "Want to remove this image?"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:459
+msgid "Remove"
+msgstr ""
+
 #: properties/templates/properties/new_property.html:5
-#: properties/templates/properties/new_property.html:90
 msgid "New Property"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:66
+#: properties/templates/properties/new_property.html:54
 msgid "Your Property's Details"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:273
+#: properties/templates/properties/new_property.html:76
+msgid "Details"
+msgstr ""
+
+#: properties/templates/properties/new_property.html:239
 msgid "Image"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:278
+#: properties/templates/properties/new_property.html:244
 msgid "Done"
+msgstr ""
+
+#: properties/templates/properties/new_property.html:361
+msgid "Please check the confirm box to continue"
 msgstr ""
 
 #: properties/templates/properties/property-details.html:84
@@ -553,7 +633,7 @@ msgstr ""
 
 #: properties/templates/properties/property-details.html:174
 #: properties/templates/properties/property_card.html:11
-#: properties/templates/properties/property_card_scroll.html:82
+#: properties/templates/properties/property_card_scroll.html:81
 #: properties/templates/properties/property_carousel.html:25
 #: properties/templates/properties/property_list.html:45 properties/views.py:48
 msgid "Sale"
@@ -561,7 +641,7 @@ msgstr ""
 
 #: properties/templates/properties/property-details.html:177
 #: properties/templates/properties/property_card.html:14
-#: properties/templates/properties/property_card_scroll.html:85
+#: properties/templates/properties/property_card_scroll.html:84
 #: properties/templates/properties/property_carousel.html:28
 #: properties/templates/properties/property_carousel.html:50
 #: properties/templates/properties/property_list.html:48
@@ -580,20 +660,33 @@ msgstr ""
 msgid "More Info"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:207
+#: properties/templates/properties/property-details.html:199
 msgid "Gallery"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:236
+#: properties/templates/properties/property-details.html:228
 msgid "Recently Added Properties"
 msgstr ""
 
-#: properties/templates/properties/property_card_scroll.html:98
+#: properties/templates/properties/property_card_scroll.html:97
 msgid "click to go to property's page"
 msgstr ""
 
-#: properties/templates/properties/property_card_scroll.html:115
+#: properties/templates/properties/property_card_scroll.html:114
 msgid "Edit"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:175
+msgid "Add a property"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:176
+#: properties/templates/properties/property_card_scroll.html:186
+msgid "Click here"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:185
+msgid "Browse Properties"
 msgstr ""
 
 #: properties/templates/properties/property_carousel.html:5
