@@ -17,12 +17,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
+from .decorators import user_is_propertys_manager
 from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
 from .models import Property, AddressCol, Image, Contact, BusinessType, Following
 
@@ -207,7 +209,6 @@ class CreateProperty(LoginRequiredMixin, CreateView):
     #     return super().get(request, *args, **kwargs)
     #
 
-
 class UpdateProperty(LoginRequiredMixin, UpdateView):
     model = Property
     template_name = 'properties/new_property.html'
@@ -226,6 +227,11 @@ class UpdateProperty(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('property:create-address', args=[self.new_property.id])
+
+    @method_decorator(user_is_propertys_manager)
+    def dispatch(self, *args, **kwargs):
+        print('dispatching')
+        return super(UpdateProperty, self).dispatch(*args, **kwargs)
 
     # def get_object(self):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
