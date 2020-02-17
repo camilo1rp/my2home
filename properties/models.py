@@ -44,7 +44,7 @@ class Property(models.Model):
 
     # analytic
     seen = models.IntegerField(_('seen'), default=0)
-    active = models.BooleanField(_('active'), default=True)
+    active = models.BooleanField(_('active'), default=False)
     promoted = models.BooleanField(_('promoted'), default=False)
     followers = models.ManyToManyField(User, through='Following', related_name='following',)
     created = models.DateTimeField(auto_now_add=True)
