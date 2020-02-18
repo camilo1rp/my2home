@@ -31,24 +31,43 @@
         padding: 5px;
         width: 100%;
       }
-      .item .btn {
+      .yellow{
+        background-color: yellow;
+        padding: 5px;
+        width: 100%;
+      }
+      .item .btn2 {
             position: absolute;
             top: 70%;
-            left: 80%;
-            transform: translate(-85%, -85%);
-            -ms-transform: translate(-85%, -85%);
-            background-color:
-            #37474f94;
-            color:
-            white;
+            left: 70%;
+            transform: translate(-70%, -70%);
+            -ms-transform: translate(-70%, -70%);
+            background-color: #37474f94;
+            color: white;
             font-size: 1.5rem;
             border: 1px solid white;
             cursor: pointer;
             border-radius: 5px;
         }
-.item .btn:hover {
-  background-color: #364e68;
-}
+        .item .btn:hover {
+          background-color: #364e68;
+        }
+      .item .btn3 {
+            position: absolute;
+            top: 70%;
+            left: 30%;
+            transform: translate(-70%, -70%);
+            -ms-transform: translate(-70%, -70%);
+            background-color: #37474f;
+            color:  white;
+            font-size: 1.5rem;
+            border: 1px solid white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .item .btn2:hover {
+          background-color: #364e68;
+        }
     </style>
     <base target="_parent">
 </head>
@@ -65,14 +84,13 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" >
- {% for prop in properties %}
-
+    {% for prop in propertie %}
       {% if forloop.counter == 1 %}
         <div class="item active">
       {% else %}
         <div class="item">
       {% endif %}
-      <div class="property-entry">
+      <div id="id_pause_{{prop.id}}" class="property-entry">
         <a href="{% url 'property:detail' prop.id %}" class="property-thumbnail" >
           {% with business=prop.type_business.all %}
           <div class="offer-type-wrap">
@@ -89,7 +107,17 @@
             {% endfor %}
           </div>
           {% endwith %}
+            <div class="offer-type-wrap ">
+            {% if not prop.active %}
+                  <span class="offer-type red" style="font-size:3.5rem;">{% trans 'waiting for approval' %}</span>
 
+            {% endif %}
+            {% if prop.pause %}
+
+                  <span class="offer-type red" style="font-size:2rem;">{% trans 'This AD is paused. Only you can see it' %}</span>
+
+            {% endif %}
+                </div>
           {% with gallery=prop.gallery.all %}
           {%if gallery %}
             {% for img in gallery%}
@@ -108,11 +136,24 @@
             </span></a>
           {% endif %}
           {% if editable %}
-            <a href="{% url 'property:update' prop.id %}" class="btn">
+            <a  href="{% url 'property:update' prop.id %}" class="btn btn2">
                 <i class="fas fa-edit"></i>
                     <span style="font-size: 1em;">
                       &nbsp;{% trans 'Edit' %}
                     </span>
+            </a>
+            <a onclick="pause({{prop.id}})" class="btn btn3">
+                {% if prop.pause %}
+                    <i class="fa fa-play"></i>
+                    <span style="font-size: 1em;">
+                        &nbsp;{% trans 'Unpause' %}
+                    </span>
+                {% else %}
+                    <i class="fa fa-pause"></i>
+                    <span style="font-size: 1em;">
+                        &nbsp;{% trans 'Pause' %}
+                    </span>
+                {% endif %}
             </a>
           {% endif %}
       </div>
@@ -163,78 +204,110 @@
     </div>
 {% endwith %}
 {% empty %}
+    <div class="item active">
 
-<div class="item active">
-      <div class="property-entry">
-          {% if editable %}
-        <a href="{% url 'property:create'%}" class="property-thumbnail" >
+          <div class="property-entry">
+              {% if editable %}
 
-            <a href="{% url 'property:create'%}" class="property-thumbnail">
-                <img src="{% static 'images/img_5.jpg' %}" height="320px" width="100%" alt="Image" class="img-fluid">
+            <a href="{% url 'property:create'%}" class="property-thumbnail" >
+                <a href="{% url 'property:create'%}" class="property-thumbnail">
+                    <div class="offer-type-wrap ">
+                        <span class="offer-type green" style="font-size:2rem;">{% trans 'Your properties will appear here' %}</span>
+                        <span class="offer-type blue" style="font-size:2rem;">{% trans "Add your first property now, It's free!. Click here" %}</span>
+                    </div>
+                    <img src="{% static 'images/img_6.jpg' %}" height="320px" width="100%" alt="Image" class="img-fluid">
 
-                <span class="offer-type" style="text-align: center;height:5em;padding-top: 1em; font-weight:bold; background:#37474f;">{% trans 'Add a property' %} <br>
-                    <p>{% trans 'Click here' %}</p>
-            </span></a>
-        </a>
-          {% else %}
-                  <a href="{% url 'property:index'%}" class="property-thumbnail" >
+                    <span class="offer-type" style="text-align: center;height:5em;padding-top: 1em; font-weight:bold; background:#37474f;">{% trans 'Add a property' %} <br>
+                        <p>{% trans 'Click here' %}</p>
+                </span></a>
+            </a>
+              {% else %}
+                      <a href="{% url 'property:index'%}" class="property-thumbnail" >
 
-            <a href="{% url 'property:index'%}" class="property-thumbnail">
-                <img src="{% static 'images/img_2.jpg' %}" height="320px" width="100%" alt="Image" class="img-fluid">
+                <a href="{% url 'property:index'%}" class="property-thumbnail">
+                    <div class="offer-type-wrap ">
+                        <span class="offer-type green" style="font-size:2rem;">{% trans 'Your favorite properties will appear here' %}</span>
+                        <span class="offer-type blue" style="font-size:2rem;">{% trans "Browse through properties now. Click here to go to the main page!" %}</span>
+                    </div>
+                    <img src="{% static 'images/img_5.jpg' %}" height="320px" width="100%" alt="Image" class="img-fluid">
 
-                <span class="offer-type" style="text-align: center;height:5em;padding-top: 1em; font-weight:bold; background:#37474f;">{% trans 'Browse Properties' %} <br>
-                    <p>{% trans 'Click here' %}</p>
-            </span></a>
-        </a>
-          {% endif %}
-      </div>
-      <div style="width: 100%;text-align: center;">
-           <ul class="property-specs-wrap" style="margin: 0%;padding: 0%;">
-                <li>
-                  <span class="property-specs">
-                    <i class="fas fa-bed fa-2x"></i>
-                    <span style="font-size: 2em;">
-                      &nbsp;2
-                    </span>
-                  </span>
-                 </li>
-                <li style="margin-left: 3%;">
-                  <span class="property-specs">
-                    <i class="fas fa-bath fa-2x"></i>
-                    <span style="font-size: 2em;">
-                      &nbsp;1
-                    </span>
-                  </span>
-                 </li>
-                <li style="margin-left: 3%;">
-                  <span class="property-specs">
-                    <i class="fas fa-chart-area icon fa-2x"></i>
-                    <span style="font-size: 2em;">
-                      &nbsp;115 m
-                    </span>
-                  </span>
-                </li>
-                <li style="margin-left: 3%;">
-                  <span class="property-specs">
-                    <i class="fas fa-car fa-2x"></i>
-                    <span style="font-size: 2em;">
-                      &nbsp;3
-                    </span>
-                  </span>
-                </li>
-                <li>
-                  <p>
-                    <strong style="font-size: 22px;" class="property-price text-primary d-block text-success">
-                      $150.000.000
-                    </strong>
-                  </p>
-                </li>
-            </ul>
-      </div>
-</div>
+                    <span class="offer-type" style="text-align: center;height:5em;padding-top: 1em; font-weight:bold; background:#37474f;">{% trans 'Browse Properties' %} <br>
+                        <p>{% trans 'Click here' %}</p>
+                </span></a>
+            </a>
+              {% endif %}
+          </div>
+          <div style="width: 100%;text-align: center;">
+               <ul class="property-specs-wrap" style="margin: 0%;padding: 0%;">
+                    <li>
+                      <span class="property-specs">
+                        <i class="fas fa-bed fa-2x"></i>
+                        <span style="font-size: 2em;">
+                          &nbsp;2
+                        </span>
+                      </span>
+                     </li>
+                    <li style="margin-left: 3%;">
+                      <span class="property-specs">
+                        <i class="fas fa-bath fa-2x"></i>
+                        <span style="font-size: 2em;">
+                          &nbsp;1
+                        </span>
+                      </span>
+                     </li>
+                    <li style="margin-left: 3%;">
+                      <span class="property-specs">
+                        <i class="fas fa-chart-area icon fa-2x"></i>
+                        <span style="font-size: 2em;">
+                          &nbsp;115 m
+                        </span>
+                      </span>
+                    </li>
+                    <li style="margin-left: 3%;">
+                      <span class="property-specs">
+                        <i class="fas fa-car fa-2x"></i>
+                        <span style="font-size: 2em;">
+                          &nbsp;3
+                        </span>
+                      </span>
+                    </li>
+                    <li>
+                      <p>
+                        <strong style="font-size: 22px;" class="property-price text-primary d-block text-success">
+                          $150.000.000
+                        </strong>
+                      </p>
+                    </li>
+                </ul>
+          </div>
+    </div>
 {% endfor %}
+</div>
+            <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+        </div></div></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    function pause(id){
+    console.log("got in");
+    $.ajax({
+            url: '{% url "property:pause" 123 %}'.replace( /123/ , id),
+            type: 'get',
+        }).done(function(data) {
+            console.log("done")
+             $("#id_pause_"+id).load(location.href + " #id_pause_"+id, "");
+        });
+    }
+</script>
 </body>
 </html>
   

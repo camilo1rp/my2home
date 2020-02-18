@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.forms import modelformset_factory
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
@@ -155,7 +155,7 @@ class ListProperty(ListView):
                 pass
 
         # assign query and filters to context
-        self.object_list = query.filter(active=True)
+        self.object_list = query.filter(active=True, pause=False)
         context = self.get_context_data()
         context['filters'] = filters_dict
         context['filters_active'] = filters_active
@@ -172,7 +172,6 @@ def property_following(request):
         try:
             user = request.user
             prop = Property.objects.get(id=request.GET.get('prop_id'))
-            print(prop)
         except:
             return HttpResponse(json.dumps(0), content_type='application/json')
         if user.following.filter(id=prop.id):
@@ -250,7 +249,7 @@ def create_address(request, prop_id=None):
         prop = Property.objects.get(id=prop_id)
     except ObjectDoesNotExist:
         return HttpResponse(gettext("Property does not exist"))
-    if request.user in [prop.manager, prop.owner]:
+    if request.user not in [prop.manager, prop.owner]:
         return HttpResponse(gettext("Access denied"))
     if request.method == 'POST':
         if prop.address_col.all():  # check if property has address
@@ -277,7 +276,7 @@ def create_image(request, prop_id=None):
         prop = Property.objects.get(id=prop_id)
     except ObjectDoesNotExist:
         return HttpResponse(gettext("Property does not exist"))
-    if request.user in [prop.manager, prop.owner]:
+    if request.user not in [prop.manager, prop.owner]:
         return HttpResponse(gettext("Access denied, you don't own or manage this property"))
     images = prop.gallery.all()
     images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6 - len(images))
@@ -510,3 +509,23 @@ def contact_us(request):
             send_mail(subject, message, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
             # ****************
     return render(request, 'properties/contact.html', {'form': form})
+
+
+@login_required
+def pause(request, prop_id):
+    try:
+        prop = Property.objects.get(id=prop_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(gettext("Property does not exist"))
+    if request.user not in [prop.manager, prop.owner]:
+        return HttpResponse(gettext("Access denied, you don't own or manage this property"))
+    print(prop.pause)
+    if prop.pause:
+        prop.pause = False
+    else:
+        prop.pause = True
+    prop.save()
+    print(prop.pause)
+    # return JsonResponse({'a':1})
+    # return render(request, 'account/dashboard.html')
+    return HttpResponse(json.dumps(2), content_type='application/json')

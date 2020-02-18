@@ -20,6 +20,7 @@ VIAS = [
     ('AK', _('Avenida carrera')),
 ]
 
+
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,7 +33,7 @@ class PropertyForm(forms.ModelForm):
 
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted']
+        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted', 'pause']
 
 
 class AddressColForm(forms.ModelForm):
