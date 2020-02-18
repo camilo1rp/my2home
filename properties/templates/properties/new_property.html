@@ -12,16 +12,6 @@
     .span{
         color: red;
     }
-    .titleModal{
-        text-align: center;
-    }
-    .divTitleModal{
-        margin: 0 auto;
-    }
-
-    .btnSave{
-        margin-left: 6%;
-    }
     #id_description {
         max-width: 100%;
     }
@@ -36,6 +26,7 @@
     }
     input[type=number] {
         -moz-appearance:textfield; /* Firefox */
+        text-align: center;
     }
     .form-control {
         padding:0.2em !important;
@@ -44,7 +35,7 @@
         font-size: 0.8em;
     }
     .modal-lg {
-        max-width: 78% !important;
+        max-width: 85% !important;
     }
     form label {
       overflow: none;
@@ -59,17 +50,16 @@
 <div class="modal fade animated fadeInDown" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header divTitleModal">
-        <h5 class="modal-title titleModal" id="exampleModalLongTitle">{% trans "Your Property's Details" %}</h5>
+      <div class="modal-header mx-auto">
+        <h5 class="modal-title" id="exampleModalLongTitle">{% trans "Your Property's Details" %}</h5>
        </div>
         <h2 id="datoPage" style="display: none;">{{page}}</h2><!-- ******** TEXT DE PESTAÑA ******* -->
         <span id="propiedad" hidden>{{propiedad}}</span>
-        <div class="modal-body">
-                <div class="col-md-12">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="modal-body offset-lg-2 px-0 mx-0">
+                <div class="col-md-12 px-0 mx-0">
+                    <div class="col-md-12 col-lg-10 offset-lg-1">
                         <div class="col-md-12">
                             <div id="content">
-                             
                                 <div class="content" style="height: 100%;">
                                     <script>
                                     $(function () {
@@ -82,9 +72,8 @@
                                         });
                                     });
                                     </script>
-
                                     <div id="wizard">
-                                        <h2>{% trans 'New Property' %}</h2>
+                                        <h2>{% trans 'Details' %}</h2>
                                         <section style="overflow: auto;"> <!-- PAGE 1-->
                                             <form id="formSectionUno" method="post" >
                                                 {% csrf_token %}
@@ -92,7 +81,8 @@
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <div class="col-md-12">
                                                             <div class="row">
-                                                                <div class="col-md-6" hidden>
+                                                                <div class="col-md-4" hidden>
+                                                                    {{form.price}}
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.owner.label}}<span class="span"> *</span>
                                                                     </label>
@@ -101,6 +91,7 @@
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
+<<<<<<< HEAD
                                                                 <div class="col-md-6">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.type_property.label}}<span class="span"> *</span>
@@ -114,40 +105,57 @@
                                                             <hr>
                                                             <div class="row justify-content-center">
                                                                 <div class="col-md-6">
+=======
+                                                                <div class="col-md-4">
+>>>>>>> master
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                        {{form.type_business.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-12 col-lg-10 offset-lg-2">
                                                                         {{form.type_business}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
+<<<<<<< HEAD
                                                                 <div class="col-md-6" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                          {{form.price_str.label}}<span class="span"> *</span>
                                                                      </label>
                                                                     <div class="col-md-12">
                                                                         {{form.price_str}}
+=======
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.type_property.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+                                                                        {{form.type_property}}
+>>>>>>> master
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-0"  hidden>
+                                                                 <div class="col-md-4" id="divEstrato" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                         {{form.price.label}
-                                                                     </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.price}}
+                                                                        {{form.estrato.label}}<span class="span"></span>
+                                                                    </label>
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+                                                                        {{form.estrato}}
+                                                                        <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
-                                                            <div class="row justify-content-center">
-                                                                <div class="col-md-4 justify-content-center">
-                                                                    <div class="form-group ">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
                                                                         <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                             {{form.rooms.label}}<span class="span"> *</span>
                                                                          </label>
+<<<<<<< HEAD
                                                                         <div class="col-md-12 col-lg-9">
+=======
+                                                                        <div class="col-md-12 col-lg-8 offset-lg-2">
+>>>>>>> master
                                                                             {{form.rooms}}
                                                                             <span class="help-block"></span>
                                                                         </div>
@@ -157,7 +165,11 @@
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.baths.label}}<span class="span"> *</span>
                                                                     </label>
+<<<<<<< HEAD
                                                                     <div class="col-md-12 col-lg-9">
+=======
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+>>>>>>> master
                                                                         {{form.baths}}
                                                                         <span class="help-block"></span>
                                                                     </div>
@@ -166,32 +178,45 @@
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                        {{form.parking.label}}<span class="span"> *</span>
                                                                     </label>
+<<<<<<< HEAD
                                                                     <div class="col-md-12 col-lg-9">
+=======
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+>>>>>>> master
                                                                         {{form.parking}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
-                                                            <div class="row justify-content-center">
-                                                                <div class="col-md-6 col-lg-3">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label ">
                                                                         {{form.area_total.label}}<span class="span"> *</span>
                                                                     </label>
+<<<<<<< HEAD
                                                                     <div class="col-md-12 col-lg-9">
+=======
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+>>>>>>> master
                                                                         {{form.area_total}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6 col-lg-3" >
+                                                                <div class="col-md-4" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.area_built.label}}<span class="span"> *</span>
                                                                     </label>
+<<<<<<< HEAD
                                                                     <div class="col-md-12 col-lg-9">
+=======
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+>>>>>>> master
                                                                         {{form.area_built}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
+<<<<<<< HEAD
                                                                 <div class="col-md-6 col-lg-3" id="divEstrato">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.estrato.label}}<span class="span"> *</span>
@@ -206,37 +231,43 @@
                                                                         {{form.year.label}}<span class="span"> *</span>
                                                                     </label>
                                                                     <div class="col-md-12 col-lg-9">
+=======
+                                                                <div class="col-md-4">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.year.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+>>>>>>> master
                                                                         {{form.year}}
                                                                         <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <br/>
                                                             <hr>
-<!--                                                            <div class="row">-->
-<!--                                                                <div class="col-md-12">-->
-<!--                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">-->
-<!--                                                                        {{form.manager.label}} <span class="span"> *</span>-->
-<!--                                                                    </label>-->
-<!--                                                                    <div class="col-md-12">-->
-<!--                                                                        {{form.manager}}-->
-<!--                                                                        <span class="help-block"></span>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-<!--                                                                <br/>-->
-<!--                                                            </div>-->
-<!--                                                            <br/>-->
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                                                        {{form.title.label}}<span class="span"> *</span>
-                                                                    </label>
-                                                                    <div class="col-md-12">
-                                                                        {{form.title}}
-                                                                        <span class="help-block"></span>
+                                                                    <div class="col-md-12 px-0">
+                                                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                         {{form.price_str.label}}<span class="span"> *</span>
+                                                                     </label>
+
+                                                                        <div class="col-md-10 offset-md-1">
+                                                                            {{form.price_str}}
+                                                                            <span class="help-block"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="col-md-12 px-0">
+                                                                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                            {{form.title.label}}<span class="span"> *</span>
+                                                                        </label>
+                                                                        <div class="col-md-11 offset-md-1">
+                                                                            {{form.title}}
+                                                                            <span class="help-block"></span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6" style="text-align: -webkit-right;">
+                                                                <div class="col-md-6 mt-2" style="text-align: -webkit-right;">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.description.label}}<span class="span"> *</span>
                                                                     </label>
@@ -254,8 +285,8 @@
                                                 <br/>
                                                 <div class="form-group divBtn">
                                                     <div class="col-md-12">
-                                                        <button type="submit" id="btnGuardar" class="btn btn-primary btnSave">
-                                                            Guardar
+                                                        <button type="submit" id="btnGuardar" class="btn btn-primary" style="background-color:#364e68;">
+                                                            {% trans 'save' %}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -302,6 +333,15 @@ $(document).ready(function(){
         }
     });
 
+    // max-length
+       $("#id_description").attr("maxlength", "700");
+
+    // hide section number in small display
+    $('.steps > ul > li:first > a > .number').addClass('d-none d-lg-inline')
+    $('.steps > ul > li:eq(1) > a > .number').addClass('d-none d-lg-inline')
+    $('.steps > ul > li:eq(2) > a > .number').addClass('d-none d-lg-inline')
+    $('.steps > ul > li:eq(3) > a > .number').addClass('d-none d-lg-inline')
+
     //New Propery Activo SECTION 1
     $('.steps > ul > li:first').addClass('newProperty')
     $(".newProperty").click(function(e){
@@ -327,6 +367,7 @@ $(document).ready(function(){
     $("[href='#next']").css('display','none');
     $("[href='#DF GFFG N']").css('display','none');
     $("[href='#previous']").css('display','none');
+<<<<<<< HEAD
     
     $("[href='#next']").click(function(){
         //alert('mario ')
@@ -400,6 +441,73 @@ $(document).ready(function(){
                     $(this).val("")
                     }
             });
+=======
+
+     // ***funtion currency
+    var id_price_strInput = document.getElementById('id_price_str');
+    var currency = 'USD'; // https://www.id_price_str-iso.org/dam/downloads/lists/list_one.xml
+
+    id_price_strInput.addEventListener('keydown', onKeydown);
+    id_price_strInput.addEventListener('keyup', onKeyup);
+    id_price_strInput.addEventListener('focus', onFocus);
+    id_price_strInput.addEventListener('blur', onBlur);
+
+    function localStringToNumber( s ){
+        return Number(String(s).replace(/[^0-9.-]+/g,""));
+    }
+
+    var val_com = $("#id_price_str").val();
+    $("#id_price_str").attr("placeholder",val_com);
+
+    function onFocus(e){
+      $("#id_price_str").attr("pattern", "[0-9]*");
+    }
+    function onBlur(e){
+        $("#id_price_str").removeAttr("pattern");
+    }
+    function onKeydown(e){
+      var intformat= e.target.value;
+      var value = intformat.replace(/[.]/g,',');
+      e.target.value = value ? localStringToNumber(value) : '';
+      document.getElementById("id_price").value = e.target.value;
+    }
+    var timeout = null
+    function onKeyup(e){
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+              var value = e.target.value;
+              document.getElementById("id_price").value = value;
+              const options = {
+                  maximumFractionDigits : 0,
+                  minimumFractionDigits : 0,
+                  currency              : currency,
+                  style                 : "currency",
+                  currencyDisplay       : "symbol",
+              }
+              var usformat = value ? localStringToNumber(value).toLocaleString(undefined, options): '';
+              val = usformat.replace(/[,]/g,'.');
+              e.target.value = val.replace(/[US]/g,'');
+              document.getElementById("id_price_str").value = e.target.value;
+        }, 400);
+    }
+    // **** end funtion currency
+
+    // SECTION 4
+    if( $('#customCheck1').prop('indeterminate') == false ){
+        /*
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{% trans 'Please check the confirm box to continue'%}',
+            timer: 2100
+        })
+        */
+    }
+
+    $("#customCheck1").change(function(){
+        alert("Acepto ¨¨¨¨¨¨¨******* terminos")
+    });
+>>>>>>> master
 
     });
 </script>
