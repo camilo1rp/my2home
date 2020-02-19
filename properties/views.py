@@ -11,6 +11,7 @@ from smtplib import SMTPAuthenticationError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.forms import modelformset_factory
@@ -203,7 +204,7 @@ class CreateProperty(LoginRequiredMixin, CreateView):
         return context
 
     def get_initial(self):
-        owner = self.request.user
+        owner = User.objects.filter(is_superuser=True)[0]
         return {
             'owner': owner,
         }
