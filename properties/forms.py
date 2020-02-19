@@ -72,7 +72,7 @@ class ImageForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['message'].widget.attrs.update(rows='4', cols='20')
+        self.fields['message'].widget.attrs.update(rows='4', cols='25')
 
     class Meta:
         model = Contact
