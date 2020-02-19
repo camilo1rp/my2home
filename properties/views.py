@@ -483,11 +483,14 @@ def Template(request):  # view for debugging
     prop = Property.objects.last()
     a = prop.address_col.get()
     geo_data = get_coordinates(str(a))
-    template = 'properties/maps.html'
+    template = 'properties/address_auto.html'
     data = {'propiedad': prop, 'name': "nombre apellido", 'phone': "1234456809",
             'email': "email@email.com", 'geo_data': geo_data}
-    return render(request, template, {'data': data})
+    form = AddressColForm()
+    return render(request, template, {'form': form})
 
+class TemplateView(TemplateView):
+    template_name = "properties/address_auto.html"
 
 def contact_us(request):
     form = ContactForm(request.POST or None, )
