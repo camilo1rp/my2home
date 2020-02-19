@@ -323,8 +323,8 @@ def property_detail(request, prop_id):
             except KeyError:
                 print("no email provided")
                 email_in = 'noemail@nomail.com'
-            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in,
-                                                       message=message_in)
+            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in,
+                                                       email=email_in, message=message_in)
             address = prop.address_col.get()
             address_parsed = urllib.parse.quote(str(address))
             print(address_parsed)
@@ -332,13 +332,12 @@ def property_detail(request, prop_id):
             # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
             file = "/media/{}".format(prop.gallery.get(main=True).image)
             data = {'propiedad': contact.propiedad, 'name': contact.name, 'phone': contact.phone,
-                    'email': contact.email, 'message':contact.message,
-                    'image': file, 'addr_parse': address_parsed}
+                    'email': contact.email, 'message': contact.message, 'image': file, 'addr_parse': address_parsed}
             html_content = render_to_string('properties/contact_email.html', {'data': data})
             subject = '{} esta interesad@ en la propiedad: {} - {}'.format(data['name'].title(),
                                                                            data['propiedad'].title,
                                                                            data['propiedad'].code)
-            msg = EmailMultiAlternatives(subject, html_content, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
+            msg = EmailMultiAlternatives(subject, html_content, prop.manager.email, prop.owner.email)
             msg.content_subtype = "html"
             msg.mixed_subtype = "related"
             img = open(file[1::], 'rb').read()
@@ -374,8 +373,8 @@ def property_detail(request, prop_id):
 
 def whatsapp_contact(request):
     prop_id = request.GET.get('id')
-    phone = 3162128561
     prop = get_object_or_404(Property, id=prop_id)
+    phone = prop.manager.profile.phone
     message = gettext("I am interested in the property: {}, Address: {}, code: {}. Is it still Available?") \
         .format(prop.title, prop.address_col.get(), prop.code)
     print('message: {}'.format(message))
