@@ -62,7 +62,7 @@ class ListProperty(ListView):
                           'price__lte': gettext('Max price'),
                           }
         # init variables
-        query = self.model.objects.all()
+        query = self.model.objects.all().filter(active=True, pause=False)
         filters_dict = {}
 
         if current_filters:
@@ -105,7 +105,7 @@ class ListProperty(ListView):
         elif filters_dict:
             filters_query = filters_dict.copy()
             filters_query.pop('City', None)
-            query = self.model.objects.filter(**filters_query)
+            query = self.model.objects.filter(**filters_query).filter(active=True, pause=False)
 
         # check location filter
         if city not in ['ALL', None]:
@@ -155,7 +155,7 @@ class ListProperty(ListView):
                 pass
 
         # assign query and filters to context
-        self.object_list = query.filter(active=True, pause=False)
+        self.object_list = query
         context = self.get_context_data()
         context['filters'] = filters_dict
         context['filters_active'] = filters_active
