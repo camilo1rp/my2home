@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-14 10:24-0500\n"
-"PO-Revision-Date: 2020-02-14 15:41+0000\n"
+"POT-Creation-Date: 2020-02-19 16:34+0000\n"
+"PO-Revision-Date: 2020-02-19 16:37+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,31 +19,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
+#: properties/decorators.py:15 properties/views.py:251 properties/views.py:278
+#: properties/views.py:519
+msgid "Property does not exist"
+msgstr "Propiedad no existe"
+
 #: properties/forms.py:15
 msgid "Carrera"
-msgstr ""
+msgstr "Carrera"
 
 #: properties/forms.py:16
 msgid "Transversal"
-msgstr ""
+msgstr "Transversal"
 
 #: properties/forms.py:17
 msgid "Diagonal"
-msgstr ""
+msgstr "Diagonal"
 
 #: properties/forms.py:18
 msgid "Avenida"
-msgstr ""
+msgstr "Avenida"
 
 #: properties/forms.py:19
 msgid "Avenida calle"
-msgstr ""
+msgstr "Avenida calle"
 
 #: properties/forms.py:20
 msgid "Avenida carrera"
-msgstr ""
+msgstr "Avenida carrera"
 
-#: properties/forms.py:28
+#: properties/forms.py:29
 msgid ""
 "Add extra information that adds value to your property. i.e. common areas, "
 "services, security, location, etc."
@@ -51,15 +56,15 @@ msgstr ""
 "Agrega información extra para incrementar el valor de tu inmueble. e.j, "
 "áreas comunes, seguridad, ubicación, etc."
 
-#: properties/forms.py:29
+#: properties/forms.py:30
 msgid "select owner"
 msgstr "Seleccione Propietario"
 
-#: properties/forms.py:31 properties/models.py:31
+#: properties/forms.py:32 properties/models.py:31
 msgid "price"
 msgstr "precio"
 
-#: properties/forms.py:82
+#: properties/forms.py:83
 msgid "csv file"
 msgstr "archivo csv"
 
@@ -152,53 +157,55 @@ msgid "active"
 msgstr "activo"
 
 #: properties/models.py:48
+msgid "pause"
+msgstr "pausa"
+
+#: properties/models.py:49
 msgid "promoted"
 msgstr "promovido"
 
-#: properties/models.py:138
+#: properties/models.py:139
 msgid "sale"
 msgstr "venta"
 
-#: properties/models.py:139
+#: properties/models.py:140
 msgid "rent"
 msgstr "arrendamiento"
 
-#: properties/models.py:140
+#: properties/models.py:141
 #: properties/templates/properties/property-details.html:180
 #: properties/templates/properties/property_card.html:17
 #: properties/templates/properties/property_carousel.html:31
 msgid "swap"
 msgstr "Permuta"
 
-#: properties/models.py:142
+#: properties/models.py:143
 msgid "type of business"
 msgstr "tipo de negocios"
 
-#: properties/models.py:161
+#: properties/models.py:162
 msgid "name"
 msgstr "nombre"
 
-#: properties/models.py:162
+#: properties/models.py:163
 msgid "email"
 msgstr "email"
 
-#: properties/models.py:163
+#: properties/models.py:164
 msgid "phone"
 msgstr "teléfono"
 
-#: properties/models.py:164
-#| msgid "Send Message"
+#: properties/models.py:165
 msgid "message"
 msgstr "Mensaje"
 
 #: properties/templates/properties/contact.html:69
-#: properties/templates/properties/index.html:583
+#: properties/templates/properties/index.html:580
 #: properties/templates/properties/property-details.html:266
 msgid "Contact Us"
 msgstr "Contactanos"
 
 #: properties/templates/properties/contact.html:123
-#| msgid "Contact"
 msgid "Contact Info"
 msgstr "Información de Contacto"
 
@@ -212,20 +219,19 @@ msgid "Phone"
 msgstr "Teléfono"
 
 #: properties/templates/properties/contact.html:130
-#| msgid "Address"
 msgid "Email Address"
 msgstr "Correo Electrónico"
 
 #: properties/templates/properties/contact.html:145
-#: properties/templates/properties/index.html:529
+#: properties/templates/properties/index.html:524
 msgid "Our Team"
 msgstr "Nuestro equipo"
 
-#: properties/templates/properties/contact_form.html:14
+#: properties/templates/properties/contact_form.html:19
 msgid "Contact Agent"
 msgstr "Contactar Vendedor"
 
-#: properties/templates/properties/contact_form.html:46
+#: properties/templates/properties/contact_form.html:51
 msgid "Send Message"
 msgstr "Enviar Mensaje"
 
@@ -256,7 +262,7 @@ msgstr "Lotes"
 
 #: properties/templates/properties/index.html:246
 #: properties/templates/properties/property-details.html:163
-#: properties/templates/properties/top_nav.html:40 properties/views.py:54
+#: properties/templates/properties/top_nav.html:40 properties/views.py:57
 msgid "Commercial"
 msgstr "Comercial"
 
@@ -265,8 +271,8 @@ msgstr "Comercial"
 msgid "Farms"
 msgstr "Fincas"
 
-#: properties/templates/properties/index.html:251 properties/views.py:48
-#: properties/views.py:49 properties/views.py:50
+#: properties/templates/properties/index.html:251 properties/views.py:51
+#: properties/views.py:52 properties/views.py:53
 msgid "Offer Type"
 msgstr "Tipo de oferta"
 
@@ -279,6 +285,7 @@ msgid "For Rent"
 msgstr "Arriendo"
 
 #: properties/templates/properties/index.html:256
+#: properties/templates/properties/property_list.html:51
 msgid "For Swap"
 msgstr "Permuta"
 
@@ -351,84 +358,108 @@ msgstr "filtros"
 msgid "Why Choose Us?"
 msgstr "Por que escogernos?"
 
-#: properties/templates/properties/index.html:500
-msgid "Responsabilidad"
+#: properties/templates/properties/index.html:493
+msgid ""
+"Although this is a brand new platform, our team has many years of experience"
+" buying and selling properties in the region."
 msgstr ""
+"A pesar de que este es una plataforma nueva, nuestro equipo cuenta con "
+"muchos años de experiencia en la compra y venta de inmuebles en la región."
 
-#: properties/templates/properties/index.html:508
-msgid "Recientes Ventas"
-msgstr ""
+#: properties/templates/properties/index.html:501
+msgid "Responsability"
+msgstr "Responsabilidad"
 
-#: properties/templates/properties/index.html:516
-msgid "Asesoria legal"
-msgstr ""
+#: properties/templates/properties/index.html:507
+msgid "Satisfied Customers"
+msgstr "Clientes Satisfechos"
 
-#: properties/templates/properties/index.html:562
+#: properties/templates/properties/index.html:513
+msgid "Legal advise"
+msgstr "Asesoría Legal"
+
+#: properties/templates/properties/index.html:557
 #: properties/templates/properties/property-details.html:245
 msgid "About Inmuebles Fusa"
 msgstr "Acerca de Inmuebles Fusa"
 
-#: properties/templates/properties/index.html:569
+#: properties/templates/properties/index.html:558
+msgid ""
+"Inmuebles Fusa is an online real state based in Fusagasugá, Cundinamarca. "
+"Our goal is to make it easier for you to sell, rent, swap or buy properties."
+msgstr ""
+"Inmuebles Fusa es una inmobiliaria de  Fusagasugá, Cundinamarca. Nuestro "
+"objetivo es hacer mas fácil para ti la compra, arrendamiento, y permuta de "
+"finca raiz."
+
+#: properties/templates/properties/index.html:559
+msgid ""
+"Although this platform is quite new, our team has vast experience and "
+"reputation on real state and they are ready to offer you the best possible "
+"advice."
+msgstr ""
+"A pesar de que esta plataforma es nueva, nuestro equipo cuenta con una basta"
+" experiencia y reputación en negocios relacionados a finca raíz y están "
+"listos para ofrecerte la mejor asesoría"
+
+#: properties/templates/properties/index.html:566
 #: properties/templates/properties/property-details.html:252
 msgid "Navigations"
 msgstr "Navegación"
 
-#: properties/templates/properties/index.html:573
+#: properties/templates/properties/index.html:570
 #: properties/templates/properties/property-details.html:256
 msgid "Home"
 msgstr "Inicio"
 
-#: properties/templates/properties/index.html:574
+#: properties/templates/properties/index.html:571
 #: properties/templates/properties/property-details.html:257
 #: properties/templates/properties/top_nav.html:31
 msgid "Buy"
 msgstr "Comprar"
 
-#: properties/templates/properties/index.html:575
+#: properties/templates/properties/index.html:572
 #: properties/templates/properties/property-details.html:258
-#: properties/templates/properties/top_nav.html:32 properties/views.py:49
+#: properties/templates/properties/top_nav.html:32 properties/views.py:52
 msgid "Rent"
 msgstr "Rentar"
 
-#: properties/templates/properties/index.html:576
+#: properties/templates/properties/index.html:573
 #: properties/templates/properties/property-details.html:259
-#: properties/templates/properties/property_card_scroll.html:87
-#: properties/templates/properties/property_list.html:51
-#: properties/templates/properties/top_nav.html:33 properties/views.py:50
+#: properties/templates/properties/property_card_scroll.html:105
+#: properties/templates/properties/top_nav.html:33 properties/views.py:53
 msgid "Swap"
 msgstr "Permutar"
 
-#: properties/templates/properties/index.html:581
+#: properties/templates/properties/index.html:578
 #: properties/templates/properties/property-details.html:264
 msgid "About Us"
 msgstr "Acerca"
 
-#: properties/templates/properties/index.html:582
+#: properties/templates/properties/index.html:579
 #: properties/templates/properties/property-details.html:265
 msgid "Privacy Policy"
 msgstr "Política de privacidad"
 
-#: properties/templates/properties/index.html:584
+#: properties/templates/properties/index.html:581
 #: properties/templates/properties/property-details.html:267
 msgid "Terms"
 msgstr "Términos"
 
-#: properties/templates/properties/index.html:591
+#: properties/templates/properties/index.html:588
 #: properties/templates/properties/property-details.html:274
 msgid "Follow Us"
 msgstr "Siguenos"
 
-#: properties/templates/properties/index.html:651
-#| msgid "Add to favourites"
+#: properties/templates/properties/index.html:648
 msgid "Cannot add it to favourite!"
 msgstr "No se puede agregar a favoritos!"
 
-#: properties/templates/properties/index.html:651
-#| msgid "New Property"
+#: properties/templates/properties/index.html:648
 msgid "You pubished this property"
 msgstr "Tu publicaste esta propiedad"
 
-#: properties/templates/properties/index.html:656
+#: properties/templates/properties/index.html:653
 msgid "You need to login to add property to favorites"
 msgstr "Necesitas ingresar para agregar propiedades a favoritos"
 
@@ -467,7 +498,7 @@ msgstr "Si!"
 
 #: properties/templates/properties/my_account.html:54
 #: properties/templates/properties/new_image2.html:127
-#: properties/templates/properties/new_image2.html:315
+#: properties/templates/properties/new_image2.html:321
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -488,19 +519,15 @@ msgid "Address to be shown:"
 msgstr "Dirección a mostrar:"
 
 #: properties/templates/properties/new_address.html:174
-#: properties/templates/properties/new_image2.html:316
 #: properties/templates/properties/new_property.html:227
-#, fuzzy
-msgid "Save"
-msgstr "Guardar"
+msgid "save"
+msgstr "guardar"
 
 #: properties/templates/properties/new_image2.html:108
-#| msgid "Information"
 msgid "confirmation"
 msgstr "confirmación"
 
 #: properties/templates/properties/new_image2.html:115
-#: properties/templates/properties/tyc.html:4
 msgid ""
 "I confirm that I have all the rights to share the information given in this "
 "form and I authorise the publication of it, including images and text."
@@ -510,12 +537,10 @@ msgstr ""
 "texto."
 
 #: properties/templates/properties/new_image2.html:117
-#: properties/templates/properties/tyc.html:6
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: properties/templates/properties/new_image2.html:125
-#| msgid "Publish a Property"
 msgid "Publish my Property"
 msgstr "Publicar mi Inmueble"
 
@@ -536,37 +561,39 @@ msgid "Finish"
 msgstr "Finalizar"
 
 #: properties/templates/properties/new_image2.html:211
-#: properties/templates/properties/new_image2.html:345
-#| msgid "Image"
+#: properties/templates/properties/new_image2.html:351
 msgid "Main Image"
 msgstr "Imagen Principal"
 
-#: properties/templates/properties/new_image2.html:306
-#| msgid "Choose a main image"
+#: properties/templates/properties/new_image2.html:312
 msgid "Please select a main image"
 msgstr "Por favor escoja la imagen principal"
 
-#: properties/templates/properties/new_image2.html:311
+#: properties/templates/properties/new_image2.html:317
 msgid "You can add more images. Up to 6!"
 msgstr "Puedes agregar mas imagen. Hasta 6!"
 
-#: properties/templates/properties/new_image2.html:311
+#: properties/templates/properties/new_image2.html:317
 msgid "Would you like to save these images?"
 msgstr "Quieres guardar estas imágenes?"
 
-#: properties/templates/properties/new_image2.html:315
+#: properties/templates/properties/new_image2.html:321
 msgid "Add more images"
 msgstr "Agregar mas imágenes"
 
-#: properties/templates/properties/new_image2.html:344
+#: properties/templates/properties/new_image2.html:322
+msgid "Save"
+msgstr "Guardar"
+
+#: properties/templates/properties/new_image2.html:350
 msgid "main image in page"
 msgstr "imagen principal en pagina"
 
-#: properties/templates/properties/new_image2.html:454
+#: properties/templates/properties/new_image2.html:463
 msgid "Want to remove this image?"
 msgstr "Quieres remover esta imagen?"
 
-#: properties/templates/properties/new_image2.html:459
+#: properties/templates/properties/new_image2.html:468
 msgid "Remove"
 msgstr "Remover"
 
@@ -575,12 +602,10 @@ msgid "New Property"
 msgstr "Nuevo inmueble"
 
 #: properties/templates/properties/new_property.html:54
-#| msgid "Property Details"
 msgid "Your Property's Details"
 msgstr "Detalles de tu inmueble"
 
 #: properties/templates/properties/new_property.html:76
-#| msgid "See Details"
 msgid "Details"
 msgstr "Detalles"
 
@@ -592,7 +617,7 @@ msgstr "Imagen"
 msgid "Done"
 msgstr "Hecho"
 
-#: properties/templates/properties/new_property.html:361
+#: properties/templates/properties/new_property.html:364
 msgid "Please check the confirm box to continue"
 msgstr "Por favor click en la caja para continuar"
 
@@ -631,17 +656,17 @@ msgid "Property Type"
 msgstr "Tipo de propiedad"
 
 #: properties/templates/properties/property-details.html:155
-#: properties/views.py:52
+#: properties/views.py:55
 msgid "House"
 msgstr "Casa"
 
 #: properties/templates/properties/property-details.html:158
-#: properties/views.py:51
+#: properties/views.py:54
 msgid "Apartment"
 msgstr "Apartamento"
 
 #: properties/templates/properties/property-details.html:161
-#: properties/templates/properties/top_nav.html:39 properties/views.py:53
+#: properties/templates/properties/top_nav.html:39 properties/views.py:56
 msgid "Land"
 msgstr "Lotes"
 
@@ -651,16 +676,16 @@ msgstr "Tipo de oferta"
 
 #: properties/templates/properties/property-details.html:174
 #: properties/templates/properties/property_card.html:11
-#: properties/templates/properties/property_card_scroll.html:81
+#: properties/templates/properties/property_card_scroll.html:99
 #: properties/templates/properties/property_carousel.html:25
 #: properties/templates/properties/property_list.html:45
-#: properties/views.py:48
+#: properties/views.py:51
 msgid "Sale"
 msgstr "Venta"
 
 #: properties/templates/properties/property-details.html:177
 #: properties/templates/properties/property_card.html:14
-#: properties/templates/properties/property_card_scroll.html:84
+#: properties/templates/properties/property_card_scroll.html:102
 #: properties/templates/properties/property_carousel.html:28
 #: properties/templates/properties/property_carousel.html:50
 #: properties/templates/properties/property_list.html:48
@@ -668,7 +693,6 @@ msgid "Lend"
 msgstr "Arriendo"
 
 #: properties/templates/properties/property-details.html:187
-#| msgid "built area"
 msgid "built in"
 msgstr "construida en"
 
@@ -688,26 +712,56 @@ msgstr "Galería"
 msgid "Recently Added Properties"
 msgstr "Propiedades Agregadas Recientemente"
 
-#: properties/templates/properties/property_card_scroll.html:97
+#: properties/templates/properties/property_card_scroll.html:112
+msgid "waiting for approval"
+msgstr "esperando aprobación"
+
+#: properties/templates/properties/property_card_scroll.html:117
+msgid "This AD is paused. Only you can see it"
+msgstr "Este anuncio esta pausado. Solo tu puedes verlo"
+
+#: properties/templates/properties/property_card_scroll.html:125
 msgid "click to go to property's page"
 msgstr "click para ir a la pagina del inmueble"
 
-#: properties/templates/properties/property_card_scroll.html:114
+#: properties/templates/properties/property_card_scroll.html:142
 msgid "Edit"
 msgstr "Editar"
 
-#: properties/templates/properties/property_card_scroll.html:175
-#| msgid "type of property"
+#: properties/templates/properties/property_card_scroll.html:149
+msgid "Unpause"
+msgstr "Des-pausar "
+
+#: properties/templates/properties/property_card_scroll.html:154
+msgid "Pause"
+msgstr "Pausar"
+
+#: properties/templates/properties/property_card_scroll.html:215
+msgid "Your properties will appear here"
+msgstr "Tus propiedades aparecerán aquí"
+
+#: properties/templates/properties/property_card_scroll.html:216
+msgid "Add your first property now, It's free!. Click here"
+msgstr "Agrega tu primer inmueble ahora, es gratis!, click aquí"
+
+#: properties/templates/properties/property_card_scroll.html:220
 msgid "Add a property"
 msgstr "Agregar una propiedad"
 
-#: properties/templates/properties/property_card_scroll.html:176
-#: properties/templates/properties/property_card_scroll.html:186
+#: properties/templates/properties/property_card_scroll.html:221
+#: properties/templates/properties/property_card_scroll.html:235
 msgid "Click here"
 msgstr "Click aquí"
 
-#: properties/templates/properties/property_card_scroll.html:185
-#| msgid "Properties"
+#: properties/templates/properties/property_card_scroll.html:229
+msgid "Your favorite properties will appear here"
+msgstr "Tus inmuebles favoritos aparecerán aquí"
+
+#: properties/templates/properties/property_card_scroll.html:230
+msgid "Browse through properties now. Click here to go to the main page!"
+msgstr "Busca inmuebles ahora. Click aquí para ir a la pagina principal!"
+
+#: properties/templates/properties/property_card_scroll.html:234
 msgid "Browse Properties"
 msgstr "Buscar Propiedades"
 
@@ -756,69 +810,81 @@ msgstr "Acerca"
 msgid "Contact"
 msgstr "Contacto"
 
-#: properties/views.py:48
+#: properties/views.py:51
 msgid "City"
 msgstr "Ciudad"
 
-#: properties/views.py:51 properties/views.py:52 properties/views.py:53
-#: properties/views.py:54 properties/views.py:55
+#: properties/views.py:54 properties/views.py:55 properties/views.py:56
+#: properties/views.py:57 properties/views.py:58
 msgid "Property type"
 msgstr "Tipo de propiedad"
 
-#: properties/views.py:55
+#: properties/views.py:58
 msgid "Farm"
 msgstr "Finca"
 
-#: properties/views.py:55
+#: properties/views.py:58
 msgid "Min rooms"
 msgstr "Min habitaciones"
 
-#: properties/views.py:56
+#: properties/views.py:59
 msgid "Max rooms"
 msgstr "Max habitaciones"
 
-#: properties/views.py:56
+#: properties/views.py:59
 msgid "Min bathrooms"
 msgstr "Min baños"
 
-#: properties/views.py:57
+#: properties/views.py:60
 msgid "Max bathrooms"
 msgstr "Max baños"
 
-#: properties/views.py:57
+#: properties/views.py:60
 msgid "Min area"
 msgstr "Min área"
 
-#: properties/views.py:58
+#: properties/views.py:61
 msgid "Max area"
 msgstr "Max área"
 
-#: properties/views.py:58
+#: properties/views.py:61
 msgid "Min price"
 msgstr "Min precio"
 
-#: properties/views.py:59
+#: properties/views.py:62
 msgid "Max price"
 msgstr "Max precio"
 
-#: properties/views.py:332
+#: properties/views.py:253
+msgid "Access denied"
+msgstr "Acceso no autorizado"
+
+#: properties/views.py:280 properties/views.py:521
+msgid "Access denied, you don't own or manage this property"
+msgstr "Acceso no autorizado, tu no administras esta propiedad"
+
+#: properties/views.py:353
 msgid "Your information has been sent to our agents! Thank you"
 msgstr "Su información ha sido enviada al vendedor. Gracias"
 
-#: properties/views.py:336
+#: properties/views.py:357
 msgid ""
 "Something went wrong, please try again or contact agent by phone or whatsapp"
 msgstr ""
 "Algo salio mal, pro favor inténtalo de nuevo or contacta al vendedor por "
 "teléfono o whatsapp"
 
-#: properties/views.py:358
+#: properties/views.py:379
 msgid ""
 "I am interested in the property: {}, Address: {}, code: {}. Is it still "
 "Available?"
 msgstr ""
 "Estoy interesado en la propiedad: {}, Dirección: {}, código: {}. Sigue "
 "disponible?"
+
+#, fuzzy
+#~ msgid "Inmuebles Fusa is online"
+#~ msgstr "Inmuebles Fusa"
 
 #~ msgid "business type"
 #~ msgstr "tipo de negocio"
