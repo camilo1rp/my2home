@@ -51,11 +51,24 @@ services:
         depends_on:
             - my2home
         ports:
-            - 80:80
+            - "80:80"
+            - "443:443"
         volumes:
             - my2home-media-files:/opt/my2home/media/
             - my2home-static-files:/opt/my2home/static/
             - my2home-nginx:/etc/my2home-nginx/
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+    
+    certbot:
+        image: certbot/certbot
+        depends_on:
+            - nginx
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+
+
 
 secrets:
     django_superuser_mail:
