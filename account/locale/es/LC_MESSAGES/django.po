@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-14 10:24-0500\n"
-"PO-Revision-Date: 2020-02-10 20:14+0000\n"
-"Last-Translator: b'Camilo Romero <camilo1rp2@gmail.com>'\n"
+"POT-Creation-Date: 2020-02-19 16:34+0000\n"
+"PO-Revision-Date: 2020-02-19 16:05+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,64 +19,64 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
-#: account/templates/account/dashboard.html:117
+#: account/templates/account/dashboard.html:121
 msgid "Profile"
 msgstr "Perfil"
 
-#: account/templates/account/dashboard.html:129
+#: account/templates/account/dashboard.html:133
 msgid "Home"
 msgstr "Inicio"
 
-#: account/templates/account/dashboard.html:130
+#: account/templates/account/dashboard.html:134
 msgid "Publish a Property"
 msgstr "Publicar una Propiedad"
 
-#: account/templates/account/dashboard.html:132
+#: account/templates/account/dashboard.html:136
 msgid "More"
 msgstr "Mas"
 
-#: account/templates/account/dashboard.html:133
+#: account/templates/account/dashboard.html:137
 msgid "Contact Us"
 msgstr "Contactanos"
 
-#: account/templates/account/dashboard.html:142
+#: account/templates/account/dashboard.html:146
 msgid "Details"
 msgstr "Detalles"
 
-#: account/templates/account/dashboard.html:149
+#: account/templates/account/dashboard.html:153
 msgid "change image"
-msgstr ""
+msgstr "cambiar imagen"
 
-#: account/templates/account/dashboard.html:154
-#: account/templates/account/dashboard.html:203
+#: account/templates/account/dashboard.html:158
+#: account/templates/account/dashboard.html:207
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: account/templates/account/dashboard.html:163
+#: account/templates/account/dashboard.html:167
 msgid "Phone"
 msgstr "Teléfono"
 
-#: account/templates/account/dashboard.html:167
+#: account/templates/account/dashboard.html:171
 msgid "Gender"
-msgstr ""
+msgstr "Genero"
 
-#: account/templates/account/dashboard.html:173
+#: account/templates/account/dashboard.html:177
 msgid "City"
 msgstr "Ciudad"
 
-#: account/templates/account/dashboard.html:177
+#: account/templates/account/dashboard.html:181
 msgid "Company"
 msgstr "Empresa"
 
-#: account/templates/account/dashboard.html:192
+#: account/templates/account/dashboard.html:196
 msgid "Messages"
 msgstr "Mensajes"
 
-#: account/templates/account/dashboard.html:200
+#: account/templates/account/dashboard.html:204
 msgid "Coming soon!"
 msgstr "Próximamente!"
 
-#: account/templates/account/dashboard.html:232
+#: account/templates/account/dashboard.html:236
 msgid "Followed properties"
 msgstr "Inmuebles seguidos"
 
