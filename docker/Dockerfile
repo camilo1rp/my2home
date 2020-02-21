@@ -40,5 +40,4 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod ug+x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-COPY nginx/nginx.conf /etc/my2home-nginx/
 VOLUME ["/etc/my2home-nginx/"]

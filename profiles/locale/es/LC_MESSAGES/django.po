@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-14 10:24-0500\n"
-"PO-Revision-Date: 2020-02-14 15:31+0000\n"
+"POT-Creation-Date: 2020-02-19 16:34+0000\n"
+"PO-Revision-Date: 2020-02-19 16:05+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -90,10 +90,8 @@ msgstr "Teléfono"
 
 #: profiles/templates/profiles/details_list.html:17
 #: profiles/templates/profiles/profile.html:54
-#, fuzzy
-#| msgid "gender"
 msgid "Gender"
-msgstr "sexo"
+msgstr "Genero"
 
 #: profiles/templates/profiles/details_list.html:23
 #: profiles/templates/profiles/profile.html:59
@@ -102,10 +100,8 @@ msgstr "Ciudad"
 
 #: profiles/templates/profiles/details_list.html:27
 #: profiles/templates/profiles/profile.html:64
-#, fuzzy
-#| msgid "company"
 msgid "Company"
-msgstr "empresa"
+msgstr "Empresa"
 
 #: profiles/templates/profiles/edit.html:32
 msgid "save"
@@ -116,10 +112,8 @@ msgid "Change Profile Photo"
 msgstr "Cambiar Foto de Perfil"
 
 #: profiles/templates/profiles/photo_edit.html:33
-#, fuzzy
-#| msgid "Confirm Password"
 msgid "Confirm"
-msgstr "Confirmar Contraseña"
+msgstr "Confirmar"
 
 #: profiles/templates/profiles/profile.html:7
 msgid "Edit Profile"
