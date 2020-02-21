@@ -519,13 +519,11 @@ def pause(request, prop_id):
         return HttpResponse(gettext("Property does not exist"))
     if request.user not in [prop.manager, prop.owner]:
         return HttpResponse(gettext("Access denied, you don't own or manage this property"))
-    print(prop.pause)
     if prop.pause:
         prop.pause = False
     else:
         prop.pause = True
     prop.save()
-    print(prop.pause)
     # return JsonResponse({'a':1})
     # return render(request, 'account/dashboard.html')
     return HttpResponse(json.dumps(2), content_type='application/json')

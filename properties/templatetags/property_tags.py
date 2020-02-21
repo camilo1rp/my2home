@@ -39,7 +39,6 @@ def get_item(dictionary, key):
 
 @register.inclusion_tag('properties/maps.html')
 def google_maps(lat, lng, show):
-    print("inside function")
     return {'lat': lat, 'lng': lng, 'show': show}
 
 

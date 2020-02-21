@@ -44,7 +44,6 @@ class ProfileEdit(UpdateView):
     context_object_name = 'profile'
 
     def form_valid(self, form):
-        print("valid****************")
         form.save()
         return render(self.request, 'profiles/details_list.html')
 
@@ -57,7 +56,6 @@ class ProtoEdit(UpdateView):
     context_object_name = 'profile'
 
     def form_valid(self, form):
-        print("valid****************")
         form.save()
         return HttpResponse(json.dumps(0), content_type='application/json')
 

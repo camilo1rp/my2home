@@ -25,7 +25,6 @@ class UserForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data['email']
         emails = [users.user.email for users in Profile.objects.all()]
-        print(email)
         if email != "" and email in emails:
             self.add_error('email', gettext("Email is already registered"))
         return email

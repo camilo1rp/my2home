@@ -25,6 +25,18 @@
     <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158817582-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-158817582-1');
+    </script>
     <style>
         .miCuenta:hover {
           background: #004085;
@@ -43,6 +55,51 @@
       #map {
         height: calc(50vh);
       }
+      .property-favori {
+        position: absolute;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        background: #fff;
+        left: 48%;
+        text-align: center; }
+      .property-favori span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); }
+      .property-favori:hover, .property-favori.active {
+        color: #f23a2e !important;
+        border: 2px #f23a2e solid;
+         }
+      .property-unfavori {
+        position: absolute;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        background: #f23a2e !important;
+        color: #fff;
+        left: 48%;
+        border: 2px white solid;
+        text-align: center; }
+      .property-unfavori span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: white !important;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%); }
+        .property-unfavori:hover, .property-unfavori.active {
+          background: transparent;
+          color: #f23a2e !important;
+          border: 2px white solid;
+         }
+
     </style>
   </head>
   <body>
@@ -85,8 +142,15 @@
             {% with address=prop.address_col.get %}
             <h1 class="mb-2">{{ address }}</h1>
             {% endwith %}
-            <p class="mb-5"><strong class="h2 text-success font-weight-bold">{{ prop.price_str }}</strong></p>
-         </div>
+            <p class="mb-3"><strong class="h2 text-success font-weight-bold">{{ prop.price_str }}</strong></p>
+            {%if prop in user.following.all %}
+                <a class="property-unfavori" title="{% trans 'Remove from favourites' %}" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
+              {% else %}
+                <a class="property-favori" title="{% trans 'Add to favourites' %}" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
+              {% endif %}
+          </div>
+
+            </div>
         </div>
       </div>
     </div>
@@ -107,13 +171,12 @@
             </div>
             <div class="bg-white property-body border-bottom border-left border-right">
               <div class="row mb-3">
-                <div class="col-md-12 col-lg-6 ">
+                <div class="col-md-12 col-lg-6">
                   <strong class="text-secondary h4 mb-2 ">{{ prop.title }}</strong>
                 </div>
                 <div class="col-md-12 col-lg-6 text-right">
                   <strong class="text-success h1 mb-2">{{ prop.price_str }}</strong>
                 </div>
-
               </div>
               <div class="row mb-5 text-center">
                   <div class="col-4 col-md-2">
@@ -312,6 +375,42 @@
   <script src="{% static 'js/main.js' %}"></script>
 
     <script type="text/javascript">
+        function follows(id){
+        $.ajax({
+        url: '{% url "property:index" %}',
+        type: 'get',
+        data: {'prop_id': id, 'follow':1,}
+         }).done(function(data) {
+         var id = "#"+JSON.parse(data.prop_id)
+         var command = JSON.parse(data.command)
+        if (command == 1) {
+            $(id).removeClass("property-favori");
+            $(id).addClass("property-unfavori");
+            $(id).prop('title', '{% trans 'Remove from favourites' %}');
+        }else if(command == 0){
+            $(id).removeClass("property-unfavori");
+            $(id).addClass("property-favori");
+            $(id).prop('title', '{% trans 'Add to favourites' %}');
+        }else if(command == 2){
+          swal.fire("{%trans 'Cannot add it to favourite!'%}", "{% trans 'You pubished this property' %}", "error");
+        }
+        else {
+         Swal.fire({
+                title: 'Add to favourites',
+                text: "{% trans 'You need to login to add property to favorites' %}",
+                showCancelButton: true,
+                confirmButtonColor: '#364e68',
+                cancelButtonColor: '#bb1f1f',
+                cancelButtonText: 'cancel',
+                confirmButtonText: 'login',
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href='{% url "account:login" %}'
+                }
+             });
+             }
+     });
+     }
   $("p").css("overflow-wrap", "break-word");
   $.ajax({
       url: '{% url "property:whatsapp" %}',

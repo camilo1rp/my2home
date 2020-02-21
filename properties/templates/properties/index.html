@@ -5,9 +5,7 @@
 <html lang="en">
   <head>
     <title>Inmuebles Fusa</title>
-
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500">
     <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
@@ -27,170 +25,179 @@
     <!--fontawesome-->
     <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
     <!--fontawesome-->
-<!--    swal alerts-->
+    <!--    swal alerts-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<style type="text/css">
-.iconos{
-  .color: #7f7f7f;
-}
-#myInput {
-  padding: 20px;
-  margin-top: -6px;
-  border: 0;
-  border-radius: 0;
-  background: #f1f1f1;
-}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158817582-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-#separar {
-  padding: 6%;
-  display: inline-block;
-}
+      gtag('config', 'UA-158817582-1');
+    </script>
 
-.titulo {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  text-decoration: underline;
-  color: #333333;
-}
-.botonSelect {
-  color: #fff !important;
-  font-size: 20px;
-  font-weight: 500;
-  padding: 0.5em 1.2em;
-  background: black;
-  border: 2px solid;
-  border-color: #fff;
-  transition: all 1s ease;
-  position: relative;
-}
-.buttonMenu {
-  color: #fff !important;
-  font-size: 20px;
-  font-weight: 500;
-  padding: 0.5em 1.2em;
-  background: rgba(0,0,0,0);
-  border: 2px solid;
-  border-color: #fff;
-  transition: all 1s ease;
-  position: relative;
-}
-.buttonMenu:hover {
-  background: black;
-  color: #fff !important;
-  border-color: black;
-}
-.miCuenta:hover {
-  background: #004085;
-  color: white !important;
-}
-.textMiCuenta{
-  margin: 0%;
-  font-weight: bold;
-  cursor: pointer;
-}
+    <style type="text/css">
+      .iconos{
+        .color: #7f7f7f;
+      }
+      #myInput {
+        padding: 20px;
+        margin-top: -6px;
+        border: 0;
+        border-radius: 0;
+        background: #f1f1f1;
+      }
 
-.espacio{
-  padding: 2%;
-  z-index: 1000;
-}
-.opcionElegida{
-  text-align:center;
-  margin-top: 5%;
-  display: none;
-}
-.search{
-  margin-top: 2%;
-  margin-right: 1%;
- /* margin-left: 2em;*/
-}
-.btnSelect{
-  width: 15em;/* 1oem text-align: left;*/
-  height: 3em;
-  font-size: 0.7em;
-  
-}
-.btnSelect2{
-  width: 10.5em;
-  height: 3em;
-  padding-left: 1px;
-  font-size: 0.7em;
-  text-align: left;
-}
-.ul{
-  width: 15em;
-}
-.ulFiltros{
-    width: 41em;
-    height: 30em;
-    margin-left: -350%;
-}
-.textDropDawn{
-  margin-left: 10%;
-  font-weight: bold;
-  color: #364e68;
-}
-.divMinimo{
-  width: 49%;
-  float: left;
-}
-.selecBorde{
-  border: solid 1px #364e68;
-}
-.divMaximo{
-  float: right;
-  width: 51%;
-}
-.margen{
-  margin-top: -100px;
-}
-.divMargen{
-  margin-top: -3%;
-}
-.pCopyRigth{
-  font-size:7px;
-}
-.icon{
-  padding-left: 3px;
-}
-.intro {
-  font-size: 150%;
-  color: red;
-}
-.fadeOutRight{
-  animation-duration: 1s
-}
+      #separar {
+        padding: 6%;
+        display: inline-block;
+      }
 
-@media screen and (max-width:550px) {
-  .btnSelect {
-      width: 42.5em;
-  }
-}
+      .titulo {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        text-decoration: underline;
+        color: #333333;
+      }
+      .botonSelect {
+        color: #fff !important;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0.5em 1.2em;
+        background: black;
+        border: 2px solid;
+        border-color: #fff;
+        transition: all 1s ease;
+        position: relative;
+      }
+      .buttonMenu {
+        color: #fff !important;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0.5em 1.2em;
+        background: rgba(0,0,0,0);
+        border: 2px solid;
+        border-color: #fff;
+        transition: all 1s ease;
+        position: relative;
+      }
+      .buttonMenu:hover {
+        background: black;
+        color: #fff !important;
+        border-color: black;
+      }
+      .miCuenta:hover {
+        background: #004085;
+        color: white !important;
+      }
+      .textMiCuenta{
+        margin: 0%;
+        font-weight: bold;
+        cursor: pointer;
+      }
 
-@media screen and (max-width:768px) {
-  .btnSelect {
-      width: 101%;
-  }
-}
-@media screen and (max-width:994px) and (min-width:768px) {
-  .btnSelect {
-      width: 11em;
-      padding-left: 0px;
-  }
-  .size{
-     font-size: 9px;
-  }
-  .search{
-     margin-right: 11px;
-  }
-}
-@media screen and (min-width:994px) {
-  .btnSelect {
-      width: 15em;
-  }
-}
+      .espacio{
+        padding: 2%;
+        z-index: 1000;
+      }
+      .opcionElegida{
+        text-align:center;
+        margin-top: 5%;
+        display: none;
+      }
+      .search{
+        margin-top: 2%;
+        margin-right: 1%;
+       /* margin-left: 2em;*/
+      }
+      .btnSelect{
+        width: 15em;/* 1oem text-align: left;*/
+        height: 3em;
+        font-size: 0.7em;
 
-</style>
+      }
+      .btnSelect2{
+        width: 10.5em;
+        height: 3em;
+        padding-left: 1px;
+        font-size: 0.7em;
+        text-align: left;
+      }
+      .ul{
+        width: 15em;
+      }
+      .ulFiltros{
+          width: 41em;
+          height: 30em;
+          margin-left: -350%;
+      }
+      .textDropDawn{
+        margin-left: 10%;
+        font-weight: bold;
+        color: #364e68;
+      }
+      .divMinimo{
+        width: 49%;
+        float: left;
+      }
+      .selecBorde{
+        border: solid 1px #364e68;
+      }
+      .divMaximo{
+        float: right;
+        width: 51%;
+      }
+      .margen{
+        margin-top: -100px;
+      }
+      .divMargen{
+        margin-top: -3%;
+      }
+      .pCopyRigth{
+        font-size:7px;
+      }
+      .icon{
+        padding-left: 3px;
+      }
+      .intro {
+        font-size: 150%;
+        color: red;
+      }
+      .fadeOutRight{
+        animation-duration: 1s
+      }
+
+      @media screen and (max-width:550px) {
+        .btnSelect {
+            width: 42.5em;
+        }
+      }
+
+      @media screen and (max-width:768px) {
+        .btnSelect {
+            width: 101%;
+        }
+      }
+      @media screen and (max-width:994px) and (min-width:768px) {
+        .btnSelect {
+            width: 11em;
+            padding-left: 0px;
+        }
+        .size{
+           font-size: 9px;
+        }
+        .search{
+           margin-right: 11px;
+        }
+      }
+      @media screen and (min-width:994px) {
+        .btnSelect {
+            width: 15em;
+        }
+      }
+    </style>
 </head>
 <body>
   {% get_current_language as LANGUAGE_CODE %}
@@ -639,12 +646,13 @@
         if (command == 1) {
             $(id).removeClass("property-favorite");
             $(id).addClass("property-unfavorite");
-
+            $(id).prop('title', '{% trans 'Remove from favourites' %}');
         }else if(command == 0){
             $(id).removeClass("property-unfavorite");
             $(id).addClass("property-favorite");
+            $(id).prop('title', '{% trans 'Add to favourites' %}');
         }else if(command == 2){
-          swal.fire("{%trans 'Cannot add it to favourite!'%}", "{% trans 'You pubished this property' %}", "error");
+          swal.fire("{%trans 'Cannot add it to favourites!'%}", "{% trans 'You pubished this property' %}", "error");
         }
         else {
          Swal.fire({
@@ -751,7 +759,6 @@
           }else if( cont == 3 ){
             $(".liBtnCuenta").removeClass('animated heartBeat');
             clearInterval( id );
-            console.log(cont)
           }
         },500);
     });

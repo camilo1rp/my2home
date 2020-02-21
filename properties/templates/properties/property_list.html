@@ -67,13 +67,9 @@
               </a>
             <div class="p-4 property-body data">
               {%if prop in user.following.all %}
-              <div title="{% trans 'Remove from favourites' %}">
-                <a class="property-unfavorite heart" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
-              </div>
+                <a class="property-unfavorite" title="{% trans 'Remove from favourites' %}" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
               {% else %}
-              <div title="{% trans 'Add to favourites' %}">
-                <a class="property-favorite heart" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
-              </div>
+                <a class="property-favorite" title="{% trans 'Add to favourites' %}" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
               {% endif %}
 
               {% with address=prop.address_col.get %}

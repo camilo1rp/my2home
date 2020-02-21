@@ -633,7 +633,7 @@ a {
   background: #fff; }
   .property-entry .property-body {
     position: relative; }
-  .property-entry .property-favorite {
+  .property-favorite {
     position: absolute;
     border-radius: 50%;
     top: -60px;
@@ -643,17 +643,17 @@ a {
     line-height: 50px;
     background: #fff;
     text-align: center; }
-    .property-entry .property-favorite span {
+    .property-favorite span {
       position: absolute;
       top: 50%;
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%); }
-    .property-entry .property-favorite:hover, .property-entry .property-favorite.active {
-      background: #f23a2e;
-      color: #fff; }
-    .property-entry .property-unfavorite {
+    .property-favorite:hover, .property-favorite.active {
+        color: #f23a2e !important;
+        border: 2px #f23a2e solid; }
+    .property-unfavorite {
     position: absolute;
     border-radius: 50%;
     top: -60px;
@@ -661,20 +661,23 @@ a {
     width: 50px;
     height: 50px;
     line-height: 50px;
-    background: #f23a2e;
+    background: #f23a2e !important;
     color: #fff;
+    border: 2px white solid;
     text-align: center; }
-    .property-entry .property-unfavorite span {
+    .property-unfavorite span {
       position: absolute;
       top: 50%;
       left: 50%;
+      color: white !important;
       -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%); }
-    .property-entry .property-unfavorite:hover, .property-entry .property-unfavorite.active {
-        background: #fff;
-        color: #1f3c88;
-       }
+    .property-unfavorite:hover, .property-unfavorite.active {
+      background: transparent;
+      color: #f23a2e !important;
+      border: 2px white solid;
+    }
 
   .property-entry .offer-type-wrap {
     position: absolute;
