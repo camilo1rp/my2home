@@ -643,12 +643,13 @@
         if (command == 1) {
             $(id).removeClass("property-favorite");
             $(id).addClass("property-unfavorite");
-
+            $(id).prop('title', '{% trans 'Remove from favourites' %}');
         }else if(command == 0){
             $(id).removeClass("property-unfavorite");
             $(id).addClass("property-favorite");
+            $(id).prop('title', '{% trans 'Add to favourites' %}');
         }else if(command == 2){
-          swal.fire("{%trans 'Cannot add it to favourite!'%}", "{% trans 'You pubished this property' %}", "error");
+          swal.fire("{%trans 'Cannot add it to favourites!'%}", "{% trans 'You pubished this property' %}", "error");
         }
         else {
          Swal.fire({
@@ -755,7 +756,6 @@
           }else if( cont == 3 ){
             $(".liBtnCuenta").removeClass('animated heartBeat');
             clearInterval( id );
-            console.log(cont)
           }
         },500);
     });

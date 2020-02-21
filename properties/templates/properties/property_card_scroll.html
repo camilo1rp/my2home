@@ -298,12 +298,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
     function pause(id){
-    console.log("got in");
     $.ajax({
             url: '{% url "property:pause" 123 %}'.replace( /123/ , id),
             type: 'get',
         }).done(function(data) {
-            console.log("done")
              $("#id_pause_"+id).load(location.href + " #id_pause_"+id, "");
         });
     }
