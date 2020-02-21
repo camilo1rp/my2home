@@ -10,7 +10,8 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<!--	<link rel="stylesheet" type="text/css" href="{% static '/style_login.css' %}">-->
+	<!-- 	sweet alerts-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<style type="text/css">
@@ -132,6 +133,7 @@
 				</li>
 				<li><a href="{%url 'property:index' %}"><i class="material-icons">home</i>{% trans 'Home' %}</a></li>
 				<li><a href="{%url 'property:create' %}"><i class="material-icons">publish</i>{% trans 'Publish a Property' %}</a></li>
+				<li><a id="logout" href="#"><i class="material-icons">exit_to_app</i>{% trans 'Log Out' %}</a></li>
 				<li><div class="divider"></div></li>
 				<li><a class="subheader">{% trans 'More' %}</a></li>
 				<li><a class="waves-effect" href="{% url 'property:contact'%}">{% trans 'Contact Us' %}</a></li>
@@ -359,6 +361,29 @@
 				$("#id_phone").focus();
 			  });
 		});
+		$("#logout").click(function(){
+		  Swal.fire({
+			title: "{% trans 'Are you sure?' %}",
+			text: "{% trans "You will be logged out" %}",
+			showCancelButton: true,
+			confirmButtonColor: '#364e68',
+			cancelButtonColor: '#bb1f1f',
+			confirmButtonText: "{% trans 'Yes!' %}",
+			cancelButtonText: "{% trans 'Cancel' %}"
+		  }).then((result) => {
+			if (result.value) {
+			  Swal.fire(
+				"{% trans 'You are logged out' %}",
+				"{% trans 'You can go to My account to login again' %}",
+				'success'
+			  )
+			   setTimeout(logout, 1800)
+			}
+		  })
+		})
+		function logout(){
+		  window.location.href='{% url "account:logout" %}'
+		}
 		function sendForm() {
 			var form = $("#formulario").serialize(); // serializes the form's elements.
 			const id = $("#pro_id").text();
