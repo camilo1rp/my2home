@@ -71,7 +71,6 @@ class Property(models.Model):
         if not last_property:
             code_str = datetime.now().strftime("%y") + datetime.now().strftime("%m") + '0000'
             code = int(code_str)
-            print(code)
             return code
         # get letest property's code
         property_code = str(last_property.code)

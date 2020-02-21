@@ -36,10 +36,8 @@ def all_cities(request):
         cities_distinct = list(set(cities))
         cities_sorted = cities_distinct.sort()
         dicta = dict(zip(cities_distinct, cities_distinct))
-        print(dicta)
         try:
             valores = serializers.serialize('json', dicta)
         except:
             valores = 0
-        print(valores)
     return HttpResponse(json.dumps(dicta), content_type='application/json')
