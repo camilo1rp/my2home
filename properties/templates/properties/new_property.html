@@ -310,10 +310,11 @@ $(document).ready(function(){
     var id_price_strInput = document.getElementById('id_price_str');
     var currency = 'USD'; // https://www.id_price_str-iso.org/dam/downloads/lists/list_one.xml
 
-    id_price_strInput.addEventListener('keydown', onKeydown);
-    id_price_strInput.addEventListener('keyup', onKeyup);
+
     id_price_strInput.addEventListener('focus', onFocus);
     id_price_strInput.addEventListener('blur', onBlur);
+    id_price_strInput.addEventListener('mouseover', onMouseOver);
+    id_price_strInput.addEventListener('mouseout', onMouseOut);
 
     function localStringToNumber( s ){
         return Number(String(s).replace(/[^0-9.-]+/g,""));
@@ -322,20 +323,23 @@ $(document).ready(function(){
     var val_com = $("#id_price_str").val();
     $("#id_price_str").attr("placeholder",val_com);
 
-    function onFocus(e){
+    function onMouseOver(e){
       $("#id_price_str").attr("pattern", "[0-9]*");
     }
-    function onBlur(e){
-        $("#id_price_str").removeAttr("pattern");
+    function onMouseOut(e){
+      $("#id_price_str").removeAttr("pattern");
     }
-    function onKeydown(e){
+
+    function onFocus(e){
       var intformat= e.target.value;
+       $("#id_price_str").attr("pattern", "[0-9]*");
       var value = intformat.replace(/[.]/g,',');
       e.target.value = value ? localStringToNumber(value) : '';
       document.getElementById("id_price").value = e.target.value;
     }
+
     var timeout = null
-    function onKeyup(e){
+    function onBlur(e){
         clearTimeout(timeout);
         timeout = setTimeout(function () {
               var value = e.target.value;
@@ -350,26 +354,11 @@ $(document).ready(function(){
               var usformat = value ? localStringToNumber(value).toLocaleString(undefined, options): '';
               val = usformat.replace(/[,]/g,'.');
               e.target.value = val.replace(/[US]/g,'');
+              $("#id_price_str").removeAttr("pattern");
               document.getElementById("id_price_str").value = e.target.value;
-        }, 1000);
+        }, 200);
     }
     // **** end funtion currency
-
-    // SECTION 4
-    if( $('#customCheck1').prop('indeterminate') == false ){
-        /*
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '{% trans 'Please check the confirm box to continue'%}',
-            timer: 2100
-        })
-        */
-    }
-
-    $("#customCheck1").change(function(){
-        alert("Acepto ¨¨¨¨¨¨¨******* terminos")
-    });
 
     $("input").focus(function(){
                 if($(this).val() === '0'){
