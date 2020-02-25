@@ -9,4 +9,6 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('property_card/', views.property_card, name='pro-card'),
     path('favorite_card/', views.favorite_card, name='fav-card'),
+    path('messages/', views.messages, name='message'),
+    path('message_detail/<int:mess_id>/', views.message_detail, name='mess-detail'),
 ]

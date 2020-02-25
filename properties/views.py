@@ -1,7 +1,6 @@
 import ast
 import csv
 import io
-import json
 import os
 import urllib
 import json
@@ -97,7 +96,6 @@ class ListProperty(ListView):
                         return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}),
                                             content_type='application/json')
                     else:
-                        print('user owns this property')
                         return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}),
                                             content_type='application/json')
                 else:
@@ -364,7 +362,7 @@ def property_detail(request, prop_id):
         address = prop.address_col.get()
         geo_data = get_coordinates(str(address))
     except ObjectDoesNotExist:
-        geo_data = {'lat':  '4.624335', 'lng': '-74.063644'}
+        geo_data = {'lat': '4.624335', 'lng': '-74.063644'}
     visit = Visits(request)
     visit.add(prop_id)
     return render(request, 'properties/property-details.html',
@@ -389,6 +387,7 @@ def whatsapp_contact(request):
 
 class Tyc(TemplateView):
     template_name = "properties/tyc.html"
+
 
 @login_required
 def property_upload(request):
@@ -527,3 +526,6 @@ def pause(request, prop_id):
     # return JsonResponse({'a':1})
     # return render(request, 'account/dashboard.html')
     return HttpResponse(json.dumps(2), content_type='application/json')
+
+
+

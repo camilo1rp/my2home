@@ -162,6 +162,7 @@ class Contact(models.Model):
     email = models.EmailField(_('email'), max_length=100, null=True, blank=True)
     phone = models.BigIntegerField(_('phone'), validators=[validate_phone])
     message = models.TextField(_('message'), max_length=500, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
