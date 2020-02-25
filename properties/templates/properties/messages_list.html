@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>messages</title>
+    <!--ajax.js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--ajax.js-->
+    <!--BOOTSTRAP-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!--BOOTSTRAP-->
+    <!--    SWEET ALERT-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!--    SWEET ALERT-->
+</head>
+<body>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">{% trans 'Details' %}</th>
+      <th scope="col">{% trans 'Sender' %}</th>
+      <th scope="col">{% trans 'Property' %}</th>
+      <th scope="col">{% trans 'Message' %}</th>
+      <th scope="col">{% trans 'Date' %}</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for mess in messages %}
+    <tr>
+      <td><button type="button" onclick="details({{mess.0.id}})" class="btn btn-dark">view</button></td>
+      <th scope="row">{{mess.0.name}}</th>
+      <th>{{mess.0.propiedad|truncatechars:20}}</th>
+      <td>{{mess.0.message|truncatechars:25}}</td>
+      <td>{{mess.0.created|date:'l d-m-y'}}</td>
+    </tr>
+  {% empty %}
+  <p> {% trans 'no messages' %}</p>
+{% endfor %}
+  </tbody>
+</table>
+<script>
+    const details = mess_id => {
+        $.ajax({
+           type: "get",
+           url: '{% url "account:mess-detail" 123 %}'.replace( /123/ , mess_id),
+        }).done(function(data) {
+          Swal.fire({
+            position: 'top',
+            html:data,
+            showConfirmButton: false,
+          });
+        });
+    };
+
+  const delMess = mess_id => {
+      $.ajax({
+           type: "post",
+           url: '{% url "account:mess-detail" 123 %}'.replace( /123/ , mess_id),
+           headers: {'X-CSRFToken': '{{ csrf_token }}'},
+        }).done(function(data) {
+            location.reload(true);
+        });
+  };
+
+</script>
+</body>
+</html>

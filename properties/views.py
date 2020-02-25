@@ -1,7 +1,6 @@
 import ast
 import csv
 import io
-import json
 import os
 import urllib
 import json
@@ -529,12 +528,4 @@ def pause(request, prop_id):
     return HttpResponse(json.dumps(2), content_type='application/json')
 
 
-@login_required
-def message_detail(request, mess_id):
-    message = Contact.objects.get(id=mess_id)
-    if request.method == 'POST':
-        print("got in")
-        message.delete()
-        return HttpResponse(json.dumps(1), content_type='application/json')
-    return render(request, 'properties/message_details.html', {'mess': message})
 

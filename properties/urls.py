@@ -16,7 +16,6 @@ urlpatterns = [
     path('update_property/<int:pk>/', views.UpdateProperty.as_view(), name='update'),
     path('pause_property/<int:prop_id>/', views.pause, name='pause'),
     path('property_detail/<int:prop_id>/', views.property_detail, name='detail'),
-    path('message_detail/<int:mess_id>/', views.message_detail, name='mess-detail'),
     path('whatsapp_connect/', views.whatsapp_contact, name='whatsapp'),
 ]
 
