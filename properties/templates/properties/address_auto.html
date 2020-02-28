@@ -74,6 +74,7 @@
                the locations relevant to your app. For more information, see
          https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
     -->
+    <div style="margin: 50px">
         <form id="formUno" method="post" class="form">
             {% csrf_token %}
             <div class="col-md-12">
@@ -185,6 +186,7 @@
                 </div>
             </div>
         </form>
+        </div>
     <table id="address">
       <tr>
         <td class="label">Street address</td>
@@ -220,24 +222,25 @@
 // <script
 // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-
-document.getElementById('id_via').className="postal_code";
-//document.getElementById('id_via').className="route";
-//document.getElementById('id_via').className="locality";
+document.getElementById('id_tipo_via').className="route";
+document.getElementById('id_via').className="via";
+document.getElementById('id_prefijo_via').className="pre_via";
+document.getElementById('id_prefijo_numero').className="pre_num";
+document.getElementById('id_numero').className="street_number_1";
+document.getElementById('id_placa').className="street_number_2";
 document.getElementById('id_departamento').className="administrative_area_level_1";
 document.getElementById('id_ciudad').className="locality";
-//document.getElementById('id_via').className="neighborhood";
+document.getElementById('id_barrio').className="neighborhood";
 
 var placeSearch, autocomplete;
 
 var componentForm = {
-  //street_number: 'short_name',
-  //route: 'long_name',
+  street_number: 'short_name',
+  route: 'long_name',
   administrative_area_level_1: 'short_name',
   locality: 'long_name',
   //country: 'long_name',
-  postal_code: 'short_name',
-  //neighborhood: 'short_name'
+  neighborhood: 'short_name'
 };
 
 function initAutocomplete() {
@@ -269,19 +272,91 @@ function fillInAddress() {
   for (var i = 0; i < place.address_components.length; i++) {
     var addressType = place.address_components[i].types[0];
     if (componentForm[addressType]) {
-    console.log(addressType);
-      var val = place.address_components[i][componentForm[addressType]];
-      console.log(val);
-      if( addressType == "administrative_area_level_1" || addressType == "locality"){
-           var val2 =val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-           console.log(val2);
-          dept = document.getElementsByClassName(addressType)[0]
-          dept.options[dept.selectedIndex].text = val2.toUpperCase();
-      } else{
-        document.getElementsByClassName(addressType)[0].value = val;
+        var val = place.address_components[i][componentForm[addressType]];
+        console.log(addressType)
+      switch (addressType){
+        case "route":
+            let value = val.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            let route = value.split(' ');
+            if (route.length > 1){
+                let tipoVia = document.getElementsByClassName('route')[0];
+                if (route[0] === 'Avenida'){
+                    let streetType = route[0] + ' ' +route[1].toLowerCase();
+                    setSelectedValue(tipoVia,streetType);
+                }else{ setSelectedValue(tipoVia, route[0]);}
+                if (route[route.length - 1] === 'Sur') {
+                    direction = route[route.length - 1].toUpperCase();
+                    let numPref = route[1].match(/[a-z]+|[^a-z]+/gi);
+                    let prefix = document.getElementsByClassName('pre_via')[0];
+                    if (numPref.length > 1){
+                        prefixUpper = numPref[1].toUpperCase();
+                        document.getElementsByClassName('via')[0].value = numPref[0];
+                        setSelectedValue(prefix, prefixUpper + ' ' + direction);
+                    }else if (route.length === 4) {
+                        document.getElementsByClassName('via')[0].value = numPref;
+                        setSelectedValue(prefix, route[2].toUpperCase() + ' ' + direction)
+                    }else{
+                        document.getElementsByClassName('via')[0].value = numPref;
+                        setSelectedValue(prefix, direction)
+                    }
+                }else{
+                    let numPref = route[route.length - 1].match(/[a-z]+|[^a-z]+/gi);
+                    let prefix = document.getElementsByClassName('pre_via')[0];
+                    if (numPref.length > 1){
+                        prefixUpper = numPref[1].toUpperCase();
+                        document.getElementsByClassName('via')[0].value = numPref[0];
+                        setSelectedValue(prefix, prefixUpper);
+                    }else {
+                        document.getElementsByClassName('via')[0].value = numPref;
+                        prefix.options[0].selected = true;
+                    }
+                }
+            }else{ alert("It wasn't possible to auto-fill")}
+
+            break;
+        case "administrative_area_level_1":
+          var val2 =val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+          dept = document.getElementsByClassName(addressType)[0];
+          if (val2 === 'BOGOTA'){
+            setSelectedValue(dept, 'CUNDINAMARCA');
+          }else{ setSelectedValue(dept, val2);}
+          break;
+        case "locality":
+          var val2 =val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+          city = document.getElementsByClassName(addressType)[0];
+          setSelectedValue(city, val2);
+          break;
+        case "street_number":
+             let street = val.split('-');
+            if ( street.length > 1) {
+                let number = street[0].replace('#', '' );
+                let placa = street[1];
+                let numPref2 = number.match(/[a-z]+|[^a-z]+/gi);
+                if (numPref2.length > 1){
+                    document.getElementsByClassName('street_number_1')[0].value = numPref2[0]
+                    let prefix2 = document.getElementsByClassName('pre_num')[0];
+                    setSelectedValue(prefix2, numPref2[1].toUpperCase());
+                }else{document.getElementsByClassName('street_number_1')[0].value = number;}
+                document.getElementsByClassName('street_number_2')[0].value = placa;
+            }else{
+                document.getElementsByClassName('street_number_1')[0].value = val.substring(0, val.length/2);
+                document.getElementsByClassName('street_number_2')[0].value = val.substring(val.length/2, val.length);
+            }
+            break;
+        default:
+            document.getElementsByClassName(addressType)[0].value = val;
+            break;
       }
     }
   }
+  function setSelectedValue(selectObj, valueToSet) {
+    for (var i = 0; i < selectObj.options.length; i++) {
+        if (selectObj.options[i].text== valueToSet) {
+            selectObj.options[i].selected = true;
+            return;
+        }
+    }
+    }
 }
 
 // Bias the autocomplete object to the user's geographical location,
@@ -299,6 +374,8 @@ function geolocate() {
     });
   }
 }
+
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&libraries=places&callback=initAutocomplete"
         async defer></script>

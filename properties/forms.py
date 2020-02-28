@@ -7,6 +7,7 @@ import string
 
 PREFIJOS = [tuple([x, x]) for x in string.ascii_uppercase[:8]]
 [PREFIJOS.append(tuple(['{} BIS'.format(x), '{} BIS'.format(x)])) for x in string.ascii_uppercase[:8]]
+PREFIJOS.append(tuple(['SUR', 'SUR']))
 [PREFIJOS.append(tuple(['{} SUR'.format(x), '{} SUR'.format(x)])) for x in string.ascii_uppercase[:8]]
 PREFIJOS.insert(0, tuple(['', '']))
 
