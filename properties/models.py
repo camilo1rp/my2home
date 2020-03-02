@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from datetime import datetime
 from django.urls import reverse
@@ -8,6 +9,12 @@ from django.utils.translation import gettext_lazy as _
 from account.validators import validate_phone
 from citiesapp.models import City, State
 
+def current_year():
+    return datetime.today().year
+
+
+def max_value_current_year(value):
+    return MaxValueValidator(current_year())(value)
 
 class Property(models.Model):
     APARTMENT = 'APT'
@@ -16,6 +23,11 @@ class Property(models.Model):
     COMMERCIAL = 'COM'
     FARM = 'FAR'
 
+    NEW = 'NEW'
+    OFFPLAN = 'PLA'
+    STARTED = 'STA'
+    USED = 'USE'
+
     TIPO_PRO = [
         (APARTMENT, _('apartment')),
         (HOUSE, _('house')),
@@ -23,11 +35,19 @@ class Property(models.Model):
         (FARM, _('farm')),
         (COMMERCIAL, _('commercial')),
     ]
+    STATUS_PRO = [
+        (NEW, _('new')),
+        (OFFPLAN, _('off-plans')),
+        (STARTED, _('on construction')),
+        (USED, _('used')),
+    ]
+
     code = models.IntegerField(_('code'), default=00000000)
     upload_code = models.IntegerField(_('upload-code'), default=00000000, null=True, blank=True)
     manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name=_('manager'))
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_properties', verbose_name=_('owner'))
     type_property = models.CharField(_('type of property'), max_length=70, choices=TIPO_PRO, default=APARTMENT)
+    condition = models.CharField(_('condition'), max_length=40, choices=STATUS_PRO, default=NEW)
     price = models.DecimalField(_('price'), decimal_places=0, max_digits=12)
     price_str = models.CharField(max_length=18, default="")
     rooms = models.IntegerField(_('rooms'), default=0)
@@ -36,7 +56,8 @@ class Property(models.Model):
     area_built = models.DecimalField(_('built area'), default=0, decimal_places=0, max_digits=12)
     area_total = models.DecimalField(_('total area'), default=0, decimal_places=0, max_digits=12)
     estrato = models.IntegerField(null=True, blank=True)
-    year = models.IntegerField(_('year built'), null=True, blank=True)
+    year = models.PositiveIntegerField(_('built in'),  default=current_year(),
+                                       validators=[MinValueValidator(1900), max_value_current_year])
     title = models.CharField(_('title'), max_length=30)
     title_slug = models.SlugField(max_length=50)
     description = models.TextField(_('description'), max_length=700)

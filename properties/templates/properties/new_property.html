@@ -88,7 +88,7 @@
                                                                     </label>
                                                                     <div class="col-md-12">
                                                                         {{form.owner}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.owner.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -97,7 +97,7 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-lg-10 offset-lg-2">
                                                                         {{form.type_business}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.type_business.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -106,7 +106,7 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-lg-8 offset-lg-2">
                                                                         {{form.type_property}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.type_property.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                                  <div class="col-md-4" id="divEstrato" >
@@ -115,7 +115,7 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-lg-8 offset-lg-2">
                                                                         {{form.estrato}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.estrato.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -128,7 +128,7 @@
                                                                          </label>
                                                                         <div class="col-md-12 col-lg-8 offset-lg-2">
                                                                             {{form.rooms}}
-                                                                            <span class="help-block"></span>
+                                                                            <span class="help-block">{{form.rooms.errors}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -138,7 +138,7 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-lg-8 offset-lg-2">
                                                                         {{form.baths}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.baths.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -147,37 +147,46 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-lg-8 offset-lg-2">
                                                                         {{form.parking}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.parking.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
                                                             <div class="row">
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label ">
                                                                         {{form.area_total.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+                                                                    <div class="col-md-12 col-lg-9 offset-lg-2">
                                                                         {{form.area_total}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.area_total.errors}}</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4" >
+                                                                <div class="col-md-3" >
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.area_built.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+                                                                    <div class="col-md-12 col-lg-9 offset-lg-2">
                                                                         {{form.area_built}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.area_built.errors}}</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <label class="col-md-12 col-sm-12 col-xs-12 control-label">
                                                                         {{form.year.label}}<span class="span"> *</span>
                                                                     </label>
-                                                                    <div class="col-md-12 col-lg-8 offset-lg-2">
+                                                                    <div class="col-md-12 col-lg-9 offset-lg-2">
                                                                         {{form.year}}
-                                                                        <span class="help-block"></span>
+                                                                        <span class="help-block">{{form.year.errors}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                                                        {{form.condition.label}}<span class="span"> *</span>
+                                                                    </label>
+                                                                    <div class="col-md-12 col-lg-9 offset-lg-2">
+                                                                        {{form.condition}}
+                                                                        <span class="help-block">{{form.condition.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -191,7 +200,7 @@
 
                                                                         <div class="col-md-10 offset-md-1">
                                                                             {{form.price_str}}
-                                                                            <span class="help-block"></span>
+                                                                            <span class="help-block">{{form.price_str.errors}}</span>
                                                                         </div>
                                                                     </div>
                                                                     <hr>
@@ -201,7 +210,7 @@
                                                                         </label>
                                                                         <div class="col-md-11 offset-md-1">
                                                                             {{form.title}}
-                                                                            <span class="help-block"></span>
+                                                                            <span class="help-block">{{form.title.errors}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -211,7 +220,7 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                                         {{form.description}}
-                                                                        <span class="help-block">{{form.errors}}</span>
+                                                                        <span class="help-block">{{form.description.errors}}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -256,6 +265,7 @@
     </div>
   </div>
 </div>
+
         {% block script %}
 
 <script>

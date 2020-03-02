@@ -41,13 +41,17 @@ class ListProperty(ListView):
         filter_index = request.GET.get('remove')
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
+        condition = request.GET.get('condition')
+        print('condition')
+        print(condition)
         filters_names = ['City', 'type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
-                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', ]
-        filters_values = [request.GET.get('select-city'), request.GET.get('list-types'), request.GET.get('offer-types'),
-                          request.GET.get('room_min'),
-                          request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
-                          request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
-                          request.GET.get('price_max')]
+                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', 'condition']
+        # filter_names and filter values must have corresponding index, e.g. city's index == and select-city's index
+        filters_values = [city, request.GET.get('list-types'), request.GET.get('offer-types'),
+                          request.GET.get('room_min'), request.GET.get('room_max'), request.GET.get('bath_min'),
+                          request.GET.get('bath_max'), request.GET.get('area_min'), request.GET.get('area_max'),
+                          request.GET.get('price_min'), request.GET.get('price_max'), request.GET.get('condition')]
+
         filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Offer Type'): gettext('Sale')},
                           'RENT / ARRENDAMIENTO': {gettext('Offer Type'): gettext('Rent')},
                           'SWAP / PERMUTA': {gettext('Offer Type'): gettext('Swap')},
@@ -55,7 +59,10 @@ class ListProperty(ListView):
                           'HOU': {gettext('Property type'): gettext('House')},
                           'LAN': {gettext('Property type'): gettext('Land')},
                           'COM': {gettext('Property type'): gettext('Commercial')},
-                          'FAR': {gettext('Property type'): gettext('Farm')}, 'rooms__gte': gettext('Min rooms'),
+                          'FAR': {gettext('Property type'): gettext('Farm')},
+                          'NEW': {gettext('Condition'): gettext('New')}, 'USE': {gettext('Condition'): gettext('Used')},
+                          'PLA': {gettext('Condition'): gettext('Off-plan')},
+                          'STA': {gettext('Condition'): gettext('On construction')}, 'rooms__gte': gettext('Min rooms'),
                           'rooms__lte': gettext('Max rooms'), 'baths__gte': gettext('Min bathrooms'),
                           'baths__lte': gettext('Max bathrooms'), 'area_total__gte': gettext('Min area'),
                           'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'),

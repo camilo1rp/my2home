@@ -50,28 +50,6 @@
         background: #f1f1f1;
       }
 
-      #separar {
-        padding: 6%;
-        display: inline-block;
-      }
-
-      .titulo {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        text-decoration: underline;
-        color: #333333;
-      }
-      .botonSelect {
-        color: #fff !important;
-        font-size: 20px;
-        font-weight: 500;
-        padding: 0.5em 1.2em;
-        background: black;
-        border: 2px solid;
-        border-color: #fff;
-        transition: all 1s ease;
-        position: relative;
-      }
       .buttonMenu {
         color: #fff !important;
         font-size: 20px;
@@ -113,7 +91,7 @@
        /* margin-left: 2em;*/
       }
       .btnSelect{
-        width: 15em;/* 1oem text-align: left;*/
+        width: 14em;/* 1oem text-align: left;*/
         height: 3em;
         font-size: 0.7em;
 
@@ -147,7 +125,7 @@
       }
       .divMaximo{
         float: right;
-        width: 51%;
+        width: 49%;
       }
       .margen{
         margin-top: -100px;
@@ -177,7 +155,7 @@
 
       @media screen and (max-width:768px) {
         .btnSelect {
-            width: 101%;
+            width: 100%;
         }
       }
       @media screen and (max-width:994px) and (min-width:768px) {
@@ -194,7 +172,7 @@
       }
       @media screen and (min-width:994px) {
         .btnSelect {
-            width: 15em;
+            width: 14em;
         }
       }
     </style>
@@ -243,7 +221,7 @@
         <div class="row">
           <form id=idForm method="get" class="form-search col-md-12 margen">
             <div class="row  align-items-end divMargen">
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="list-types">{% trans 'Listing Types' %}</label>
                   <select name="list-types" id="list-types" class="form-control rounded-0">
                     <option value="ALL">{% trans 'All' %}</option>
@@ -254,13 +232,23 @@
                     <option value="FAR">{% trans 'Farms' %}</option>
                   </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="offer-types">{% trans 'Offer Type' %}</label>
                   <select name="offer-types" id="offer-types" class="form-control rounded-0">
                       <option value="ALL">{% trans 'All' %}</option>
                       <option value="SALE / VENTA">{% trans 'For Sale' %}</option>
                       <option value="RENT / ARRENDAMIENTO">{% trans 'For Rent' %}</option>
                       <option value="SWAP / PERMUTA">{% trans 'For Swap' %}</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="condition">{% trans 'Condition' %}</label>
+                  <select name="condition" id="condition" class="form-control rounded-0">
+                    <option value="ALL">{% trans 'All' %}</option>
+                    <option value="NEW">{% trans 'New' %}</option>
+                    <option value="PLA">{% trans 'Off-Plan' %}</option>
+                    <option value="STA">{% trans 'On Construction' %}</option>
+                    <option value="USE">{% trans 'Used' %}</option>
                   </select>
                 </div>
                 <div class="col-md-3">
@@ -276,7 +264,7 @@
 
             </div>
             <div class="row">
-               <div class="col-md-2 search">
+               <div class="col-md-2  search">
                   <div>
                     <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnHab" type="button" data-toggle="dropdown">
                       <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Rooms' %}
@@ -319,7 +307,7 @@
                     <span id="textBanMa"></span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul" id="id_dropdownBan">
-                      <span  class="textDropDawn">&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Number of' %} {% trans 'bathrooms' %}
+                      <span  class="textDropDawn">{% trans 'Number of' %} {% trans 'bathrooms' %}
                       </span>
                       <li class="espacio" >
                         <div class="divMinimo selecBorde">
@@ -357,9 +345,7 @@
                     <span id="textAreMa" class="size">m²</span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul" id="id_dropdownAre">
-                      <span class="textDropDawn">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Area m²' %}
-                      </span>
+                      <span class="textDropDawn">{% trans 'Area m²' %}</span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="area_min" id="selectMinAre" class="form-control">
@@ -411,9 +397,7 @@
                     <span id="textPreMa" class="size"></span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul" id="id_dropdownPre">
-                      <span class="textDropDawn">
-                        &nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Price' %} ({% trans 'Millions' %})
-                      </span>
+                      <span class="textDropDawn">{% trans 'Price' %} ({% trans 'Millions' %})</span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="price_min" id="selectMinPre" class="form-control">
@@ -497,8 +481,8 @@
             <div class="site-section-title">
               <h2>{% trans 'Why Choose Us?' %}</h2>
             </div>
-            <p>{% trans "Although this is a brand new platform, our team has many years of experience buying and selling properties in the region." %} {% trans "During this time we have gain reputation and
-             are locally known in the real state and contruction bussines" %}</p>
+            <p>{% trans "Although this is a brand new platform, our team has many years of experience buying and selling properties in the region." %} {% trans "During this time we have gain reputation" %}
+              {% trans "and are locally known in the real state and contruction bussines" %}</p>
           </div>
         </div>
         <div class="row">
@@ -593,7 +577,6 @@
 
           <div class="col-lg-4 mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">{% trans 'Follow Us' %}</h3>
-
                 <div>
                   <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
@@ -601,6 +584,7 @@
                   <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                 </div>
           </div>
+          <span id="session">{{ request.session.visits }}</span>
         </div>
 <!--        <div class="row pt-5 mt-5 text-center">-->
 <!--          <div class="col-md-12">-->
@@ -958,7 +942,15 @@
               myArray[i].removeClass('show');
               }
           }
-          });
+    });
+    let visit = $("#session");
+    $(window).on('load',function(){
+        var pathname = window.location.href;
+        if ( !pathname.includes('?') && !visit.text()){
+          $('#myModal').modal('show');
+          }
+
+    });
 </script>
   </body>
 </html>
