@@ -102,7 +102,7 @@ a {
   background: #000; }
 
 .form-control {
-  height: 47px; }
+  height: 35px; }
 
 .form-control-sm {
   height: auto !important;
@@ -678,6 +678,11 @@ a {
       color: #f23a2e !important;
       border: 2px white solid;
     }
+    .property-entry .offer-type-wrap2 {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 8; }
 
   .property-entry .offer-type-wrap {
     position: absolute;
@@ -788,7 +793,7 @@ a {
   .form-search .form-control {
     border: none; }
   .form-search .btn[type="submit"] {
-    height: 47px; }
+    height: 40px; }
 
 .select-wrap {
   position: relative; }
