@@ -9,12 +9,14 @@ from django.utils.translation import gettext_lazy as _
 from account.validators import validate_phone
 from citiesapp.models import City, State
 
+
 def current_year():
     return datetime.today().year
 
 
 def max_value_current_year(value):
     return MaxValueValidator(current_year())(value)
+
 
 class Property(models.Model):
     APARTMENT = 'APT'
@@ -56,19 +58,26 @@ class Property(models.Model):
     area_built = models.DecimalField(_('built area'), default=0, decimal_places=0, max_digits=12)
     area_total = models.DecimalField(_('total area'), default=0, decimal_places=0, max_digits=12)
     estrato = models.IntegerField(null=True, blank=True)
-    year = models.PositiveIntegerField(_('built in'),  default=current_year(),
+    year = models.PositiveIntegerField(_('built in'), default=current_year(),
                                        validators=[MinValueValidator(1900), max_value_current_year])
     title = models.CharField(_('title'), max_length=30)
     title_slug = models.SlugField(max_length=50)
     description = models.TextField(_('description'), max_length=700)
     type_business = models.ManyToManyField('BusinessType', related_name='business', verbose_name=_('offer type'))
 
+    # projects
+    is_project = models.BooleanField(default=False)
+    area_pro = models.DecimalField(_('Project area'), default=0, decimal_places=0, max_digits=12)
+    sale = models.IntegerField(null=True, blank=True)
+    sold = models.IntegerField(null=True, blank=True)
+    facilities = models.ManyToManyField('Facility', related_name='facilities', verbose_name=_('facilities'))
+
     # analytic
     seen = models.IntegerField(_('seen'), default=0)
     active = models.BooleanField(_('active'), default=False)
     pause = models.BooleanField(_('pause'), default=False)
     promoted = models.BooleanField(_('promoted'), default=False)
-    followers = models.ManyToManyField(User, through='Following', related_name='following',)
+    followers = models.ManyToManyField(User, through='Following', related_name='following', )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -127,10 +136,10 @@ class AddressCol(models.Model):
 
     def __str__(self):
         if self.mostrar:
-            address= "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
-                                                        self.prefijo_via, self.numero,
-                                                        self.prefijo_numero, self.placa,
-                                                        self.ciudad, self.departamento)
+            address = "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
+                                                           self.prefijo_via, self.numero,
+                                                           self.prefijo_numero, self.placa,
+                                                           self.ciudad, self.departamento)
             return address.replace("None", "")
         else:
             if self.barrio:
@@ -184,6 +193,14 @@ class Contact(models.Model):
     phone = models.BigIntegerField(_('phone'), validators=[validate_phone])
     message = models.TextField(_('message'), max_length=500, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Facility(models.Model):
+    name = models.CharField(_('facilities'), max_length=70)
+    description = models.CharField(_('description'), max_length=200)
 
     def __str__(self):
         return self.name

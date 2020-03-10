@@ -33,7 +33,8 @@ class PropertyForm(forms.ModelForm):
 
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted', 'pause']
+        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted', 'pause',
+                   'is_project', 'area_pro', 'sale', 'sold', 'facilities']
 
 
 class AddressColForm(forms.ModelForm):
