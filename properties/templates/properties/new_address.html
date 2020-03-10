@@ -50,7 +50,13 @@
 </head>
 <body>
 <input id="prop" value="{{propiedad}}" hidden disabled>
-
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong>{%trans 'Look up your address!' %} </strong>
+                                {%trans "We'll try to auto-complete this form for you, if it isn't possible, please fill it out yourself"%}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
 <div class="container">
     <div class="row">
         <form id="formUno" method="post" class="form">
@@ -58,6 +64,7 @@
             <div class="col-md-12">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="col-md-12">
+
                         <div class="row">
                             <div class="col-md-4">
                                 {{form.errors}}
@@ -155,12 +162,12 @@
                         <br/>
                         <hr>
                         <div class="row">
-                            <div class="col-sm-9 col-md-7 col-lg-6">
+                            <div class="col-sm-9 col-md-7 col-lg-4>
                                 <label class="control-label">
                                     <p>{% trans 'Show full address in web:' %}</p>
                                 </label>
                             </div>
-                            <div class="col-sm-3     col-md-3 col-lg-3">
+                            <div class="col-sm-3 col-md-3 col-lg-2">
                                 {{form.mostrar}}
                             </div>
                         </div>
@@ -188,19 +195,40 @@
 
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>-->
 <script>
-document.getElementById('id_tipo_via').className="route";
-document.getElementById('id_via').className="via";
-document.getElementById('id_prefijo_via').className="pre_via";
-document.getElementById('id_prefijo_numero').className="pre_num";
-document.getElementById('id_numero').className="street_number_1";
-document.getElementById('id_placa').className="street_number_2";
-document.getElementById('id_departamento').className="administrative_area_level_1";
-document.getElementById('id_ciudad').className="locality";
-document.getElementById('id_barrio').className="neighborhood";
-var city;
-var val_city;
-var placeSearch, autocomplete;
+    $(".alert").hide()
+    document.getElementById('id_tipo_via').className="route";
+    document.getElementById('id_via').className="via";
+    document.getElementById('id_prefijo_via').className="pre_via";
+    document.getElementById('id_prefijo_numero').className="pre_num";
+    document.getElementById('id_numero').className="street_number_1";
+    document.getElementById('id_placa').className="street_number_2";
+    document.getElementById('id_departamento').className="administrative_area_level_1";
+    document.getElementById('id_ciudad').className="locality";
+    document.getElementById('id_barrio').className="neighborhood";
+    var city;
+    var val_city;
+    var placeSearch, autocomplete;
 
+    function getCities() {
+        var opcion = $("#id_departamento option:selected").val();
+        depa = $("#id_departamento option:selected").text();
+        $.ajax({
+            url: '{% url "city:cities" %}',
+            type: 'get',
+            data: { 'id': opcion }
+        }).done(function(data) {
+            var valores = '';
+            var datos = JSON.parse(data);
+            $("#id_ciudad").empty();
+            valores = "<option value='' selected>Ciudad</option>"
+            $.each(datos, function(item, val) {
+                valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
+            });
+            $("#id_ciudad").append(valores);
+            $("#id_ciudad").val(city_id);
+        });
+        datos();
+    }
 var componentForm = {
   street_number: 'short_name',
   route: 'long_name',
@@ -235,8 +263,7 @@ function fillInAddress() {
   for (var i = 0; i < place.address_components.length; i++) {
     var addressType = place.address_components[i].types[0];
     if (componentForm[addressType]) {
-         console.log(addressType)
-                 var val = place.address_components[i][componentForm[addressType]];
+      var val = place.address_components[i][componentForm[addressType]];
       switch (addressType){
         case "route":
             let value = val.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -274,7 +301,7 @@ function fillInAddress() {
                         prefix.options[0].selected = true;
                     }
                 }
-            }else{ alert("It wasn't possible to auto-fill")}
+            }else{ alert("{% trans "We've tried our best to autocomplete. Please check the form" %}")}
 
             break;
         case "administrative_area_level_1":
@@ -284,41 +311,67 @@ function fillInAddress() {
           if (val_dept === 'BOGOTA'){
             setSelectedValue(dept, 'CUNDINAMARCA');
           }else{ setSelectedValue(dept, val_dept);}
-          $("#id_departamento").trigger('change');
           setSelectedValue(city, val_city);
           break;
         case "locality":
-          city = val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+          val_city = val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
           city = document.getElementsByClassName(addressType)[0];
           break;
         case "street_number":
              let street = val.split('-');
+             console.log(val)
+             console.log(street)
              let prefix2 = document.getElementsByClassName('pre_num')[0];
             if ( street.length > 1) {
                 let number = street[0].replace('#', '' );
                 let placa = street[1];
                 let numPref2 = number.match(/[a-z]+|[^a-z]+/gi);
+                console.log(numPref2)
                 if (numPref2.length > 1){
+                console.log(numPref2[1].toUpperCase())
                     document.getElementsByClassName('street_number_1')[0].value = numPref2[0]
-
-                    setSelectedValue(prefix2, numPref2[1].toUpperCase());
-                }else{document.getElementsByClassName('street_number_1')[0].value = number;}
+                    let pxNum =numPref2[1].toUpperCase()
+                    setSelectedValue(prefix2, pxNum);
+                }else{document.getElementsByClassName('street_number_1')[0].value = number;
                 document.getElementsByClassName('street_number_2')[0].value = placa;
                 prefix2.options[0].selected = true;
+                }
             }else{
-                document.getElementsByClassName('street_number_1')[0].value = val.substring(0, val.length/2);
-                document.getElementsByClassName('street_number_2')[0].value = val.substring(val.length/2, val.length);
-                prefix2.options[0].selected = true;
+                let withprex = val.match(/[a-z]+|[^a-z]+/gi);
+                if ( withprex.length > 2){
+                    let pxNum = withprex[1].toUpperCase()
+                    setSelectedValue(prefix2, pxNum);
+                    document.getElementsByClassName('street_number_1')[0].value = withprex[0];
+                    document.getElementsByClassName('street_number_2')[0].value = withprex[2];
+                } else{
+                    if (val.length > 1){
+                        document.getElementsByClassName('street_number_1')[0].value = val.substring(0, val.length/2 + val.length % 2);
+                        document.getElementsByClassName('street_number_2')[0].value = val.substring(val.length/2 + val.length % 2, val.length);
+                        prefix2.options[0].selected = true;
+                    }else{
+                     document.getElementsByClassName('street_number_1')[0].value = val;
+                     document.getElementsByClassName('street_number_2')[0].value = '';
+                     prefix2.options[0].selected = true;
+                    }
+                    alert("{% trans "We've tried our best to autocomplete. Please check the form" %}")
+                }
             }
+           // $("#id_departamento").trigger('change');
+            $("#id_prefijo_via").trigger('change');
+            $("#id_prefijo_numero").trigger('change');
+            $("#id_ciudad").trigger("change");
+            $("#id_mostrar").trigger("change");
             break;
         default:
             document.getElementsByClassName(addressType)[0].value = val;
             break;
       }
+      datos()
     }
   }
 
   function setSelectedValue(selectObj, valueToSet) {
+  console.log(valueToSet)
     for (var i = 0; i < selectObj.options.length; i++) {
         if (selectObj.options[i].text== valueToSet) {
             selectObj.options[i].selected = true;
@@ -361,25 +414,7 @@ function geolocate() {
 
 
     $("#id_departamento").change(function(){
-        var opcion = $("#id_departamento option:selected").val();
-        depa = $("#id_departamento option:selected").text();
-        $.ajax({
-            url: '{% url "city:cities" %}',
-            type: 'get',
-            data: { 'id': opcion }
-        }).done(function(data) {
-            var valores = '';
-            var datos = JSON.parse(data);
-            $("#id_ciudad").empty();
-            valores = "<option value='' selected>Ciudad</option>"
-            $.each(datos, function(item, val) {
-                valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
-            });
-            $("#id_ciudad").append(valores);
-            $("#id_ciudad").val(city_id);
-            $("#id_ciudad").trigger("change");
-        });
-        datos();
+        getCities();
     });
 
     $("#id_ciudad").change(function(){
@@ -395,28 +430,22 @@ function geolocate() {
     //Css
     $("input, select").addClass('form-control');
     $("#id_mostrar").prop('checked',true);
-    //$("#id_mostrar").css('height','1.5em').css('width','100%');
 
     if(  $("#id_mostrar").is(':checked') ){
-        $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
-    }
+        }
 
     function datos(){
+    $("#showData2").text('');
         if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios
-            if( $("#id_tipo_via").val() == '' && $("#id_via").val() == '' && $("#id_prefijo_via").val() == '' && $("#id_numero").val() == '' && $("#id_prefijo_numero").val() == '' && $("#id_placa").val() == '' && $("#id_ciudad option:selected").val() == '' && $("#id_departamento option:selected").val() == '' && $("#id_barrio").val() == '' ){
-                $("#showData2").text('');
-            }else{
-                $("#showData2").text( $("#id_tipo_via").val()+' '+$("#id_via").val()+''+pref+' # '+$("#id_numero").val()+''+prefNum+' - '+$("#id_placa").val()+' '+$("#id_barrio").val()+', '+ciud+', '+depa );
-            }
+         $("#showData2").text($("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
+        }else{
+            $("#showData2").html( $("#id_barrio").val()+' '+$("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text() );
         }
     }
 
-    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").keyup(function () {
-
+    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").change(function () {
         $("#showData2").html( $("#id_barrio").val()+' '+$("#id_departamento option:selected").text()+', '+$("#id_ciudad option:selected").text() );
         datos();
-
     });
 
 
@@ -425,38 +454,17 @@ function geolocate() {
     }
 
     $("#id_mostrar").change(function() {
-        if( $("#id_mostrar").is(':checked') ){
-            //Campos vacios
             datos();
-        }else{
-            $("#showData2").html( $("#id_barrio").val()+' '+$("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text() );
-        }
-    });
-    var city_id = $("#id_ciudad").val();
-    $( document ).ready(function() {
-        $("#id_departamento").trigger('change');
-        $("#id_prefijo_via").trigger('change');
-        $("#id_prefijo_numero").trigger('change');
     });
 
-$("#autocomplete").focus( function (){
-let timerInterval
-Swal.fire({
-  title: "{%trans 'Look up your address'%}",
-  html: "{%trans 'We will try to auto-complete this form, if it is not possible, please fill it out manually'%}",
-  timer: 4000,
-  timerProgressBar: true,
-  onBeforeOpen: () => {
-    Swal.showLoading()
-    timerInterval = setInterval(() => {
-      const content = Swal.getContent()
-    }, 100)
-  },
-  onClose: () => {
-    //clearInterval(timerInterval)
-  }
-})
-})
+    var city_id = $("#id_ciudad").val();
+    $( document ).ready(function() {
+        datos()
+    });
+
+    $("#autocomplete").focus( function (){
+        $(".alert").show()
+    })
 
 </script>
 </html>

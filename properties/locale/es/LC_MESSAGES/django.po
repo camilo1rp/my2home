@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-19 16:34+0000\n"
-"PO-Revision-Date: 2020-02-19 16:37+0000\n"
-"Last-Translator: b'  <>'\n"
+"POT-Creation-Date: 2020-03-04 20:24+0000\n"
+"PO-Revision-Date: 2020-03-04 20:30+0000\n"
+"Last-Translator: b'Camilo Romero <inmueblesfusa@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,36 +19,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
-#: properties/decorators.py:15 properties/views.py:251 properties/views.py:278
-#: properties/views.py:519
+#: properties/decorators.py:15 properties/views.py:252 properties/views.py:279
+#: properties/views.py:522
 msgid "Property does not exist"
 msgstr "Propiedad no existe"
 
-#: properties/forms.py:15
+#: properties/forms.py:16
 msgid "Carrera"
 msgstr "Carrera"
 
-#: properties/forms.py:16
+#: properties/forms.py:17
 msgid "Transversal"
 msgstr "Transversal"
 
-#: properties/forms.py:17
+#: properties/forms.py:18
 msgid "Diagonal"
 msgstr "Diagonal"
 
-#: properties/forms.py:18
+#: properties/forms.py:19
 msgid "Avenida"
 msgstr "Avenida"
 
-#: properties/forms.py:19
+#: properties/forms.py:20
 msgid "Avenida calle"
 msgstr "Avenida calle"
 
-#: properties/forms.py:20
+#: properties/forms.py:21
 msgid "Avenida carrera"
 msgstr "Avenida carrera"
 
-#: properties/forms.py:29
+#: properties/forms.py:30
 msgid ""
 "Add extra information that adds value to your property. i.e. common areas, "
 "services, security, location, etc."
@@ -56,15 +56,15 @@ msgstr ""
 "Agrega información extra para incrementar el valor de tu inmueble. e.j, "
 "áreas comunes, seguridad, ubicación, etc."
 
-#: properties/forms.py:30
+#: properties/forms.py:31
 msgid "select owner"
 msgstr "Seleccione Propietario"
 
-#: properties/forms.py:32 properties/models.py:31
+#: properties/forms.py:33 properties/models.py:31
 msgid "price"
 msgstr "precio"
 
-#: properties/forms.py:83
+#: properties/forms.py:84
 msgid "csv file"
 msgstr "archivo csv"
 
@@ -199,33 +199,125 @@ msgstr "teléfono"
 msgid "message"
 msgstr "Mensaje"
 
-#: properties/templates/properties/contact.html:69
+#: properties/templates/properties/address_auto.html:184
+#: properties/templates/properties/new_address.html:185
+#: properties/templates/properties/new_property.html:227
+msgid "save"
+msgstr "guardar"
+
+#: properties/templates/properties/contact.html:76
+#: properties/templates/properties/contact.html:252
 #: properties/templates/properties/index.html:580
 #: properties/templates/properties/property-details.html:266
 msgid "Contact Us"
 msgstr "Contactanos"
 
-#: properties/templates/properties/contact.html:123
+#: properties/templates/properties/contact.html:130
 msgid "Contact Info"
 msgstr "Información de Contacto"
 
-#: properties/templates/properties/contact.html:124
+#: properties/templates/properties/contact.html:131
 #: properties/templates/properties/new_property.html:234
 msgid "Address"
 msgstr "Dirección"
 
-#: properties/templates/properties/contact.html:127
+#: properties/templates/properties/contact.html:134
 msgid "Phone"
 msgstr "Teléfono"
 
-#: properties/templates/properties/contact.html:130
+#: properties/templates/properties/contact.html:137
 msgid "Email Address"
 msgstr "Correo Electrónico"
 
-#: properties/templates/properties/contact.html:145
+#: properties/templates/properties/contact.html:152
 #: properties/templates/properties/index.html:524
 msgid "Our Team"
 msgstr "Nuestro equipo"
+
+#: properties/templates/properties/contact.html:229
+#: properties/templates/properties/index.html:557
+#: properties/templates/properties/property-details.html:245
+msgid "About Inmuebles Fusa"
+msgstr "Acerca de Inmuebles Fusa"
+
+#: properties/templates/properties/contact.html:230
+#: properties/templates/properties/index.html:558
+msgid ""
+"Inmuebles Fusa is an online real state based in Fusagasugá, Cundinamarca. "
+"Our goal is to make it easier for you to sell, rent, swap or buy properties."
+msgstr ""
+"Inmuebles Fusa es una inmobiliaria de  Fusagasugá, Cundinamarca. Nuestro "
+"objetivo es hacer mas fácil para ti la compra, arrendamiento, y permuta de "
+"finca raiz."
+
+#: properties/templates/properties/contact.html:231
+#: properties/templates/properties/index.html:559
+msgid ""
+"Although this platform is quite new, our team has vast experience and "
+"reputation on real state and they are ready to offer you the best possible "
+"advice."
+msgstr ""
+"A pesar de que esta plataforma es nueva, nuestro equipo cuenta con una basta"
+" experiencia y reputación en negocios relacionados a finca raíz y están "
+"listos para ofrecerte la mejor asesoría"
+
+#: properties/templates/properties/contact.html:238
+#: properties/templates/properties/index.html:566
+#: properties/templates/properties/property-details.html:252
+msgid "Navigations"
+msgstr "Navegación"
+
+#: properties/templates/properties/contact.html:242
+#: properties/templates/properties/index.html:570
+#: properties/templates/properties/property-details.html:256
+msgid "Home"
+msgstr "Inicio"
+
+#: properties/templates/properties/contact.html:243
+#: properties/templates/properties/index.html:571
+#: properties/templates/properties/property-details.html:257
+#: properties/templates/properties/top_nav.html:31
+msgid "Buy"
+msgstr "Comprar"
+
+#: properties/templates/properties/contact.html:244
+#: properties/templates/properties/index.html:572
+#: properties/templates/properties/property-details.html:258
+#: properties/templates/properties/top_nav.html:32 properties/views.py:53
+msgid "Rent"
+msgstr "Rentar"
+
+#: properties/templates/properties/contact.html:245
+#: properties/templates/properties/index.html:573
+#: properties/templates/properties/property-details.html:259
+#: properties/templates/properties/property_card_scroll.html:105
+#: properties/templates/properties/top_nav.html:33 properties/views.py:54
+msgid "Swap"
+msgstr "Permutar"
+
+#: properties/templates/properties/contact.html:250
+#: properties/templates/properties/index.html:578
+#: properties/templates/properties/property-details.html:264
+msgid "About Us"
+msgstr "Acerca"
+
+#: properties/templates/properties/contact.html:251
+#: properties/templates/properties/index.html:579
+#: properties/templates/properties/property-details.html:265
+msgid "Privacy Policy"
+msgstr "Política de privacidad"
+
+#: properties/templates/properties/contact.html:253
+#: properties/templates/properties/index.html:581
+#: properties/templates/properties/property-details.html:267
+msgid "Terms"
+msgstr "Términos"
+
+#: properties/templates/properties/contact.html:260
+#: properties/templates/properties/index.html:588
+#: properties/templates/properties/property-details.html:274
+msgid "Follow Us"
+msgstr "Siguenos"
 
 #: properties/templates/properties/contact_form.html:19
 msgid "Contact Agent"
@@ -262,7 +354,7 @@ msgstr "Lotes"
 
 #: properties/templates/properties/index.html:246
 #: properties/templates/properties/property-details.html:163
-#: properties/templates/properties/top_nav.html:40 properties/views.py:57
+#: properties/templates/properties/top_nav.html:40 properties/views.py:58
 msgid "Commercial"
 msgstr "Comercial"
 
@@ -271,8 +363,8 @@ msgstr "Comercial"
 msgid "Farms"
 msgstr "Fincas"
 
-#: properties/templates/properties/index.html:251 properties/views.py:51
-#: properties/views.py:52 properties/views.py:53
+#: properties/templates/properties/index.html:251 properties/views.py:52
+#: properties/views.py:53 properties/views.py:54
 msgid "Offer Type"
 msgstr "Tipo de oferta"
 
@@ -378,88 +470,15 @@ msgstr "Clientes Satisfechos"
 msgid "Legal advise"
 msgstr "Asesoría Legal"
 
-#: properties/templates/properties/index.html:557
-#: properties/templates/properties/property-details.html:245
-msgid "About Inmuebles Fusa"
-msgstr "Acerca de Inmuebles Fusa"
-
-#: properties/templates/properties/index.html:558
-msgid ""
-"Inmuebles Fusa is an online real state based in Fusagasugá, Cundinamarca. "
-"Our goal is to make it easier for you to sell, rent, swap or buy properties."
-msgstr ""
-"Inmuebles Fusa es una inmobiliaria de  Fusagasugá, Cundinamarca. Nuestro "
-"objetivo es hacer mas fácil para ti la compra, arrendamiento, y permuta de "
-"finca raiz."
-
-#: properties/templates/properties/index.html:559
-msgid ""
-"Although this platform is quite new, our team has vast experience and "
-"reputation on real state and they are ready to offer you the best possible "
-"advice."
-msgstr ""
-"A pesar de que esta plataforma es nueva, nuestro equipo cuenta con una basta"
-" experiencia y reputación en negocios relacionados a finca raíz y están "
-"listos para ofrecerte la mejor asesoría"
-
-#: properties/templates/properties/index.html:566
-#: properties/templates/properties/property-details.html:252
-msgid "Navigations"
-msgstr "Navegación"
-
-#: properties/templates/properties/index.html:570
-#: properties/templates/properties/property-details.html:256
-msgid "Home"
-msgstr "Inicio"
-
-#: properties/templates/properties/index.html:571
-#: properties/templates/properties/property-details.html:257
-#: properties/templates/properties/top_nav.html:31
-msgid "Buy"
-msgstr "Comprar"
-
-#: properties/templates/properties/index.html:572
-#: properties/templates/properties/property-details.html:258
-#: properties/templates/properties/top_nav.html:32 properties/views.py:52
-msgid "Rent"
-msgstr "Rentar"
-
-#: properties/templates/properties/index.html:573
-#: properties/templates/properties/property-details.html:259
-#: properties/templates/properties/property_card_scroll.html:105
-#: properties/templates/properties/top_nav.html:33 properties/views.py:53
-msgid "Swap"
-msgstr "Permutar"
-
-#: properties/templates/properties/index.html:578
-#: properties/templates/properties/property-details.html:264
-msgid "About Us"
-msgstr "Acerca"
-
-#: properties/templates/properties/index.html:579
-#: properties/templates/properties/property-details.html:265
-msgid "Privacy Policy"
-msgstr "Política de privacidad"
-
-#: properties/templates/properties/index.html:581
-#: properties/templates/properties/property-details.html:267
-msgid "Terms"
-msgstr "Términos"
-
-#: properties/templates/properties/index.html:588
-#: properties/templates/properties/property-details.html:274
-msgid "Follow Us"
-msgstr "Siguenos"
-
-#: properties/templates/properties/index.html:648
+#: properties/templates/properties/index.html:647
 msgid "Cannot add it to favourite!"
 msgstr "No se puede agregar a favoritos!"
 
-#: properties/templates/properties/index.html:648
+#: properties/templates/properties/index.html:647
 msgid "You pubished this property"
 msgstr "Tu publicaste esta propiedad"
 
-#: properties/templates/properties/index.html:653
+#: properties/templates/properties/index.html:652
 msgid "You need to login to add property to favorites"
 msgstr "Necesitas ingresar para agregar propiedades a favoritos"
 
@@ -484,44 +503,58 @@ msgstr "Cerrar Sesión"
 msgid "Log In"
 msgstr "Iniciar sesión"
 
-#: properties/templates/properties/my_account.html:48
+#: properties/templates/properties/my_account.html:54
 msgid "Are you sure?"
 msgstr "Estas seguro?"
 
-#: properties/templates/properties/my_account.html:49
+#: properties/templates/properties/my_account.html:55
 msgid "You will be logged out"
 msgstr "Tu sesión se cerrara"
 
-#: properties/templates/properties/my_account.html:53
+#: properties/templates/properties/my_account.html:59
 msgid "Yes!"
 msgstr "Si!"
 
-#: properties/templates/properties/my_account.html:54
+#: properties/templates/properties/my_account.html:60
 #: properties/templates/properties/new_image2.html:127
 #: properties/templates/properties/new_image2.html:321
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: properties/templates/properties/my_account.html:58
+#: properties/templates/properties/my_account.html:64
 msgid "You are logged out"
 msgstr "Tu sesión has sido cerrada"
 
-#: properties/templates/properties/my_account.html:59
+#: properties/templates/properties/my_account.html:65
 msgid "You can go to My account to login again"
 msgstr "Puedes ir a Mi cuenta e ingresar otra vez"
 
-#: properties/templates/properties/new_address.html:156
+#: properties/templates/properties/new_address.html:54
+msgid "Look up your address!"
+msgstr "Busca tu dirección!"
+
+#: properties/templates/properties/new_address.html:55
+msgid ""
+"We'll try to auto-complete this form for you, if it isn't possible, please "
+"fill it out yourself"
+msgstr ""
+"Intentaremos llenar el siguiente formulario automáticamente, si no es "
+"posible, por favor llenarlo tu mismo."
+
+#: properties/templates/properties/new_address.html:167
 msgid "Show full address in web:"
 msgstr "Mostrar dirección completa en la web:"
 
-#: properties/templates/properties/new_address.html:164
+#: properties/templates/properties/new_address.html:175
 msgid "Address to be shown:"
 msgstr "Dirección a mostrar:"
 
-#: properties/templates/properties/new_address.html:174
-#: properties/templates/properties/new_property.html:227
-msgid "save"
-msgstr "guardar"
+#: properties/templates/properties/new_address.html:304
+#: properties/templates/properties/new_address.html:356
+msgid "We've tried our best to autocomplete. Please check the form"
+msgstr ""
+"Hemos tratado de llenar tu formulario con la dirección que escogiste. Por "
+"favor revísalo antes de seguir "
 
 #: properties/templates/properties/new_image2.html:108
 msgid "confirmation"
@@ -609,15 +642,19 @@ msgstr "Detalles de tu inmueble"
 msgid "Details"
 msgstr "Detalles"
 
-#: properties/templates/properties/new_property.html:239
+#: properties/templates/properties/new_property.html:238
+msgid "Enter your address to fill-out the form below"
+msgstr "Escribe tu dirección para auto-completar el siguiente formulario "
+
+#: properties/templates/properties/new_property.html:245
 msgid "Image"
 msgstr "Imagen"
 
-#: properties/templates/properties/new_property.html:244
+#: properties/templates/properties/new_property.html:250
 msgid "Done"
 msgstr "Hecho"
 
-#: properties/templates/properties/new_property.html:364
+#: properties/templates/properties/new_property.html:369
 msgid "Please check the confirm box to continue"
 msgstr "Por favor click en la caja para continuar"
 
@@ -656,17 +693,17 @@ msgid "Property Type"
 msgstr "Tipo de propiedad"
 
 #: properties/templates/properties/property-details.html:155
-#: properties/views.py:55
+#: properties/views.py:56
 msgid "House"
 msgstr "Casa"
 
 #: properties/templates/properties/property-details.html:158
-#: properties/views.py:54
+#: properties/views.py:55
 msgid "Apartment"
 msgstr "Apartamento"
 
 #: properties/templates/properties/property-details.html:161
-#: properties/templates/properties/top_nav.html:39 properties/views.py:56
+#: properties/templates/properties/top_nav.html:39 properties/views.py:57
 msgid "Land"
 msgstr "Lotes"
 
@@ -679,7 +716,7 @@ msgstr "Tipo de oferta"
 #: properties/templates/properties/property_card_scroll.html:99
 #: properties/templates/properties/property_carousel.html:25
 #: properties/templates/properties/property_list.html:45
-#: properties/views.py:51
+#: properties/views.py:52
 msgid "Sale"
 msgstr "Venta"
 
@@ -810,56 +847,56 @@ msgstr "Acerca"
 msgid "Contact"
 msgstr "Contacto"
 
-#: properties/views.py:51
+#: properties/views.py:52
 msgid "City"
 msgstr "Ciudad"
 
-#: properties/views.py:54 properties/views.py:55 properties/views.py:56
-#: properties/views.py:57 properties/views.py:58
+#: properties/views.py:55 properties/views.py:56 properties/views.py:57
+#: properties/views.py:58 properties/views.py:59
 msgid "Property type"
 msgstr "Tipo de propiedad"
 
-#: properties/views.py:58
+#: properties/views.py:59
 msgid "Farm"
 msgstr "Finca"
 
-#: properties/views.py:58
+#: properties/views.py:59
 msgid "Min rooms"
 msgstr "Min habitaciones"
 
-#: properties/views.py:59
+#: properties/views.py:60
 msgid "Max rooms"
 msgstr "Max habitaciones"
 
-#: properties/views.py:59
+#: properties/views.py:60
 msgid "Min bathrooms"
 msgstr "Min baños"
 
-#: properties/views.py:60
+#: properties/views.py:61
 msgid "Max bathrooms"
 msgstr "Max baños"
 
-#: properties/views.py:60
+#: properties/views.py:61
 msgid "Min area"
 msgstr "Min área"
 
-#: properties/views.py:61
+#: properties/views.py:62
 msgid "Max area"
 msgstr "Max área"
 
-#: properties/views.py:61
+#: properties/views.py:62
 msgid "Min price"
 msgstr "Min precio"
 
-#: properties/views.py:62
+#: properties/views.py:63
 msgid "Max price"
 msgstr "Max precio"
 
-#: properties/views.py:253
+#: properties/views.py:254
 msgid "Access denied"
 msgstr "Acceso no autorizado"
 
-#: properties/views.py:280 properties/views.py:521
+#: properties/views.py:281 properties/views.py:524
 msgid "Access denied, you don't own or manage this property"
 msgstr "Acceso no autorizado, tu no administras esta propiedad"
 
