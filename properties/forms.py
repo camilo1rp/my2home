@@ -26,15 +26,42 @@ class PropertyForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['description'].widget.attrs.update(rows='6', cols='85')
         self.fields['description'].widget.attrs['placeholder'] = \
-            gettext("Add extra information that adds value to your property. i.e. common areas, services, security, location, etc.")
+            gettext("Add extra information that adds value to your property. i.e. common areas, services, security, "
+                    "location, etc.")
         self.fields['owner'].empty_label = _('select owner')
-        # self.fields['owner'].widget.attrs['disabled'] = True
         self.fields['price_str'].label = _('price')
 
     class Meta:
         model = Property
         exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted', 'pause',
-                   'is_project', 'area_pro', 'sale', 'sold', 'facilities']
+                   'is_project', 'area_pro', 'sale', 'sold', 'facilities', 'rooms_max', 'baths_max', 'parking_max',
+                   'area_max']
+
+
+class PropertyForm2(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['description'].widget.attrs.update(rows='6', cols='85')
+        self.fields['description'].widget.attrs['placeholder'] = \
+            gettext("Add extra information that adds value to your property. i.e. common areas, services, security, "
+                    "location, etc.")
+        self.fields['owner'].empty_label = _('select owner')
+        self.fields['price_str'].label = _('Price: from')
+        self.fields['rooms'].label = _('Rooms: from')
+        self.fields['rooms_max'].label = _('Rooms: up to')
+        self.fields['baths'].label = _('Baths: from')
+        self.fields['baths_max'].label = _('Baths: up to')
+        self.fields['sale'].label = _('# For sale')
+        self.fields['sold'].label = _('# Sold')
+        self.fields['area_built'].label = _('Area: from')
+        self.fields['area_max'].label = _('Area: to')
+        self.fields['parking'].label = _('Parking: from')
+        self.fields['parking_max'].label = _('Parking: to')
+
+    class Meta:
+        model = Property
+        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted', 'pause',
+                   'area_total']
 
 
 class AddressColForm(forms.ModelForm):

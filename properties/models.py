@@ -67,7 +67,11 @@ class Property(models.Model):
 
     # projects
     is_project = models.BooleanField(default=False)
-    area_pro = models.DecimalField(_('Project area'), default=0, decimal_places=0, max_digits=12)
+    area_max = models.DecimalField(_('Project max'), default=0, decimal_places=0, max_digits=12)
+    rooms_max = models.IntegerField(_('rooms max'), default=0)
+    baths_max = models.IntegerField(_('bathrooms max'), default=0)
+    parking_max = models.IntegerField(_('parking max'), default=0)
+
     sale = models.IntegerField(null=True, blank=True)
     sold = models.IntegerField(null=True, blank=True)
     facilities = models.ManyToManyField('Facility', related_name='facilities', verbose_name=_('facilities'))

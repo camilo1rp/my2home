@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <form id="formSectionUno" method="post" >
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4" hidden>
+                        {{form.price}}
+                        {{form.is_project}}
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.owner.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12">
+                            {{form.owner}}
+                            <span class="help-block">{{form.owner.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                           {{form.type_business.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-10 offset-lg-2">
+                            {{form.type_business}}
+                            <span class="help-block">{{form.type_business.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.type_property.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.type_property}}
+                            <span class="help-block">{{form.type_property.errors}}</span>
+                        </div>
+                    </div>
+                     <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.facilities.label}}<span class="span"></span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.facilities}}
+                            <span class="help-block">{{form.facilities.errors}}</span>
+                        </div>
+                    </div>
+                     <div class="col-md-3" id="divEstrato" >
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.estrato.label}}<span class="span"></span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.estrato}}
+                            <span class="help-block">{{form.estrato.errors}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                {{form.rooms.label}}<span class="span"> *</span>
+                             </label>
+                            <div class="col-md-12 col-lg-8 offset-lg-2">
+                                {{form.rooms}}
+                                <span class="help-block">{{form.rooms.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.rooms_max.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.rooms_max}}
+                            <span class="help-block">{{form.rooms_max.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                           {{form.baths.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.baths}}
+                            <span class="help-block">{{form.baths.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                           {{form.baths_max.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.baths_max}}
+                            <span class="help-block">{{form.baths_max.errors}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                {{form.parking.label}}<span class="span"> *</span>
+                             </label>
+                            <div class="col-md-12 col-lg-8 offset-lg-2">
+                                {{form.parking}}
+                                <span class="help-block">{{form.parking.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.parking_max.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.parking_max}}
+                            <span class="help-block">{{form.parking_max.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label ">
+                            {{form.area_built.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-9 offset-lg-2">
+                            {{form.area_built}}
+                            <span class="help-block">{{form.area_built.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.area_max.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-9 offset-lg-2">
+                            {{form.area_max}}
+                            <span class="help-block">{{form.area_max.errors}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                           {{form.sale.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.sale}}
+                            <span class="help-block">{{form.sale.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                           {{form.sold.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-8 offset-lg-2">
+                            {{form.sold}}
+                            <span class="help-block">{{form.sold.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.year.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-9 offset-lg-2">
+                            {{form.year}}
+                            <span class="help-block">{{form.year.errors}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.condition.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-lg-9 offset-lg-2">
+                            {{form.condition}}
+                            <span class="help-block">{{form.condition.errors}}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12 px-0">
+                            <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                             {{form.price_str.label}}<span class="span"> *</span>
+                         </label>
+
+                            <div class="col-md-10 offset-md-1">
+                                {{form.price_str}}
+                                <span class="help-block">{{form.price_str.errors}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-md-12 px-0">
+                            <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                {{form.title.label}}<span class="span"> *</span>
+                            </label>
+                            <div class="col-md-11 offset-md-1">
+                                {{form.title}}
+                                <span class="help-block">{{form.title.errors}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                            {{form.description.label}}<span class="span"> *</span>
+                        </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            {{form.description}}
+                            <span class="help-block">{{form.description.errors}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group divBtn">
+        <div class="col-md-12">
+            <button type="submit" id="btnGuardar" class="btn btn-primary" style="background-color:#364e68;">
+                {% trans 'save' %}
+            </button>
+        </div>
+    </div>
+ </form>
+</body>
+</html>

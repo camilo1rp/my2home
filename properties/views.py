@@ -26,7 +26,7 @@ from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
 from .decorators import user_is_propertys_manager
-from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
+from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm, PropertyForm2
 from .models import Property, AddressCol, Image, Contact, BusinessType, Following
 
 
@@ -206,6 +206,7 @@ class CreateProperty(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page'] = 0
+        context['project'] = False
         return context
 
     def get_initial(self):
@@ -216,10 +217,37 @@ class CreateProperty(LoginRequiredMixin, CreateView):
 
     def dispatch(self, *args, **kwargs):
         return super(CreateProperty, self).dispatch(*args, **kwargs)
-    # def get(self, request, *args, **kwargs):
-    #     self.business = BusinessType.objects.all()
-    #     return super().get(request, *args, **kwargs)
-    #
+
+
+class CreateProject(LoginRequiredMixin, CreateView):
+    model = Property
+    template_name = 'properties/new_property.html'
+    form_class = PropertyForm2
+
+    def form_valid(self, form):
+        self.new_property = form.save(commit=False)
+        self.new_property.manager = self.request.user
+        self.new_property.save()
+        return super(CreateProject, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('property:create-address', args=[self.new_property.id])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page'] = 0
+        context['project'] = True
+        return context
+
+    def get_initial(self):
+        owner = User.objects.filter(is_superuser=True)[0]
+        return {
+            'owner': owner,
+            'is_project': True,
+        }
+
+    def dispatch(self, *args, **kwargs):
+        return super(CreateProject, self).dispatch(*args, **kwargs)
 
 
 class UpdateProperty(LoginRequiredMixin, UpdateView):

@@ -75,7 +75,11 @@
                                     <div id="wizard">
                                         <h2>{% trans 'Details' %}</h2>
                                         <section style="overflow: auto;"> <!-- PAGE 1-->
-                                           {% include "properties/property_form.html" %}
+                                            {% if project %}
+                                                {% include "properties/project_form.html" %}
+                                            {% else %}
+                                                {% include "properties/property_form.html" %}
+                                            {% endif %}
                                         </section>
 
                                         <h2>{% trans 'Address' %}</h2><!-- PAGE 2-->
@@ -144,6 +148,7 @@ $(document).ready(function(){
 
     $("span[class='select2-selection select2-selection--multiple']");
     $("#id_type_business").attr('class','form-control selectDos');
+    $("#id_facilities").attr('class','form-control selectDos');
     $('.selectDos').select2({
         //placeholder: '',
     });
