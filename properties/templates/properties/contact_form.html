@@ -5,10 +5,15 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 /* Firefox */
 input[type=number] {
   -moz-appearance:textfield;
+}
+input {
+    width: 100%;
+}
+textarea {
+  width: 100%;
 }
 </style>
 <h3 class="h4 text-black widget-title mb-3">{% trans 'Contact Agent' %}</h3>
@@ -26,7 +31,7 @@ input[type=number] {
         </div>
         <div class="form-group">
           <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-            <i class="fas fa-envelope"></i>&nbsp;{{form.email.label}}</label>
+            <i class="fas fa-at"></i>&nbsp;{{form.email.label}}</label>
           {{form.email}}
         </div>
         <div class="form-group">
@@ -43,7 +48,7 @@ input[type=number] {
             </div>
         {% endif %}
         <div class="form-group">
-          <input type="submit" id="phone" class="btn btn-primary" value="{% trans 'Send Message' %}">
+          <input type="submit" id="phone" class="btn btn-primary" style="background-color:#364e68" value="{% trans 'Send Message' %}">
         </div>
     {% endif %}
     <p>{{mess}}</p>

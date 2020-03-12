@@ -3,6 +3,8 @@ from django.contrib.auth import views as auth_views
 from . import views
 from django.utils.translation import gettext_lazy as _
 
+from .views import TemplateView
+
 app_name = "property"
 urlpatterns = [
     path('', views.ListProperty.as_view(), name='index'),
@@ -14,7 +16,9 @@ urlpatterns = [
     path('new_address_col/<int:prop_id>/', views.create_address, name='create-address'),
     path('new_image/<int:prop_id>/', views.create_image, name='create-image'),
     path('update_property/<int:pk>/', views.UpdateProperty.as_view(), name='update'),
+    path('pause_property/<int:prop_id>/', views.pause, name='pause'),
     path('property_detail/<int:prop_id>/', views.property_detail, name='detail'),
     path('whatsapp_connect/', views.whatsapp_contact, name='whatsapp'),
+    path('address/', TemplateView.as_view(template_name="properties/address_auto.html")),
 ]
 

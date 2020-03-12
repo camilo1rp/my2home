@@ -18,9 +18,9 @@ services:
         image: dev/my2home 
         container_name: my2home
         environment:
-            SUPERUSER_NAME: my2homeadmin
-            SUPERUSER_EMAIL: /run/secrets/superuser_email
-            SUPERUSER_PASSWORD: /run/secrets/superuser_password
+            DJANGO_SUPERUSER_NAME: my2homeadmin
+            DJANGO_SUPERUSER_MAIL: /run/secrets/django_superuser_mail
+            DJANGO_SUPERUSER_PASS: /run/secrets/django_superuser_password
             ALLOWED_HOSTS: localhost
             DB_NAME: my2home
             DB_USER: my2home
@@ -30,30 +30,48 @@ services:
             EMAIL_HOST_USER: /run/secrets/email_host_user
             EMAIL_HOST_PASSWORD: /run/secrets/email_host_password
         secrets:
-            - superuser_password
+            - django_superuser_mail
+            - django_superuser_password
             - db_password
             - secret_key
             - email_host_user
             - email_host_password
         volumes:
-            - my2home-static-files:/etc/my2home-nginx/
+            - my2home-media-files:/opt/my2home/media/
+            - my2home-static-files:/opt/my2home/static/
+
 
     nginx:
-        image: nginx:1.11.1-alpine
+        image: nginx:1.17.8-alpine
         links:
             - my2home
         container_name: nginx-my2home
-        command: nginx -g 'daemon off;' -c /etc/my2home-nginx/nginx.conf
         depends_on:
             - my2home
         ports:
             - 80:80
+            - 443:443
         volumes:
-            - my2home-static-files:/etc/my2home-nginx/
+            - my2home-media-files:/opt/my2home/media/
+            - my2home-static-files:/opt/my2home/static/
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf 
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+    
+    certbot:
+        image: certbot/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'" 
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+
+
 
 secrets:
-    superuser_password:
-        file: secrets/superuser_password.txt
+    django_superuser_mail:
+        file: secrets/django_superuser_mail.txt
+    django_superuser_password:
+        file: secrets/django_superuser_password.txt
     db_password:
         file: secrets/db_password.txt
     secret_key:
@@ -67,3 +85,4 @@ secrets:
 volumes:
     postgres-vol:
     my2home-static-files:
+    my2home-media-files:

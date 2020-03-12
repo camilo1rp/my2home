@@ -9,6 +9,7 @@
         li {
             text-align: center;
             font-size: 0.8rem;
+            color: red;
          }
     </style>
 </head>
@@ -45,7 +46,7 @@
       </label>
          {{form.password2.errors}}
          {{ form.non_field_errors }}
-      <button type="button" onclick="sendForm()" class="submit">{% trans 'sign up' %}</button>
+      <button type="button" onclick="sendForm()" class="submit" >{% trans 'sign up' %}</button>
 <!--      <button type="button" class="fb-btn">Join with <span>facebook</span></button>-->
      </form>
 </body>

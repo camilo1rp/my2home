@@ -10,26 +10,31 @@
     font-size: 1rem;
     border: #608288 1px solid;
   }
-  .alertas{
+  .filterDiv{
     color: #0c5460;
     position: relative;
     padding: .75rem 1.25rem;
     margin-bottom: 1rem;
-    border: 1px solid #364e68;
+    border: 1px solid #608288;
     border-radius: .25rem;
     font-weight: bold;
+  }
+    .filterDiv:hover{
+    background-color: #364e68;
+    color: white;
+    border: 2px solid #0c5460;
   }
 </style>
 <div  class="container">
     {% if filters_active %}
         <div class="information" id="descripcion">
-          <div class="alertas">
+          <div class="filterDiv">
             <span><i class="fas fa-filter"></i>{% trans 'Filters'%} :</span>
               {% for label, value in filters_active.items %}
                 <span class="badge filter">{{ label }}: {{ value }}
-                  <a onclick="filter_remove({{ forloop.counter|add:-1 }})"><i class="fas fa-times-circle"></i></a></span>
+                  <a style="cursor: pointer;" onclick="filter_remove({{ forloop.counter|add:-1 }})"><i class="fas fa-times-circle"></i></a></span>
               {% endfor %}
-            <span class="badge badge-danger"><a onclick="clear_filters()"> {% trans 'Clear all Filters' %} <i class="fas fa-times-circle"></i></a></span>
+            <a style="cursor: pointer;" onclick="clear_filters()"><span class="badge filter" style="color:#dc3545; "> {% trans 'Clear all Filters' %}</span></a>
           </div>
         </div>
     {% endif %}
@@ -48,16 +53,24 @@
                     <span class="offer-type bg-success">{% trans 'Lend'%}</span>
                   {% endif %}
                   {% if busi.name == 'SWAP / PERMUTA' %}
-                    <span class="offer-type bg-info">{% trans 'Swap'%}</span>
+                    <span class="offer-type bg-info">{% trans 'For Swap'%}</span>
                   {% endif %}
                 {% endfor %}
-              </div>
-              {% endwith %}
+                {% endwith %}
+                </div>
+                 <div class="offer-type-wrap2">
+                   <span class="offer-type badge badge-pill badge-dark" style="font-size: 1rem;">
+                   {% if prop.condition == 'NEW' %}{% trans 'brand new' %}
+                   {% elif prop.condition == 'PLA' %}{% trans 'off-plan' %}
+                   {% elif prop.condition == 'STA'%}{% trans 'on construction' %}
+                   {% else%}{% trans 'used' %}{% endif %}
+                   </span>
+                 </div>
               {% with gallery=prop.gallery.all %}
               {%if gallery %}
                 {% for img in gallery%}
                   {%if img.main %}
-                      <img src="{{img.image.url}}"  alt="Image" class="img-fluid">
+                      <img src="{{img.image.url}}"  alt="Image not found" class="img-fluid">
                   {% endif %}
                 {% endfor %}
               {% else %}
@@ -67,13 +80,9 @@
               </a>
             <div class="p-4 property-body data">
               {%if prop in user.following.all %}
-              <div title="{% trans 'Remove from favourites' %}">
-                <a class="property-unfavorite heart" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
-              </div>
+                <a class="property-unfavorite" title="{% trans 'Remove from favourites' %}" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
               {% else %}
-              <div title="{% trans 'Add to favourites' %}">
-                <a class="property-favorite heart" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
-              </div>
+                <a class="property-favorite" title="{% trans 'Add to favourites' %}" id="{{prop.id}}" onclick="follows('{{prop.id}}')"><span class="icon-heart-o"></span></a>
               {% endif %}
 
               {% with address=prop.address_col.get %}
@@ -130,7 +139,7 @@
         </div>
       {% endwith %}
       {% empty %}
-        <p> no properties</p>
+        <p> {% trans 'There are no properties that match your search. Try altering the filters' %}</p>
       {% endfor %}
     </div>
     <div class="row">

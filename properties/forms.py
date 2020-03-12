@@ -7,6 +7,7 @@ import string
 
 PREFIJOS = [tuple([x, x]) for x in string.ascii_uppercase[:8]]
 [PREFIJOS.append(tuple(['{} BIS'.format(x), '{} BIS'.format(x)])) for x in string.ascii_uppercase[:8]]
+PREFIJOS.append(tuple(['SUR', 'SUR']))
 [PREFIJOS.append(tuple(['{} SUR'.format(x), '{} SUR'.format(x)])) for x in string.ascii_uppercase[:8]]
 PREFIJOS.insert(0, tuple(['', '']))
 
@@ -20,10 +21,11 @@ VIAS = [
     ('AK', _('Avenida carrera')),
 ]
 
+
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['description'].widget.attrs.update(rows='4', cols='40')
+        self.fields['description'].widget.attrs.update(rows='6', cols='85')
         self.fields['description'].widget.attrs['placeholder'] = \
             gettext("Add extra information that adds value to your property. i.e. common areas, services, security, location, etc.")
         self.fields['owner'].empty_label = _('select owner')
@@ -32,7 +34,7 @@ class PropertyForm(forms.ModelForm):
 
     class Meta:
         model = Property
-        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted']
+        exclude = ['title_slug', 'code', 'seen', 'active', 'followers', 'manager', 'upload_code', 'promoted', 'pause']
 
 
 class AddressColForm(forms.ModelForm):
@@ -71,7 +73,7 @@ class ImageForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['message'].widget.attrs.update(rows='4', cols='20')
+        self.fields['message'].widget.attrs.update(rows='4', cols='25')
 
     class Meta:
         model = Contact

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 14:39-0500\n"
+"POT-Creation-Date: 2020-03-02 16:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,578 +18,861 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: properties/forms.py:15
-msgid "Carrera"
+#: properties/decorators.py:15 properties/views.py:257 properties/views.py:284
+#: properties/views.py:525
+msgid "Property does not exist"
 msgstr ""
 
 #: properties/forms.py:16
-msgid "Transversal"
+msgid "Carrera"
 msgstr ""
 
 #: properties/forms.py:17
-msgid "Diagonal"
+msgid "Transversal"
 msgstr ""
 
 #: properties/forms.py:18
-msgid "Avenida"
+msgid "Diagonal"
 msgstr ""
 
 #: properties/forms.py:19
-msgid "Avenida calle"
+msgid "Avenida"
 msgstr ""
 
 #: properties/forms.py:20
+msgid "Avenida calle"
+msgstr ""
+
+#: properties/forms.py:21
 msgid "Avenida carrera"
 msgstr ""
 
-#: properties/forms.py:28
+#: properties/forms.py:30
 msgid ""
 "Add extra information that adds value to your property. i.e. common areas, "
 "services, security, location, etc."
 msgstr ""
 
-#: properties/forms.py:29
+#: properties/forms.py:31
 msgid "select owner"
 msgstr ""
 
-#: properties/forms.py:31 properties/models.py:31
+#: properties/forms.py:32 properties/models.py:51
 msgid "price"
 msgstr ""
 
-#: properties/forms.py:82
+#: properties/forms.py:84
 msgid "csv file"
 msgstr ""
 
-#: properties/models.py:20
+#: properties/models.py:32
 msgid "apartment"
 msgstr ""
 
-#: properties/models.py:21
+#: properties/models.py:33
 msgid "house"
 msgstr ""
 
-#: properties/models.py:22
+#: properties/models.py:34
 msgid "land"
 msgstr ""
 
-#: properties/models.py:23
+#: properties/models.py:35
 msgid "farm"
 msgstr ""
 
-#: properties/models.py:24
+#: properties/models.py:36
 msgid "commercial"
 msgstr ""
 
-#: properties/models.py:26
-msgid "code"
-msgstr ""
-
-#: properties/models.py:27
-msgid "upload-code"
-msgstr ""
-
-#: properties/models.py:28
-msgid "manager"
-msgstr ""
-
-#: properties/models.py:29
-msgid "owner"
-msgstr ""
-
-#: properties/models.py:30
-msgid "type of property"
-msgstr ""
-
-#: properties/models.py:33 properties/templates/properties/index.html:284
-msgid "rooms"
-msgstr ""
-
-#: properties/models.py:34 properties/templates/properties/index.html:318
-msgid "bathrooms"
-msgstr ""
-
-#: properties/models.py:35
-msgid "parking"
-msgstr ""
-
-#: properties/models.py:36
-#: properties/templates/properties/property-details.html:164
-#: properties/templates/properties/property_list.html:128
-msgid "built area"
-msgstr ""
-
-#: properties/models.py:37
-#: properties/templates/properties/property-details.html:158
-#: properties/templates/properties/property_list.html:122
-msgid "total area"
-msgstr ""
-
 #: properties/models.py:39
-msgid "year built"
+msgid "new"
 msgstr ""
 
 #: properties/models.py:40
-msgid "title"
+msgid "off-plans"
+msgstr ""
+
+#: properties/models.py:41
+#: properties/templates/properties/property_list.html:65
+msgid "on construction"
 msgstr ""
 
 #: properties/models.py:42
-msgid "description"
+#: properties/templates/properties/property_list.html:66
+msgid "used"
 msgstr ""
 
-#: properties/models.py:43
-msgid "offer type"
+#: properties/models.py:45
+msgid "code"
 msgstr ""
 
 #: properties/models.py:46
-msgid "seen"
+msgid "upload-code"
 msgstr ""
 
 #: properties/models.py:47
-msgid "active"
+msgid "manager"
 msgstr ""
 
 #: properties/models.py:48
+msgid "owner"
+msgstr ""
+
+#: properties/models.py:49
+msgid "type of property"
+msgstr ""
+
+#: properties/models.py:50
+msgid "condition"
+msgstr ""
+
+#: properties/models.py:53 properties/templates/properties/index.html:276
+msgid "rooms"
+msgstr ""
+
+#: properties/models.py:54 properties/templates/properties/index.html:310
+msgid "bathrooms"
+msgstr ""
+
+#: properties/models.py:55
+msgid "parking"
+msgstr ""
+
+#: properties/models.py:56
+#: properties/templates/properties/property-details.html:211
+#: properties/templates/properties/property_list.html:131
+msgid "built area"
+msgstr ""
+
+#: properties/models.py:57
+#: properties/templates/properties/property-details.html:205
+#: properties/templates/properties/property_list.html:125
+msgid "total area"
+msgstr ""
+
+#: properties/models.py:59
+#: properties/templates/properties/property-details.html:253
+msgid "built in"
+msgstr ""
+
+#: properties/models.py:61
+msgid "title"
+msgstr ""
+
+#: properties/models.py:63
+msgid "description"
+msgstr ""
+
+#: properties/models.py:64
+msgid "offer type"
+msgstr ""
+
+#: properties/models.py:67
+msgid "seen"
+msgstr ""
+
+#: properties/models.py:68
+msgid "active"
+msgstr ""
+
+#: properties/models.py:69
+msgid "pause"
+msgstr ""
+
+#: properties/models.py:70
 msgid "promoted"
 msgstr ""
 
-#: properties/models.py:138
+#: properties/models.py:159
 msgid "sale"
 msgstr ""
 
-#: properties/models.py:139
+#: properties/models.py:160
 msgid "rent"
 msgstr ""
 
-#: properties/models.py:140
-#: properties/templates/properties/property-details.html:199
+#: properties/models.py:161
+#: properties/templates/properties/property-details.html:246
 #: properties/templates/properties/property_card.html:17
 #: properties/templates/properties/property_carousel.html:31
 msgid "swap"
 msgstr ""
 
-#: properties/models.py:142
+#: properties/models.py:163
 msgid "type of business"
 msgstr ""
 
-#: properties/models.py:161
+#: properties/models.py:182
 msgid "name"
 msgstr ""
 
-#: properties/models.py:162
+#: properties/models.py:183
 msgid "email"
 msgstr ""
 
-#: properties/models.py:163
+#: properties/models.py:184
 msgid "phone"
 msgstr ""
 
-#: properties/models.py:164
+#: properties/models.py:185
 msgid "message"
 msgstr ""
 
-#: properties/templates/properties/contact.html:72
-#: properties/templates/properties/index.html:584
-#: properties/templates/properties/property-details.html:293
+#: properties/templates/properties/contact.html:87
+#: properties/templates/properties/contact.html:263
+#: properties/templates/properties/index.html:571
+#: properties/templates/properties/property-details.html:332
 msgid "Contact Us"
 msgstr ""
 
-#: properties/templates/properties/contact.html:126
+#: properties/templates/properties/contact.html:141
 msgid "Contact Info"
 msgstr ""
 
-#: properties/templates/properties/contact.html:127
-#: properties/templates/properties/new_property.html:269
+#: properties/templates/properties/contact.html:142
+#: properties/templates/properties/new_property.html:243
 msgid "Address"
 msgstr ""
 
-#: properties/templates/properties/contact.html:130
+#: properties/templates/properties/contact.html:145
+#: properties/templates/properties/message_details.html:14
 msgid "Phone"
 msgstr ""
 
-#: properties/templates/properties/contact.html:133
+#: properties/templates/properties/contact.html:148
 msgid "Email Address"
 msgstr ""
 
-#: properties/templates/properties/contact.html:148
-#: properties/templates/properties/index.html:530
+#: properties/templates/properties/contact.html:163
+#: properties/templates/properties/index.html:515
 msgid "Our Team"
 msgstr ""
 
-#: properties/templates/properties/contact_form.html:14
-msgid "Contact Agent"
-msgstr ""
-
-#: properties/templates/properties/contact_form.html:46
-msgid "Send Message"
-msgstr ""
-
-#: properties/templates/properties/index.html:229
-msgid "Inmuebles Fusa"
-msgstr ""
-
-#: properties/templates/properties/index.html:243
-msgid "Listing Types"
-msgstr ""
-
-#: properties/templates/properties/index.html:245
-#: properties/templates/properties/index.html:256
-#: properties/templates/properties/index.html:265
-#: properties/templates/properties/index.html:267
-msgid "All"
-msgstr ""
-
-#: properties/templates/properties/index.html:246
-#: properties/templates/properties/top_nav.html:32
-msgid "Apartments"
-msgstr ""
-
-#: properties/templates/properties/index.html:247
-#: properties/templates/properties/top_nav.html:33
-msgid "Houses"
-msgstr ""
-
-#: properties/templates/properties/index.html:248
-msgid "Lands"
-msgstr ""
-
-#: properties/templates/properties/index.html:249
-#: properties/templates/properties/property-details.html:182
-#: properties/templates/properties/top_nav.html:35 properties/views.py:54
-msgid "Commercial"
-msgstr ""
-
-#: properties/templates/properties/index.html:250
-#: properties/templates/properties/top_nav.html:36
-msgid "Farms"
-msgstr ""
-
-#: properties/templates/properties/index.html:254 properties/views.py:48
-#: properties/views.py:49 properties/views.py:50
-msgid "Offer Type"
-msgstr ""
-
-#: properties/templates/properties/index.html:257
-msgid "For Sale"
-msgstr ""
-
-#: properties/templates/properties/index.html:258
-msgid "For Rent"
-msgstr ""
-
-#: properties/templates/properties/index.html:259
-msgid "For Swap"
-msgstr ""
-
-#: properties/templates/properties/index.html:263
-msgid "Select City"
-msgstr ""
-
-#: properties/templates/properties/index.html:270
-msgid "Search"
-msgstr ""
-
-#: properties/templates/properties/index.html:278
-msgid "Rooms"
-msgstr ""
-
-#: properties/templates/properties/index.html:284
-#: properties/templates/properties/index.html:318
-msgid "Number of"
-msgstr ""
-
-#: properties/templates/properties/index.html:289
-#: properties/templates/properties/index.html:323
-#: properties/templates/properties/index.html:362
-#: properties/templates/properties/index.html:416
-msgid "Minimum"
-msgstr ""
-
-#: properties/templates/properties/index.html:298
-#: properties/templates/properties/index.html:333
-#: properties/templates/properties/index.html:380
-#: properties/templates/properties/index.html:438
-msgid "Maximum"
-msgstr ""
-
-#: properties/templates/properties/index.html:313
-msgid "Bathrooms"
-msgstr ""
-
-#: properties/templates/properties/index.html:351
-msgid "Area"
-msgstr ""
-
-#: properties/templates/properties/index.html:357
-msgid "Area m²"
-msgstr ""
-
-#: properties/templates/properties/index.html:405
-#: properties/templates/properties/index.html:411
-msgid "Price"
-msgstr ""
-
-#: properties/templates/properties/index.html:411
-msgid "Millions"
-msgstr ""
-
-#: properties/templates/properties/index.html:468
-#: properties/templates/properties/property_list.html:33
-msgid "Filters"
-msgstr ""
-
-#: properties/templates/properties/index.html:471
-msgid "More"
-msgstr ""
-
-#: properties/templates/properties/index.html:471
-msgid "filters"
-msgstr ""
-
-#: properties/templates/properties/index.html:492
-msgid "Why Choose Us?"
-msgstr ""
-
-#: properties/templates/properties/index.html:501
-msgid "Responsabilidad"
-msgstr ""
-
-#: properties/templates/properties/index.html:509
-msgid "Recientes Ventas"
-msgstr ""
-
-#: properties/templates/properties/index.html:517
-msgid "Asesoria legal"
-msgstr ""
-
-#: properties/templates/properties/index.html:563
-#: properties/templates/properties/property-details.html:272
+#: properties/templates/properties/contact.html:240
+#: properties/templates/properties/index.html:548
+#: properties/templates/properties/property-details.html:311
 msgid "About Inmuebles Fusa"
 msgstr ""
 
-#: properties/templates/properties/index.html:570
-#: properties/templates/properties/property-details.html:279
+#: properties/templates/properties/contact.html:241
+#: properties/templates/properties/index.html:549
+msgid ""
+"Inmuebles Fusa is an online real state based in Fusagasugá, Cundinamarca. "
+"Our goal is to make it easier for you to sell, rent, swap or buy properties."
+msgstr ""
+
+#: properties/templates/properties/contact.html:242
+#: properties/templates/properties/index.html:550
+msgid ""
+"Although this platform is quite new, our team has vast experience and "
+"reputation on real state and they are ready to offer you the best possible "
+"advice."
+msgstr ""
+
+#: properties/templates/properties/contact.html:249
+#: properties/templates/properties/index.html:557
+#: properties/templates/properties/property-details.html:318
 msgid "Navigations"
 msgstr ""
 
-#: properties/templates/properties/index.html:574
-#: properties/templates/properties/property-details.html:283
+#: properties/templates/properties/contact.html:253
+#: properties/templates/properties/index.html:561
+#: properties/templates/properties/property-details.html:322
 msgid "Home"
 msgstr ""
 
-#: properties/templates/properties/index.html:575
-#: properties/templates/properties/property-details.html:284
-#: properties/templates/properties/top_nav.html:26
+#: properties/templates/properties/contact.html:254
+#: properties/templates/properties/index.html:562
+#: properties/templates/properties/property-details.html:323
+#: properties/templates/properties/top_nav.html:31
 msgid "Buy"
 msgstr ""
 
-#: properties/templates/properties/index.html:576
-#: properties/templates/properties/property-details.html:285
-#: properties/templates/properties/top_nav.html:27 properties/views.py:49
+#: properties/templates/properties/contact.html:255
+#: properties/templates/properties/index.html:563
+#: properties/templates/properties/property-details.html:324
+#: properties/templates/properties/top_nav.html:32 properties/views.py:56
 msgid "Rent"
 msgstr ""
 
-#: properties/templates/properties/index.html:577
-#: properties/templates/properties/property-details.html:286
-#: properties/templates/properties/property_card_scroll.html:70
-#: properties/templates/properties/property_list.html:57
-#: properties/templates/properties/top_nav.html:28 properties/views.py:50
+#: properties/templates/properties/contact.html:256
+#: properties/templates/properties/index.html:564
+#: properties/templates/properties/property-details.html:325
+#: properties/templates/properties/property_card_scroll.html:105
+#: properties/templates/properties/top_nav.html:33 properties/views.py:57
 msgid "Swap"
 msgstr ""
 
-#: properties/templates/properties/index.html:582
-#: properties/templates/properties/property-details.html:291
+#: properties/templates/properties/contact.html:261
+#: properties/templates/properties/index.html:569
+#: properties/templates/properties/property-details.html:330
 msgid "About Us"
 msgstr ""
 
-#: properties/templates/properties/index.html:583
-#: properties/templates/properties/property-details.html:292
+#: properties/templates/properties/contact.html:262
+#: properties/templates/properties/index.html:570
+#: properties/templates/properties/property-details.html:331
 msgid "Privacy Policy"
 msgstr ""
 
-#: properties/templates/properties/index.html:585
-#: properties/templates/properties/property-details.html:294
+#: properties/templates/properties/contact.html:264
+#: properties/templates/properties/index.html:572
+#: properties/templates/properties/property-details.html:333
 msgid "Terms"
 msgstr ""
 
-#: properties/templates/properties/index.html:592
-#: properties/templates/properties/property-details.html:301
+#: properties/templates/properties/contact.html:271
+#: properties/templates/properties/index.html:579
+#: properties/templates/properties/property-details.html:340
 msgid "Follow Us"
 msgstr ""
 
-#: properties/templates/properties/index.html:652
-msgid "Cannot add it to favourite!"
+#: properties/templates/properties/contact_form.html:19
+msgid "Contact Agent"
 msgstr ""
 
-#: properties/templates/properties/index.html:652
+#: properties/templates/properties/contact_form.html:51
+msgid "Send Message"
+msgstr ""
+
+#: properties/templates/properties/index.html:225
+msgid "Listing Types"
+msgstr ""
+
+#: properties/templates/properties/index.html:227
+#: properties/templates/properties/index.html:238
+#: properties/templates/properties/index.html:247
+#: properties/templates/properties/index.html:257
+#: properties/templates/properties/index.html:259
+msgid "All"
+msgstr ""
+
+#: properties/templates/properties/index.html:228
+#: properties/templates/properties/top_nav.html:37
+msgid "Apartments"
+msgstr ""
+
+#: properties/templates/properties/index.html:229
+#: properties/templates/properties/top_nav.html:38
+msgid "Houses"
+msgstr ""
+
+#: properties/templates/properties/index.html:230
+msgid "Lands"
+msgstr ""
+
+#: properties/templates/properties/index.html:231
+#: properties/templates/properties/property-details.html:229
+#: properties/templates/properties/top_nav.html:40 properties/views.py:61
+msgid "Commercial"
+msgstr ""
+
+#: properties/templates/properties/index.html:232
+#: properties/templates/properties/top_nav.html:41
+msgid "Farms"
+msgstr ""
+
+#: properties/templates/properties/index.html:236 properties/views.py:55
+#: properties/views.py:56 properties/views.py:57
+msgid "Offer Type"
+msgstr ""
+
+#: properties/templates/properties/index.html:239
+msgid "For Sale"
+msgstr ""
+
+#: properties/templates/properties/index.html:240
+msgid "For Rent"
+msgstr ""
+
+#: properties/templates/properties/index.html:241
+#: properties/templates/properties/property_list.html:56
+msgid "For Swap"
+msgstr ""
+
+#: properties/templates/properties/index.html:245 properties/views.py:63
+#: properties/views.py:64 properties/views.py:65
+msgid "Condition"
+msgstr ""
+
+#: properties/templates/properties/index.html:248 properties/views.py:63
+msgid "New"
+msgstr ""
+
+#: properties/templates/properties/index.html:249
+msgid "Off-Plan"
+msgstr ""
+
+#: properties/templates/properties/index.html:250
+msgid "On Construction"
+msgstr ""
+
+#: properties/templates/properties/index.html:251 properties/views.py:63
+msgid "Used"
+msgstr ""
+
+#: properties/templates/properties/index.html:255
+msgid "Select City"
+msgstr ""
+
+#: properties/templates/properties/index.html:262
+msgid "Search"
+msgstr ""
+
+#: properties/templates/properties/index.html:270
+msgid "Rooms"
+msgstr ""
+
+#: properties/templates/properties/index.html:276
+#: properties/templates/properties/index.html:310
+msgid "Number of"
+msgstr ""
+
+#: properties/templates/properties/index.html:281
+#: properties/templates/properties/index.html:315
+#: properties/templates/properties/index.html:352
+#: properties/templates/properties/index.html:404
+msgid "Minimum"
+msgstr ""
+
+#: properties/templates/properties/index.html:290
+#: properties/templates/properties/index.html:325
+#: properties/templates/properties/index.html:370
+#: properties/templates/properties/index.html:427
+msgid "Maximum"
+msgstr ""
+
+#: properties/templates/properties/index.html:305
+msgid "Bathrooms"
+msgstr ""
+
+#: properties/templates/properties/index.html:343
+msgid "Area"
+msgstr ""
+
+#: properties/templates/properties/index.html:348
+msgid "Area m²"
+msgstr ""
+
+#: properties/templates/properties/index.html:395
+#: properties/templates/properties/index.html:400
+msgid "Price"
+msgstr ""
+
+#: properties/templates/properties/index.html:400
+msgid "Millions"
+msgstr ""
+
+#: properties/templates/properties/index.html:458
+#: properties/templates/properties/property_list.html:32
+msgid "Filters"
+msgstr ""
+
+#: properties/templates/properties/index.html:461
+msgid "More"
+msgstr ""
+
+#: properties/templates/properties/index.html:461
+msgid "filters"
+msgstr ""
+
+#: properties/templates/properties/index.html:482
+msgid "Why Choose Us?"
+msgstr ""
+
+#: properties/templates/properties/index.html:484
+msgid ""
+"Although this is a brand new platform, our team has many years of experience "
+"buying and selling properties in the region."
+msgstr ""
+
+#: properties/templates/properties/index.html:484
+msgid "During this time we have gain reputation"
+msgstr ""
+
+#: properties/templates/properties/index.html:485
+msgid "and are locally known in the real state and contruction bussines"
+msgstr ""
+
+#: properties/templates/properties/index.html:492
+msgid "Responsability"
+msgstr ""
+
+#: properties/templates/properties/index.html:498
+msgid "Satisfied Customers"
+msgstr ""
+
+#: properties/templates/properties/index.html:504
+msgid "Legal advise"
+msgstr ""
+
+#: properties/templates/properties/index.html:632
+#: properties/templates/properties/property-details.html:150
+#: properties/templates/properties/property-details.html:392
+#: properties/templates/properties/property_list.html:83
+msgid "Remove from favourites"
+msgstr ""
+
+#: properties/templates/properties/index.html:636
+#: properties/templates/properties/property-details.html:152
+#: properties/templates/properties/property-details.html:396
+#: properties/templates/properties/property_list.html:85
+msgid "Add to favourites"
+msgstr ""
+
+#: properties/templates/properties/index.html:638
+msgid "Cannot add it to favourites!"
+msgstr ""
+
+#: properties/templates/properties/index.html:638
+#: properties/templates/properties/property-details.html:398
 msgid "You pubished this property"
 msgstr ""
 
-#: properties/templates/properties/index.html:657
+#: properties/templates/properties/index.html:643
+#: properties/templates/properties/property-details.html:403
 msgid "You need to login to add property to favorites"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:11
-#: properties/templates/properties/top_nav.html:41
+#: properties/templates/properties/message_details.html:12
+#: properties/templates/properties/messages_list.html:23
+msgid "Sender"
+msgstr ""
+
+#: properties/templates/properties/message_details.html:13
+msgid "Email"
+msgstr ""
+
+#: properties/templates/properties/message_details.html:28
+msgid "Propiedad"
+msgstr ""
+
+#: properties/templates/properties/message_details.html:29
+#: properties/templates/properties/messages_list.html:26
+msgid "Date"
+msgstr ""
+
+#: properties/templates/properties/message_details.html:39
+#: properties/templates/properties/messages_list.html:25
+msgid "Message"
+msgstr ""
+
+#: properties/templates/properties/message_details.html:40
+msgid "Delete"
+msgstr ""
+
+#: properties/templates/properties/messages_list.html:22
+#: properties/templates/properties/new_property.html:76
+msgid "Details"
+msgstr ""
+
+#: properties/templates/properties/messages_list.html:24
+msgid "Property"
+msgstr ""
+
+#: properties/templates/properties/messages_list.html:40
+msgid "no messages"
+msgstr ""
+
+#: properties/templates/properties/my_account.html:27
+#: properties/templates/properties/top_nav.html:29
 msgid "My Account"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:17
+#: properties/templates/properties/my_account.html:33
 msgid "My Profile"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:18
+#: properties/templates/properties/my_account.html:34
 msgid "Publish a Property"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:20
+#: properties/templates/properties/my_account.html:36
 msgid "Log Out"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:22
+#: properties/templates/properties/my_account.html:38
 msgid "Log In"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:32
+#: properties/templates/properties/my_account.html:54
 msgid "Are you sure?"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:33
+#: properties/templates/properties/my_account.html:55
 msgid "You will be logged out"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:37
+#: properties/templates/properties/my_account.html:59
 msgid "Yes!"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:38
+#: properties/templates/properties/my_account.html:60
+#: properties/templates/properties/new_image2.html:127
+#: properties/templates/properties/new_image2.html:321
 msgid "Cancel"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:42
+#: properties/templates/properties/my_account.html:64
 msgid "You are logged out"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:43
+#: properties/templates/properties/my_account.html:65
 msgid "You can go to My account to login again"
 msgstr ""
 
-#: properties/templates/properties/new_image2.html:164
+#: properties/templates/properties/new_address.html:54
+msgid "Look up your address!"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:55
+msgid ""
+"We'll try to auto-complete this form for you, if it isn't possible, please "
+"fill it out yourself"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:167
+msgid "Show full address in web:"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:175
+msgid "Address to be shown:"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:174
+#: properties/templates/properties/new_property.html:236
+msgid "save"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:108
+msgid "confirmation"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:115
+msgid ""
+"I confirm that I have all the rights to share the information given in this "
+"form and I authorise the publication of it, including images and text."
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:117
+msgid "Confirm"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:125
+msgid "Publish my Property"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:165
 msgid "all done!"
 msgstr ""
 
-#: properties/templates/properties/new_image2.html:166
+#: properties/templates/properties/new_image2.html:167
 msgid "Choose a main image"
 msgstr ""
 
-#: properties/templates/properties/new_image2.html:210
+#: properties/templates/properties/new_image2.html:180
+msgid "Save images"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:180
+msgid "Finish"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:211
+#: properties/templates/properties/new_image2.html:351
 msgid "Main Image"
 msgstr ""
 
+#: properties/templates/properties/new_image2.html:312
+msgid "Please select a main image"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:317
+msgid "You can add more images. Up to 6!"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:317
+msgid "Would you like to save these images?"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:321
+msgid "Add more images"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:322
+msgid "Save"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:350
+msgid "main image in page"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:463
+msgid "Want to remove this image?"
+msgstr ""
+
+#: properties/templates/properties/new_image2.html:468
+msgid "Remove"
+msgstr ""
+
 #: properties/templates/properties/new_property.html:5
-#: properties/templates/properties/new_property.html:91
 msgid "New Property"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:67
+#: properties/templates/properties/new_property.html:54
 msgid "Your Property's Details"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:274
+#: properties/templates/properties/new_property.html:248
 msgid "Image"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:279
+#: properties/templates/properties/new_property.html:253
 msgid "Done"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:103
+#: properties/templates/properties/property-details.html:144
 msgid "Property Details of"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:139
+#: properties/templates/properties/property-details.html:186
 #: properties/templates/properties/property_card.html:48
-#: properties/templates/properties/property_list.html:97
+#: properties/templates/properties/property_list.html:100
 msgid "Beds"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:145
+#: properties/templates/properties/property-details.html:192
 #: properties/templates/properties/property_card.html:54
-#: properties/templates/properties/property_list.html:103
+#: properties/templates/properties/property_list.html:106
 msgid "Baths"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:151
+#: properties/templates/properties/property-details.html:198
 #: properties/templates/properties/property_card.html:60
-#: properties/templates/properties/property_list.html:115
+#: properties/templates/properties/property_list.html:118
 msgid "Parking"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:161
-#: properties/templates/properties/property-details.html:167
+#: properties/templates/properties/property-details.html:208
+#: properties/templates/properties/property-details.html:214
 #: properties/templates/properties/property_card.html:67
-#: properties/templates/properties/property_list.html:125
-#: properties/templates/properties/property_list.html:131
+#: properties/templates/properties/property_list.html:128
+#: properties/templates/properties/property_list.html:134
 msgid "Sq m"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:172
+#: properties/templates/properties/property-details.html:219
 msgid "Property Type"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:174
-#: properties/views.py:52
+#: properties/templates/properties/property-details.html:221
+#: properties/views.py:59
 msgid "House"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:177
-#: properties/views.py:51
+#: properties/templates/properties/property-details.html:224
+#: properties/views.py:58
 msgid "Apartment"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:180
-#: properties/templates/properties/top_nav.html:34 properties/views.py:53
+#: properties/templates/properties/property-details.html:227
+#: properties/templates/properties/top_nav.html:39 properties/views.py:60
 msgid "Land"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:189
+#: properties/templates/properties/property-details.html:236
 msgid "Type of offer"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:193
+#: properties/templates/properties/property-details.html:240
 #: properties/templates/properties/property_card.html:11
-#: properties/templates/properties/property_card_scroll.html:64
+#: properties/templates/properties/property_card_scroll.html:99
 #: properties/templates/properties/property_carousel.html:25
-#: properties/templates/properties/property_list.html:51 properties/views.py:48
+#: properties/templates/properties/property_list.html:50 properties/views.py:55
 msgid "Sale"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:196
+#: properties/templates/properties/property-details.html:243
 #: properties/templates/properties/property_card.html:14
-#: properties/templates/properties/property_card_scroll.html:67
+#: properties/templates/properties/property_card_scroll.html:102
 #: properties/templates/properties/property_carousel.html:28
 #: properties/templates/properties/property_carousel.html:50
-#: properties/templates/properties/property_list.html:54
+#: properties/templates/properties/property_list.html:53
 msgid "Lend"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:206
-msgid "built in"
-msgstr ""
-
-#: properties/templates/properties/property-details.html:210
+#: properties/templates/properties/property-details.html:257
 msgid "Visits"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:214
+#: properties/templates/properties/property-details.html:261
 msgid "More Info"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:226
+#: properties/templates/properties/property-details.html:265
 msgid "Gallery"
 msgstr ""
 
-#: properties/templates/properties/property-details.html:255
+#: properties/templates/properties/property-details.html:294
 msgid "Recently Added Properties"
+msgstr ""
+
+#: properties/templates/properties/property-details.html:398
+msgid "Cannot add it to favourite!"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:112
+msgid "waiting for approval"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:117
+msgid "This AD is paused. Only you can see it"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:125
+msgid "click to go to property's page"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:142
+msgid "Edit"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:149
+msgid "Unpause"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:154
+msgid "Pause"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:214
+msgid "Your properties will appear here"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:215
+msgid "Add your first property now, It's free!. Click here"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:219
+msgid "Add a property"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:220
+#: properties/templates/properties/property_card_scroll.html:234
+msgid "Click here"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:228
+msgid "Your favorite properties will appear here"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:229
+msgid "Browse through properties now. Click here to go to the main page!"
+msgstr ""
+
+#: properties/templates/properties/property_card_scroll.html:233
+msgid "Browse Properties"
 msgstr ""
 
 #: properties/templates/properties/property_carousel.html:5
@@ -605,89 +888,114 @@ msgstr ""
 msgid "See Details"
 msgstr ""
 
-#: properties/templates/properties/property_list.html:38
+#: properties/templates/properties/property_list.html:37
 msgid "Clear all Filters"
 msgstr ""
 
-#: properties/templates/properties/property_list.html:76
-msgid "Remove from favourites"
+#: properties/templates/properties/property_list.html:63
+msgid "brand new"
 msgstr ""
 
-#: properties/templates/properties/property_list.html:80
-msgid "Add to favourites"
+#: properties/templates/properties/property_list.html:64
+msgid "off-plan"
 msgstr ""
 
-#: properties/templates/properties/property_list.html:109
+#: properties/templates/properties/property_list.html:112
 msgid "estrato"
 msgstr ""
 
-#: properties/templates/properties/top_nav.html:30
+#: properties/templates/properties/property_list.html:142
+msgid ""
+"There are no properties that match your search. Try altering the filters"
+msgstr ""
+
+#: properties/templates/properties/top_nav.html:23
+msgid "Inmuebles Fusa"
+msgstr ""
+
+#: properties/templates/properties/top_nav.html:35
 msgid "Properties"
 msgstr ""
 
-#: properties/templates/properties/top_nav.html:39
+#: properties/templates/properties/top_nav.html:44
 msgid "About"
 msgstr ""
 
-#: properties/templates/properties/top_nav.html:40
+#: properties/templates/properties/top_nav.html:45
 msgid "Contact"
 msgstr ""
 
-#: properties/views.py:48
+#: properties/views.py:55
 msgid "City"
 msgstr ""
 
-#: properties/views.py:51 properties/views.py:52 properties/views.py:53
-#: properties/views.py:54 properties/views.py:55
+#: properties/views.py:58 properties/views.py:59 properties/views.py:60
+#: properties/views.py:61 properties/views.py:62
 msgid "Property type"
 msgstr ""
 
-#: properties/views.py:55
+#: properties/views.py:62
 msgid "Farm"
 msgstr ""
 
-#: properties/views.py:55
+#: properties/views.py:64
+msgid "Off-plan"
+msgstr ""
+
+#: properties/views.py:65
+msgid "On construction"
+msgstr ""
+
+#: properties/views.py:65
 msgid "Min rooms"
 msgstr ""
 
-#: properties/views.py:56
+#: properties/views.py:66
 msgid "Max rooms"
 msgstr ""
 
-#: properties/views.py:56
+#: properties/views.py:66
 msgid "Min bathrooms"
 msgstr ""
 
-#: properties/views.py:57
+#: properties/views.py:67
 msgid "Max bathrooms"
 msgstr ""
 
-#: properties/views.py:57
+#: properties/views.py:67
 msgid "Min area"
 msgstr ""
 
-#: properties/views.py:58
+#: properties/views.py:68
 msgid "Max area"
 msgstr ""
 
-#: properties/views.py:58
+#: properties/views.py:68
 msgid "Min price"
 msgstr ""
 
-#: properties/views.py:59
+#: properties/views.py:69
 msgid "Max price"
 msgstr ""
 
-#: properties/views.py:332
+#: properties/views.py:259
+msgid "Access denied"
+msgstr ""
+
+#: properties/views.py:286 properties/views.py:527
+msgid "Access denied, you don't own or manage this property"
+msgstr ""
+
+#: properties/views.py:358
 msgid "Your information has been sent to our agents! Thank you"
 msgstr ""
 
-#: properties/views.py:336
+#: properties/views.py:362
 msgid ""
 "Something went wrong, please try again or contact agent by phone or whatsapp"
 msgstr ""
 
-#: properties/views.py:357
+#: properties/views.py:384
 msgid ""
 "I am interested in the property: {}, Address: {}, code: {}. Is it still "
 "Available?"

@@ -131,7 +131,8 @@ dmypy.json
 # Docker
 .Dockerfile.*
 docker/secrets/*
-
+docker/data/*
+id_rsa
 # Collect static
 static/* 
 
@@ -144,6 +145,7 @@ nuevo.js
 .idea
 codestyles/*
 inspection/*
-vsc.xml
+vcs.xml
 find.xml
 editor.xml
+

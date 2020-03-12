@@ -17,7 +17,7 @@
         font-family: arial, verdana, tahoma;
     }
     .accordian {
-        width: 805px; height: 320px;
+        width: 60vw; height: 320px;
         overflow: hidden;
 
         /*Time for some styling*/
@@ -34,7 +34,7 @@
     .accordian li {
         position: relative;
         display: block;
-        width: 140px;
+        width: 6vw;
         float: left;
         border-left: 1px solid #888;
 
@@ -83,7 +83,8 @@
         font-weight: bold;
     }
     .contenedor{
-        width: 35%;
+        width: 55vw;
+        max-width: 500px;
         height: auto;
         margin: 0 auto;
         border: solid #ccc9c9;
@@ -99,23 +100,21 @@
     </head>
 
     <body>
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" style="margin-top: 7%;" data-keyboard='false' data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="exampleModal"  data-keyboard='false' data-backdrop='static' tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title centrar fuenteOscura" id="exampleModalLabel">Terminos y condiciones</h5>
+        <h5 class="modal-title centrar fuenteOscura" id="exampleModalLabel">{% trans 'confirmation' %}</h5>
       </div>
-      <div class="modal-body" style="padding: 7%;">
+      <div class="modal-body" style="padding: 2%;">
 
-
-        <div style="background-color: #fafafa; margin: 3rem; padding: 1rem;border: 2px solid #ccc; text-align: center;">
-           <form>
+        <div class="col-12" style="background-color: #fafafa; padding: 1rem;border: 2px solid #ccc; text-align: center;">
+             <form>
                 <div class="custom-control custom-checkbox">
-                    <label>Al llenar este formulario Acepta que las imagenes y los datos de su propiedad Se han publicados en la Web </label>
+                    <p style="overflow-wrap: break-word;">{%trans 'I confirm that I have all the rights to share the information given in this form and I authorise the publication of it, including images and text.' %}</p>
                     <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Aceptar terminos y condiciones</label>
+                    <label class="custom-control-label" for="customCheck1">{% trans 'Confirm' %}</label>
                 </div>
             </form>
         </div>
@@ -123,9 +122,9 @@
 
       </div>
       <div class="modal-footer centrar">
-        <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
+        <button type="button" id="btnEnviar" class="btn btn-primary" data-dismiss="modal" style="background-color:#364e68;" disabled>{% trans 'Publish my Property' %}</button>
         &nbsp;&nbsp;&nbsp;
-        <button type="button" class="btn btn-danger" id="btnCancelar">Cancelar</button>
+        <button type="button" class="btn btn-secondary" id="btnCancelar">{% trans 'Cancel' %}</button>
       </div>
     </div>
   </div>
@@ -144,9 +143,9 @@
                     <div class="row">
                             {{ form.management_form }}
                             {%for formu in form%}
-                                <div id="div{{ forloop.counter|add:-1 }}" style="display: none;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
-                                    <div class="col-md-12" style="padding-left: 0%;margin-top: 11%;">
-                                        <div class="col-md-12 img{{ forloop.counter|add:-1 }}">
+                             <div id="div{{ forloop.counter|add:-1 }}" style="display: none;" class="imagenLi" dir="{{ forloop.counter|add:-1 }}">
+                                    <div class="col-md-12"  style="padding:0; margin-top: 10%;">
+                                        <div class="col-md-12 offset-lg-1 col-lg-10 px-1 img{{ forloop.counter|add:-1 }}">
                                             {{formu}}
                                             <span class="help-block"></span>
                                         </div>
@@ -154,11 +153,13 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <div class="col-md-12">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                                 <div class="information animated swing" id="descripcion" style="display: none;text-align:center;margin-top: 4%;">
                                     <div class="alert alert-info" style="font-weight: bold;">
                                         <label>
-                                            <i class="fa fa-check" aria-hidden="true" style="font-size: 90px;color: blue;"></i>
+                                            <i class="fa fa-check" aria-hidden="true" style="font-size: 4vw;color: #364e68;"></i>
                                         </label>
                                         <br/>
                                         {% trans 'all done!' %}
@@ -168,19 +169,19 @@
 
                                 <br/>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                    <div class="progress-bar" role="progressbar" style="width: 0%; background-color:#364e68;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
                                 </div>
+                                <br/>
                             </div>
-                            <hr>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center; display: none;" id="DivBtnSave">
+                            <button title="{% trans 'Save images' %}" class="btn btn-primary" style="background-color:#364e68;" id="btnSave">{% trans 'Finish' %}</button>
+                        </div>
                     </div>
                 </div>
                 <input type="hidden" value="{{propiedad}}" name="propiedad_id" id="propiedad_id">
-                <br/>
-                <div class="form-group divBtn">
-                    <div class="col-md-12" style="text-align: center; display: none;" id="DivBtnSave">
-                        <button title="Eliminar Servicio" class="btn btn-primary" id="btnSave">Guardar</button>
-                    </div>
-                </div>
 
             </form>
             <br/>
@@ -202,14 +203,14 @@
                     <li id="idCard_{{ forloop.counter|add:-1 }}" class="liCard tarjeta">
                             <div class="image_title">
                                 <p style="color:white;font-family: serif;">
-                                &nbsp;&nbsp;&nbsp;<span style="color: white;font-weight: bold;margin-top: 3px;" title=" Eliminar Imagen" id="btnImg_{{ forloop.counter|add:-1 }}">
+                                &nbsp;&nbsp;&nbsp;<span style="color: white;font-weight: bold;" title=" Eliminar Imagen" id="btnImg_{{ forloop.counter|add:-1 }}">
                                     <i class="fa fa-trash fa-2x" aria-hidden="true" style="cursor: pointer; margin-top: 2px;font-size: 18px;"></i>
-                                </span>
-                                Nombre</p>
+                                </span>{{f.image.value}}
+                                </p>
                                 <input type="radio" name="radioBtn" id="radio_{{ forloop.counter|add:-1 }}" class="form-check-input radio" value=1 style="width: 9%;height: 21%;margin-left:-4px;" title="Imagen Principal en la Web">
                                 <p style="color: white;margin-left:2%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Main Image' %}</p>
                             </div>
-                            <img src="{% get_media_prefix%}{{f.image.value}}" width="684" height="340">
+                            <img src="{% get_media_prefix%}{{f.image.value}}" width="650" height="330">
                             </a>
                         </li>
                     {% endif %}
@@ -224,37 +225,33 @@
 <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
 
 <script>
-        function ocultaText(){
-            for (let index = 0; index <= 7; index++) {
-                var id = "#id_form-"+index+"-main"
-                var radio_id = "#radio_"+index
-                var clear_id ="#form-"+index+"-image-clear_id"
-                $(id).hide();
-                $(radio_id).prop('checked',$(id).prop('checked'));
-                $(clear_id).hide();
-                $('label[for="id_form-'+index+'-main"]').hide();
-                $('label[for="form-'+index+'-image-clear_id"]').hide();
-                $('label[for="id_form-'+index+'-image"]').hide();
-                console.log(' itero '+index)
-
-            }
+    function ocultaText(){
+        for (let index = 0; index <= 7; index++) {
+            var id = "#id_form-"+index+"-main"
+            var radio_id = "#radio_"+index
+            var clear_id ="#form-"+index+"-image-clear_id"
+            $(id).hide();
+            $(radio_id).prop('checked',$(id).prop('checked'));
+            $(clear_id).hide();
+            $('label[for="id_form-'+index+'-main"]').hide();
+            $('label[for="form-'+index+'-image-clear_id"]').hide();
+            $('label[for="id_form-'+index+'-image"]').hide();
         }
+    }
         
     ocultaText();    
     var cantidad;
     var contador = 0;
     var completo = 0;
-    $("#btnEnviar").click(function(){
-        if( $("#customCheck1").is(':checked') ){
-            $("form").submit();
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Recuerde Aceptar terminos y condiciones',
-                timer: 2000
-            });
+    $("#customCheck1").click(function(){
+        if($("#customCheck1").is(':checked')){
+         $("#btnEnviar").removeAttr("disabled");
         }
+        else{$("#btnEnviar").attr("disabled", "disabled");}
+    });
+
+    $("#btnEnviar").click(function(){
+        $("form").submit();
     });
 
     $("#btnCancelar").click(function(){
@@ -270,34 +267,41 @@
     }
 
     function eventosImg(){
+        $('#msjMain').hide();
         if( document.getElementById('btnImg_0') != null ){
             document.getElementById('btnImg_0').addEventListener('click',()=> borrarImg(0), false);
             document.getElementById('radio_0').addEventListener('click',()=> validacion(0), false);
+            $("#radio_0").prop("checked",$("#id_form-0-main").prop("checked"))
         }
         if( document.getElementById('btnImg_1') != null ){
             document.getElementById('btnImg_1').addEventListener('click',()=> borrarImg(1), false);
             document.getElementById('radio_1').addEventListener('click',()=> validacion(1), false);
+            $("#radio_1").prop("checked",$("#id_form-1-main").prop("checked"))
         }
         if( document.getElementById('btnImg_2') != null ){
             document.getElementById('btnImg_2').addEventListener('click',()=> borrarImg(2), false);
             document.getElementById('radio_2').addEventListener('click',()=> validacion(2), false);
+            $("#radio_2").prop("checked",$("#id_form-2-main").prop("checked"))
         }
         if( document.getElementById('btnImg_3') != null ){
             document.getElementById('btnImg_3').addEventListener('click',()=> borrarImg(3), false);
             document.getElementById('radio_3').addEventListener('click',()=> validacion(3), false);
+            $("#radio_3").prop("checked",$("#id_form-3-main").prop("checked"))
         }
         if( document.getElementById('btnImg_4') != null ){
             document.getElementById('btnImg_4').addEventListener('click',()=> borrarImg(4), false);
             document.getElementById('radio_4').addEventListener('click',()=> validacion(4), false);
+            $("#radio_4").prop("checked",$("#id_form-4-main").prop("checked"))
         }
         if( document.getElementById('btnImg_5') != null ){
             document.getElementById('btnImg_5').addEventListener('click',()=> borrarImg(5), false);
             document.getElementById('radio_5').addEventListener('click',()=> validacion(5), false);
+            $("#radio_5").prop("checked",$("#id_form-5-main").prop("checked"))
         }
     }
 
-    $("input").attr('accept','image/*');//camilooooo
-    $("select").addClass('form-control');//camilooooo
+
+    $("select").addClass('form-control');
 
     $("#btnSave").click(function(){
         event.preventDefault();
@@ -305,19 +309,17 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Recuerde Elegir Una Imagen Principal',
+                text: '{% trans "Please select a main image" %}',
                 timer: 2100
             });
         }else{
             Swal.fire({
-                title: 'Confirmar?',
-                text:  quantity < 6 ? 'Enviar, Aún puede agregar mas imagenes ...' : 'Desea guardar estas imagenes',
-                icon: 'warning',
+                text:  quantity < 6 ? "{% trans 'You can add more images. Up to 6!' %}" : '{% trans 'Would you like to save these images?' %}',
                 showCancelButton: true,
                 confirmButtonColor: '#364e68',
-                cancelButtonColor: '#bb1f1f',
-                cancelButtonText: 'Agregar mas fotos',
-                confirmButtonText: 'Guardar',
+                cancelButtonColor: '#6c757d',
+                cancelButtonText: quantity < 6 ? "{% trans 'Add more images' %}" : '{% trans 'Cancel' %}',
+                confirmButtonText: '{% trans 'Save' %}',
             }).then((result) => {
                 if (result.value) {
                     $('#exampleModal').modal('show');
@@ -330,7 +332,6 @@
 
     function archivo(evt) {
         var files = evt.target.files;
-        console.log(" to archivo "+files)
         var firstName = evt.target.files[0].name
         //Obtenemos la imagen del campo "file".
         for (var i = 0, f; f = files[i]; i++) {
@@ -346,16 +347,14 @@
                                 <i class="fa fa-trash fa-2x" aria-hidden="true" style="cursor: pointer; margin-top: 2px;font-size: 18px;"></i>\
                             </span>\
                             '+firstName+'</p>\
-                            <input type="radio" name="radioBtn" id="radio_'+contador+'" class="form-check-input radio" value='+contador+' style="width: 9%;height: 21%;margin-left:-4px;" title="Imagen Principal en la Web">\
-                            <p style="color: white;margin-left:2%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imagen principal</p>\
+                            <input type="radio" name="radioBtn" id="radio_'+contador+'" class="form-check-input radio" value='+contador+' style="width: 9%;height: 21%;margin-left:-4px;" title="{% trans 'main image in page'%}">\
+                            <p style="color: white;margin-left:2%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Main Image' %}</p>\
                         </div> \
-                        <a href="#">\
-                        <img src="'+e.target.result+'" width="684" height="325">\
-                        </a>\
+                        <img src="'+e.target.result+'" width="650" height="330">\
                     </li>';
             var y = document.getElementById('imagen2');
             if (document.getElementById(list)){
-                document.getElementById(list).remove();
+               document.getElementById(list).remove();
             }
             y.innerHTML += a;
 
@@ -437,6 +436,9 @@
         }else if(  quantity == 6 ){
             completo = 102;
             $('#descripcion').show();
+            if ( !$("input[type='radio']:checked").val() ) {
+                $('#msjMain').show();
+               };
             $(".imagenLi").hide();
             $("#DivBtnSave").show();
         }else{
@@ -458,16 +460,14 @@
     function borrarImg(id) {
         //Oculta texT
         Swal.fire({
-                title: 'Confirmar ..?',
-                text: "Desea Eliminar esta Imagen",
+                text: "{% trans 'Want to remove this image?'%}",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#364e68',
-                cancelButtonColor: '#bb1f1f',
-                confirmButtonText: 'Eliminar',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: "{% trans 'Remove' %}",
             }).then((result) => {
                 if (result.value) {
-                    $('#msjMain').show();
                     ocultaText();
                     $("#idCard_"+id).remove();
                     $("#form-"+id+"-image-clear_id").prop('checked',true);
@@ -476,7 +476,6 @@
                         $("#div"+index).hide();
                     }
                     deleteClear = id;
-                    //$("#div"+id).show();
                     $('#descripcion').hide();
                     $("#id_form-"+id+"-image").val('');
                 }

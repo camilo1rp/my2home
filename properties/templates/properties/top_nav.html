@@ -1,21 +1,22 @@
 {% load i18n %}
 <style type="text/css">
  .boton3 {
-    color: #fff !important;
+    background: #fff !important;
     font-size: 13px;
     font-weight: 700;
     padding: 0.3em 0.5em;
-    background: rgba(0,0,0,0);
-    border: 1px solid;
+    color: #364e68;
+    border: 1px solid #364e68;
     letter-spacing: .05em;
     transition: all 1s ease;
     position: relative;
-}
-.boton3:hover {
-  background: black;
-  color: #fff !important;
-  border: black;
-  padding: 11px
+  }
+  .boton3:hover {
+    color: white;
+    font-size: 16px;
+    border: 1px solid white;
+    background: #364e68 !important;
+    padding: 11px
   }
 </style>
 <div class="col-8 col-md-8 col-lg-4">
@@ -25,6 +26,8 @@
   <nav class="site-navigation text-right text-md-right" role="navigation">
     <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
     <ul class="site-menu js-clone-nav d-none d-lg-block font-weight-bold idBuy">
+     <li class="liBtnCuenta"><button  id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal">{% trans 'My Account' %}</button>
+      </li>
       <li><a href="{%url 'property:index' %}?offer-types=SALE / VENTA" class="ClassBuy">{% trans 'Buy' %}</a></li>
       <li><a href="{%url 'property:index' %}?offer-types=RENT / ARRENDAMIENTO" class="idRent">{% trans 'Rent' %}</a></li>
       <li><a href="{%url 'property:index' %}?offer-types=SWAP / PERMUTA" class="idSwap">{% trans 'Swap' %}</a></li>
@@ -40,8 +43,6 @@
       </li>
 <!--      <li><a href="about.html">{% trans 'About' %}</a></li>-->
       <li><a href="{% url 'property:contact'%}">{% trans 'Contact' %}</a></li>
-      <li class="liBtnCuenta"><button  id="btnCuenta" class="btn btn-default boton3" data-toggle="modal" data-target="#myModal">{% trans 'My Account' %}</button>
-      </li>
     </ul>
   </nav>
 </div>

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-06 14:39-0500\n"
-"PO-Revision-Date: 2020-02-06 13:59+0000\n"
+"POT-Creation-Date: 2020-03-02 16:21+0000\n"
+"PO-Revision-Date: 2020-02-19 16:05+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.3\n"
+
+#: profiles/forms.py:22
+msgid "Username is already taken"
+msgstr "Nombre de usuario ya ha sido tomado"
+
+#: profiles/forms.py:29
+msgid "Email is already registered"
+msgstr "Email ya esta registrado"
 
 #: profiles/models.py:15
 msgid "Male"
@@ -47,74 +55,79 @@ msgstr "ciudad"
 msgid "company"
 msgstr "empresa"
 
-#: profiles/templates/profiles/create.html:12
+#: profiles/templates/profiles/create.html:19
 msgid "Username"
 msgstr "Nombre de Usuario"
 
-#: profiles/templates/profiles/create.html:17
+#: profiles/templates/profiles/create.html:24
 msgid "First Name"
 msgstr "Nombres"
 
-#: profiles/templates/profiles/create.html:22
+#: profiles/templates/profiles/create.html:29
 msgid "Last Name"
 msgstr "Apellidos"
 
-#: profiles/templates/profiles/create.html:27
+#: profiles/templates/profiles/create.html:34
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
-#: profiles/templates/profiles/create.html:32
+#: profiles/templates/profiles/create.html:39
 msgid "Password"
 msgstr "Contraseña "
 
-#: profiles/templates/profiles/create.html:37
+#: profiles/templates/profiles/create.html:44
 msgid "Confirm Password"
 msgstr "Confirmar Contraseña"
 
-#: profiles/templates/profiles/create.html:42
+#: profiles/templates/profiles/create.html:49
 msgid "sign up"
 msgstr "registrarse"
 
-#: profiles/templates/profiles/profile.html:7
-#: profiles/templates/profiles/profile2.html:7
-msgid "Edit Profile"
-msgstr "Editar Perfil"
-
-#: profiles/templates/profiles/profile.html:26
-#: profiles/templates/profiles/profile2.html:50
+#: profiles/templates/profiles/details_list.html:13
+#: profiles/templates/profiles/profile.html:49
 msgid "Phone"
 msgstr "Teléfono"
 
-#: profiles/templates/profiles/profile.html:31
-#: profiles/templates/profiles/profile2.html:59
-#, fuzzy
-#| msgid "gender"
+#: profiles/templates/profiles/details_list.html:17
+#: profiles/templates/profiles/profile.html:54
 msgid "Gender"
-msgstr "sexo"
+msgstr "Genero"
 
-#: profiles/templates/profiles/profile.html:36
-#: profiles/templates/profiles/profile2.html:69
+#: profiles/templates/profiles/details_list.html:23
+#: profiles/templates/profiles/profile.html:59
 msgid "City"
 msgstr "Ciudad"
 
-#: profiles/templates/profiles/profile.html:41
-#: profiles/templates/profiles/profile2.html:78
-#, fuzzy
-#| msgid "company"
+#: profiles/templates/profiles/details_list.html:27
+#: profiles/templates/profiles/profile.html:64
 msgid "Company"
-msgstr "empresa"
+msgstr "Empresa"
 
-#: profiles/templates/profiles/profile.html:46
+#: profiles/templates/profiles/edit.html:32
+msgid "save"
+msgstr "Guardar"
+
+#: profiles/templates/profiles/photo_edit.html:14
+msgid "Change Profile Photo"
+msgstr "Cambiar Foto de Perfil"
+
+#: profiles/templates/profiles/photo_edit.html:33
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: profiles/templates/profiles/profile.html:7
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: profiles/templates/profiles/profile.html:69
 msgid "sign in now"
 msgstr "Ingresa ahora"
 
-#: profiles/templates/profiles/profile2.html:46
-msgid "Profile"
-msgstr "Perfil"
+#~ msgid "Profile"
+#~ msgstr "Perfil"
 
-#: profiles/templates/profiles/profile2.html:95
-msgid "Save Changes"
-msgstr "Guardar Cambios"
+#~ msgid "Save Changes"
+#~ msgstr "Guardar Cambios"
 
 #~ msgid "Registration"
 #~ msgstr "Registro"

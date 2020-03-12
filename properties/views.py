@@ -1,7 +1,6 @@
 import ast
 import csv
 import io
-import json
 import os
 import urllib
 import json
@@ -9,20 +8,24 @@ from email.mime.image import MIMEImage
 from smtplib import SMTPAuthenticationError
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives, send_mail
 from django.forms import modelformset_factory
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
+from .decorators import user_is_propertys_manager
 from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
 from .models import Property, AddressCol, Image, Contact, BusinessType, Following
 
@@ -38,13 +41,17 @@ class ListProperty(ListView):
         filter_index = request.GET.get('remove')
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
+        condition = request.GET.get('condition')
+        print('condition')
+        print(condition)
         filters_names = ['City', 'type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
-                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', ]
-        filters_values = [request.GET.get('select-city'), request.GET.get('list-types'), request.GET.get('offer-types'),
-                          request.GET.get('room_min'),
-                          request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
-                          request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
-                          request.GET.get('price_max')]
+                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', 'condition']
+        # filter_names and filter values must have corresponding index, e.g. city's index == and select-city's index
+        filters_values = [city, request.GET.get('list-types'), request.GET.get('offer-types'),
+                          request.GET.get('room_min'), request.GET.get('room_max'), request.GET.get('bath_min'),
+                          request.GET.get('bath_max'), request.GET.get('area_min'), request.GET.get('area_max'),
+                          request.GET.get('price_min'), request.GET.get('price_max'), request.GET.get('condition')]
+
         filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Offer Type'): gettext('Sale')},
                           'RENT / ARRENDAMIENTO': {gettext('Offer Type'): gettext('Rent')},
                           'SWAP / PERMUTA': {gettext('Offer Type'): gettext('Swap')},
@@ -52,14 +59,17 @@ class ListProperty(ListView):
                           'HOU': {gettext('Property type'): gettext('House')},
                           'LAN': {gettext('Property type'): gettext('Land')},
                           'COM': {gettext('Property type'): gettext('Commercial')},
-                          'FAR': {gettext('Property type'): gettext('Farm')}, 'rooms__gte': gettext('Min rooms'),
+                          'FAR': {gettext('Property type'): gettext('Farm')},
+                          'NEW': {gettext('Condition'): gettext('New')}, 'USE': {gettext('Condition'): gettext('Used')},
+                          'PLA': {gettext('Condition'): gettext('Off-plan')},
+                          'STA': {gettext('Condition'): gettext('On construction')}, 'rooms__gte': gettext('Min rooms'),
                           'rooms__lte': gettext('Max rooms'), 'baths__gte': gettext('Min bathrooms'),
                           'baths__lte': gettext('Max bathrooms'), 'area_total__gte': gettext('Min area'),
                           'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'),
                           'price__lte': gettext('Max price'),
                           }
         # init variables
-        query = self.model.objects.all()
+        query = self.model.objects.all().filter(active=True, pause=False)
         filters_dict = {}
 
         if current_filters:
@@ -84,22 +94,24 @@ class ListProperty(ListView):
                         user.following.remove(prop)
                         user.save()
                         print("{} stopped following {}".format(user, prop))
-                        return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}), content_type='application/json')
+                        return HttpResponse(json.dumps({'command': 0, 'prop_id': prop.id}),
+                                            content_type='application/json')
                     elif user != prop.manager:
                         follows = Following(user=user, property_followed=prop)
                         follows.save()
                         print("{} started following {}".format(user, prop))
-                        return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}), content_type='application/json')
+                        return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}),
+                                            content_type='application/json')
                     else:
-                        print('user owns this property')
-                        return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}), content_type='application/json')
+                        return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}),
+                                            content_type='application/json')
                 else:
                     return HttpResponse(json.dumps({'command': -1, 'prop_id': -1}), content_type='application/json')
 
         elif filters_dict:
             filters_query = filters_dict.copy()
             filters_query.pop('City', None)
-            query = self.model.objects.filter(**filters_query)
+            query = self.model.objects.filter(**filters_query).filter(active=True, pause=False)
 
         # check location filter
         if city not in ['ALL', None]:
@@ -166,7 +178,6 @@ def property_following(request):
         try:
             user = request.user
             prop = Property.objects.get(id=request.GET.get('prop_id'))
-            print(prop)
         except:
             return HttpResponse(json.dumps(0), content_type='application/json')
         if user.following.filter(id=prop.id):
@@ -198,10 +209,13 @@ class CreateProperty(LoginRequiredMixin, CreateView):
         return context
 
     def get_initial(self):
-        owner = self.request.user
+        owner = User.objects.filter(is_superuser=True)[0]
         return {
             'owner': owner,
         }
+
+    def dispatch(self, *args, **kwargs):
+        return super(CreateProperty, self).dispatch(*args, **kwargs)
     # def get(self, request, *args, **kwargs):
     #     self.business = BusinessType.objects.all()
     #     return super().get(request, *args, **kwargs)
@@ -227,13 +241,24 @@ class UpdateProperty(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('property:create-address', args=[self.new_property.id])
 
+    @method_decorator(user_is_propertys_manager)
+    def dispatch(self, *args, **kwargs):
+        return super(UpdateProperty, self).dispatch(*args, **kwargs)
+
     # def get_object(self):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
 
 
+@login_required
 def create_address(request, prop_id=None):
+    try:
+        prop = Property.objects.get(id=prop_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(gettext("Property does not exist"))
+    if request.user not in [prop.manager, prop.owner]:
+        return HttpResponse(gettext("Access denied"))
     if request.method == 'POST':
-        if Property.objects.get(id=prop_id).address_col.all():  # check if property has address
+        if prop.address_col.all():  # check if property has address
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(instance=instance, data=request.POST)
         else:
@@ -243,7 +268,7 @@ def create_address(request, prop_id=None):
             new_address.save()
             return HttpResponseRedirect(reverse('property:create-image', args=(new_address.propiedad.id,)))
     else:
-        if Property.objects.get(id=prop_id).address_col.all():
+        if prop.address_col.all():
             instance = get_object_or_404(AddressCol, propiedad__id=prop_id)
             form = AddressColForm(request.POST or None, instance=instance)
         else:
@@ -251,18 +276,20 @@ def create_address(request, prop_id=None):
     return render(request, 'properties/new_property.html', {'form': form, 'propiedad': prop_id, 'page': 1})
 
 
+@login_required
 def create_image(request, prop_id=None):
-    prop = Property.objects.get(id=int(prop_id))
+    try:
+        prop = Property.objects.get(id=prop_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(gettext("Property does not exist"))
+    if request.user not in [prop.manager, prop.owner]:
+        return HttpResponse(gettext("Access denied, you don't own or manage this property"))
     images = prop.gallery.all()
     images_formset = modelformset_factory(Image, fields=['image', 'main'], extra=6 - len(images))
     if request.method == 'POST':
-        print('got posted')
         form = images_formset(request.POST or None, request.FILES or None)
         if form.is_valid():
-            print('got valid')
-            print(prop)
             for obj in form:
-                print(obj.cleaned_data)
                 try:
                     img_in = obj.cleaned_data['image']
                     main_in = obj.cleaned_data['main']
@@ -302,8 +329,8 @@ def property_detail(request, prop_id):
             except KeyError:
                 print("no email provided")
                 email_in = 'noemail@nomail.com'
-            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in, email=email_in,
-                                                       message=message_in)
+            contact, _ = Contact.objects.get_or_create(propiedad=prop, name=name_in, phone=phone_in,
+                                                       email=email_in, message=message_in)
             address = prop.address_col.get()
             address_parsed = urllib.parse.quote(str(address))
             print(address_parsed)
@@ -311,13 +338,12 @@ def property_detail(request, prop_id):
             # //TODO: move email from property_detail to a funtion in tasks.py after setting up Celery
             file = "/media/{}".format(prop.gallery.get(main=True).image)
             data = {'propiedad': contact.propiedad, 'name': contact.name, 'phone': contact.phone,
-                    'email': contact.email, 'message':contact.message,
-                    'image': file, 'addr_parse': address_parsed}
+                    'email': contact.email, 'message': contact.message, 'image': file, 'addr_parse': address_parsed}
             html_content = render_to_string('properties/contact_email.html', {'data': data})
             subject = '{} esta interesad@ en la propiedad: {} - {}'.format(data['name'].title(),
                                                                            data['propiedad'].title,
                                                                            data['propiedad'].code)
-            msg = EmailMultiAlternatives(subject, html_content, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
+            msg = EmailMultiAlternatives(subject, html_content, prop.manager.email, prop.owner.email)
             msg.content_subtype = "html"
             msg.mixed_subtype = "related"
             img = open(file[1::], 'rb').read()
@@ -340,9 +366,10 @@ def property_detail(request, prop_id):
         elif request.is_ajax():
             return render(request, 'properties/contact_form.html', {'form': form})
     try:
-        geo_data = get_coordinates(str(prop.address_col.get()))
+        address = prop.address_col.get()
+        geo_data = get_coordinates(str(address))
     except ObjectDoesNotExist:
-        geo_data = {'lat': 70, 'lng': 20}
+        geo_data = {'lat': '4.624335', 'lng': '-74.063644'}
     visit = Visits(request)
     visit.add(prop_id)
     return render(request, 'properties/property-details.html',
@@ -352,8 +379,8 @@ def property_detail(request, prop_id):
 
 def whatsapp_contact(request):
     prop_id = request.GET.get('id')
-    phone = 3162128561
     prop = get_object_or_404(Property, id=prop_id)
+    phone = prop.manager.profile.phone
     message = gettext("I am interested in the property: {}, Address: {}, code: {}. Is it still Available?") \
         .format(prop.title, prop.address_col.get(), prop.code)
     print('message: {}'.format(message))
@@ -369,6 +396,7 @@ class Tyc(TemplateView):
     template_name = "properties/tyc.html"
 
 
+@login_required
 def property_upload(request):
     template = 'properties/upload.html'
     if request.method == 'POST':
@@ -461,11 +489,14 @@ def Template(request):  # view for debugging
     prop = Property.objects.last()
     a = prop.address_col.get()
     geo_data = get_coordinates(str(a))
-    template = 'properties/maps.html'
+    template = 'properties/address_auto.html'
     data = {'propiedad': prop, 'name': "nombre apellido", 'phone': "1234456809",
             'email': "email@email.com", 'geo_data': geo_data}
-    return render(request, template, {'data': data})
+    form = AddressColForm()
+    return render(request, template, {'form': form})
 
+class TemplateView(TemplateView):
+    template_name = "properties/address_auto.html"
 
 def contact_us(request):
     form = ContactForm(request.POST or None, )
@@ -487,3 +518,24 @@ def contact_us(request):
             send_mail(subject, message, 'camilo1rp@gmail.com', ['camilo1rp@gmail.com'])
             # ****************
     return render(request, 'properties/contact.html', {'form': form})
+
+
+@login_required
+def pause(request, prop_id):
+    try:
+        prop = Property.objects.get(id=prop_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(gettext("Property does not exist"))
+    if request.user not in [prop.manager, prop.owner]:
+        return HttpResponse(gettext("Access denied, you don't own or manage this property"))
+    if prop.pause:
+        prop.pause = False
+    else:
+        prop.pause = True
+    prop.save()
+    # return JsonResponse({'a':1})
+    # return render(request, 'account/dashboard.html')
+    return HttpResponse(json.dumps(2), content_type='application/json')
+
+
+

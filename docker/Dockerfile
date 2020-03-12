@@ -1,7 +1,6 @@
-FROM debian:10.2 as build
+FROM ubuntu:18.04 as build
 
-ENV DEBIAN_FRONTEND=noninteractive
-
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && apt-get -qy install lsof \
 ntp \
 git \
@@ -27,7 +26,7 @@ RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 WORKDIR /opt
-RUN git clone --depth 1 git@github.com:fernando737/my2home.git
+RUN git clone --depth 1 git@github.com:camilo1rp/my2home.git
 
 FROM repoClone as appBuild
 
@@ -41,5 +40,4 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod ug+x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-COPY nginx/nginx.conf /etc/my2home-nginx/
 VOLUME ["/etc/my2home-nginx/"]

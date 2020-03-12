@@ -2,7 +2,8 @@
 set -e
 
 # read docker secrets into env variables
-export SUPERUSER_PASSWORD=$(cat /run/secrets/superuser_password)
+export DJANGO_SUPERUSER_PASSWORD=$(cat /run/secrets/django_superuser_password)
+export DJANGO_SUPERUSER_MAIL=$(cat /run/secrets/django_superuser_mail)
 export DB_PASSWORD=$(cat /run/secrets/db_password)
 export SECRET_KEY=$(cat /run/secrets/secret_key)
 
@@ -11,5 +12,38 @@ while ! python3 /opt/my2home/manage.py migrate 2>&1; do
 	sleep 5
 done
 
+# Create Superuser if required
+if [ "$DJANGO_SKIP_SUPERUSER" == "true" ]; then
+  echo "↩️ Skip creating the superuser"
+else
+  if [ -z ${DJANGO_SUPERUSER_NAME+x} ]; then
+    DJANGO_SUPERUSER_NAME='admin'
+  fi
+  if [ -z ${DJANGO_SUPERUSER_MAIL+x} ]; then
+    DJANGO_SUPERUSER_MAIL='admin@example.com'
+  fi
+  if [ -z ${DJANGO_SUPERUSER_PASSWORD+x} ]; then
+    if [ -f "/run/secrets/django_superuser_password" ]; then
+      DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
+    else
+      DJANGO_SUPERUSER_PASSWORD='admin'
+    fi
+  fi
+
+python3 /opt/my2home/manage.py shell << END
+from django.contrib.auth.models import User
+if not User.objects.filter(username='${DJANGO_SUPERUSER_NAME}'):
+    u=User.objects.create_superuser('${DJANGO_SUPERUSER_NAME}', '${DJANGO_SUPERUSER_MAIL}', '${DJANGO_SUPERUSER_PASSWORD}')
+END
+  echo "💡 Superuser Username: ${DJANGO_SUPERUSER_NAME}, E-Mail: ${DJANGO_SUPERUSER_MAIL}"
+fi
+
+
+# run python3 manage.py collectstatic
+python3 /opt/my2home/manage.py collectstatic --noinput
+
+#move to seed_7 directory
+cd /opt/my2home/
+
 # start daphene
-daphne -b seed7 -p 8080 --root-path /opt/my2home/ myhome.asgi:application
+daphne -b my2home -p 8080 myhome.asgi:application

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
 
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm, ProfileEditForm, ProfilePhotoForm
 from .models import Profile
 
 
@@ -26,7 +26,6 @@ class ProfileUpdate(UpdateView):
         return render(self.request, 'account/dashboard.html')
 
     def form_invalid(self, form):
-        """If the form is invalid, render the invalid form."""
         return self.render_to_response(self.get_context_data(form=form))
 
     def get_context_data(self, **kwargs):
@@ -37,6 +36,42 @@ class ProfileUpdate(UpdateView):
         return context
 
 
+class ProfileEdit(UpdateView):
+    model = Profile
+    form_class = ProfileEditForm
+    template_name = "profiles/edit.html"
+    pk_url_kwarg = 'user_id'
+    context_object_name = 'profile'
 
+    def form_valid(self, form):
+        form.save()
+        return render(self.request, 'profiles/details_list.html')
+
+
+class ProtoEdit(UpdateView):
+    model = Profile
+    form_class = ProfilePhotoForm
+    template_name = "profiles/photo_edit.html"
+    pk_url_kwarg = 'user_id'
+    context_object_name = 'profile'
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse(json.dumps(0), content_type='application/json')
+
+
+
+
+
+# def edit_profile(request):
+#     form = ProfileEditForm(request.POST or None)
+#     if request.method == 'POST':
+#         form = ProfileEditForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             HttpResponse(json.dumps(0), content_type='application/json')
+#         else:
+#             render(request, "properties/edit.html", {'form': form})
+#     render(request, "properties/edit.html", {'form': form})
 
 
