@@ -1,7 +1,6 @@
 import ast
 import csv
 import io
-import json
 import os
 import urllib
 import json
@@ -42,13 +41,17 @@ class ListProperty(ListView):
         filter_index = request.GET.get('remove')
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
+        condition = request.GET.get('condition')
+        print('condition')
+        print(condition)
         filters_names = ['City', 'type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
-                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', ]
-        filters_values = [request.GET.get('select-city'), request.GET.get('list-types'), request.GET.get('offer-types'),
-                          request.GET.get('room_min'),
-                          request.GET.get('room_max'), request.GET.get('bath_min'), request.GET.get('bath_max'),
-                          request.GET.get('area_min'), request.GET.get('area_max'), request.GET.get('price_min'),
-                          request.GET.get('price_max')]
+                         'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', 'condition']
+        # filter_names and filter values must have corresponding index, e.g. city's index == and select-city's index
+        filters_values = [city, request.GET.get('list-types'), request.GET.get('offer-types'),
+                          request.GET.get('room_min'), request.GET.get('room_max'), request.GET.get('bath_min'),
+                          request.GET.get('bath_max'), request.GET.get('area_min'), request.GET.get('area_max'),
+                          request.GET.get('price_min'), request.GET.get('price_max'), request.GET.get('condition')]
+
         filters_labels = {'select-city': gettext('City'), 'SALE / VENTA': {gettext('Offer Type'): gettext('Sale')},
                           'RENT / ARRENDAMIENTO': {gettext('Offer Type'): gettext('Rent')},
                           'SWAP / PERMUTA': {gettext('Offer Type'): gettext('Swap')},
@@ -56,7 +59,10 @@ class ListProperty(ListView):
                           'HOU': {gettext('Property type'): gettext('House')},
                           'LAN': {gettext('Property type'): gettext('Land')},
                           'COM': {gettext('Property type'): gettext('Commercial')},
-                          'FAR': {gettext('Property type'): gettext('Farm')}, 'rooms__gte': gettext('Min rooms'),
+                          'FAR': {gettext('Property type'): gettext('Farm')},
+                          'NEW': {gettext('Condition'): gettext('New')}, 'USE': {gettext('Condition'): gettext('Used')},
+                          'PLA': {gettext('Condition'): gettext('Off-plan')},
+                          'STA': {gettext('Condition'): gettext('On construction')}, 'rooms__gte': gettext('Min rooms'),
                           'rooms__lte': gettext('Max rooms'), 'baths__gte': gettext('Min bathrooms'),
                           'baths__lte': gettext('Max bathrooms'), 'area_total__gte': gettext('Min area'),
                           'area_total__lte': gettext('Max area'), 'price__gte': gettext('Min price'),
@@ -97,7 +103,6 @@ class ListProperty(ListView):
                         return HttpResponse(json.dumps({'command': 1, 'prop_id': prop.id}),
                                             content_type='application/json')
                     else:
-                        print('user owns this property')
                         return HttpResponse(json.dumps({'command': 2, 'prop_id': prop.id}),
                                             content_type='application/json')
                 else:
@@ -364,7 +369,7 @@ def property_detail(request, prop_id):
         address = prop.address_col.get()
         geo_data = get_coordinates(str(address))
     except ObjectDoesNotExist:
-        geo_data = {'lat':  '4.624335', 'lng': '-74.063644'}
+        geo_data = {'lat': '4.624335', 'lng': '-74.063644'}
     visit = Visits(request)
     visit.add(prop_id)
     return render(request, 'properties/property-details.html',
@@ -389,6 +394,7 @@ def whatsapp_contact(request):
 
 class Tyc(TemplateView):
     template_name = "properties/tyc.html"
+
 
 @login_required
 def property_upload(request):
@@ -522,13 +528,14 @@ def pause(request, prop_id):
         return HttpResponse(gettext("Property does not exist"))
     if request.user not in [prop.manager, prop.owner]:
         return HttpResponse(gettext("Access denied, you don't own or manage this property"))
-    print(prop.pause)
     if prop.pause:
         prop.pause = False
     else:
         prop.pause = True
     prop.save()
-    print(prop.pause)
     # return JsonResponse({'a':1})
     # return render(request, 'account/dashboard.html')
     return HttpResponse(json.dumps(2), content_type='application/json')
+
+
+

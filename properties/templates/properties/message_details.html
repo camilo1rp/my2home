@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+</head>
+<body>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">{% trans 'Sender' %}</th>
+          <th scope="col">{% trans 'Phone' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>{{mess.name}}</th>
+
+          <td>{{mess.phone}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table">
+      <thead>
+        <tr>
+
+          <th scope="col">{% trans 'Email' %}</th>
+          <th scope="col">{% trans 'Date' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>{{mess.email}}</td>
+            <td>{{mess.created|date:'d-m-y'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>{% trans 'Propiedad' %}:</strong> {{mess.propiedad}}</p>
+    <p><strong>{% trans 'Message' %}: </strong>{{mess.message}}</p>
+    <button type="button" onclick="delMess({{mess.id}})" class="btn btn-danger">{% trans 'Delete' %}</button>
+</body>
+</html>

@@ -5,7 +5,6 @@ import requests
 def get_coordinates(address):
 
     address_parsed = urllib.parse.quote(address)
-    print("address_parsed")
     print(address_parsed)
     url = "https://maps.googleapis.com/maps/api/geocode/json"
 

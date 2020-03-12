@@ -131,7 +131,8 @@ dmypy.json
 # Docker
 .Dockerfile.*
 docker/secrets/*
-
+docker/data/*
+id_rsa
 # Collect static
 static/* 
 
@@ -147,3 +148,4 @@ inspection/*
 vcs.xml
 find.xml
 editor.xml
+

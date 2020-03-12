@@ -26,6 +26,17 @@
     <!--fontawesome-->
     <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
     <!--fontawesome-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158817582-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-158817582-1');
+    </script>
+
   <style>
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -321,7 +332,6 @@
           }else if( cont == 3 ){
             $(".liBtnCuenta").removeClass('animated heartBeat');
             clearInterval( id );
-            console.log(cont)
           }
         },500);
     });

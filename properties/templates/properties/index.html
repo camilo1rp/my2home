@@ -5,9 +5,7 @@
 <html lang="en">
   <head>
     <title>Inmuebles Fusa</title>
-
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500">
     <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
@@ -27,170 +25,157 @@
     <!--fontawesome-->
     <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
     <!--fontawesome-->
-<!--    swal alerts-->
+    <!--    swal alerts-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
-<style type="text/css">
-.iconos{
-  .color: #7f7f7f;
-}
-#myInput {
-  padding: 20px;
-  margin-top: -6px;
-  border: 0;
-  border-radius: 0;
-  background: #f1f1f1;
-}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158817582-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-#separar {
-  padding: 6%;
-  display: inline-block;
-}
+      gtag('config', 'UA-158817582-1');
+    </script>
 
-.titulo {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  text-decoration: underline;
-  color: #333333;
-}
-.botonSelect {
-  color: #fff !important;
-  font-size: 20px;
-  font-weight: 500;
-  padding: 0.5em 1.2em;
-  background: black;
-  border: 2px solid;
-  border-color: #fff;
-  transition: all 1s ease;
-  position: relative;
-}
-.buttonMenu {
-  color: #fff !important;
-  font-size: 20px;
-  font-weight: 500;
-  padding: 0.5em 1.2em;
-  background: rgba(0,0,0,0);
-  border: 2px solid;
-  border-color: #fff;
-  transition: all 1s ease;
-  position: relative;
-}
-.buttonMenu:hover {
-  background: black;
-  color: #fff !important;
-  border-color: black;
-}
-.miCuenta:hover {
-  background: #004085;
-  color: white !important;
-}
-.textMiCuenta{
-  margin: 0%;
-  font-weight: bold;
-  cursor: pointer;
-}
+    <style type="text/css">
+      .iconos{
+        .color: #7f7f7f;
+      }
+      #myInput {
+        padding: 20px;
+        margin-top: -6px;
+        border: 0;
+        border-radius: 0;
+        background: #f1f1f1;
+      }
 
-.espacio{
-  padding: 2%;
-  z-index: 1000;
-}
-.opcionElegida{
-  text-align:center;
-  margin-top: 5%;
-  display: none;
-}
-.search{
-  margin-top: 2%;
-  margin-right: 1%;
- /* margin-left: 2em;*/
-}
-.btnSelect{
-  width: 15em;/* 1oem text-align: left;*/
-  height: 3em;
-  font-size: 0.7em;
-  
-}
-.btnSelect2{
-  width: 10.5em;
-  height: 3em;
-  padding-left: 1px;
-  font-size: 0.7em;
-  text-align: left;
-}
-.ul{
-  width: 15em;
-}
-.ulFiltros{
-    width: 41em;
-    height: 30em;
-    margin-left: -350%;
-}
-.textDropDawn{
-  margin-left: 10%;
-  font-weight: bold;
-  color: #364e68;
-}
-.divMinimo{
-  width: 49%;
-  float: left;
-}
-.selecBorde{
-  border: solid 1px #364e68;
-}
-.divMaximo{
-  float: right;
-  width: 51%;
-}
-.margen{
-  margin-top: -100px;
-}
-.divMargen{
-  margin-top: -3%;
-}
-.pCopyRigth{
-  font-size:7px;
-}
-.icon{
-  padding-left: 3px;
-}
-.intro {
-  font-size: 150%;
-  color: red;
-}
-.fadeOutRight{
-  animation-duration: 1s
-}
+      .buttonMenu {
+        color: #fff !important;
+        font-size: 20px;
+        font-weight: 500;
+        padding: 0.5em 1.2em;
+        background: rgba(0,0,0,0);
+        border: 2px solid;
+        border-color: #fff;
+        transition: all 1s ease;
+        position: relative;
+      }
+      .buttonMenu:hover {
+        background: black;
+        color: #fff !important;
+        border-color: black;
+      }
+      .miCuenta:hover {
+        background: #004085;
+        color: white !important;
+      }
+      .textMiCuenta{
+        margin: 0%;
+        font-weight: bold;
+        cursor: pointer;
+      }
 
-@media screen and (max-width:550px) {
-  .btnSelect {
-      width: 42.5em;
-  }
-}
+      .espacio{
+        padding: 2%;
+        z-index: 1000;
+      }
+      .opcionElegida{
+        text-align:center;
+        margin-top: 5%;
+        display: none;
+      }
+      .search{
+        margin-top: 2%;
+        margin-right: 1%;
+       /* margin-left: 2em;*/
+      }
+      .btnSelect{
+        width: 14em;/* 1oem text-align: left;*/
+        height: 3em;
+        font-size: 0.7em;
 
-@media screen and (max-width:768px) {
-  .btnSelect {
-      width: 101%;
-  }
-}
-@media screen and (max-width:994px) and (min-width:768px) {
-  .btnSelect {
-      width: 11em;
-      padding-left: 0px;
-  }
-  .size{
-     font-size: 9px;
-  }
-  .search{
-     margin-right: 11px;
-  }
-}
-@media screen and (min-width:994px) {
-  .btnSelect {
-      width: 15em;
-  }
-}
+      }
+      .btnSelect2{
+        width: 10.5em;
+        height: 3em;
+        padding-left: 1px;
+        font-size: 0.7em;
+        text-align: left;
+      }
+      .ul{
+        width: 15em;
+      }
+      .ulFiltros{
+          width: 41em;
+          height: 30em;
+          margin-left: -350%;
+      }
+      .textDropDawn{
+        margin-left: 10%;
+        font-weight: bold;
+        color: #364e68;
+      }
+      .divMinimo{
+        width: 49%;
+        float: left;
+      }
+      .selecBorde{
+        border: solid 1px #364e68;
+      }
+      .divMaximo{
+        float: right;
+        width: 49%;
+      }
+      .margen{
+        margin-top: -100px;
+      }
+      .divMargen{
+        margin-top: -3%;
+      }
+      .pCopyRigth{
+        font-size:10px;
+      }
+      .icon{
+        padding-left: 3px;
+      }
+      .intro {
+        font-size: 150%;
+        color: red;
+      }
+      .fadeOutRight{
+        animation-duration: 1s
+      }
 
-</style>
+      @media screen and (max-width:550px) {
+        .btnSelect {
+            width: 42.5em;
+        }
+      }
+
+      @media screen and (max-width:768px) {
+        .btnSelect {
+            width: 100%;
+        }
+      }
+      @media screen and (max-width:994px) and (min-width:768px) {
+        .btnSelect {
+            width: 11em;
+            padding-left: 0px;
+        }
+        .size{
+           font-size: 9px;
+        }
+        .search{
+           margin-right: 11px;
+        }
+      }
+      @media screen and (min-width:994px) {
+        .btnSelect {
+            width: 14em;
+        }
+      }
+    </style>
 </head>
 <body>
   {% get_current_language as LANGUAGE_CODE %}
@@ -236,7 +221,7 @@
         <div class="row">
           <form id=idForm method="get" class="form-search col-md-12 margen">
             <div class="row  align-items-end divMargen">
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="list-types">{% trans 'Listing Types' %}</label>
                   <select name="list-types" id="list-types" class="form-control rounded-0">
                     <option value="ALL">{% trans 'All' %}</option>
@@ -247,13 +232,23 @@
                     <option value="FAR">{% trans 'Farms' %}</option>
                   </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <label for="offer-types">{% trans 'Offer Type' %}</label>
                   <select name="offer-types" id="offer-types" class="form-control rounded-0">
                       <option value="ALL">{% trans 'All' %}</option>
                       <option value="SALE / VENTA">{% trans 'For Sale' %}</option>
                       <option value="RENT / ARRENDAMIENTO">{% trans 'For Rent' %}</option>
                       <option value="SWAP / PERMUTA">{% trans 'For Swap' %}</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label for="condition">{% trans 'Condition' %}</label>
+                  <select name="condition" id="condition" class="form-control rounded-0">
+                    <option value="ALL">{% trans 'All' %}</option>
+                    <option value="NEW">{% trans 'New' %}</option>
+                    <option value="PLA">{% trans 'Off-Plan' %}</option>
+                    <option value="STA">{% trans 'On Construction' %}</option>
+                    <option value="USE">{% trans 'Used' %}</option>
                   </select>
                 </div>
                 <div class="col-md-3">
@@ -269,7 +264,7 @@
 
             </div>
             <div class="row">
-               <div class="col-md-2 search">
+               <div class="col-md-2  search">
                   <div>
                     <button class="btn btn-default dropdown-toggle buttonMenu btnSelect" id="btnHab" type="button" data-toggle="dropdown">
                       <i class="fas fa-bed"></i>&nbsp;&nbsp;{% trans 'Rooms' %}
@@ -312,7 +307,7 @@
                     <span id="textBanMa"></span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul" id="id_dropdownBan">
-                      <span  class="textDropDawn">&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Number of' %} {% trans 'bathrooms' %}
+                      <span  class="textDropDawn">{% trans 'Number of' %} {% trans 'bathrooms' %}
                       </span>
                       <li class="espacio" >
                         <div class="divMinimo selecBorde">
@@ -350,9 +345,7 @@
                     <span id="textAreMa" class="size">m²</span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul" id="id_dropdownAre">
-                      <span class="textDropDawn">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Area m²' %}
-                      </span>
+                      <span class="textDropDawn">{% trans 'Area m²' %}</span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="area_min" id="selectMinAre" class="form-control">
@@ -404,9 +397,7 @@
                     <span id="textPreMa" class="size"></span>
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu filtro ul" id="id_dropdownPre">
-                      <span class="textDropDawn">
-                        &nbsp;&nbsp;&nbsp;&nbsp;{% trans 'Price' %} ({% trans 'Millions' %})
-                      </span>
+                      <span class="textDropDawn">{% trans 'Price' %} ({% trans 'Millions' %})</span>
                       <li class="espacio">
                         <div class="divMinimo selecBorde">
                           <select name="price_min" id="selectMinPre" class="form-control">
@@ -490,8 +481,8 @@
             <div class="site-section-title">
               <h2>{% trans 'Why Choose Us?' %}</h2>
             </div>
-            <p>{% trans "Although this is a brand new platform, our team has many years of experience buying and selling properties in the region." %} {% trans "During this time we have gain reputation and
-             are locally known in the real state and contruction bussines" %}</p>
+            <p>{% trans "Although this is a brand new platform, our team has many years of experience buying and selling properties in the region." %} {% trans "During this time we have gain reputation" %}
+              {% trans "and are locally known in the real state and contruction bussines" %}</p>
           </div>
         </div>
         <div class="row">
@@ -586,7 +577,6 @@
 
           <div class="col-lg-4 mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">{% trans 'Follow Us' %}</h3>
-
                 <div>
                   <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
                   <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
@@ -594,21 +584,21 @@
                   <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                 </div>
           </div>
+          <span id="session">{{ request.session.visits }}</span>
         </div>
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p class="pCopyRigth">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
-        </div>
+<!--        <div class="row pt-5 mt-5 text-center">-->
+<!--          <div class="col-md-12">-->
+<!--            <p class="pCopyRigth">-->
+<!--            &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>-->
+<!--            &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </footer>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <a href="https://api.whatsapp.com/send?phone=573108181802&text=Quisiera%20mas%20informacion%20sobre%20los%20inmuebles%20y%20servicios%20que%20ofrecen" class="float" target="_blank">
-  <i class="fa fa-whatsapp my-float"></i>
+  <i class="fab fa-whatsapp"></i>
   </a>
 
   <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
@@ -639,12 +629,13 @@
         if (command == 1) {
             $(id).removeClass("property-favorite");
             $(id).addClass("property-unfavorite");
-
+            $(id).prop('title', '{% trans 'Remove from favourites' %}');
         }else if(command == 0){
             $(id).removeClass("property-unfavorite");
             $(id).addClass("property-favorite");
+            $(id).prop('title', '{% trans 'Add to favourites' %}');
         }else if(command == 2){
-          swal.fire("{%trans 'Cannot add it to favourite!'%}", "{% trans 'You pubished this property' %}", "error");
+          swal.fire("{%trans 'Cannot add it to favourites!'%}", "{% trans 'You pubished this property' %}", "error");
         }
         else {
          Swal.fire({
@@ -751,7 +742,6 @@
           }else if( cont == 3 ){
             $(".liBtnCuenta").removeClass('animated heartBeat');
             clearInterval( id );
-            console.log(cont)
           }
         },500);
     });
@@ -952,7 +942,15 @@
               myArray[i].removeClass('show');
               }
           }
-          });
+    });
+    let visit = $("#session");
+    $(window).on('load',function(){
+        var pathname = window.location.href;
+        if ( !pathname.includes('?') && !visit.text()){
+          $('#myModal').modal('show');
+          }
+
+    });
 </script>
   </body>
 </html>
