@@ -1,70 +1,85 @@
-<!DOCTYPE html>
 {% load i18n %}
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Autocomplete Address Form</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
     <style>
-    .select2-container {
-        width: 260px ! important;
-    }
-    .span{
-        color: red; 
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
         font-weight: bold;
-    }
-    .divBtn{
-        text-align: center;
-    }
-    .contenedor{
-        width: 45%;
-        height: 22%;
-        margin: 0 auto;
-        border: solid #ccc9c9;
-    }
-    .form{
-        margin: 0 auto;
-        padding-top:3%;
-    }
+        width: 100px;
+        color: #303030;
+        font-family: "Roboto";
+      }
+      #address {
+        border: 1px solid #000090;
+        background-color: #f0f9ff;
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+    </style>
+  </head>
 
-    input[type=number] {
-        -moz-appearance:textfield; /* Firefox */
-        text-align: center;
-    }
-    input[type=text] {
-        text-align: center;
-    }
-    input[type=checkbox] {
-     -ms-transform: scale(1.5); /* IE */
-     -moz-transform: scale(1.5); /* FF */
-     -webkit-transform: scale(1.5); /* Safari and Chrome */
-     -o-transform: scale(1.5); /* Opera */
-      padding: 10px;
-    }
-      .pac-container {
-        z-index: 10000 !important;
-    }
-</style>
-     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-</head>
-<body>
-<input id="prop" value="{{propiedad}}" hidden disabled>
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <strong>{%trans 'Look up your address!' %} </strong>
-                                {%trans "We'll try to auto-complete this form for you, if it isn't possible, please fill it out yourself"%}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-<div class="container">
-    <div class="row">
+  <body>
+    <div id="locationField">
+      <input id="autocomplete"
+             placeholder="Enter your address"
+             onFocus="geolocate()"
+             type="text"/>
+    </div>
+
+    <!-- Note: The address components in this sample are typical. You might need to adjust them for
+               the locations relevant to your app. For more information, see
+         https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
+    -->
+    <div style="margin: 50px">
         <form id="formUno" method="post" class="form">
             {% csrf_token %}
             <div class="col-md-12">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="col-md-12">
-
                         <div class="row">
                             <div class="col-md-4">
                                 {{form.errors}}
@@ -159,22 +174,6 @@
 
                              {{form.propiedad}}
 
-                        <br/>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-9 col-md-7 col-lg-4>
-                                <label class="control-label">
-                                    <p>{% trans 'Show full address in web:' %}</p>
-                                </label>
-                            </div>
-                            <div class="col-sm-3 col-md-3 col-lg-2">
-                                {{form.mostrar}}
-                            </div>
-                        </div>
-                        <div style=" text-align: center;">
-                            <span style="font-size: 18px;">{% trans 'Address to be shown:' %}</span>
-                            <span style="font-weight: bold;" id="showData2"></span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -187,54 +186,59 @@
                 </div>
             </div>
         </form>
-    </div>
-</div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&libraries=places&callback=initAutocomplete"
-            async defer></script>
-</body>
+        </div>
+    <table id="address">
+      <tr>
+        <td class="label">Street address</td>
+        <td class="slimField"><input class="field" id="street_number" disabled="true"/></td>
+        <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"/></td>
+      </tr>
+      <tr>
+        <td class="label">City</td>
+        <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"/></td>
+      </tr>
+      <tr>
+        <td class="label">State</td>
+        <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"/></td>
+        <td class="label">Zip code</td>
+        <td class="wideField"><input class="field" id="postal_code" disabled="true"/></td>
+      </tr>
+      <tr>
+        <td class="label">Country</td>
+        <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"/></td>
+      </tr>
+      <tr>
+        <td class="label">Neighborhood</td>
+        <td class="wideField" colspan="3"><input class="field" id="neighborhood" disabled="true"/></td>
+      </tr>
+    </table>
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>-->
-<script>
-    $(".alert").hide()
-    document.getElementById('id_tipo_via').className="route";
-    document.getElementById('id_via').className="via";
-    document.getElementById('id_prefijo_via').className="pre_via";
-    document.getElementById('id_prefijo_numero').className="pre_num";
-    document.getElementById('id_numero').className="street_number_1";
-    document.getElementById('id_placa').className="street_number_2";
-    document.getElementById('id_departamento').className="administrative_area_level_1";
-    document.getElementById('id_ciudad').className="locality";
-    document.getElementById('id_barrio').className="neighborhood";
-    var city;
-    var val_city;
-    var placeSearch, autocomplete;
+    <script>
+// This sample uses the Autocomplete widget to help the user select a
+// place, then it retrieves the address components associated with that
+// place, and then it populates the form fields with those details.
+// This sample requires the Places library. Include the libraries=places
+// parameter when you first load the API. For example:
+// <script
+// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-    function getCities() {
-        var opcion = $("#id_departamento option:selected").val();
-        depa = $("#id_departamento option:selected").text();
-        $.ajax({
-            url: '{% url "city:cities" %}',
-            type: 'get',
-            data: { 'id': opcion }
-        }).done(function(data) {
-            var valores = '';
-            var datos = JSON.parse(data);
-            $("#id_ciudad").empty();
-            valores = "<option value='' selected>Ciudad</option>"
-            $.each(datos, function(item, val) {
-                valores += "<option value='" + val.pk + "'>" + val.fields.name + "</option>";
-            });
-            $("#id_ciudad").append(valores);
-            $("#id_ciudad").val(city_id);
-        });
-        datos();
-    }
+document.getElementById('id_tipo_via').className="route";
+document.getElementById('id_via').className="via";
+document.getElementById('id_prefijo_via').className="pre_via";
+document.getElementById('id_prefijo_numero').className="pre_num";
+document.getElementById('id_numero').className="street_number_1";
+document.getElementById('id_placa').className="street_number_2";
+document.getElementById('id_departamento').className="administrative_area_level_1";
+document.getElementById('id_ciudad').className="locality";
+document.getElementById('id_barrio').className="neighborhood";
+
+var placeSearch, autocomplete;
+
 var componentForm = {
   street_number: 'short_name',
   route: 'long_name',
-  locality: 'long_name',
   administrative_area_level_1: 'short_name',
-
+  locality: 'long_name',
   //country: 'long_name',
   neighborhood: 'short_name'
 };
@@ -258,12 +262,18 @@ function fillInAddress() {
   // Get the place details from the autocomplete object.
   var place = autocomplete.getPlace();
 
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
   // Get each component of the address from the place details,
   // and then fill-in the corresponding field on the form.
   for (var i = 0; i < place.address_components.length; i++) {
     var addressType = place.address_components[i].types[0];
     if (componentForm[addressType]) {
-      var val = place.address_components[i][componentForm[addressType]];
+        var val = place.address_components[i][componentForm[addressType]];
+        console.log(addressType)
       switch (addressType){
         case "route":
             let value = val.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -301,77 +311,45 @@ function fillInAddress() {
                         prefix.options[0].selected = true;
                     }
                 }
-            }else{ alert("{% trans "We've tried our best to autocomplete. Please check the form" %}")}
+            }else{ alert("It wasn't possible to auto-fill")}
 
             break;
         case "administrative_area_level_1":
-          var val_dept =val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+          var val2 =val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
           dept = document.getElementsByClassName(addressType)[0];
-          dept.options[0].selected = true;
-          if (val_dept === 'BOGOTA'){
+          if (val2 === 'BOGOTA'){
             setSelectedValue(dept, 'CUNDINAMARCA');
-          }else{ setSelectedValue(dept, val_dept);}
-          setSelectedValue(city, val_city);
+          }else{ setSelectedValue(dept, val2);}
           break;
         case "locality":
-          val_city = val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+          var val2 =val.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
           city = document.getElementsByClassName(addressType)[0];
+          setSelectedValue(city, val2);
           break;
         case "street_number":
              let street = val.split('-');
-             console.log(val)
-             console.log(street)
-             let prefix2 = document.getElementsByClassName('pre_num')[0];
             if ( street.length > 1) {
                 let number = street[0].replace('#', '' );
                 let placa = street[1];
                 let numPref2 = number.match(/[a-z]+|[^a-z]+/gi);
-                console.log(numPref2)
                 if (numPref2.length > 1){
-                console.log(numPref2[1].toUpperCase())
                     document.getElementsByClassName('street_number_1')[0].value = numPref2[0]
-                    let pxNum =numPref2[1].toUpperCase()
-                    setSelectedValue(prefix2, pxNum);
-                }else{document.getElementsByClassName('street_number_1')[0].value = number;
+                    let prefix2 = document.getElementsByClassName('pre_num')[0];
+                    setSelectedValue(prefix2, numPref2[1].toUpperCase());
+                }else{document.getElementsByClassName('street_number_1')[0].value = number;}
                 document.getElementsByClassName('street_number_2')[0].value = placa;
-                prefix2.options[0].selected = true;
-                }
             }else{
-                let withprex = val.match(/[a-z]+|[^a-z]+/gi);
-                if ( withprex.length > 2){
-                    let pxNum = withprex[1].toUpperCase()
-                    setSelectedValue(prefix2, pxNum);
-                    document.getElementsByClassName('street_number_1')[0].value = withprex[0];
-                    document.getElementsByClassName('street_number_2')[0].value = withprex[2];
-                } else{
-                    if (val.length > 1){
-                        document.getElementsByClassName('street_number_1')[0].value = val.substring(0, val.length/2 + val.length % 2);
-                        document.getElementsByClassName('street_number_2')[0].value = val.substring(val.length/2 + val.length % 2, val.length);
-                        prefix2.options[0].selected = true;
-                    }else{
-                     document.getElementsByClassName('street_number_1')[0].value = val;
-                     document.getElementsByClassName('street_number_2')[0].value = '';
-                     prefix2.options[0].selected = true;
-                    }
-                    alert("{% trans "We've tried our best to autocomplete. Please check the form" %}")
-                }
+                document.getElementsByClassName('street_number_1')[0].value = val.substring(0, val.length/2);
+                document.getElementsByClassName('street_number_2')[0].value = val.substring(val.length/2, val.length);
             }
-           // $("#id_departamento").trigger('change');
-            $("#id_prefijo_via").trigger('change');
-            $("#id_prefijo_numero").trigger('change');
-            $("#id_ciudad").trigger("change");
-            $("#id_mostrar").trigger("change");
             break;
         default:
             document.getElementsByClassName(addressType)[0].value = val;
             break;
       }
-      datos()
     }
   }
-
   function setSelectedValue(selectObj, valueToSet) {
-  console.log(valueToSet)
     for (var i = 0; i < selectObj.options.length; i++) {
         if (selectObj.options[i].text== valueToSet) {
             selectObj.options[i].selected = true;
@@ -396,75 +374,10 @@ function geolocate() {
     });
   }
 }
-//SECTION 2
-    var  depa = '';
-    var  ciud = '';
-    var  pref = '';
-    var  prefNum = '';
-    $("#id_prefijo_via").change(function(){
-        pref = $("#id_prefijo_via option:selected").text();
-        datos();
-    });
-
-    $("#id_prefijo_numero").change(function(){
-        prefNum = $("#id_prefijo_numero option:selected").text();
-        datos();
-    });
-    // show dept and city in mostrar address (trick)
 
 
-    $("#id_departamento").change(function(){
-        getCities();
-    });
-
-    $("#id_ciudad").change(function(){
-        ciud = $("#id_ciudad option:selected").text();
-        datos();
-    });
-
-    var propy = $("#prop").val();
-    $("#id_propiedad").val(propy).change();
-    $('label[for="id_propiedad"]').hide();
-    $("#id_propiedad").hide()
-
-    //Css
-    $("input, select").addClass('form-control');
-    $("#id_mostrar").prop('checked',true);
-
-    if(  $("#id_mostrar").is(':checked') ){
-        }
-
-    function datos(){
-    $("#showData2").text('');
-        if( $("#id_mostrar").is(':checked') ){
-         $("#showData2").text($("#id_tipo_via").val()+' '+$("#id_via").val()+' '+$("#id_prefijo_via").val()+' '+$("#id_numero").val() +' # '+$("#id_prefijo_numero").val()+' - '+$("#id_placa").val()+' '+$("#id_ciudad option:selected").text()+', '+$("#id_departamento option:selected").text()+', '+$("#id_barrio").val() );
-        }else{
-            $("#showData2").html( $("#id_barrio").val()+' '+$("#id_ciudad option:selected").text()+' '+$("#id_departamento option:selected").text() );
-        }
-    }
-
-    $("#id_tipo_via, #id_via, #id_prefijo_via, #id_numero, #id_prefijo_numero, #id_placa, #id_ciudad, #id_departamento, #id_barrio").change(function () {
-        $("#showData2").html( $("#id_barrio").val()+' '+$("#id_departamento option:selected").text()+', '+$("#id_ciudad option:selected").text() );
-        datos();
-    });
-
-
-    if( $("#id_mostrar").is(':checked') ){
-        datos();
-    }
-
-    $("#id_mostrar").change(function() {
-            datos();
-    });
-
-    var city_id = $("#id_ciudad").val();
-    $( document ).ready(function() {
-        datos()
-    });
-
-    $("#autocomplete").focus( function (){
-        $(".alert").show()
-    })
-
-</script>
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&libraries=places&callback=initAutocomplete"
+        async defer></script>
+  </body>
 </html>

@@ -23,37 +23,37 @@ msgstr ""
 msgid "Property does not exist"
 msgstr ""
 
-#: properties/forms.py:15
+#: properties/forms.py:16
 msgid "Carrera"
 msgstr ""
 
-#: properties/forms.py:16
+#: properties/forms.py:17
 msgid "Transversal"
 msgstr ""
 
-#: properties/forms.py:17
+#: properties/forms.py:18
 msgid "Diagonal"
 msgstr ""
 
-#: properties/forms.py:18
+#: properties/forms.py:19
 msgid "Avenida"
 msgstr ""
 
-#: properties/forms.py:19
+#: properties/forms.py:20
 msgid "Avenida calle"
 msgstr ""
 
-#: properties/forms.py:20
+#: properties/forms.py:21
 msgid "Avenida carrera"
 msgstr ""
 
-#: properties/forms.py:29
+#: properties/forms.py:30
 msgid ""
 "Add extra information that adds value to your property. i.e. common areas, "
 "services, security, location, etc."
 msgstr ""
 
-#: properties/forms.py:30
+#: properties/forms.py:31
 msgid "select owner"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "price"
 msgstr ""
 
-#: properties/forms.py:83
+#: properties/forms.py:84
 msgid "csv file"
 msgstr ""
 
@@ -596,37 +596,47 @@ msgstr ""
 msgid "Log In"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:48
+#: properties/templates/properties/my_account.html:54
 msgid "Are you sure?"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:49
+#: properties/templates/properties/my_account.html:55
 msgid "You will be logged out"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:53
+#: properties/templates/properties/my_account.html:59
 msgid "Yes!"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:54
+#: properties/templates/properties/my_account.html:60
 #: properties/templates/properties/new_image2.html:127
 #: properties/templates/properties/new_image2.html:321
 msgid "Cancel"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:58
+#: properties/templates/properties/my_account.html:64
 msgid "You are logged out"
 msgstr ""
 
-#: properties/templates/properties/my_account.html:59
+#: properties/templates/properties/my_account.html:65
 msgid "You can go to My account to login again"
 msgstr ""
 
-#: properties/templates/properties/new_address.html:156
+#: properties/templates/properties/new_address.html:54
+msgid "Look up your address!"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:55
+msgid ""
+"We'll try to auto-complete this form for you, if it isn't possible, please "
+"fill it out yourself"
+msgstr ""
+
+#: properties/templates/properties/new_address.html:167
 msgid "Show full address in web:"
 msgstr ""
 
-#: properties/templates/properties/new_address.html:164
+#: properties/templates/properties/new_address.html:175
 msgid "Address to be shown:"
 msgstr ""
 

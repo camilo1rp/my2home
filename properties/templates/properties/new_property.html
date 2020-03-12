@@ -242,6 +242,12 @@
 
                                         <h2>{% trans 'Address' %}</h2><!-- PAGE 2-->
                                         <section id="section2">
+                                                <div id="locationField">
+                                                      <input id="autocomplete"
+                                                             placeholder="{% trans 'Enter your address to fill-out the form below' %}"
+                                                             onFocus="geolocate()"
+                                                             type="text"/>
+                                                </div>
                                             {% include "properties/new_address.html" %}
                                         </section>
 
@@ -267,7 +273,6 @@
 </div>
 
         {% block script %}
-
 <script>
 $(document).ready(function(){
     var prop_id;
@@ -374,9 +379,8 @@ $(document).ready(function(){
                 if($(this).val() === '0'){
                     $(this).val("")
                     }
-            });
-
     });
+});
 </script>
 {% endblock %}
 {% endblock %}

@@ -24,31 +24,31 @@ msgstr ""
 msgid "Property does not exist"
 msgstr "Propiedad no existe"
 
-#: properties/forms.py:15
+#: properties/forms.py:16
 msgid "Carrera"
 msgstr "Carrera"
 
-#: properties/forms.py:16
+#: properties/forms.py:17
 msgid "Transversal"
 msgstr "Transversal"
 
-#: properties/forms.py:17
+#: properties/forms.py:18
 msgid "Diagonal"
 msgstr "Diagonal"
 
-#: properties/forms.py:18
+#: properties/forms.py:19
 msgid "Avenida"
 msgstr "Avenida"
 
-#: properties/forms.py:19
+#: properties/forms.py:20
 msgid "Avenida calle"
 msgstr "Avenida calle"
 
-#: properties/forms.py:20
+#: properties/forms.py:21
 msgid "Avenida carrera"
 msgstr "Avenida carrera"
 
-#: properties/forms.py:29
+#: properties/forms.py:30
 msgid ""
 "Add extra information that adds value to your property. i.e. common areas, "
 "services, security, location, etc."
@@ -56,7 +56,7 @@ msgstr ""
 "Agrega información extra para incrementar el valor de tu inmueble. e.j, "
 "áreas comunes, seguridad, ubicación, etc."
 
-#: properties/forms.py:30
+#: properties/forms.py:31
 msgid "select owner"
 msgstr "Seleccione Propietario"
 
@@ -64,7 +64,7 @@ msgstr "Seleccione Propietario"
 msgid "price"
 msgstr "precio"
 
-#: properties/forms.py:83
+#: properties/forms.py:84
 msgid "csv file"
 msgstr "archivo csv"
 
@@ -621,37 +621,49 @@ msgstr "Cerrar Sesión"
 msgid "Log In"
 msgstr "Iniciar sesión"
 
-#: properties/templates/properties/my_account.html:48
+#: properties/templates/properties/my_account.html:54
 msgid "Are you sure?"
 msgstr "Estas seguro?"
 
-#: properties/templates/properties/my_account.html:49
+#: properties/templates/properties/my_account.html:55
 msgid "You will be logged out"
 msgstr "Tu sesión se cerrara"
 
-#: properties/templates/properties/my_account.html:53
+#: properties/templates/properties/my_account.html:59
 msgid "Yes!"
 msgstr "Si!"
 
-#: properties/templates/properties/my_account.html:54
+#: properties/templates/properties/my_account.html:60
 #: properties/templates/properties/new_image2.html:127
 #: properties/templates/properties/new_image2.html:321
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: properties/templates/properties/my_account.html:58
+#: properties/templates/properties/my_account.html:64
 msgid "You are logged out"
 msgstr "Tu sesión has sido cerrada"
 
-#: properties/templates/properties/my_account.html:59
+#: properties/templates/properties/my_account.html:65
 msgid "You can go to My account to login again"
 msgstr "Puedes ir a Mi cuenta e ingresar otra vez"
 
-#: properties/templates/properties/new_address.html:156
+#: properties/templates/properties/new_address.html:54
+msgid "Look up your address!"
+msgstr "Busca tu dirección!"
+
+#: properties/templates/properties/new_address.html:55
+msgid ""
+"We'll try to auto-complete this form for you, if it isn't possible, please "
+"fill it out yourself"
+msgstr ""
+"Intentaremos llenar el siguiente formulario automáticamente, si no es "
+"posible, por favor llenarlo tu mismo."
+
+#: properties/templates/properties/new_address.html:167
 msgid "Show full address in web:"
 msgstr "Mostrar dirección completa en la web:"
 
-#: properties/templates/properties/new_address.html:164
+#: properties/templates/properties/new_address.html:175
 msgid "Address to be shown:"
 msgstr "Dirección a mostrar:"
 
