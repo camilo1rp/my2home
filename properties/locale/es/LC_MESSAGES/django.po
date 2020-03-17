@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-02 16:21+0000\n"
-"PO-Revision-Date: 2020-03-17 19:37+0000\n"
+"POT-Creation-Date: 2020-03-17 19:49+0000\n"
+"PO-Revision-Date: 2020-03-17 19:56+0000\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.9.3\n"
 
 #: properties/decorators.py:15 properties/views.py:257 properties/views.py:284
-#: properties/views.py:525
+#: properties/views.py:528
 msgid "Property does not exist"
 msgstr "Propiedad no existe"
 
@@ -60,7 +60,7 @@ msgstr ""
 msgid "select owner"
 msgstr "Seleccione Propietario"
 
-#: properties/forms.py:32 properties/models.py:51
+#: properties/forms.py:33 properties/models.py:51
 msgid "price"
 msgstr "precio"
 
@@ -127,7 +127,6 @@ msgid "type of property"
 msgstr "tipo de propiedad"
 
 #: properties/models.py:50
-#| msgid "confirmation"
 msgid "condition"
 msgstr "condición"
 
@@ -223,6 +222,12 @@ msgstr "teléfono"
 msgid "message"
 msgstr "Mensaje"
 
+#: properties/templates/properties/address_auto.html:184
+#: properties/templates/properties/new_address.html:185
+#: properties/templates/properties/new_property.html:236
+msgid "save"
+msgstr "guardar"
+
 #: properties/templates/properties/contact.html:87
 #: properties/templates/properties/contact.html:263
 #: properties/templates/properties/index.html:571
@@ -240,7 +245,7 @@ msgid "Address"
 msgstr "Dirección"
 
 #: properties/templates/properties/contact.html:145
-#: properties/templates/properties/message_details.html:14
+#: properties/templates/properties/message_details.html:13
 msgid "Phone"
 msgstr "Teléfono"
 
@@ -403,7 +408,6 @@ msgstr "Permuta"
 
 #: properties/templates/properties/index.html:245 properties/views.py:63
 #: properties/views.py:64 properties/views.py:65
-#| msgid "confirmation"
 msgid "Condition"
 msgstr "Condición"
 
@@ -536,7 +540,6 @@ msgid "Add to favourites"
 msgstr "Agregar a favoritos"
 
 #: properties/templates/properties/index.html:638
-#| msgid "Cannot add it to favourite!"
 msgid "Cannot add it to favourites!"
 msgstr "No se puede agregar a favoritos!"
 
@@ -555,15 +558,9 @@ msgstr "Necesitas ingresar para agregar propiedades a favoritos"
 msgid "Sender"
 msgstr "Remitente"
 
-#: properties/templates/properties/message_details.html:13
-#| msgid "email"
+#: properties/templates/properties/message_details.html:28
 msgid "Email"
 msgstr "correo"
-
-#: properties/templates/properties/message_details.html:28
-#| msgid "Properties"
-msgid "Propiedad"
-msgstr "Propiedades"
 
 #: properties/templates/properties/message_details.html:29
 #: properties/templates/properties/messages_list.html:26
@@ -571,12 +568,15 @@ msgid "Date"
 msgstr "Fecha"
 
 #: properties/templates/properties/message_details.html:39
+msgid "Propiedad"
+msgstr "Propiedades"
+
+#: properties/templates/properties/message_details.html:40
 #: properties/templates/properties/messages_list.html:25
-#| msgid "message"
 msgid "Message"
 msgstr "Mensaje"
 
-#: properties/templates/properties/message_details.html:40
+#: properties/templates/properties/message_details.html:41
 msgid "Delete"
 msgstr "Borrar"
 
@@ -586,12 +586,10 @@ msgid "Details"
 msgstr "Detalles"
 
 #: properties/templates/properties/messages_list.html:24
-#| msgid "New Property"
 msgid "Property"
 msgstr "Inmueble"
 
 #: properties/templates/properties/messages_list.html:40
-#| msgid "message"
 msgid "no messages"
 msgstr "No tienes mensajes"
 
@@ -662,10 +660,11 @@ msgstr "Mostrar dirección completa en la web:"
 msgid "Address to be shown:"
 msgstr "Dirección a mostrar:"
 
-#: properties/templates/properties/new_address.html:174
-#: properties/templates/properties/new_property.html:236
-msgid "save"
-msgstr "guardar"
+#: properties/templates/properties/new_address.html:304
+#: properties/templates/properties/new_address.html:356
+msgid "We've tried our best to autocomplete. Please check the form"
+msgstr ""
+"Hemos intentado llenar el formulario. Por favor revisalo antes de seguir"
 
 #: properties/templates/properties/new_image2.html:108
 msgid "confirmation"
@@ -749,11 +748,15 @@ msgstr "Nuevo inmueble"
 msgid "Your Property's Details"
 msgstr "Detalles de tu inmueble"
 
-#: properties/templates/properties/new_property.html:248
+#: properties/templates/properties/new_property.html:247
+msgid "Enter your address to fill-out the form below"
+msgstr "Busca tu dirección para llenar el formulario"
+
+#: properties/templates/properties/new_property.html:254
 msgid "Image"
 msgstr "Imagen"
 
-#: properties/templates/properties/new_property.html:253
+#: properties/templates/properties/new_property.html:259
 msgid "Done"
 msgstr "Hecho"
 
@@ -1010,7 +1013,7 @@ msgstr "Max precio"
 msgid "Access denied"
 msgstr "Acceso no autorizado"
 
-#: properties/views.py:286 properties/views.py:527
+#: properties/views.py:286 properties/views.py:530
 msgid "Access denied, you don't own or manage this property"
 msgstr "Acceso no autorizado, tu no administras esta propiedad"
 
