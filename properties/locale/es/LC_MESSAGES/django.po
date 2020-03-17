@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-02 16:21+0000\n"
-"PO-Revision-Date: 2020-03-02 16:54+0000\n"
-"Last-Translator: b'Camilo Romero <inmueblesfusa@gmail.com>'\n"
+"PO-Revision-Date: 2020-03-17 19:37+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -536,7 +536,6 @@ msgid "Add to favourites"
 msgstr "Agregar a favoritos"
 
 #: properties/templates/properties/index.html:638
-#, fuzzy
 #| msgid "Cannot add it to favourite!"
 msgid "Cannot add it to favourites!"
 msgstr "No se puede agregar a favoritos!"
@@ -562,7 +561,6 @@ msgid "Email"
 msgstr "correo"
 
 #: properties/templates/properties/message_details.html:28
-#, fuzzy
 #| msgid "Properties"
 msgid "Propiedad"
 msgstr "Propiedades"
@@ -574,7 +572,6 @@ msgstr "Fecha"
 
 #: properties/templates/properties/message_details.html:39
 #: properties/templates/properties/messages_list.html:25
-#, fuzzy
 #| msgid "message"
 msgid "Message"
 msgstr "Mensaje"
@@ -589,16 +586,14 @@ msgid "Details"
 msgstr "Detalles"
 
 #: properties/templates/properties/messages_list.html:24
-#, fuzzy
 #| msgid "New Property"
 msgid "Property"
-msgstr "Nuevo inmueble"
+msgstr "Inmueble"
 
 #: properties/templates/properties/messages_list.html:40
-#, fuzzy
 #| msgid "message"
 msgid "no messages"
-msgstr "Mensaje"
+msgstr "No tienes mensajes"
 
 #: properties/templates/properties/my_account.html:27
 #: properties/templates/properties/top_nav.html:29

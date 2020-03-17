@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-02 16:21+0000\n"
-"PO-Revision-Date: 2020-03-02 16:59+0000\n"
-"Last-Translator: b'Camilo Romero <inmueblesfusa@gmail.com>'\n"
+"PO-Revision-Date: 2020-03-17 19:38+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -57,10 +57,9 @@ msgid "Name"
 msgstr "Nombre"
 
 #: account/templates/account/dashboard.html:184
-#, fuzzy
 #| msgid "Username"
 msgid "Surname"
-msgstr "Nombre de Usuario"
+msgstr "Apellido"
 
 #: account/templates/account/dashboard.html:186
 #: account/templates/registration/login.html:33
