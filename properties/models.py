@@ -9,12 +9,53 @@ from django.utils.translation import gettext_lazy as _
 from account.validators import validate_phone
 from citiesapp.models import City, State
 
+
 def current_year():
     return datetime.today().year
 
 
 def max_value_current_year(value):
     return MaxValueValidator(current_year())(value)
+
+
+def code_generator(self):
+    last_property = Property.objects.all().order_by('id').last()
+    # check if it is the first register
+    if not last_property:
+        code_str = datetime.now().strftime("%y") + datetime.now().strftime("%m") + '0000'
+        code = int(code_str)
+        return code
+    # get letest property's code
+    property_code = str(last_property.code)
+    code_date = property_code[:4]
+    code_unique = (int(property_code[-4:]))
+    today_date = datetime.now().strftime("%y%m")
+    # creates new code
+    if code_date != today_date:
+        code_str = today_date + '0000'
+        code = int(code_str)
+    else:
+        code_unique_new = str(code_unique + 1).zfill(4)
+        code_str = today_date + code_unique_new
+        code = int(code_str)
+    return code
+
+
+class Project(models.Model):
+    name = models.CharField(_('name'), max_length=30)
+    name_slug = models.CharField(max_length=50)
+    code = models.CharField(_('code'), max_length=30)
+    date_start = models.DateField(_('start date'))
+    date_complete = models.DateField(_('completion date'))
+    photo = models.ImageField(upload_to="media/project", default="/profiles/project.jpg")
+
+    def save(self, *args, **kwargs):
+        if not self.name_slug:
+            self.name_slug = slugify(self.name)
+        if not self.code:
+            self.code = code_generator()
+        super(Project, self).save(*args, **kwargs)
+
 
 class Property(models.Model):
     APARTMENT = 'APT'
@@ -56,7 +97,7 @@ class Property(models.Model):
     area_built = models.DecimalField(_('built area'), default=0, decimal_places=0, max_digits=12)
     area_total = models.DecimalField(_('total area'), default=0, decimal_places=0, max_digits=12)
     estrato = models.IntegerField(null=True, blank=True)
-    year = models.PositiveIntegerField(_('built in'),  default=current_year(),
+    year = models.PositiveIntegerField(_('built in'), default=current_year(),
                                        validators=[MinValueValidator(1900), max_value_current_year])
     title = models.CharField(_('title'), max_length=30)
     title_slug = models.SlugField(max_length=50)
@@ -68,9 +109,13 @@ class Property(models.Model):
     active = models.BooleanField(_('active'), default=False)
     pause = models.BooleanField(_('pause'), default=False)
     promoted = models.BooleanField(_('promoted'), default=False)
-    followers = models.ManyToManyField(User, through='Following', related_name='following',)
+    followers = models.ManyToManyField(User, through='Following', related_name='following', )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    # project
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='proj_properties',
+                                verbose_name=_('project'))
 
     class Meta:
         ordering = ('-created',)
@@ -83,30 +128,8 @@ class Property(models.Model):
         if not self.title_slug:
             self.title_slug = slugify(self.title)
         if not self.code:
-            self.code = self.code_generator()
+            self.code = code_generator()
         super(Property, self).save(*args, **kwargs)
-
-    def code_generator(self):
-        last_property = Property.objects.all().order_by('id').last()
-        # check if it is the first register
-        if not last_property:
-            code_str = datetime.now().strftime("%y") + datetime.now().strftime("%m") + '0000'
-            code = int(code_str)
-            return code
-        # get letest property's code
-        property_code = str(last_property.code)
-        code_date = property_code[:4]
-        code_unique = (int(property_code[-4:]))
-        today_date = datetime.now().strftime("%y%m")
-        # creates new code
-        if code_date != today_date:
-            code_str = today_date + '0000'
-            code = int(code_str)
-        else:
-            code_unique_new = str(code_unique + 1).zfill(4)
-            code_str = today_date + code_unique_new
-            code = int(code_str)
-        return code
 
     def get_absolute_url(self):
         return reverse('property:detail', args=[self.id])
@@ -127,10 +150,10 @@ class AddressCol(models.Model):
 
     def __str__(self):
         if self.mostrar:
-            address= "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
-                                                        self.prefijo_via, self.numero,
-                                                        self.prefijo_numero, self.placa,
-                                                        self.ciudad, self.departamento)
+            address = "{} {}{} # {}{} - {}, {}, {}".format(self.tipo_via, self.via,
+                                                           self.prefijo_via, self.numero,
+                                                           self.prefijo_numero, self.placa,
+                                                           self.ciudad, self.departamento)
             return address.replace("None", "")
         else:
             if self.barrio:
