@@ -2,6 +2,7 @@
   <component name="FileTypeManager" version="17">
     <extensionMap>
       <mapping pattern="email_host_password" type="PLAIN_TEXT" />
+      <mapping pattern="email_host_user" type="XHTML" />
     </extensionMap>
   </component>
 </application>
