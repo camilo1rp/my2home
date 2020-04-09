@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY','')
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['my2home','my2home:8080']
+ALLOWED_HOSTS = ['my2home', 'my2home:8080']
 
 # Application definition
 
@@ -97,10 +97,8 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD',''),
         'HOST': os.environ.get('DB_HOST',''),
         'PORT': '5432',
-        }
+    }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -135,7 +133,7 @@ LANGUAGE_CODE = 'en'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
-TIME_ZONE = os.environ.get('TIME_ZONE','America/Bogota')
+TIME_ZONE = os.environ.get('TIME_ZONE', 'America/Bogota')
 
 USE_I18N = True
 
@@ -156,21 +154,20 @@ LOGIN_URL = '/account/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('profile:update', args=[u.profile.id])
 }
 
 # ***** google maps key *****
-GOOGLE_MAPS_KEY = os.environ.get('GOOGLE_MAPS_KEY','')
+GOOGLE_MAPS_KEY = os.environ.get('GOOGLE_MAPS_KEY', '')
 
 # ***** session variable for counting page visits *****
 VISITS_SESSION_ID = 'visits'
 
 # ***** email settings *****
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER','')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD','')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

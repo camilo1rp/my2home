@@ -44,17 +44,25 @@ def code_generator(self):
 class Project(models.Model):
     name = models.CharField(_('name'), max_length=30)
     name_slug = models.CharField(max_length=50)
-    code = models.CharField(_('code'), max_length=30)
     date_start = models.DateField(_('start date'))
     date_complete = models.DateField(_('completion date'))
     photo = models.ImageField(upload_to="media/project", default="/profiles/project.jpg")
+    facilities = models.ManyToManyField('Facility', related_name='projects', verbose_name=_('Facilities'))
 
     def save(self, *args, **kwargs):
         if not self.name_slug:
             self.name_slug = slugify(self.name)
-        if not self.code:
-            self.code = code_generator()
         super(Project, self).save(*args, **kwargs)
+
+
+class Facility(models.Model):
+    name = models.CharField(max_length=40)
+    name_slug = models.CharField(max_length=60)
+
+    def save(self, *args, **kwargs):
+        if not self.name_slug:
+            self.name_slug = slugify(self.name)
+        super(Facility, self).save(*args, **kwargs)
 
 
 class Property(models.Model):
@@ -115,7 +123,7 @@ class Property(models.Model):
 
     # project
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='proj_properties',
-                                verbose_name=_('project'))
+                                verbose_name=_('project'), null=True, blank=True)
 
     class Meta:
         ordering = ('-created',)

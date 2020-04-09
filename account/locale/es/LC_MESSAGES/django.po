@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-02 16:21+0000\n"
-"PO-Revision-Date: 2020-03-02 16:59+0000\n"
-"Last-Translator: b'Camilo Romero <inmueblesfusa@gmail.com>'\n"
+"POT-Creation-Date: 2020-03-17 19:49+0000\n"
+"PO-Revision-Date: 2020-03-17 19:38+0000\n"
+"Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -57,10 +57,8 @@ msgid "Name"
 msgstr "Nombre"
 
 #: account/templates/account/dashboard.html:184
-#, fuzzy
-#| msgid "Username"
 msgid "Surname"
-msgstr "Nombre de Usuario"
+msgstr "Apellido"
 
 #: account/templates/account/dashboard.html:186
 #: account/templates/registration/login.html:33
@@ -88,7 +86,6 @@ msgid "Messages"
 msgstr "Mensajes"
 
 #: account/templates/account/dashboard.html:247
-#| msgid "Followed properties"
 msgid "My properties"
 msgstr "Mis Propiedades"
 
@@ -125,7 +122,6 @@ msgid "Welcome back,"
 msgstr "Bienvenido otra vez,"
 
 #: account/templates/registration/login.html:33
-#: account/templates/registration/login1.html:44
 msgid "Username"
 msgstr "Nombre de Usuario"
 
@@ -134,7 +130,6 @@ msgid "or"
 msgstr "o"
 
 #: account/templates/registration/login.html:38
-#: account/templates/registration/login1.html:58
 msgid "Password"
 msgstr "Contraseña "
 
@@ -180,26 +175,6 @@ msgstr "Tu cuenta ha sido creada"
 msgid "Fill out this extra information and login"
 msgstr "Llena esta información extra e ingresa"
 
-#: account/templates/registration/login1.html:40
-msgid "Login"
-msgstr "Ingresar"
-
-#: account/templates/registration/login1.html:68
-msgid "Log-in"
-msgstr "Ingresar"
-
-#: account/templates/registration/login1.html:74
-msgid "Dont have an account?"
-msgstr "No tienes una cuenta?"
-
-#: account/templates/registration/login1.html:75
-msgid "Register here!"
-msgstr "Registrate aquí!"
-
-#: account/templates/registration/login1.html:78
-msgid "Go to main page"
-msgstr "Ir a pagina principal"
-
 #: account/validators.py:8
 msgid "Phone number is too short. It must be between 7-10 digits"
 msgstr "Numero muy corto. Numero debe ser entre 7-10 dígitos"
@@ -207,6 +182,21 @@ msgstr "Numero muy corto. Numero debe ser entre 7-10 dígitos"
 #: account/validators.py:10
 msgid "Phone number is too long. It must be between 7-10 digits"
 msgstr "Numero muy largo. Numero debe ser entre 7-10 dígitos"
+
+#~ msgid "Login"
+#~ msgstr "Ingresar"
+
+#~ msgid "Log-in"
+#~ msgstr "Ingresar"
+
+#~ msgid "Dont have an account?"
+#~ msgstr "No tienes una cuenta?"
+
+#~ msgid "Register here!"
+#~ msgstr "Registrate aquí!"
+
+#~ msgid "Go to main page"
+#~ msgstr "Ir a pagina principal"
 
 #~ msgid "change image"
 #~ msgstr "cambiar imagen"

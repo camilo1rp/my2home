@@ -621,7 +621,7 @@ a {
     font-style: italic; }
 
 .social-icon span {
-  font-size: 20px; }
+  font-size: 15px; }
 
 .social-icon:hover {
   color: #eec60a !important;
@@ -1072,7 +1072,7 @@ a {
 /*LENGUAJES ESPAÑOL - INGLES*/
 .social {
     left: 0;
-    top: 200px;
+    top: 100px;
     z-index: 2000; /
 }
 
@@ -1083,26 +1083,25 @@ a {
 .social ul li a {
   display: inline-block;
   color:#fff;
-  background: #000;
-  padding: 7px 12px;
+  padding: 2px 4px;
   text-decoration: none;
   -webkit-transition:all 500ms ease;
   -o-transition:all 500ms ease;
   transition:all 500ms ease;
+    background: #1d1c1c40;
 }
 
 .social ul li .icon-twitter {
   background: #00abf0;
 }
-.social ul li .icon-flag {
+.social ul li .flag-lng {
   background: #1d1c1c40;
-  border: 1px solid #1d1c1c40;
 }
 
 .social ul li a:hover {
   background: #000;
   /*padding: 10px 30px;*/
-  padding: 14px;
+  padding: 8px;
 }
 
 .float{

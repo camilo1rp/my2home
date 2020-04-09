@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 {% load static %}
 {% load property_tags %}
 {% load i18n %}
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Inmuebles Fusa</title>
@@ -195,23 +195,22 @@
     </div> <!-- .site-mobile-menu -->
 
     <div class="site-navbar mt-4">
-        <div class="social">
-            <ul class="languages">
-              {% for language in languages %}
-                <li>
-                    <a href="/{{ language.code }}" class="icon-flag"
-                      {% if language.code == LANGUAGE_CODE %} class="selected" {% endif %}>
-                      {{ language.name_local|title  }}
-                    </a>
-                </li>
-              {% endfor %}
-             </ul>
-        </div>
-
         <div class="container py-1">
           <div class="row align-items-center">
             {% include 'properties/top_nav.html' %}
           </div>
+        </div>
+        <div class="social">
+          <ul class="languages">
+            {% for language in languages %}
+            <li>
+              <a href="/{{ language.code }}" class="flag-lng" title="{% trans 'Change lenguage' %}"
+                 {% if language.code == LANGUAGE_CODE %} class="selected" hidden {% endif %}>
+                <i class="fas fa-language"></i> {{ language.name_local|title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
     </div>
