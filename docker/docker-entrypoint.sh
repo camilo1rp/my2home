@@ -6,6 +6,8 @@ export DJANGO_SUPERUSER_PASSWORD=$(cat /run/secrets/django_superuser_password)
 export DJANGO_SUPERUSER_MAIL=$(cat /run/secrets/django_superuser_mail)
 export DB_PASSWORD=$(cat /run/secrets/db_password)
 export SECRET_KEY=$(cat /run/secrets/secret_key)
+export EMAIL_HOST_USER=$(cat /run/secrets/email_host_user)
+export EMAIL_HOST_PASSWORD=$(cat /run/secrets/email_host_password)
 
 # run db migrations (retry on error)
 while ! python3 /opt/my2home/manage.py migrate 2>&1; do
