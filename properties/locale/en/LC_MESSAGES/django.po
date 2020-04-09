@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-02 16:21+0000\n"
+"POT-Creation-Date: 2020-03-17 19:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: properties/decorators.py:15 properties/views.py:257 properties/views.py:284
-#: properties/views.py:525
+#: properties/views.py:528
 msgid "Property does not exist"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "select owner"
 msgstr ""
 
-#: properties/forms.py:32 properties/models.py:51
+#: properties/forms.py:33 properties/models.py:51
 msgid "price"
 msgstr ""
 
@@ -219,6 +219,12 @@ msgstr ""
 msgid "message"
 msgstr ""
 
+#: properties/templates/properties/address_auto.html:184
+#: properties/templates/properties/new_address.html:185
+#: properties/templates/properties/new_property.html:236
+msgid "save"
+msgstr ""
+
 #: properties/templates/properties/contact.html:87
 #: properties/templates/properties/contact.html:263
 #: properties/templates/properties/index.html:571
@@ -236,7 +242,7 @@ msgid "Address"
 msgstr ""
 
 #: properties/templates/properties/contact.html:145
-#: properties/templates/properties/message_details.html:14
+#: properties/templates/properties/message_details.html:13
 msgid "Phone"
 msgstr ""
 
@@ -540,12 +546,8 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: properties/templates/properties/message_details.html:13
-msgid "Email"
-msgstr ""
-
 #: properties/templates/properties/message_details.html:28
-msgid "Propiedad"
+msgid "Email"
 msgstr ""
 
 #: properties/templates/properties/message_details.html:29
@@ -554,11 +556,15 @@ msgid "Date"
 msgstr ""
 
 #: properties/templates/properties/message_details.html:39
+msgid "Propiedad"
+msgstr ""
+
+#: properties/templates/properties/message_details.html:40
 #: properties/templates/properties/messages_list.html:25
 msgid "Message"
 msgstr ""
 
-#: properties/templates/properties/message_details.html:40
+#: properties/templates/properties/message_details.html:41
 msgid "Delete"
 msgstr ""
 
@@ -640,9 +646,9 @@ msgstr ""
 msgid "Address to be shown:"
 msgstr ""
 
-#: properties/templates/properties/new_address.html:174
-#: properties/templates/properties/new_property.html:236
-msgid "save"
+#: properties/templates/properties/new_address.html:304
+#: properties/templates/properties/new_address.html:356
+msgid "We've tried our best to autocomplete. Please check the form"
 msgstr ""
 
 #: properties/templates/properties/new_image2.html:108
@@ -724,11 +730,15 @@ msgstr ""
 msgid "Your Property's Details"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:248
+#: properties/templates/properties/new_property.html:247
+msgid "Enter your address to fill-out the form below"
+msgstr ""
+
+#: properties/templates/properties/new_property.html:254
 msgid "Image"
 msgstr ""
 
-#: properties/templates/properties/new_property.html:253
+#: properties/templates/properties/new_property.html:259
 msgid "Done"
 msgstr ""
 
@@ -982,7 +992,7 @@ msgstr ""
 msgid "Access denied"
 msgstr ""
 
-#: properties/views.py:286 properties/views.py:527
+#: properties/views.py:286 properties/views.py:530
 msgid "Access denied, you don't own or manage this property"
 msgstr ""
 
