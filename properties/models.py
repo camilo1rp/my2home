@@ -18,7 +18,7 @@ def max_value_current_year(value):
     return MaxValueValidator(current_year())(value)
 
 
-def code_generator(self):
+def code_generator():
     last_property = Property.objects.all().order_by('id').last()
     # check if it is the first register
     if not last_property:
@@ -42,12 +42,16 @@ def code_generator(self):
 
 
 class Project(models.Model):
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects', verbose_name=_('project'))
     name = models.CharField(_('name'), max_length=30)
     name_slug = models.CharField(max_length=50)
     date_start = models.DateField(_('start date'))
     date_complete = models.DateField(_('completion date'))
     photo = models.ImageField(upload_to="media/project", default="/profiles/project.jpg")
     facilities = models.ManyToManyField('Facility', related_name='projects', verbose_name=_('Facilities'))
+
+    def ___str__(self):
+        return self.name
 
     def save(self, *args, **kwargs):
         if not self.name_slug:

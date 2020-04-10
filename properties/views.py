@@ -216,10 +216,11 @@ class CreateProperty(LoginRequiredMixin, CreateView):
 
     def dispatch(self, *args, **kwargs):
         return super(CreateProperty, self).dispatch(*args, **kwargs)
-    # def get(self, request, *args, **kwargs):
-    #     self.business = BusinessType.objects.all()
-    #     return super().get(request, *args, **kwargs)
-    #
+
+    def get_form_kwargs(self):
+        kwargs = super(CreateProperty, self).get_form_kwargs()
+        kwargs['manager'] = self.request.user
+        return kwargs
 
 
 class UpdateProperty(LoginRequiredMixin, UpdateView):
@@ -245,6 +246,10 @@ class UpdateProperty(LoginRequiredMixin, UpdateView):
     def dispatch(self, *args, **kwargs):
         return super(UpdateProperty, self).dispatch(*args, **kwargs)
 
+    def get_form_kwargs(self):
+        kwargs = super(UpdateProperty, self).get_form_kwargs()
+        kwargs['manager'] = self.request.user
+        return kwargs
     # def get_object(self):
     #     return self.model.objects.get(pk=self.request.GET.get('pk'))
 

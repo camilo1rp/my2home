@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext
-from .models import Property, AddressCol, Image, Contact, BusinessType
+from .models import Property, AddressCol, Image, Contact, BusinessType, Project
 import string
 
 PREFIJOS = [tuple([x, x]) for x in string.ascii_uppercase[:8]]
@@ -24,10 +24,15 @@ VIAS = [
 
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        manager = kwargs.pop('manager')
         super().__init__(*args, **kwargs)
+
+        self.fields['project'] = forms.ModelChoiceField(Project.objects.filter(manager=manager))
+        self.fields['project'].required = False
         self.fields['description'].widget.attrs.update(rows='6', cols='85')
         self.fields['description'].widget.attrs['placeholder'] = \
-            gettext("Add extra information that adds value to your property. i.e. common areas, services, security, location, etc.")
+            gettext("Add extra information that adds value to your property."
+                    " i.e. common areas, services, security, location, etc.")
         self.fields['owner'].empty_label = _('select owner')
         # self.fields['owner'].widget.attrs['disabled'] = True
         self.fields['price_str'].label = _('price')
