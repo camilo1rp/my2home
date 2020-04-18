@@ -42,15 +42,15 @@ def code_generator():
 
 
 class Project(models.Model):
-    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects', verbose_name=_('project'))
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects', verbose_name=_('manager'))
     name = models.CharField(_('name'), max_length=30)
     name_slug = models.CharField(max_length=50)
-    date_start = models.DateField(_('start date'))
+    date_start = models.DateField(_('Beginning date'))
     date_complete = models.DateField(_('completion date'))
     photo = models.ImageField(upload_to="media/project", default="/profiles/project.jpg")
     facilities = models.ManyToManyField('Facility', related_name='projects', verbose_name=_('Facilities'))
 
-    def ___str__(self):
+    def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
@@ -67,6 +67,9 @@ class Facility(models.Model):
         if not self.name_slug:
             self.name_slug = slugify(self.name)
         super(Facility, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 
 class Property(models.Model):
@@ -126,7 +129,7 @@ class Property(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     # project
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='proj_properties',
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, related_name='proj_properties',
                                 verbose_name=_('project'), null=True, blank=True)
 
     class Meta:
