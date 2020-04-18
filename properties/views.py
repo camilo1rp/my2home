@@ -26,8 +26,8 @@ from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
 from .decorators import user_is_propertys_manager
-from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm
-from .models import Property, AddressCol, Image, Contact, BusinessType, Following
+from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm, ProjectForm
+from .models import Property, AddressCol, Image, Contact, BusinessType, Following, Project
 
 
 class ListProperty(ListView):
@@ -187,6 +187,43 @@ def property_following(request):
             follows = Following(user=user, property_followed=prop)
             follows.save()
         return render(request, 'properties/property_list.html', {'object_list': all_properties})
+
+
+class CreateProject(CreateView):
+    """Create new project"""
+    model = Project
+    template_name = 'properties/new_project.html'
+    form_class = ProjectForm
+
+    def get_success_url(self):
+        return reverse_lazy('property:index')
+
+    # def post(self, request, *args, **kwargs):
+    #     form = ProjectForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         print('valid form*****\n')
+    #         print(request.POST['properties'])
+    #         form.cleaned_data['properties'] = request.POST['properties']
+    #         print('form clean data \n')
+    #         print(form.cleaned_data)
+    #         return self.form_valid(form)
+    #     return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        print("form invalid \n")
+        return super(CreateProject, self).form_invalid(form)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        properties = form.cleaned_data.pop('properties', None)
+        print(properties)
+        new_project = form.save(commit=False)
+        new_project.manager = self.request.user
+        new_project.save()
+        for prop in properties:
+            prop.project = new_project
+            prop.save()
+        return super(CreateProject, self).form_valid(form)
 
 
 class CreateProperty(LoginRequiredMixin, CreateView):
