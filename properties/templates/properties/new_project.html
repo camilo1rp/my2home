@@ -40,7 +40,6 @@
 			            <section>
 			                <div class="inner">
 			                	<h3>{% trans 'Project Information' %}</h3>
-
 			                	<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<label class="form-row-inner">
@@ -51,19 +50,26 @@
 									</div>
 								</div>
 								<div class="form-row">
-									<div class="form-holder form-holder-2">
+									<div class="form-holder">
 										<label class="form-row-inner">
 											{{form.date_start}}
 											<span class="label">{{form.date_start.label}}</span>
 					  						<span class="border"></span>
 										</label>
 									</div>
+									<div class="form-holder">
+										<label class="form-row-inner">
+											{{form.date_complete}}
+											<span class="label">{{form.date_complete.label}}</span>
+											<span class="border"></span>
+										</label>
+									</div>
 								</div>
 								<div class="form-row">
 									<div class="form-holder form-holder-2">
 										<label class="form-row-inner">
-											{{form.date_complete}}
-											<span class="label">{{form.date_complete.label}}</span>
+											{{form.name}}
+											<span class="label">{{form.name.label}}</span>
 											<span class="border"></span>
 										</label>
 									</div>

@@ -22,6 +22,20 @@ VIAS = [
 ]
 
 
+class ProjectForm(forms.ModelForm):
+    """Form for new project"""
+    properties = forms.ModelMultipleChoiceField(queryset=Property.objects.all())
+    photo2 = forms.ImageField()
+    photo3 = forms.ImageField()
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = Project
+        exclude = ['name_slug', 'manager']
+
+
 class PropertyForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         manager = kwargs.pop('manager')
@@ -57,8 +71,8 @@ class AddressColForm(forms.ModelForm):
         self.fields['placa'].widget.attrs.update(placeholder='ej. 12')
         self.fields['ciudad'].widget.attrs.update(placeholder='ej. Bogota')
         self.fields['departamento'].widget.attrs.update(placeholder='ej. Cundinamarca')
-        self.fields['departamento'].empty_label = "Departamento"  
-        self.fields['ciudad'].empty_label = "Ciudad"  
+        self.fields['departamento'].empty_label = "Departamento"
+        self.fields['ciudad'].empty_label = "Ciudad"
         self.fields['barrio'].widget.attrs.update(placeholder='ej. Cedritos', required=False)
         self.fields['prefijo_via'].label = 'prefijo'
         self.fields['prefijo_numero'].label = 'prefijo'
@@ -74,7 +88,6 @@ class ImageForm(forms.ModelForm):
         exclude = ['propiedad']
 
 
-
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -88,5 +101,3 @@ class ContactForm(forms.ModelForm):
 class MultiPropForm(forms.Form):
     csv_file = forms.FileField(label=_('csv file'))
     owner = forms.ModelChoiceField(queryset=User.objects.all())
-
-
