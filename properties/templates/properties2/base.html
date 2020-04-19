@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+
+{% load sass_tags %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+<!--    BOOTSTRAP-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+    <link href="{% sass_src 'custom.scss' %}" rel="stylesheet" type="text/css" />
+    <!--    FONT AWESOME-->
+    <link href="{% static 'css/fontawesome-free-5.11.2-web/css/all.css' %}" rel='stylesheet'/>
+
+    <!--    BASE STYLE-->
+    <link rel="stylesheet" href="{% static 'css/myhome/base.css' %}"/>
+
+    {% block styles %}
+    {% endblock %}
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo.png'%}" width="40" height="40" alt="">
+<!--            <img src="{% static 'project/logo.png'%}" width="50" height="50" alt="">-->
+        </a>
+        <a class="navbar-brand" href="#">{% trans 'My Home' %}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-grow-1 text-right" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+                <li class="nav-item {% if page == 'home' %} active {% endif %}">
+                    <a class="nav-link" href="#">{% trans 'Home' %}</a>
+                </li>
+                <li class="nav-item {% if page == 'login' %} active {% endif %}">
+                    <a class="nav-link" href="#">{% trans 'Login' %}</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-secondary">{% trans 'Publish' %}</button>
+                </li>
+            </ul>
+            <div class="btn-group btn-group-sm mx-1" role="group" aria-label="Basic example">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <a  href="/{{ language.code }}" type="button" class="btn
+                     {% if language.code == LANGUAGE_CODE  %}btn-primary active {%else%} btn-secondary {% endif %}"
+                        title="{{language.name_local|title}}">
+                        {{ language.code|upper}}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% block scripts %}
+    {% endblock %}
+    <footer>
+        <div class="col-md-12 text-center">
+            <p>Made with love by My2home</p>
+        </div>
+    </footer>
+</body>
+</html>

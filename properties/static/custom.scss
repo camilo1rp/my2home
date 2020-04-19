@@ -1,0 +1,17 @@
+        /* custom.scss */
+
+        /* import the necessary Bootstrap files */
+        @import "./bootstrap/scss/functions";
+        //@import "./bootstrap/scss/variables";
+
+
+        /* -------begin customization-------- */
+        /* or, use an existing variable */
+        $theme-colors: (
+          primary: #e4002b
+        );
+        $component-active-bg: gray;
+        /* -------end customization-------- */
+
+        /* finally, import Bootstrap to set the changes! */
+        @import "./bootstrap/scss/bootstrap";

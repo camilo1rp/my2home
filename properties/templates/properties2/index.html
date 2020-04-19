@@ -1,0 +1,42 @@
+{% extends 'properties2/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans 'Home' %}
+{% endblock %}
+
+{% block styles %}
+<!--    INDEX STYLE-->
+<link rel="stylesheet" href="{% static 'css/myhome/index.css' %}"/>
+{% endblock %}
+
+{% block body %}
+<div class="input-group mb-3 col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 my-5">
+    <div class="input-group-prepend dropdown" id="button-addon3">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+        <div class="dropdown">
+        <button id="secondButtonSearchBar" class="btn btn-outline-secondary dropdown-toggle"  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+        </div>
+    </div>
+    <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons" aria-describedby="button-addon3">
+    <div class="input-group-append">
+        <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+    </div>
+</div>
+{% endblock %}
