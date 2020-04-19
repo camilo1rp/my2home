@@ -49,6 +49,7 @@ class Project(models.Model):
     date_complete = models.DateField(_('completion date'))
     photo = models.ImageField(upload_to="media/project", default="/profiles/project.jpg")
     facilities = models.ManyToManyField('Facility', related_name='projects', verbose_name=_('Facilities'))
+    description = models.TextField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
