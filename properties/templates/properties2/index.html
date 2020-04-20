@@ -49,14 +49,28 @@
                 {% endfor %}
             </div>
         </div>
-        <input type="text" class="form-control input-in-group" placeholder="" aria-label="input with three button addons" aria-describedby="button-addon3">
+        <input type="text" class="form-control input-in-group" id="autocomplete" onFocus="geolocate()" placeholder=""
+               aria-label="input with three button addons" aria-describedby="button-addon3">
         <div class="input-group-append">
             <button type="button" class="btn btn-primary button-in-group"><i class="fas fa-search"></i></button>
         </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&libraries=places&callback=initAutocomplete"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&libraries=places&callback=initAutocomplete&types=(regions)"
         async defer></script>
 <script>
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search predictions to
+  // geographical location types.
+  let addressIn = document.getElementById('autocomplete');
+  autocomplete = new google.maps.places.Autocomplete(
+  addressIn, {types: ['(cities)'], componentRestrictions: {country: 'co'}});
+
+}
+
+
+
+
     function selectBusinessType(choice){
         $('#id_business_type option[value="' + choice +'"]').prop("selected", true);
         document.getElementById('butBusiness').innerHTML = $('#id_business_type option:selected').html();
