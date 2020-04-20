@@ -9,6 +9,7 @@ app_name = "property"
 urlpatterns = [
     path('', views.ListProperty.as_view(), name='index'),
     path('template/', views.Template, name='template'),
+    path('home/', views.homepage, name='home'),
     path('new_property/', views.CreateProperty.as_view(), name='create'),
     path('new_project/', views.CreateProject.as_view(), name='create-project'),
     path('contact_us/', views.contact_us, name='contact'),
@@ -21,5 +22,6 @@ urlpatterns = [
     path('property_detail/<int:prop_id>/', views.property_detail, name='detail'),
     path('whatsapp_connect/', views.whatsapp_contact, name='whatsapp'),
     path('address/', TemplateView.as_view(template_name="properties/address_auto.html")),
+    path('testing/', TemplateView.as_view(template_name="properties2/base.html")),
 ]
 

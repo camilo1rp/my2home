@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext
 from .models import Property, AddressCol, Image, Contact, BusinessType, Project
+from .validators import TIPO_PRO, TIPO_BUS, STATUS_PRO
 import string
 
 PREFIJOS = [tuple([x, x]) for x in string.ascii_uppercase[:8]]
@@ -101,3 +102,13 @@ class ContactForm(forms.ModelForm):
 class MultiPropForm(forms.Form):
     csv_file = forms.FileField(label=_('csv file'))
     owner = forms.ModelChoiceField(queryset=User.objects.all())
+
+
+# *********New style forms***********"""
+
+
+class SearchBarForm(forms.Form):
+    """Index main search bar form inputs"""
+    business_type = forms.ChoiceField(choices=TIPO_BUS)
+    property_type = forms.ChoiceField(choices=TIPO_PRO)
+    property_condition = forms.ChoiceField(choices=STATUS_PRO)

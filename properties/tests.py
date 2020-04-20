@@ -1,3 +1,8 @@
 from django.test import TestCase
 
-# Create your tests here.
+
+# class ProjectFormsTesting(TestCase):
+#     """Test all forms for project"""
+#     def setUp(self):
+#         self.client =
+#     test_search_bar_form

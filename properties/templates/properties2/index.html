@@ -11,32 +11,61 @@
 <!--    INDEX STYLE-->
 <link rel="stylesheet" href="{% static 'css/myhome/index.css' %}"/>
 {% endblock %}
-
 {% block body %}
-<div class="input-group mb-3 col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 my-5">
-    <div class="input-group-prepend dropdown" id="button-addon3">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-        <div class="dropdown">
-        <button id="secondButtonSearchBar" class="btn btn-outline-secondary dropdown-toggle"  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-        </div>
-    </div>
-    <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons" aria-describedby="button-addon3">
-    <div class="input-group-append">
-        <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
-    </div>
+<div hidden>
+<!--    hidden input for form-->
+    {{form.business_type}}
+    {{form.property_type}}
 </div>
+{{form.property_condition}}
+<div class="input-group col-lg-10 offset-lg-1  col-xl-10 offset-xl-1  col-md-12  col-sm-12 my-5">
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 mx-0 px-0">
+            <button id="butBusiness" class="btn btn-outline-secondary btn-block dropdown-toggle down-in-group2 co-sm-6" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Sale' %}
+            </button>
+            <div class="dropdown-menu">
+                {% for choice in form.business_type.field.choices%}
+                <a class="dropdown-item" onclick="selectBusinessType('{{choice.0}}')">{{choice.1}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 mx-0 px-0">
+            <button id="butProperty" class="btn btn-outline-secondary  btn-block dropdown-toggle down-in-group" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Apartment' %}
+            </button>
+            <div class="dropdown-menu">
+                {% for choice in form.property_type.field.choices%}
+                <a class="dropdown-item" onclick="selectPropertyType('{{choice.0}}')">{{choice.1}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 mx-0 px-0">
+            <button id="butCondition" class="btn btn-outline-secondary  btn-block dropdown-toggle down-in-group col-sm-12"  type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'New' %}
+            </button>
+            <div class="dropdown-menu">
+                {% for choice in form.property_condition.field.choices%}
+                <a class="dropdown-item" onclick="selectCondition('{{choice.0}}')">{{choice.1}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <input type="text" class="form-control" placeholder="" aria-label="input with three button addons" aria-describedby="button-addon3">
+        <div class="input-group-append">
+            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+        </div>
+</div>
+<script>
+    $(document).ready( function(){
+        document.getElementById('butBusiness').innerHTML = $('#id_business_type option:selected').html();
+        document.getElementById('butProperty').innerHTML = $('#id_property_type option:selected').html();
+    });
+    function selectBusinessType(choice){
+        $('#id_business_type option[value="' + choice +'"]').prop("selected", true);
+        document.getElementById('butBusiness').innerHTML = $('#id_business_type option:selected').html();
+    };
+    function selectCondition(choice){
+        $('#id_property_condition option[value="' + choice +'"]').prop("selected", true);
+        document.getElementById('butCondition').innerHTML = $('#id_property_condition option:selected').html();
+    };
+</script>
 {% endblock %}

@@ -1,4 +1,18 @@
-#secondButtonSearchBar {
+.down-in-group {
     border-radius: 0%;
     border-left:none;
 }
+
+.down-in-group2 {
+    border-radius: 0.25rem 0rem 0rem 0.25rem;
+}
+@media (max-width: 768px) {
+  .down-in-group2 {
+      border-radius: 0.25rem;
+
+  }
+  .down-in-group {
+      border-left:solid 1px;
+  }
+
+  }
