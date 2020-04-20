@@ -26,14 +26,13 @@ TIPO_PRO = [
 
 STATUS_PRO = [
     (NEW, _('New')),
-    (OFFPLAN, _('Off-plans')),
-    (STARTED, _('On construction')),
+    (OFFPLAN, _('Off-Plans')),
     (USED, _('Used')),
 ]
 
 TIPO_BUS = [
     (SALE, _('Sale')),
     (RENT, _('Rent')),
-    (TRENT, _('Temporal Rent')),
+    (TRENT, _('Short-Term')),
     (SWAP, _('Swap')),
 ]

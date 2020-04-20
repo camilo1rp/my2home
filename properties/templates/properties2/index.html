@@ -16,52 +16,54 @@
 <!--    hidden input for form-->
     {{form.business_type}}
     {{form.property_type}}
+    {{form.property_condition}}
 </div>
-{{form.property_condition}}
-<div class="input-group col-lg-10 offset-lg-1  col-xl-10 offset-xl-1  col-md-12  col-sm-12 my-5">
-        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 mx-0 px-0">
-            <button id="butBusiness" class="btn btn-outline-secondary btn-block dropdown-toggle down-in-group2 co-sm-6" type="button"
+<div class="input-group col-lg-10 offset-lg-1  col-xl-8 offset-xl-2  col-md-12  col-sm-12 my-5">
+        <div class="col-xm-12 col-sm-4 col-lg-2 col-xl-2 mx-0 px-0">
+            <button id="butBusiness" class="btn btn-outline-secondary btn-block dropdown-toggle down-in-group1" type="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Sale' %}
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu col-sm-12 text-center">
                 {% for choice in form.business_type.field.choices%}
                 <a class="dropdown-item" onclick="selectBusinessType('{{choice.0}}')">{{choice.1}}</a>
                 {% endfor %}
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 mx-0 px-0">
-            <button id="butProperty" class="btn btn-outline-secondary  btn-block dropdown-toggle down-in-group" type="button"
+        <div class="col-xm-12 col-sm-4 col-lg-2 col-xl-2 mx-0 px-0">
+            <button id="butProperty" class="btn btn-outline-secondary  btn-block dropdown-toggle down-in-group2" type="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'Apartment' %}
             </button>
-            <div class="dropdown-menu">
-                {% for choice in form.property_type.field.choices%}
+            <div class="dropdown-menu col-sm-12 text-center">
+                    {% for choice in form.property_type.field.choices%}
                 <a class="dropdown-item" onclick="selectPropertyType('{{choice.0}}')">{{choice.1}}</a>
                 {% endfor %}
             </div>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 mx-0 px-0">
-            <button id="butCondition" class="btn btn-outline-secondary  btn-block dropdown-toggle down-in-group col-sm-12"  type="button"
+        <div class="col-xs-12 col-sm-4 col-lg-2 col-xl-2 mx-0 px-0">
+            <button id="butCondition" class="btn btn-outline-secondary  btn-block dropdown-toggle down-in-group3"  type="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% trans 'New' %}
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu col-sm-12 text-center">
                 {% for choice in form.property_condition.field.choices%}
                 <a class="dropdown-item" onclick="selectCondition('{{choice.0}}')">{{choice.1}}</a>
                 {% endfor %}
             </div>
         </div>
-        <input type="text" class="form-control" placeholder="" aria-label="input with three button addons" aria-describedby="button-addon3">
+        <input type="text" class="form-control input-in-group" placeholder="" aria-label="input with three button addons" aria-describedby="button-addon3">
         <div class="input-group-append">
-            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            <button type="button" class="btn btn-primary button-in-group"><i class="fas fa-search"></i></button>
         </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4Gol1U3BbHLkWzeJb5kbggvFAPVKZRAA&libraries=places&callback=initAutocomplete"
+        async defer></script>
 <script>
-    $(document).ready( function(){
-        document.getElementById('butBusiness').innerHTML = $('#id_business_type option:selected').html();
-        document.getElementById('butProperty').innerHTML = $('#id_property_type option:selected').html();
-    });
     function selectBusinessType(choice){
         $('#id_business_type option[value="' + choice +'"]').prop("selected", true);
         document.getElementById('butBusiness').innerHTML = $('#id_business_type option:selected').html();
+    };
+    function selectPropertyType(choice){
+        $('#id_property_type option[value="' + choice +'"]').prop("selected", true);
+        document.getElementById('butProperty').innerHTML = $('#id_property_type option:selected').html();
     };
     function selectCondition(choice){
         $('#id_property_condition option[value="' + choice +'"]').prop("selected", true);
