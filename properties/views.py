@@ -26,8 +26,9 @@ from geoservice.location import get_coordinates
 from myhome import settings
 from visits.visits import Visits
 from .decorators import user_is_propertys_manager
-from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm, ProjectForm
+from .forms import PropertyForm, AddressColForm, ContactForm, MultiPropForm, ProjectForm, SearchBarForm
 from .models import Property, AddressCol, Image, Contact, BusinessType, Following, Project
+from .validators import TIPO_PRO
 
 
 class ListProperty(ListView):
@@ -42,8 +43,6 @@ class ListProperty(ListView):
         city = request.GET.get('select-city')
         follow = request.GET.get('follow')
         condition = request.GET.get('condition')
-        print('condition')
-        print(condition)
         filters_names = ['City', 'type_property', 'type_business__name', 'rooms__gte', 'rooms__lte', 'baths__gte',
                          'baths__lte', 'area_total__gte', 'area_total__lte', 'price__gte', 'price__lte', 'condition']
         # filter_names and filter values must have corresponding index, e.g. city's index == and select-city's index
@@ -197,17 +196,6 @@ class CreateProject(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('property:index')
-
-    # def post(self, request, *args, **kwargs):
-    #     form = ProjectForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         print('valid form*****\n')
-    #         print(request.POST['properties'])
-    #         form.cleaned_data['properties'] = request.POST['properties']
-    #         print('form clean data \n')
-    #         print(form.cleaned_data)
-    #         return self.form_valid(form)
-    #     return self.form_invalid(form)
 
     def form_invalid(self, form):
         print("form invalid \n")
@@ -528,17 +516,13 @@ def property_upload(request):
 
 
 def Template(request):  # view for debugging
-    prop = Property.objects.last()
-    a = prop.address_col.get()
-    geo_data = get_coordinates(str(a))
-    template = 'properties/address_auto.html'
-    data = {'propiedad': prop, 'name': "nombre apellido", 'phone': "1234456809",
-            'email': "email@email.com", 'geo_data': geo_data}
-    form = AddressColForm()
-    return render(request, template, {'form': form})
+    template = "properties2/index.html"
+    return render(request, template, {'page': 'home'})
+
 
 class TemplateView(TemplateView):
     template_name = "properties/address_auto.html"
+
 
 def contact_us(request):
     form = ContactForm(request.POST or None, )
@@ -580,4 +564,9 @@ def pause(request, prop_id):
     return HttpResponse(json.dumps(2), content_type='application/json')
 
 
-
+# ************ New style view
+def homepage(request):
+    """render home page"""
+    form = SearchBarForm()
+    template = "properties2/index.html"
+    return render(request, template, {'page': 'home', 'type_pro': TIPO_PRO, 'form':form})
