@@ -112,3 +112,6 @@ class SearchBarForm(forms.Form):
     business_type = forms.ChoiceField(choices=TIPO_BUS)
     property_type = forms.ChoiceField(choices=TIPO_PRO)
     property_condition = forms.ChoiceField(choices=STATUS_PRO)
+    city = forms.CharField(max_length=127, required=False)
+    state = forms.CharField(max_length=127, required=False)
+    locality = forms.CharField(max_length=127, required=False)

@@ -567,6 +567,8 @@ def pause(request, prop_id):
 # ************ New style view
 def homepage(request):
     """render home page"""
+    if request.method == 'POST':
+        print(request.POST)
     form = SearchBarForm()
     template = "properties2/index.html"
     return render(request, template, {'page': 'home', 'type_pro': TIPO_PRO, 'form':form})
