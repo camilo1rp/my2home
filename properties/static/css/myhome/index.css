@@ -2,9 +2,11 @@
     border-radius: 0%;
     border-left:none;
 }
-
 .down-in-group1 {
     border-radius: 0.25rem 0rem 0rem 0.25rem;
+}
+.input-in-group {
+    text-overflow: ellipsis;
 }
 @media (max-width: 992px) {
     .down-in-group1 {
@@ -19,6 +21,7 @@
     }
     .input-in-group {
         border-radius: 0 0 0 0.25rem !important;
+        text-overflow: ellipsis;
     }
     .button-in-group {
         border-radius: 0 0 0.25rem 0 !important;
@@ -36,8 +39,14 @@
         border-radius: 0px;
         border-left: 1px solid;
     }
+    .input-in-group {
+        border-radius: 0 0 0 0.25rem !important;
+    }
 }
 
+.dropdown-item{
+    cursor: pointer;
+}
 .pac-container {
   background-color: #fff;
   z-index: 1000;
@@ -48,21 +57,6 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   overflow: hidden;
-}
-
-.pac-icon {
-  width: 15px;
-  height: 20px;
-  margin-right: 7px;
-  margin-top: 6px;
-  display: inline-block;
-  vertical-align: top;
-  background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
-  background-size: 34px;
-}
-
-.pac-icon-marker {
-  background-position: -1px -161px;
 }
 
 .pac-item {
