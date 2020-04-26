@@ -1,0 +1,44 @@
+.form-holder .label {
+    position: absolute;
+    border: none !important;
+    top: 0.9rem;
+    color: #6c757d;
+    transform-origin: 0 0;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	-ms-transition: all .2s ease;
+}
+
+.form-holder input,
+.form-holder select {
+    border: none;
+    border-bottom: 2px solid #e5e5e5;
+}
+.form-holder .form-control:focus,
+.form-holder .form-control:active,
+.form-holder .form-control:valid {
+    outline: none !important;
+    box-shadow: none;
+    border-radius: 0%;
+	border-bottom: 2px solid #e4002b;
+	margin-top: 0.8rem;
+}
+.form-holder .form-control:focus + .label,
+.form-holder .form-control:valid + .label {
+	transform: translateY(-23px) scale(1);
+	-o-transform: translateY(-23px) scale(1);
+	-ms-transform: translateY(-23px) scale(1);
+	-moz-transform: translateY(-23px) scale(1);
+	-webkit-transform: translateY(-23px) scale(1);
+	color: #e4002b;
+}
+
+.select2-container {
+    display: block !important;
+}
+
+#contactForm{
+    cursor: pointer;
+}

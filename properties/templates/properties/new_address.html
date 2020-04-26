@@ -242,8 +242,9 @@ var componentForm = {
 function initAutocomplete() {
   // Create the autocomplete object, restricting the search predictions to
   // geographical location types.
+  let addressIn = document.getElementById('autocomplete');
   autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autocomplete'), {types: ['geocode']});
+  addressIn, {types: ['(cities)'], componentRestrictions: {country: 'co'}});
 
   // Avoid paying for data that you don't need by restricting the set of
   // place fields that are returned to just the address components.
@@ -253,7 +254,6 @@ function initAutocomplete() {
   // address fields in the form.
   autocomplete.addListener('place_changed', fillInAddress);
 }
-
 function fillInAddress() {
   // Get the place details from the autocomplete object.
   var place = autocomplete.getPlace();

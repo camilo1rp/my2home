@@ -2,7 +2,7 @@
 {% load static %}
 
 
-    <div id="map" class="bg-white widget border rounded" style="padding-left = 0px;">
+    <div id="map" class="border rounded" style="padding-left = 0px;">
         <span id="lat" hidden>{{ lat }}</span>
         <span id="lng" hidden>{{ lng }}</span>
         <span id="show" hidden>{{ show }}</span>
@@ -15,14 +15,34 @@
       var lat = parseFloat(lat_str.replace(',','.'))
       var lng_str = $("#lng").text()
       var lng = parseFloat(lng_str.replace(',','.'))
-      var  zm = 14
+      var  zm = 16
+
+    var head = document.getElementsByTagName('head')[0];
+
+    // Save the original method
+    var insertBefore = head.insertBefore;
+
+    // Replace it!
+    head.insertBefore = function (newElement, referenceElement) {
+
+        if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') > -1) {
+
+            console.info('Prevented Roboto from loading!');
+            return;
+        }
+
+        insertBefore.call(head, newElement, referenceElement);
+    };
+
       if (show == "True"){
-        zm = 16
+        zm = 18
       }
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: lat, lng: lng},
-          zoom: zm
+          zoom: zm,
+          disableDefaultUI: true,
+          fullscreenControl: true,
         });
         if (show == 'True'){
         var marker = new google.maps.Marker({
@@ -41,7 +61,7 @@
           fillOpacity: 0.35,
           map: map,
           center: {lat: lat, lng: lng},
-          radius: 800
+          radius: 200
         });
         }
       }

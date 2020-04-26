@@ -516,12 +516,14 @@ def property_upload(request):
 
 
 def Template(request):  # view for debugging
-    template = "properties2/index.html"
-    return render(request, template, {'page': 'home'})
+    template = "properties2/slider.html"
+    geo_data = {'lat': '4.624335', 'lng': '-74.063644'}
+    return render(request, template, {'lat': '4.624335',
+                                      'lng': geo_data["lng"]})
 
 
 class TemplateView(TemplateView):
-    template_name = "properties/address_auto.html"
+    template_name = "properties2/slider.html"
 
 
 def contact_us(request):
